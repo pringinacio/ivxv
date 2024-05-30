@@ -1,0 +1,23 @@
+{#
+
+IVXV Internet voting framework
+
+Crontab template file to automate detail statistics export to VIS.
+
+-#}
+# Crontab for IVXV Management Service detail statistics export to VIS automation
+
+# This file is managed by IVXV Management Service
+# Current version is generated @ {{ time_generated }}
+
+# This file is (re)generated automatically on the following events:
+#
+# - `ivxv-cmd-load election <digitally signed election configuration>`
+#
+# This file is removed automatically on the following events:
+#
+# - `ivxv-collector-init`
+
+# Import detail voting stats from voting service and export it to VIS
+{{ minute }} {{ hour }} {{ day }} {{ month }} {{ weekday }} if [ -x /usr/bin/ivxv-voterstats ]; then /usr/bin/ivxv-voterstats detail --log-level=WARNING; fi
+

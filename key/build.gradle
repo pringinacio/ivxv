@@ -12,4 +12,6 @@ dependencies {
     testImplementation testFixtures(project(":common"))
 }
 
-mainClassName = "ee.ivxv.key.Key"
+application {
+	mainClass = "ee.ivxv.key.Key"
+}

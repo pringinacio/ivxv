@@ -116,12 +116,15 @@ func respond(c *gin.Context, status int, value interface{}, err error) {
 
 // httpErr transforms the given error to proper HTTP error response
 func httpErr(err error) int {
+	// Wrap EHS backend err into errors.EHSError, so it could correctly
+	// be used in stderrors.Is, see errors.EHSError description for details.
+	wrapErr := errors.EHSError{Err: err}
 	switch {
-	case stderrors.Is(err, errors.ErrNotFound):
+	case stderrors.Is(wrapErr, errors.ErrNotFound):
 		return http.StatusNotFound
-	case stderrors.Is(err, errors.ErrBadRequest):
+	case stderrors.Is(wrapErr, errors.ErrBadRequest):
 		return http.StatusBadRequest
-	case stderrors.Is(err, errors.ErrVotingEnd):
+	case stderrors.Is(wrapErr, errors.ErrVotingEnd):
 		return http.StatusGone
 	default:
 		return http.StatusInternalServerError

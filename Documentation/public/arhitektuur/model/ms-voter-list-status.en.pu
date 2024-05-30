@@ -1,0 +1,42 @@
+@startuml
+title Voter List State Diagram
+
+skinparam state {
+  BackgroundColor<<NEW>> LightGray
+  BackgroundColor<<OK>> LightGreen
+  BackgroundColor<<Invalid>> LightCoral
+}
+
+state "Available" as AVAILABLE <<NEW>>
+state "Pending Application" as PENDING
+state "Applied" as APPLIED <<OK>>
+state "Invalid" as INVALID <<Invalid>>
+state "Skipped" as SKIPPED <<Invalid>>
+
+note right of AVAILABLE
+  External system state not
+  registered in the management
+  service database
+end note
+
+[*] --> AVAILABLE : Detection of list availability
+AVAILABLE : List is available in the Voting Information System
+
+AVAILABLE --> PENDING : Loading of correct list \n into the management service
+PENDING : List is Loaded into the management service
+
+AVAILABLE --> INVALID : Loading of \n invalid list \n into the management service
+PENDING --> INVALID : Failed application of \n the change list \n to the list service
+INVALID : List is marked as invalid
+
+PENDING --> APPLIED : Application of the list \n to the list service
+APPLIED : List is applied to the collection service
+
+INVALID --> SKIPPED : Marking the list as skipped
+SKIPPED : List is marked as skipped
+
+SKIPPED --> [*]
+APPLIED --> [*]
+
+@enduml
+

@@ -17,6 +17,75 @@ from ..service.service import Service
 from . import init_cli_util, log
 
 
+def insert_backup_crontab(data: str, crontab: str) -> str:
+    """Wrap crontab in an ivxv_backup_crontab block and insert it to a data.
+
+    :param data: any data
+    :type data: str
+    :param crontab: rendered ivxv_backup_crontab Jinja2 crontab template file
+    :type crontab: str
+    :return: data with an ivxv_backup_crontab block
+    :rtype: str
+    """
+    header = '### block ivxv_backup_crontab ###'
+    tail = '### endblock ivxv_backup_crontab ###'
+    return data + "\n\n" + header + "\n" + crontab + "\n" + tail + "\n"
+
+
+def __get_backup_crontab_block(data: str) -> (str, bool):
+    """Get ivxv_backup_crontab block from a data.
+
+    :param data: any data
+    :type data: str
+    :return: ivxv_backup_crontab block and True on success,
+    otherwise data and False
+    :rtype: str, bool
+    :raise ValueError: if ivxv_backup_crontab block's header or tail is malformed,
+    however though, if both header and tail are malformed then function assumes that
+    ivxv_backup_crontab block doesn't exist in a data
+    """
+    header = '### block ivxv_backup_crontab ###'
+    tail = '### endblock ivxv_backup_crontab ###'
+
+    # remove leading and trailing whitespaces/newlines
+    data_stripped = data.strip()
+
+    # get start index of a header
+    header_start_index = data_stripped.find(header)
+
+    # get start index of a tail
+    tail_start_index = data_stripped.find(tail)
+
+    # both header and tail aren't present in a data_stripped
+    if header_start_index < 0 and tail_start_index < 0:
+        return data, False
+    # both header and tail present in a data_stripped
+    elif header_start_index >= 0 and tail_start_index >= 0:
+        # get end index of a tail
+        tail_end_index = tail_start_index + len(tail)
+        # extract ivxv_backup_crontab block from a data_stripped
+        return data_stripped[header_start_index:tail_end_index], True
+    else:
+        if header_start_index < 0:
+            raise ValueError("malformed ### block ivxv_backup_crontab ###")
+        else:
+            raise ValueError("malformed ### endblock ivxv_backup_crontab ###")
+
+
+def remove_backup_crontab(data: str) -> str:
+    """Remove ivxv_backup_crontab block from a data.
+
+    :param data: any data
+    :type data: str
+    :return: data without ivxv_backup_crontab block
+    :rtype: str
+    """
+    block, found = __get_backup_crontab_block(data=data)
+    if not found:
+        return data
+    return data.replace(block, '').strip()
+
+
 def backup_crontab_generator_util():
     """Generate crontab for backup automation."""
     args = init_cli_util("""
@@ -30,10 +99,12 @@ def backup_crontab_generator_util():
     """)
     filepath = args['<filename>']
 
+    crontab_tmp_file_content: str
+
     # check input file
     try:
         with open(filepath) as fp:
-            fp.read()
+            crontab_tmp_file_content = fp.read()
     except OSError as err:
         log.error("Can't read file %r: %s", filepath, err.strerror)
         return 1
@@ -63,17 +134,34 @@ def backup_crontab_generator_util():
         ))
 
     # render crontab
-    crontab = template.render(
+    backup_crontab = template.render(
         time_generated=datetime.datetime.now().strftime('%d.%M.%Y %H:%M:%S'),
         **template_params,
     )
+
+    # remove old block:
+    # ### block ivxv_backup_crontab ###
+    # ...
+    # ### endblock ivxv_backup_crontab ###
+    # from a crontab temporary file if any exists
+    try:
+        without_backup_crontab = remove_backup_crontab(
+            data=crontab_tmp_file_content)
+    except ValueError as err:
+        msg = "Can't remove ivxv_backup_crontab block from a temporary file %r: %s"
+        log.error(msg, filepath, err.__str__())
+        return 1
+
+    # add new block to a crontab temporary file
+    crontab = insert_backup_crontab(
+        data=without_backup_crontab, crontab=backup_crontab)
 
     # Pause for 1 second. Crontab checks mtime to detect file modifications. It
     # seems that crontab can't detect mtime change if changes happens too
     # quickly (tested in Ubuntu Xenial).
     time.sleep(1)
 
-    # write crontab
+    # override crontab temporary file with a new content
     try:
         with open(filepath, 'w') as fp:
             fp.write(crontab)

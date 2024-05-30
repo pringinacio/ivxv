@@ -59,6 +59,7 @@ class ElectionConfigSchema(Model):
         electionstart = DateTimeType(required=True)
         electionstop = DateTimeType(required=True)
         servicestop = DateTimeType(required=True)
+        verificationstop = DateTimeType(required=True)
 
     period = ModelType(ElectionPeriodSchema, required=True)
     voterforeignehak = StringType(regex=r'^[0-9]{1,10}$')
@@ -172,6 +173,35 @@ class ElectionConfigSchema(Model):
             "tspreg": TSPSchema,
         }))
 
+    class StatsSchema(Model):
+        """Validating schema for stats config."""
+        class DetailStatsSchema(Model):
+            class SchedulerSchema(Model):
+                class CronSchema(Model):
+                    min = StringType(required=False)
+                    hour = StringType(required=False)
+                    day = StringType(required=False)
+                    month = StringType(required=False)
+                    weekday = StringType(required=False)
+
+                cron = ModelType(CronSchema, required=False, default={})
+            scheduler = ModelType(SchedulerSchema, required=False, default={})
+        detail = ModelType(DetailStatsSchema, required=False, default={})
+
+        class VotingFactsSchema(Model):
+            class SchedulerSchema(Model):
+                class CronSchema(Model):
+                    min = StringType(required=False)
+                    hour = StringType(required=False)
+                    day = StringType(required=False)
+                    month = StringType(required=False)
+                    weekday = StringType(required=False)
+
+                cron = ModelType(CronSchema, required=False, default={})
+            scheduler = ModelType(SchedulerSchema, required=False, default={})
+        voting_facts = ModelType(VotingFactsSchema, required=False, default={})
+    stats = ModelType(StatsSchema, required=False, default={})
+
     # pylint: disable=unused-argument
     def validate_questions(self, data, value):
         """Validate question field."""
@@ -182,11 +212,14 @@ class ElectionConfigSchema(Model):
     def validate_period(self, data, value):
         """Validate election period."""
         try:
-            for point1, point2 in [['servicestart', 'electionstart'],
-                                   ['electionstart', 'electionstop'],
-                                   ['electionstop', 'servicestop']]:
-                if data['period'][point1] >= data['period'][point2]:
-                    raise ValidationError(f"Value {point1!r} is bigger than {point2!r}")
+            if data['period']['servicestart'] >= data['period']['electionstart']:
+                raise ValidationError("servicestart is >= than electionstart")
+            if data['period']['electionstart'] >= data['period']['electionstop']:
+                raise ValidationError("electionstart is >= than electionstop")
+            if data['period']['electionstop'] > data['period']['servicestop']:
+                raise ValidationError("electionstop is > than servicestop")
+            if data['period']['servicestop'] > data['period']['verificationstop']:
+                raise ValidationError("servicestop is > than verificationstop")
         except KeyError:
             pass  # error in data structure is catched later
         return value

@@ -13,13 +13,14 @@ import java.util.concurrent.LinkedBlockingQueue;
  * Class for handling ciphertexts with invalid proofs.
  */
 public class InvalidDecProofs {
-    private static final Path INVALID_PROOF_PATH = Paths.get("invalid");
+    private static final Path FAILED_PROOF_VALID_PATH = Paths.get("failed-validity");
+    private static final Path FAILED_PROOF_INVALID_PATH = Paths.get("failed-invalidity");
     private final BlockingQueue<Object> in = new LinkedBlockingQueue<>();
     private final Proof invalidProofs;
 
     /**
      * Initialize using the election identifier.
-     * 
+     *
      * @param electionName
      */
     public InvalidDecProofs(String electionName) {
@@ -28,7 +29,7 @@ public class InvalidDecProofs {
 
     /**
      * Get the worker for parsing all added proofs.
-     * 
+     *
      * @return
      */
     public InvalidProofHandler getResultWorker() {
@@ -44,7 +45,7 @@ public class InvalidDecProofs {
 
     /**
      * Add invalid proof.
-     * 
+     *
      * @param proof
      */
     public void addInvalidProof(ElGamalDecryptionProof proof) {
@@ -53,7 +54,7 @@ public class InvalidDecProofs {
 
     /**
      * Get the total number of invalid proofs.
-     * 
+     *
      * @return
      */
     public int getCount() {
@@ -62,12 +63,22 @@ public class InvalidDecProofs {
 
     /**
      * Serialize the structure to directory.
-     * 
+     *
      * @param outDir
      * @throws Exception
      */
-    public void outputInvalidProofs(Path outDir) throws Exception {
-        Json.write(invalidProofs, outDir.resolve(INVALID_PROOF_PATH));
+    public void outputFailedProofsOfValidity(Path outDir) throws Exception {
+        Json.write(invalidProofs, outDir.resolve(FAILED_PROOF_VALID_PATH));
+    }
+
+    /**
+     * Serialize the structure to directory.
+     *
+     * @param outDir
+     * @throws Exception
+     */
+    public void outputFailedProofsOfInvalidity(Path outDir) throws Exception {
+        Json.write(invalidProofs, outDir.resolve(FAILED_PROOF_INVALID_PATH));
     }
 
     private class InvalidProofHandler implements Callable<Void> {

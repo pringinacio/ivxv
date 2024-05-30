@@ -26,6 +26,8 @@ public class RevokeAndAnonymizeTool implements Tool.Runner<RevokeAndAnonymizeToo
     private static final String OUT_BB_TMPL = "bb-4.json";
     private static final String OUT_RR_TMPL = "revocation-report.csv";
     private static final String OUT_IVLJSON_TMPL = "ivoterlist.json";
+    private static final String OUT_LOG_DISCRIMINATOR_REVOKE = "revoke";
+    private static final String OUT_LOG_DISCRIMINATOR_ANONYMIZE = "anonymize";
     private static final Map<String, Object> EMPTY = new HashMap<>();
     final ProcessorContext ctx;
     final I18nConsole console;
@@ -62,8 +64,14 @@ public class RevokeAndAnonymizeTool implements Tool.Runner<RevokeAndAnonymizeToo
                 Reporter.AnonymousFormatter.NOT_ANONYMOUS);
         reporter.writeRevocationReport(out.resolve(OUT_RR_ANONYMOUS), bb.getElection(), loader.revRecords,
                 Reporter.AnonymousFormatter.REVOCATION_REPORT_CSV);
-        reporter.writeLog2(out, bb.getElection(), loader.getLog2Records());
-        reporter.writeLog3(args.out.value(), bb,
+
+        // There should still be an empty .log2 file even if there are no revoked records
+        reporter.writeEmptyLogFiles(args.out.value(), OUT_LOG_DISCRIMINATOR_REVOKE, Reporter.LogType.LOG2, bb);
+        reporter.writeLog2(out, bb.getElection(), OUT_LOG_DISCRIMINATOR_REVOKE, loader.getLog2Records());
+
+        // There should still be an empty .log3 file even if there are no anonymised records
+        reporter.writeEmptyLogFiles(args.out.value(), OUT_LOG_DISCRIMINATOR_ANONYMIZE, Reporter.LogType.LOG3, bb);
+        reporter.writeLog3(args.out.value(), bb, OUT_LOG_DISCRIMINATOR_ANONYMIZE,
                 (voterId, qid) -> !excluded.getOrDefault(voterId, EMPTY).containsKey(qid));
 
         AnonymousBallotBox abb = anonymize(bb);

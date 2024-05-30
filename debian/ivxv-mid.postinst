@@ -38,6 +38,10 @@ case "$1" in
         chmod 600 ~ivxv-mid/.ssh/authorized_keys
         chown ivxv-mid:ivxv ~ivxv-mid/.ssh/authorized_keys
 
+        mkdir --parents /var/log/ivxv
+        chown --changes syslog:syslog /var/log/ivxv
+        chmod --changes 755 /var/log/ivxv
+
         # enable user to automatically start service
         loginctl enable-linger ivxv-mid
     ;;

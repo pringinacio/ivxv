@@ -1,0 +1,238 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, Cybernetica AS
+# This file is distributed under the same license as the Elektroonilise
+# hääletamise infosüsteem package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Elektroonilise hääletamise infosüsteem 1.8.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-29 10:34+0200\n"
+"PO-Revision-Date: 2024-02-29 17:09+0200\n"
+"Last-Translator: \n"
+"Language-Team: en <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.10.3\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: ../../02-ylevaade.rst:5
+msgid "Ülevaade"
+msgstr "Overview"
+
+#: ../../02-ylevaade.rst:7
+msgid ""
+"Elektroonilise hääletamise protokollistik (edaspidi protokollistik) "
+"defineerib elektroonilise hääletamise süsteemi komponentide vahelise "
+"sõnumivahetuse, kasutatavad andmestruktuurid, algoritmid ning liidesed "
+"väliste süsteemidega. Sõnumivahetus esitatakse UML suhtlusskeemidena, mis "
+"üheselt defineerivad sõnumite järgnevuse. Andmestruktuuride kirjeldused on "
+"varustatud Backus-Naur või JSON-schema notatsioonis spetsifikatsioonidega.  "
+"Andmestruktuuride väljade eraldajateks kasutatakse reavahetusmärki ``LF`` "
+"(ASCII-kood ``0x0A``) ja tabeldusmärki ``TAB`` (ASCII-kood ``0x09``). "
+"Algoritmid esitatakse pseudokoodina."
+msgstr ""
+"The online voting protocol suite (hereafter referred to as the protocol "
+"suite) defines the messaging between the components of an online voting "
+"system, the data structures used, the algorithms, and the interfaces to "
+"external systems. The message exchange is represented as UML interaction "
+"diagrams that unambiguously define the sequence of messages. Data structure "
+"descriptions are provided with specifications in Backus-Naur or JSON schema "
+"notation.  The delimiters used for data structure fields are the line "
+"separator ``LF`` (ASCII code ``0x0A``) and the tab delimiter ``TAB`` (ASCII "
+"code ``0x09``). Algorithms shall be presented in pseudo-code form."
+
+#: ../../02-ylevaade.rst:17
+msgid ""
+"NB! Kõigis protokollistiku andmestruktuuride väljades tuleb rangelt kinni "
+"pidada lubatud märkidest ning väljade minimaalsetest ja maksimaalsetest "
+"pikkustest. Täiendavate tühikute, tabulaatorite jms. kasutamine on keelatud "
+"ning spetsifikatsiooni realiseerivad rakendused peavad vorminguga mitte-"
+"vastavate andmete töötlemisest keelduma."
+msgstr ""
+"NOTE: The allowed characters and the minimum and maximum lengths of the "
+"fields must be strictly respected in all fields of the protocol data "
+"structures. The use of additional spaces, tabs, etc. is prohibited, and "
+"applications implementing the specification must refuse to process data "
+"that does not conform to the format."
+
+#: ../../02-ylevaade.rst:23
+msgid ""
+"Protokollistik defineerib elektroonilise hääletamise protokolli ning selle "
+"protokolli realiseerimiseks vajalikud tugistruktuurid."
+msgstr ""
+"The protocol suite defines the protocol for online voting and the support "
+"structures needed to implement this protocol."
+
+#: ../../02-ylevaade.rst:27
+msgid "Elektroonilise hääletamise protokoll"
+msgstr "Online Voting Protocol"
+
+#: ../../02-ylevaade.rst:29
+msgid "Elektroonilise hääletamise protokoll spetsifitseerib:"
+msgstr "The online voting protocol specifies:"
+
+#: ../../02-ylevaade.rst:31
+msgid ""
+"elektroonilise hääle vormingu, mis võimaldab üheselt määratleda valija "
+"tahte konkreetsel valimisel;"
+msgstr ""
+"the electronic ballot format that allows defining the voter’s intent "
+"unambiguously at a specific election;"
+
+#: ../../02-ylevaade.rst:34
+msgid "elektroonilise hääle krüpteerimise hääle salajasuse tagamiseks;"
+msgstr "electronic ballot encryption to ensure ballot secrecy;"
+
+#: ../../02-ylevaade.rst:36
+msgid ""
+"elektroonilise hääle digitaalse allkirjastamise tervikluse ja valija "
+"identifitseerimise tagamiseks;"
+msgstr ""
+"the digital signing of an electronic vote to ensure integrity and voter "
+"identification;"
+
+#: ../../02-ylevaade.rst:39
+msgid ""
+"elektroonilise hääle kvalifitseerimise kogumisteenuse poolt, hääle "
+"vastuvõtmise tähistamiseks;"
+msgstr ""
+"electronic vote qualification by the collection service, to mark the "
+"acceptance of a vote;"
+
+#: ../../02-ylevaade.rst:42
+msgid ""
+"Protokoll eeldab, et valimise korraldaja on defineerinud valimise ning "
+"genereerinud häälte salastamise võtmepaari, mille avalik komponent on "
+"tehtud valijarakendusele kättesaadavaks."
+msgstr ""
+"The protocol assumes that the election organizer has defined the election "
+"and generated a key pair for vote encryption, the public component of which "
+"has been made available to the voting application."
+
+#: ../../02-ylevaade.rst:46
+msgid ""
+"Protokolli vahendusel liigub valija tahe kogumisteenuses talletatavasse e-"
+"valimiskasti ning võetakse tulemuse kujunemisel arvesse järgmist "
+"sündmusterida pidi:"
+msgstr ""
+"Through the protocol, the voter's intent will be transferred to the digital "
+"ballot box stored in the collection service and will be taken into account "
+"in the following sequence of events:"
+
+#: ../../02-ylevaade.rst:49
+msgid ""
+"Valija kasutab valijarakendust oma tahteavalduse elektrooniliseks "
+"vormistamiseks:"
+msgstr "The voter uses the voting application to vote online:"
+
+#: ../../02-ylevaade.rst:52
+msgid "tahteavaldus vormistatakse elektroonilise häälena;"
+msgstr "voter's intent is encoded as an electronic ballot;"
+
+#: ../../02-ylevaade.rst:54
+msgid "vormistatud hääl krüpteeritakse;"
+msgstr "the electronic ballot is encrypted;"
+
+#: ../../02-ylevaade.rst:56
+msgid "krüpteeritud hääl allkirjastatakse digitaalselt."
+msgstr "the encrypted ballot is digitally signed."
+
+#: ../../02-ylevaade.rst:58
+msgid "Kogumisteenus talletab elektroonilise hääle:"
+msgstr "The collection service stores the electronic vote:"
+
+#: ../../02-ylevaade.rst:60
+msgid ""
+"digitaalselt allkirjastatud häälele võetakse valija sertifikaadi kehtivust "
+"kinnitavad elemendid;"
+msgstr ""
+"a digitally signed ballot will be accompanied by elements to confirm the "
+"validity of the voter's certificate;"
+
+#: ../../02-ylevaade.rst:63
+msgid "elektrooniline hääl registreeritakse välises registreerimisteenuses;"
+msgstr ""
+"an electronic vote is registered with an external registration service;"
+
+#: ../../02-ylevaade.rst:65
+msgid ""
+"valijale võimaldatakse kvalifitseeritud elektroonilise hääle kontrollimine "
+"kontrollrakenduse abil."
+msgstr ""
+"the voter is allowed to verify a qualified electronic vote by means of a "
+"verification application."
+
+#: ../../02-ylevaade.rst:68
+msgid ""
+"Valija võib kasutada kontrollrakendust veendumaks oma hääle korrektses "
+"käitlemises kogumisteenuse poolt;"
+msgstr ""
+"The voter can use the verification application to make sure their vote is "
+"handled correctly by the collection service;"
+
+#: ../../02-ylevaade.rst:71
+msgid ""
+"Hääletamisperioodi lõppedes väljastab kogumisteenus valimise korraldajale e-"
+"valimiskasti ning registreerimisteenus loendi kogumisteenuse poolt "
+"registreeritud häältest;"
+msgstr ""
+"At the end of the voting period, the collection service will issue a "
+"digital ballot box to the election organiser and the registration service "
+"will issue a list of the votes registered by the collection service;"
+
+#: ../../02-ylevaade.rst:75
+msgid "Valimise korraldaja arvutab hääletamistulemuse:"
+msgstr "The election organiser calculates the tally:"
+
+#: ../../02-ylevaade.rst:77
+msgid ""
+"veendutakse, et kõik registreerimisteenuses registreeritud hääled on e-"
+"valimiskasti koosseisus üle antud;"
+msgstr ""
+"making sure that all the votes registered in the registration service have "
+"been cast in the digital ballot box;"
+
+#: ../../02-ylevaade.rst:80
+msgid "eraldatakse krüpteeritud hääled ja digitaalallkirjad;"
+msgstr "encrypted ballots and digital signatures are separated;"
+
+#: ../../02-ylevaade.rst:82
+msgid "dekrüpteeritakse krüpteeritud hääled;"
+msgstr "decrypt encrypted ballots;"
+
+#: ../../02-ylevaade.rst:84
+msgid "dekrüpteeritud häälte põhjal arvutatakse hääletamistulemus."
+msgstr "the decrypted votes are used to calculate the tally."
+
+#: ../../02-ylevaade.rst:86
+msgid ""
+"Protokoll on analoogne paberil posti teel hääletamise protokolliga, kus "
+"valija tahe liigub valimiskomisjonini kahes ümbrikus – välimise ümbriku "
+"sees on sisemine ümbrik, mis omakorda sisaldab valija tahteavaldusega "
+"hääletussedelit. Välimine ümbrik kannab valijat identifitseerivat infot "
+"ning võimaldab mh. kontrollida valija õigust hääletada. Sisemine ümbrik on "
+"anonüümne ning kaitseb hääle salajasust. Enne häälte kokkulugemist "
+"eraldatakse sisemised ümbrikud välimistest."
+msgstr ""
+"The protocol is analogous to a postal voting protocol, where the voter's "
+"intent is sent to the electoral commission in two envelopes - the outer "
+"envelope contains the inner envelope, which in turn contains the ballot "
+"paper with the voter's intent. The outer envelope carries the voter's "
+"identifying information and allows, among other things, the voter's right "
+"to vote to be verified. The inner envelope is anonymous and protects the "
+"secrecy of the vote. The inner envelopes are separated from the outer "
+"envelopes before the votes are counted."
+
+#: ../../02-ylevaade.rst:94
+msgid ""
+"Elektroonilise hääletamise kontekstis on sisemine ümbrik vormistatud "
+"krüpteeritud häälena ning välimine ümbrik digitaalselt allkirjastatud "
+"dokumendina."
+msgstr ""
+"In the context of online voting, the inner envelope is an encrypted ballot "
+"and the outer envelope is a digitally signed document."

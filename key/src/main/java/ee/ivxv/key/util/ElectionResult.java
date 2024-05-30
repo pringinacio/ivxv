@@ -9,9 +9,11 @@ import ee.ivxv.common.util.I18nConsole;
 import ee.ivxv.common.util.Json;
 import ee.ivxv.common.util.Util;
 import ee.ivxv.key.model.Invalid;
+import ee.ivxv.key.model.PlainBallotBox;
 import ee.ivxv.key.model.Tally;
 import ee.ivxv.key.model.Vote;
 import ee.ivxv.key.protocol.SigningProtocol;
+
 import java.io.ByteArrayOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -21,6 +23,7 @@ import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Callable;
 import java.util.concurrent.LinkedBlockingQueue;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,35 +35,46 @@ public class ElectionResult {
 
     private static final String INVALID_VOTE_PATH_TMPL = "invalid";
     private static final String PROOF_PATH_TMPL = "proof";
+    private static final String PROOF_INVALID_PATH_TMPL = "proof-invalid";
     private static final String TALLY_SUFFIX = ".tally";
-    private static final String SIGNATURE_SUFFIX = TALLY_SUFFIX + ".signature";
+    private static final String PLAIN_SUFFIX = ".plain";
+    private static final String TALLY_SIG_SUFFIX = TALLY_SUFFIX + ".signature";
+    private static final String PLAIN_SIG_SUFFIX = PLAIN_SUFFIX + ".signature";
 
     private final String electionName;
     private final CandidateList candidates;
     private final DistrictList districts;
     private final boolean withProof;
+    private final boolean proveInvalid;
     private final BlockingQueue<Object> votes = new LinkedBlockingQueue<>();
     private final Map<String, Tally> tallySet;
+    private final Map<String, PlainBallotBox> plainSet;
     private final Proof proof;
+    private final Proof proofInvalid;
     private final Invalid invalid;
 
     /**
      * Initialize using values.
      *
      * @param electionName Election identifier
-     * @param candidates Candidates list
-     * @param districts Districts list
-     * @param withProof Boolean indicating if encrypted ballots should be decrypted with proof of
-     *        correct decryption.
+     * @param candidates   Candidates list
+     * @param districts    Districts list
+     * @param withProof    Boolean indicating if encrypted ballots should be decrypted with proof of
+     *                     correct decryption.
+     * @param proveInvalid Boolean indicating whether proofs of correct decryption should be output
+     *                     for decrypted ballots deemed invalid (e.g., due to incorrect padding).
      */
     public ElectionResult(String electionName, CandidateList candidates, DistrictList districts,
-            boolean withProof) {
+                          boolean withProof, boolean proveInvalid) {
         this.electionName = electionName;
         this.candidates = candidates;
         this.districts = districts;
         this.withProof = withProof;
+        this.proveInvalid = withProof && proveInvalid;
         this.tallySet = new HashMap<>();
+        this.plainSet = new HashMap<>();
         this.proof = withProof ? new Proof(electionName) : null;
+        this.proofInvalid = this.proveInvalid ? new Proof(electionName) : null;
         this.invalid = new Invalid(electionName);
     }
 
@@ -111,7 +125,24 @@ public class ElectionResult {
             Json.write(tally.getValue(), in);
             byte[] signature = signer.sign(in.toByteArray());
             Files.write(outDir.resolve(Paths.get(tally.getKey() + TALLY_SUFFIX)), in.toByteArray());
-            Files.write(outDir.resolve(Paths.get(tally.getKey() + SIGNATURE_SUFFIX)), signature);
+            Files.write(outDir.resolve(Paths.get(tally.getKey() + TALLY_SIG_SUFFIX)), signature);
+        }
+    }
+
+    /**
+     * Output the decrypted ballot box and the corresponding signature.
+     *
+     * @param outDir Output directory to store the decrypted BB and signature.
+     * @param signer Protocol for constructing the signature for the decrypted BB.
+     * @throws Exception When writing or communication with card tokens fail.
+     */
+    public void outputPlainBB(Path outDir, SigningProtocol signer) throws Exception {
+        for (Map.Entry<String, PlainBallotBox> plain: plainSet.entrySet()) {
+            ByteArrayOutputStream in = new ByteArrayOutputStream();
+            Json.write(plain.getValue(), in);
+            byte[] signature = signer.sign(in.toByteArray());
+            Files.write(outDir.resolve(Paths.get(plain.getKey() + PLAIN_SUFFIX)), in.toByteArray());
+            Files.write(outDir.resolve(Paths.get(plain.getKey() + PLAIN_SIG_SUFFIX)), signature);
         }
     }
 
@@ -126,6 +157,19 @@ public class ElectionResult {
             return;
         }
         Json.write(proof, outDir.resolve(Util.prefixedPath(electionName, PROOF_PATH_TMPL)));
+    }
+
+    /**
+     * Output proofs of correct decryption for invalid votes.
+     *
+     * @param outDir Output directory to store the proofs file.
+     * @throws Exception When writing the proofs file fails.
+     */
+    public void outputInvalidProof(Path outDir) throws Exception {
+        if (!proveInvalid) {
+            return;
+        }
+        Json.write(proofInvalid, outDir.resolve(Util.prefixedPath(electionName, PROOF_INVALID_PATH_TMPL)));
     }
 
     /**
@@ -174,7 +218,7 @@ public class ElectionResult {
                     }
                 } else {
                     // the message has not been decrypted. This can be
-                    // caused by invalid padding, incorrect group elements etc. It was not decrypted
+                    // caused by incorrect group elements etc. It was not decrypted
                     // to prevent any leaks about the key.
                     log.warn("Ciphertext not correctly encoded: invalid vote");
                 }
@@ -186,6 +230,12 @@ public class ElectionResult {
                 }
                 if (choice.equals(Tally.INVALID_VOTE_ID)) {
                     invalid.getInvalid().add(vote);
+                    if (proveInvalid) {
+                        // Only if so configured, output the proof of correct decryption also for
+                        // votes with invalid choice strings. This includes votes with invalid padding,
+                        // since then the choice string is meaningless (it cannot be reliably extracted).
+                        proofInvalid.addProof(vote.getProof());
+                    }
                 }
                 addVoteToTally(vote, choice);
             }
@@ -194,12 +244,22 @@ public class ElectionResult {
         }
 
         private String getCandidateNumber(Vote vote) {
-            String message = vote.getProof().getDecrypted().getUTF8DecodedMessage();
-            return message.split(Util.UNIT_SEPARATOR)[0];
+            String canidateNumber = Tally.INVALID_VOTE_ID;
+            try {
+                String message = vote.getProof().getDecrypted().stripPadding().getUTF8DecodedMessage();
+                canidateNumber = message.split(Util.UNIT_SEPARATOR)[0];
+            } catch (IllegalArgumentException ignored) {
+            }
+            return canidateNumber;
         }
 
         private boolean isValidChoice(Vote vote) {
-            String voteStr = vote.getProof().getDecrypted().getUTF8DecodedMessage();
+            String voteStr;
+            try {
+                voteStr = vote.getProof().getDecrypted().stripPadding().getUTF8DecodedMessage();
+            } catch (IllegalArgumentException ignored) {
+                return false;
+            }
             String[] voteParts = voteStr.split(Util.UNIT_SEPARATOR, 3);
             if (voteParts.length != 3) {
                 return false;
@@ -225,9 +285,13 @@ public class ElectionResult {
 
         private void addVoteToTally(Vote vote, String choice) {
             tallySet.computeIfAbsent(vote.getQuestion(),
-                    q -> new Tally(electionName, candidates, districts)).getByParish()
+                            q -> new Tally(electionName, candidates, districts)).getByParish()
                     .get(vote.getDistrict()).get(vote.getStation())
                     .compute(choice, (c, count) -> count + 1);
+            plainSet.computeIfAbsent(vote.getQuestion(),
+                    q -> new PlainBallotBox(electionName, candidates, districts)).getByParish()
+                    .get(vote.getDistrict()).get(vote.getStation())
+                    .add(choice);
         }
 
     }

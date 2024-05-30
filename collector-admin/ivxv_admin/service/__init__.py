@@ -152,7 +152,7 @@ def generate_service_hints(services):
             ]
         if service_type_params['mobile_id']:
             hints.append(
-                ['Install Mobile-ID/Smart-ID identity token key',
+                ['Install Mobile-ID/Smart-ID/Web eID identity token key',
                  not params.get('mid-token-key', True)])
         if service_type_params['tspreg']:
             hints.append(

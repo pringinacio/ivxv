@@ -1,0 +1,20 @@
+
+!define TR_A_VOTER() Voter
+!define TR_P_VOTA() Voting application
+!define TR_P_VERA() Verification app
+
+!define TR_BOX_COLLECT() Online (RIA)
+!define TR_P_COLLECT() Collection service
+
+!define TR_BOX_REG() Registration service (SK)
+!define TR_P_REG() Registration service
+
+!define TR_BOX_PROCESSOR() Offline (RVT)
+!define TR_P_PROCESSOR() Processor
+
+
+!define TR_PHASE1() Voter votes
+!define TR_PHASE2() Voter verifies the vote
+!define TR_PHASE3() Services hand over the data
+!define TR_PHASE4() Processor verifies consistency of the data
+

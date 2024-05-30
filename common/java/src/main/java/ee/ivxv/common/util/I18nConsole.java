@@ -31,6 +31,10 @@ public class I18nConsole {
         console.println(i18n.get(key, args));
     }
 
+    public void printlnraw(Enum<?> key, Object... args) {
+        console.printlnraw(i18n.get(key, args));
+    }
+
     public Progress startProgress(long total) {
         return this.startProgress(total, false);
     }

@@ -1,0 +1,12 @@
+# Hardening the binaries with relro and pie is not necessary since memory
+# errors should not occur in Go binaries. Although we could use -buildmode=pie,
+# we have not tested the effect this will have, so leave it off for now.
+ivxv-webeid: hardening-no-relro usr/bin/ivxv-webeid
+ivxv-webeid: hardening-no-pie usr/bin/ivxv-webeid
+
+# We do not provide manpages, since these packages are not meant for
+# distribution.
+ivxv-webeid: binary-without-manpage
+
+# The package depends on ivxv-common, which depends on adduser.
+ivxv-webeid: maintainer-script-needs-depends-on-adduser postinst

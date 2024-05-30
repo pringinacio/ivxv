@@ -55,14 +55,12 @@ Failinime võimalik eesliide peab alati lõppema punktiga.
         Kohustuslik väli.
         Seadistuste allkirjadelt nõutav BDOC profiil. Toetatud valikud on
         ``BES`` (põhiprofiil kirjeldatud BDOC spetsifikatsiooni jaotises 5),
-        ``TM`` (ajamärkidega profiil kirjeldatud BDOC spetsifikatsiooni
-        jaotises 6.1) ja ``TS`` (ajatemplitega profiil kirjeldatud BDOC
+        ``TS`` (ajatemplitega profiil kirjeldatud BDOC
         spetsifikatsiooni jaotises 6.2).
 
 :container.bdoc.ocsp.responders:
 
-        Kasutatakse ainult juhul kui ``container.bdoc.profile`` on ``TM`` või
-        ``TS``.
+        Kasutatakse ainult juhul kui ``container.bdoc.profile`` on ``TS``.
 
         Kehtivuskinnitusi väljastanud OCSP responderi sertifikaadid. Kui nende
         hulgast responderi sertifikaati ei leita, siis otsitakse OCSP vastuses

@@ -27,14 +27,17 @@ class ServicesSchema(Model):
         id = StringType(regex=r'.+@.+', required=True)
         address = StringType(regex=r'.+:[0-9]+', required=True)
         peeraddress = StringType(regex=r'.+:[0-9]+')
+        origin = StringType(regex=r'.+:[0-9]+')
 
     proxy = ListType(ModelType(ServiceSchema))
     mid = ListType(ModelType(ServiceSchema))
     smartid = ListType(ModelType(ServiceSchema))
+    webeid = ListType(ModelType(ServiceSchema))
     votesorder = ListType(ModelType(ServiceSchema))
     voting = ListType(ModelType(ServiceSchema))
     choices = ListType(ModelType(ServiceSchema))
     verification = ListType(ModelType(ServiceSchema))
+    sessionstatus = ListType(ModelType(ServiceSchema))
     storage = ListType(ModelType(ServiceSchema))
     log = ListType(ModelType(ServiceSchema))
     backup = ListType(ModelType(BackupServiceSchema), max_size=1)
@@ -94,6 +97,19 @@ class CollectorTechnicalConfigSchema(Model):
 
     logging = ListType(ModelType(LogServerSchema))
 
+    class StatusServerSchema(Model):
+        """Validating schema for status servers config."""
+        class SessionServiceSchema(Model):
+            name = StringType(required=True)
+            servername = StringType(required=True)
+            authttl = IntType(required=True)
+            choicettl = IntType(required=True)
+            votettl = IntType(required=True)
+            verifyttl = IntType(required=True)
+        session = ModelType(SessionServiceSchema)
+
+    status = ModelType(StatusServerSchema, required=True)
+
     class FileStorageServiceSchema(Model):
         """Validating schema for file storage service config."""
         wd = StringType(required=True)
@@ -104,8 +120,11 @@ class CollectorTechnicalConfigSchema(Model):
         conntimeout = IntType(required=True, min_value=0)
         optimeout = IntType(required=True, min_value=0)
         # FIXME: Compare to network.#.services.storage.#.id on first load.
-        bootstrap = ListType(StringType(regex=r'.+@.+'), required=True)
-
+        bootstrap = ListType(StringType(regex=r'.+@.+'))
+        size = IntType(required=False)
+        snapshotcount = IntType(required=False)
+        heartbeattimeout = IntType(required=False)
+        electiontimeout = IntType(required=False)
     storage = protocol_cfg(
         {
             "file": FileStorageServiceSchema,

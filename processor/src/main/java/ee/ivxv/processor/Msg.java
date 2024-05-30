@@ -19,7 +19,7 @@ public enum Msg implements NameHolder {
     tool_check, tool_squash, tool_revoke, tool_anonymize, tool_export, tool_stats, tool_statsdiff,
     tool_checkAndSquash, tool_revokeAndAnonymize,
     // Tool arguments
-    arg_ballotbox("bb"), arg_ballotbox_checksum("bbcs"), //
+    arg_ballotbox("bb"), arg_ballotbox_checksum("bbcs"), arg_signed_ballot_max_size_bytes, //
     arg_registrationlist, arg_registrationlist_checksum, //
     arg_districts, arg_revocationlists, //
     arg_tskey, arg_vlkey, //
@@ -51,7 +51,7 @@ public enum Msg implements NameHolder {
     e_skip_cmd_loading,
     e_reg_checksum_missing, //
     e_bb_read_error, e_bb_ballot_processing, e_reg_record_processing, //
-    e_bb_invalid_file_name, e_bb_missing_file, e_bb_repeated_file, e_bb_unknown_file_type, //
+    e_bb_invalid_file_name, e_bb_invalid_file_size, e_bb_missing_file, e_bb_repeated_file, e_bb_unknown_file_type, //
     e_ballot_signature_invalid, e_ballot_missing_voter_signature, //
     e_active_voter_not_found, e_active_voterlist_not_found, //
     e_time_before_start, //

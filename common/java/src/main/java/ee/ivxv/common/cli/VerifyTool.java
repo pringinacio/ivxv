@@ -31,7 +31,7 @@ public class VerifyTool implements Tool.Runner<VerifyArgs> {
         Container c = container.read(path.toString());
 
         console.println(M.m_signatures);
-        c.getSignatures().forEach(s -> console.println(M.m_signature_row,
+        c.getSignatures().forEach(s -> console.printlnraw(M.m_signature_row,
                 s.getSigner().getSerialNumber(), s.getSigner().getName(), s.getSigningTime()));
 
         console.println(M.m_files);

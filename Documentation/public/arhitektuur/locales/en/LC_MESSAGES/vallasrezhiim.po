@@ -1,0 +1,494 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, Cybernetica AS
+# This file is distributed under the same license as the Elektroonilise
+# hääletamise infosüsteem package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Elektroonilise hääletamise infosüsteem 1.8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-08 12:14+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.10.3\n"
+
+#: ../../vallasrezhiim.rst:4
+msgid "Rakendused"
+msgstr "Applications"
+
+#: ../../vallasrezhiim.rst:8
+msgid "Üldpõhimõtted"
+msgstr "General principles"
+
+#: ../../vallasrezhiim.rst:10
+msgid ""
+"Kõik rakendused on käsurealiidesega rakendused, mis on pakendatud töötama"
+" operatsioonisüsteemi Windows 10 (või uuem) keskkonnas. Komponentide "
+"kasutajaliidesed on ühekeelsed. Komponendid tarnitakse eestikeelsetena, "
+"nende tõlkimine on võimalik tõlkefaili abil."
+msgstr ""
+"All applications are command-line applications, packaged to work in "
+"Windows 10 (or later) operating system environment. Component user "
+"interfaces are monolingual. The components are delivered in Estonian, and"
+" can be translated using a translation file."
+
+#: ../../vallasrezhiim.rst:15
+msgid "Rakendused on programmeeritud Java keeles."
+msgstr "The applications are developed in Java programming language."
+
+#: ../../vallasrezhiim.rst:17
+msgid ""
+"Väliste infosüsteemidega suhtlevad rakendused kasutavad maksimaalselt "
+"olemasolevaid liideseid/andmestruktuure."
+msgstr ""
+"Applications interacting with external information systems make maximum "
+"use of existing interfaces/data structures."
+
+#: ../../vallasrezhiim.rst:20
+msgid ""
+"Rakendused saavad oma sisendi rakenduste seadistustest ja seadistustes "
+"näidatud failidest failisüsteemis ning salvestavad oma väljundi kasutaja "
+"näidatud kausta failisüsteemis. Failid võivad paikneda ka operatiiv-"
+"mälukettal."
+msgstr ""
+"Applications get their input from the application settings and the files "
+"in the file system indicated in the settings, and store their output in "
+"the folder in the file system indicated by the user. Files may also be "
+"located on the memory-disk."
+
+#: ../../vallasrezhiim.rst:24
+msgid ""
+"Relevantsed rakendused toetavad ElGamal krüptosüsteemi "
+"täisarvujäägikorpustel ning P-384 elliptkõveral. Lugemistõend on "
+"realiseeritud Schnorri nullteadmustõestusel põhineval protokollil."
+msgstr ""
+"Relevant applications support the ElGamal cryptosystem on prime order fields "
+"and the P-384 elliptic curve. The decryption proof is implemented using "
+"the Schnorr zero-knowledge protocol."
+
+#: ../../vallasrezhiim.rst:30
+msgid "Rakenduste abimoodulid"
+msgstr "Applications support modules"
+
+#: ../../vallasrezhiim.rst:32
+msgid ""
+"Valimise liides on rakenduste jaoks unifitseeritud, see võimaldab "
+"erinevate valimistüüpide realiseerimist moodulitena. Digiallkirja "
+"verifitseerimise funktsionaalsus on loodud `digidoc4j <https://github.com"
+"/open-eid/digidoc4j>`_ teegi abil. Abimoodulite kasutamist alljärgnevatel"
+" skeemidel eraldi välja ei tooda."
+msgstr ""
+"The election interface is unified for applications, allowing different "
+"types of elections to be implemented as modules. The digital signature "
+"verification functionality has been created using the `digidoc4j "
+"<https://github.com/open-eid/digidoc4j>`_ library. The use of the "
+"auxiliary modules is not explicitly described in the following diagrams."
+
+#: ../../vallasrezhiim.rst:39
+msgid "Rakenduste seadistamine"
+msgstr "Setting up applications"
+
+#: ../../vallasrezhiim.rst:41
+msgid ""
+"Rakendused seadistatakse kas digitaalallkirjastatud "
+"konfiguratsioonipakiga või käsureavõtmetega. Käsureavõtmed ei toeta "
+"hierarhilise struktuuriga seadistuste sisestamist. Seadistused "
+"konfiguratsioonipakis kirjeldatakse YAML-keeles:"
+msgstr ""
+"The applications are configured either with a digitally signed "
+"configuration package or with command line parameters. The latter do not"
+" support the entry of hierarchically structured configurations. The "
+"settings in the configuration package shall be described in YAML:"
+
+#: ../../vallasrezhiim.rst:88
+msgid "Sisendite kooskõlalisuse kontroll"
+msgstr "Input consistency check"
+
+#: ../../vallasrezhiim.rst:90
+msgid ""
+"Kõik rakendused teostavad konfiguratsioonile sisendite kooskõlalisuse "
+"kontrolli vastavalt nende poolt kasutatavale konfiguratsioonile:"
+msgstr ""
+"All applications perform configuration consistency checks on the inputs "
+"according to the configuration they use:"
+
+#: ../../vallasrezhiim.rst:93
+msgid "sertifikaatide konfiguratsiooni laadimine;"
+msgstr "loading certificate configuration;"
+
+#: ../../vallasrezhiim.rst:95
+msgid "konfiguratsiooni digiallkirja verifitseerimine;"
+msgstr "Digital signature verification of the configuration;"
+
+#: ../../vallasrezhiim.rst:97
+msgid "ringkondade nimekirja verifitseerimine;"
+msgstr "verification of the list of districts;"
+
+#: ../../vallasrezhiim.rst:99
+msgid "ringkondade nimekirja kooskõlalisuse kontroll;"
+msgstr "checking the consistency of the list of districts;"
+
+#: ../../vallasrezhiim.rst:101
+msgid "ringkondade nimekirja laadimine;"
+msgstr "loading the list of districts;"
+
+#: ../../vallasrezhiim.rst:103
+msgid "valikute nimekirja verifitseerimine;"
+msgstr "verification of the list of choices;"
+
+#: ../../vallasrezhiim.rst:105
+msgid "valikute nimekirja kooskõlalisuse kontroll;"
+msgstr "checking the consistency of the list of choices;"
+
+#: ../../vallasrezhiim.rst:107
+msgid "valikute nimekirja laadimine;"
+msgstr "loading the list of choices;"
+
+#: ../../vallasrezhiim.rst:109
+msgid "valijate nimekirjade verifitseerimine;"
+msgstr "verification of voter lists;"
+
+#: ../../vallasrezhiim.rst:111
+msgid "valijate nimekirjade kooskõlalisus kontroll;"
+msgstr "a check on the consistency of voter lists;"
+
+#: ../../vallasrezhiim.rst:113
+msgid "valijate nimekirjade laadimine."
+msgstr "loading the voter lists."
+
+#: ../../vallasrezhiim.rst:117
+msgid "Võtmerakendus"
+msgstr "Key application"
+
+#: ../../vallasrezhiim.rst:121
+msgid "Võtmerakenduse liidesed"
+msgstr "Key application interfaces"
+
+#: ../../vallasrezhiim.rst:123
+msgid ""
+"Võtmerakendusega genereeritakse iga hääletamise jaoks häälte salastamise "
+"ja häälte avamise võti, samuti toimub selle abil häälte lugemine ja "
+"tulemuse väljastamine."
+msgstr ""
+"The key application generates a key for encrypting and decrypting votes, "
+"as well as counting votes and issuing the result."
+
+#: ../../vallasrezhiim.rst:127
+msgid ""
+"Võtmerakendus kasutab [DesmedtF89]_ läviskeemi, mis põhineb usaldataval "
+"osakujagajal ning rakendab Shamiri osakujagamist, mis on "
+"informatsiooniteoreetiliselt turvaline :math:`t < M` osapoole korral, kus"
+" M on lävipiir."
+msgstr ""
+"The key application uses the [DesmedtF89]_ threshold scheme based on a"
+" trusted dealer and implements Shamir secret-sharing, which is "
+"information-theoretically secure for :math:`t < M`, where M is the "
+"threshold."
+
+#: ../../vallasrezhiim.rst:132
+msgid ""
+"Võtmeosakud genereeritakse operatiivmälus ning talletatakse "
+"PKCS15-liidese vahendusel kiipkaardile."
+msgstr ""
+"The key shares are generated in the operational memory and stored on the smart "
+"card via the PKCS15 interface."
+
+#: ../../vallasrezhiim.rst:135
+msgid "Võtmerakenduse sisend võtme genereerimisel on:"
+msgstr "The input to the key application when generating a key is:"
+
+#: ../../vallasrezhiim.rst:137 ../../vallasrezhiim.rst:161
+msgid "Võtmepaari identifikaator;"
+msgstr "Key pair identifier;"
+
+#: ../../vallasrezhiim.rst:139
+msgid ""
+"Krüptosüsteemi ElGamal spetsifikatsioon – täisarvujäägikorpus või P-384 "
+"elliptkõver ning võtmepikkus;"
+msgstr ""
+"Specification of the ElGamal cryptosystem - prime order field or "
+"P-384 elliptic curve and key length;"
+
+#: ../../vallasrezhiim.rst:142
+msgid ""
+"M-N läviskeemi spetsifikatsioon, mis peab vastama reeglile :math:`N >= 2 "
+"* M - 1`;"
+msgstr ""
+"Specification of the M-N threshold scheme, which must satisfy the rule :math:`N "
+">= 2 * M - 1`;"
+
+#: ../../vallasrezhiim.rst:145
+msgid "N PKCS15-ühilduvat kiipkaarti;"
+msgstr "N PKCS15-compatible smart card;"
+
+#: ../../vallasrezhiim.rst:147
+msgid "Võtmerakenduse väljund võtme genereerimisel on:"
+msgstr "The output of the key application when generating a key is:"
+
+#: ../../vallasrezhiim.rst:149
+msgid "Isesigneeritud sertifikaat;"
+msgstr "Self-signed certificate;"
+
+#: ../../vallasrezhiim.rst:151
+msgid "N võtmeosakut talletatuna kiipkaartidel;"
+msgstr "N key shares stored on smart cards;"
+
+#: ../../vallasrezhiim.rst:153 ../../vallasrezhiim.rst:174
+msgid "Rakenduse detailne tegevuslogi;"
+msgstr "Detailed activity log of the application;"
+
+#: ../../vallasrezhiim.rst:155 ../../vallasrezhiim.rst:176
+msgid "Rakenduse detailne vealogi."
+msgstr "A detailed error log for the application."
+
+#: ../../vallasrezhiim.rst:157
+msgid "Võtmerakenduse sisend häälte lugemisel on:"
+msgstr "The key application input for vote counting is:"
+
+#: ../../vallasrezhiim.rst:159
+msgid "Miksitud hääled;"
+msgstr "Mixed ballots;"
+
+#: ../../vallasrezhiim.rst:163
+msgid "M võtmeosakut vastavalt läviskeemi spetsifikatsioonile."
+msgstr "M key shares according to the threshold scheme specification."
+
+#: ../../vallasrezhiim.rst:165
+msgid "Võtmerakenduse väljund häälte lugemisel on:"
+msgstr "The output of the key application for counting votes is:"
+
+#: ../../vallasrezhiim.rst:167
+msgid "Signeeritud hääletamistulemus;"
+msgstr "Signed results;"
+
+#: ../../vallasrezhiim.rst:169
+msgid "Kehtetute häälte loend;"
+msgstr "List of invalid votes;"
+
+#: ../../vallasrezhiim.rst:171
+msgid ""
+"Lugemistõend (Schnorri nullteadmustõestusel põhinev protokoll vastavalt "
+"hankedokumentides viidatule);"
+msgstr ""
+"Decryption proof (Schnorr's zero knowledge protocol as "
+"referred to in the contract documents);"
+
+#: ../../vallasrezhiim.rst:179
+msgid "Töötlemisrakendus"
+msgstr "Processing application"
+
+#: ../../vallasrezhiim.rst:181
+msgid ""
+"Töötlemisrakendusega verifitseeritakse, tühistatakse ning "
+"anonüümistatakse hääletamisperioodil kogutud hääli vastavalt "
+"Üldkirjelduse jaotisele 7.6."
+msgstr ""
+"The processing application verifies, revokes and anonymises the votes "
+"collected during the voting period in accordance with Section 7.6 of the "
+"General Description."
+
+#: ../../vallasrezhiim.rst:184
+msgid "Töötlemisrakenduse sisendid on:"
+msgstr "The inputs to the processing application are:"
+
+#: ../../vallasrezhiim.rst:186
+msgid "kogumisteenuse poolt talletatud elektroonilised hääled;"
+msgstr "electronic votes recorded by the collection service;"
+
+#: ../../vallasrezhiim.rst:188
+msgid "registreerimisteenuse poolt väljastatud ajamärgendid;"
+msgstr "time stamps issued by the registration service;"
+
+#: ../../vallasrezhiim.rst:190
+msgid "valijate nimekirjad;"
+msgstr "voter lists;"
+
+#: ../../vallasrezhiim.rst:192
+msgid "ringkondade nimekiri;"
+msgstr "list of districts;"
+
+#: ../../vallasrezhiim.rst:194
+msgid "tühistusnimekirjad;"
+msgstr "revokation lists;"
+
+#: ../../vallasrezhiim.rst:196
+msgid "ennistusnimekirjad."
+msgstr "restoration lists."
+
+#: ../../vallasrezhiim.rst:198
+msgid "Töötlemisrakenduse väljundid on:"
+msgstr "The outputs of the processing application are:"
+
+#: ../../vallasrezhiim.rst:200
+msgid "rakenduse detailne tegevuslogi;"
+msgstr "detailed activity log of the application;"
+
+#: ../../vallasrezhiim.rst:202
+msgid "rakenduse detailne vealogi;"
+msgstr "detailed error log of the application;"
+
+#: ../../vallasrezhiim.rst:204
+msgid "e-hääletanute nimekiri PDF-vormingus, vastavalt töötlemise etapile;"
+msgstr "the list of e-voters in PDF format, according to the stage of processing;"
+
+#: ../../vallasrezhiim.rst:206
+msgid ""
+"e-hääletanute nimekiri masintöödeldaval kujul, vastavalt töötlemise "
+"etapile;"
+msgstr ""
+"the list of e-voters in a machine-processable format, according to the "
+"stage of processing;"
+
+#: ../../vallasrezhiim.rst:208
+msgid "anonüümitud hääled."
+msgstr "anonymised ballots."
+
+#: ../../vallasrezhiim.rst:210
+msgid ""
+"Lisaks varem defineeritud liidestele ja sõltuvustele kasutab "
+"töötlemisrakendus kolmanda osapoole teeki PDF-ide väljastamise "
+"funktsionaalsuse teostamiseks."
+msgstr ""
+"In addition to the interfaces and dependencies defined earlier, the "
+"processing application uses a third-party library to perform PDF output "
+"functionality."
+
+#: ../../vallasrezhiim.rst:215
+msgid "Töötlemisrakenduse liidesed"
+msgstr "Processing application interfaces"
+
+#: ../../vallasrezhiim.rst:218
+msgid "Elektrooniliste häälte täielik töötlemine"
+msgstr "Complete processing of electronic voices"
+
+#: ../../vallasrezhiim.rst:220
+msgid ""
+"Elektrooniliste häälte täielik töötlemine on tegevus, mille käigus "
+"töötlemisrakendus võrdleb Kogumisteenuse poolt talletatud häälte hulka "
+"registreerimisteenuse poolt talletatud häälte hulgaga, kontrollib "
+"talletatud häälte vastavust valimiste konfiguratsioonile, tuvastab "
+"loendamisele minevad hääled ning anonüümistab need Võtmerakendusele üle "
+"andmiseks."
+msgstr ""
+"Complete processing of electronic ballots is the process whereby the "
+"processing application compares the number of ballots stored by the "
+"Collection Service with the number of ballots stored by the Registration "
+"Service, verifies that the stored ballots match the election "
+"configuration, identifies the ballots to be counted and anonymizes them "
+"for delivery to the Key Application."
+
+#: ../../vallasrezhiim.rst:226 ../../vallasrezhiim.rst:254
+msgid "rakenduse seadistuste laadimine;"
+msgstr "loading app settings;"
+
+#: ../../vallasrezhiim.rst:228 ../../vallasrezhiim.rst:256
+msgid "elektrooniliste häälte digitaalallkirjade verifitseerimine;"
+msgstr "verification of digital signatures of electronic votes;"
+
+#: ../../vallasrezhiim.rst:230
+msgid "registreerimisteenuse kinnituste verifitseerimine;"
+msgstr "verification of registration service confirmations;"
+
+#: ../../vallasrezhiim.rst:232
+msgid "ajatemplite verifitseerimine;"
+msgstr "verification of time stamps;"
+
+#: ../../vallasrezhiim.rst:234
+msgid "iga valija kohta viimase kehtiva hääle tuvastamine;"
+msgstr "identifying the last valid vote for each voter;"
+
+#: ../../vallasrezhiim.rst:236
+msgid "algse elektrooniliselt hääletanute nimekirja väljastamine PDF-vormingus;"
+msgstr "issuing the original list of electronic voters in PDF format;"
+
+#: ../../vallasrezhiim.rst:238
+msgid "tühistus- ja ennistusnimekirjade verifitseerimine;"
+msgstr "verification of revokation and restoration lists;"
+
+#: ../../vallasrezhiim.rst:240
+msgid "tühistus- ja ennistusnimekirjade kooskõlalisuse kontroll;"
+msgstr "checking the consistency of cancellation and reinstatement lists;"
+
+#: ../../vallasrezhiim.rst:242
+msgid "tühistus- ja ennistusnimekirjade rakendamine;"
+msgstr "the implementation of revokation and restoration lists;"
+
+#: ../../vallasrezhiim.rst:244
+msgid ""
+"miksimisele minevate häälte nimekirja koostamine, krüptogrammide "
+"eraldamine digitaalallkirjadest;"
+msgstr ""
+"drawing up a list of votes to be mixed, separating ciphertexts from "
+"digital signatures;"
+
+#: ../../vallasrezhiim.rst:247
+msgid ""
+"lõpliku elektrooniliselt hääletanute nimekirja väljastamine masinloetavas"
+" vormingus."
+msgstr "issuing the final list of electronic voters in machine-readable format."
+
+#: ../../vallasrezhiim.rst:252
+msgid "Elektrooniliselt hääletanute nimekirja genereerimine"
+msgstr "Generating a list of voters electronically"
+
+#: ../../vallasrezhiim.rst:258
+msgid "algse elektrooniliselt hääletanute nimekirja väljastamine PDF-vormingus."
+msgstr "issuing the original list of electronic voters in PDF format."
+
+#: ../../vallasrezhiim.rst:262
+msgid "Auditirakendus"
+msgstr "Audit application"
+
+#: ../../vallasrezhiim.rst:266
+msgid "Auditirakenduse liidesed"
+msgstr "Audit application interfaces"
+
+#: ../../vallasrezhiim.rst:268
+msgid ""
+"Auditirakendusega (joonis 9) verifitseeritakse matemaatiliselt häälte "
+"kokkulugemise korrektsust ning miksimise kasutamisel ka miksimise "
+"korrektsust."
+msgstr ""
+"The audit application (Figure 9) mathematically verifies the correctness "
+"of the voice aggregation and, when mixing is used, the correctness of the"
+" mixing."
+
+#: ../../vallasrezhiim.rst:271
+msgid "Auditirakenduse sisendid on;"
+msgstr "The inputs to the audit application are;"
+
+#: ../../vallasrezhiim.rst:273
+msgid "anonüümitud hääled;"
+msgstr "anonymised ballots;"
+
+#: ../../vallasrezhiim.rst:275
+msgid "miksitud hääled;"
+msgstr "mixed ballots;"
+
+#: ../../vallasrezhiim.rst:277
+msgid "Verificatum miksimistõend;"
+msgstr "Verificatum mixing proof;"
+
+#: ../../vallasrezhiim.rst:279
+msgid "hääletamistulemus."
+msgstr "the tally."
+
+#: ../../vallasrezhiim.rst:281
+msgid ""
+"Auditirakenduse väljund on rakenduse detailne tegevuslogi, mis sisaldab "
+"ka hinnangut auditi tervikliku õnnestumise kohta. Vajadusel väljastatakse"
+" ka rakenduse detailne vealogi."
+msgstr ""
+"The output of the audit application is a detailed log of the "
+"application's activities, including an assessment of the overall success "
+"of the audit. If required, a detailed error log of the application is "
+"also output."
+

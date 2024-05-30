@@ -18,6 +18,8 @@ public interface BboxHelper {
     interface Loader<U> {
         BboxLoader<U> getBboxLoader(Path path, Reporter<Ref.BbRef> r) throws InvalidBboxException;
 
+        BboxLoader<U> getBboxLoader(Path path, Reporter<Ref.BbRef> r, long maxSignedBallotSizeInBytes) throws InvalidBboxException;
+
         RegDataLoader<U> getRegDataLoader(Path path, Reporter<Ref.RegRef> r)
                 throws InvalidBboxException;
     }
@@ -40,7 +42,7 @@ public interface BboxHelper {
         /**
          * Checks the integrity of the ballot box, i.e. all required data for each record must be
          * present.
-         * 
+         *
          * @return
          */
         IntegrityChecked<U> checkIntegrity();
@@ -52,7 +54,7 @@ public interface BboxHelper {
     interface IntegrityChecked<U> extends Stage {
         /**
          * Checks the consistency of the ballot box, e.g. the digital signature of all ballots.
-         * 
+         *
          * @param vp Function to find active voters.
          * @param tsKey The key that was used to sign the timestamp requests.
          * @param elStart The election start time.
@@ -62,7 +64,7 @@ public interface BboxHelper {
 
         /**
          * Exports the ballots of the current ballot box to the appointed destination.
-         * 
+         *
          * @param voterId The voter ID to export, may be missing.
          * @param exporter An exporter callback.
          */
@@ -75,7 +77,7 @@ public interface BboxHelper {
          * <p>
          * <tt>start</tt> and <tt>end</tt> can be used to limit the output to voters after a start
          * time and/or before an end time (both inclusive).
-         * 
+         *
          * @param start The period start time, may be <tt>null</tt>.
          * @param end The period end time, may be <tt>null</tt>.
          * @param vp Function to find active voters.
@@ -91,7 +93,7 @@ public interface BboxHelper {
         /**
          * Compares the ballot box to the registration data and retains only the intersection of
          * records that are consistent.
-         * 
+         *
          * @param regData
          * @return
          */
@@ -104,7 +106,7 @@ public interface BboxHelper {
     interface BboxLoaderResult extends Stage {
         /**
          * Constructs ballot box instance with the loaded information.
-         * 
+         *
          * @param electionId
          * @return
          */
@@ -115,7 +117,7 @@ public interface BboxHelper {
         /**
          * Checks the integrity of the registration data container, i.e. all required data for each
          * record must be present.
-         * 
+         *
          * @return
          */
         RegDataIntegrityChecked<U> checkIntegrity();
@@ -128,7 +130,7 @@ public interface BboxHelper {
     interface RegDataIntegrityChecked<U> extends Stage {
         /**
          * Constructs and returns the registration data loader result object.
-         * 
+         *
          * @return
          */
         RegDataLoaderResult<U> getRegData();

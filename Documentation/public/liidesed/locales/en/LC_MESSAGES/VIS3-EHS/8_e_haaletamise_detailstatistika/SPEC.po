@@ -1,0 +1,88 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, Cybernetica AS
+# This file is distributed under the same license as the Elektroonilise
+# hääletamise infosüsteem package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Elektroonilise hääletamise infosüsteem 1.9.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-29 10:34+0200\n"
+"PO-Revision-Date: 2024-03-02 13:49+0200\n"
+"Last-Translator: \n"
+"Language-Team: en <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.10.3\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: ../../VIS3-EHS/8_e_haaletamise_detailstatistika/SPEC.md:1
+msgid "8 E-hääletamisest osavõtu detailne statistika"
+msgstr "8 Detailed statistics on participation in e-voting"
+
+#: ../../VIS3-EHS/8_e_haaletamise_detailstatistika/SPEC.md:3
+msgid ""
+"E-hääletamise lõppedes annab EHS VIS3-le e-hääletamisest osavõtu detailse "
+"statistika."
+msgstr ""
+"At the end of e-voting, EHS will provide VIS3 with detailed statistics on "
+"e-voting participation."
+
+#: ../../VIS3-EHS/8_e_haaletamise_detailstatistika/SPEC.md:5
+msgid ""
+"E-hääletamisest osavõtu statistikat kuvatakse valimiste veebilehel, samuti "
+"edastatakse masintöödeldaval kujul meediaorganisatsioonidele ja lõpuks "
+"publitseeritakse avaandmetena."
+msgstr ""
+"The e-voting statistics will be displayed on the election website, as well "
+"as being provided in a machine-readable format to media organisations and "
+"eventually published as open data."
+
+#: ../../VIS3-EHS/8_e_haaletamise_detailstatistika/SPEC.md:7
+msgid "Protseduur"
+msgstr "Procedure"
+
+#: ../../VIS3-EHS/8_e_haaletamise_detailstatistika/SPEC.md:9
+msgid "EHS operaator laeb faili alla."
+msgstr "The EHS operator downloads the file."
+
+#: ../../VIS3-EHS/8_e_haaletamise_detailstatistika/SPEC.md:11
+msgid "EHS operaator edastab faili VIS3 peakasutajale."
+msgstr "The EHS operator forwards the file to the VIS3 head user."
+
+#: ../../VIS3-EHS/8_e_haaletamise_detailstatistika/SPEC.md:13
+msgid "VIS3 peakasutaja laeb faili VIS3-e üles."
+msgstr "The VIS3 head user uploads the file to VIS3."
+
+#: ../../VIS3-EHS/8_e_haaletamise_detailstatistika/SPEC.md:15
+msgid "Faili edastatakse eelhääletamise ajal, kord päevas."
+msgstr "The file will be transmitted during the advance voting, once a day."
+
+#: ../../VIS3-EHS/8_e_haaletamise_detailstatistika/SPEC.md:17
+msgid "Edastatav fail"
+msgstr "Transmitted file"
+
+#: ../../VIS3-EHS/8_e_haaletamise_detailstatistika/SPEC.md:19
+msgid ""
+"JSON-skeem: [online-voters-counties.schema](online-voters-counties.schema)"
+msgstr ""
+"JSON-skeem: [online-voters-counties.schema](online-voters-counties.schema)"
+
+#: ../../VIS3-EHS/8_e_haaletamise_detailstatistika/SPEC.md:21
+msgid ""
+"Valimissündmuse identifikaator peab vastama formaadile [Valimissündmuse "
+"identifikaator](../valimissündmuse_identifikaator.md)."
+msgstr ""
+"The polling event identifier must conform to the format [Polling event "
+"identifier](../polling_event_identifier.md)."
+
+#: ../../VIS3-EHS/8_e_haaletamise_detailstatistika/SPEC.md:23
+msgid ""
+"Näide (JSON): [online-voters-counties.json](online-voters-counties.json)"
+msgstr ""
+"Example (JSON): [online-voters-counties.json](online-voters-counties.json)"

@@ -1,0 +1,56 @@
+@startuml
+
+!include skin.inc
+
+Title Components of the Collection Service Management Service
+
+[User Web Browser] as User
+
+frame IVXV {
+  [Statistics Server]
+  interface "HTTP" as StatisticsHTTP
+  [Statistics Server] -down- StatisticsHTTP
+
+  frame "Collection Service" {
+    node "Management Service" {
+      [Utilities]
+      [Web Server \n (Apache)] as WebServer
+      interface HTTPS
+      WebServer -u- HTTPS
+      [User] -> HTTPS
+
+      [Management Daemon]
+      interface "HTTP" as ManagementDaemonHTTP
+      ManagementDaemonHTTP -- [Management Daemon]
+      [Agent Daemon]
+      database "Data Catalog" {
+        [Service \n data files] as DataFiles
+      }
+    }
+
+    [Microservice]
+    interface "SSH" as ServiceSSH
+    [Microservice] -l- ServiceSSH
+  }
+}
+
+/' External Sources '/
+StatisticsHTTP -> [Agent Daemon]
+
+/' Management Service '/
+[Agent Daemon] --> [Data Files] : Writing \n collected \n data
+[Management Daemon] --> [Data Files] : 1. Adding and \n modifying users \n 2. Saving digital \n ballot-box
+
+[Data Files] --> [Web Server] : Reading \n generated \n data
+
+[Web Server] --> [Data Files] : Loading commands
+[Web Server] --> ManagementDaemonHTTP : Implementing \n commands
+
+[Data Files] --> [Web Server] : Loading digital \n ballot-box
+
+/' Service Servers '/
+ServiceSSH --> [Management Daemon] : Loading digital \n ballot-box \n from storage service
+[Utilities] --> ServiceSSH : 1. Installing service \n 2. Configuring service \n 3. Applying list
+[Agent Daemon] --> ServiceSSH : Service monitoring
+
+@enduml

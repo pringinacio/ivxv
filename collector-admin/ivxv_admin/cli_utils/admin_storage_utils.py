@@ -6,11 +6,11 @@ import re
 import shutil
 import sys
 
+from .service_utils import remove_ivxv_admin_crontab
 from ..config import CONFIG, cfg_path
 from ..db import IVXVManagerDb, check_db_dir
 from ..event_log import init_event_log
 from ..lib import IvxvError, clean_dir
-from ..service.backup_service import remove_backup_crontab
 from . import ask_user_confirmation, init_cli_util, log
 
 #: Config value names for Management Service data directories
@@ -72,8 +72,8 @@ def ivxv_collector_init_util():
                 'Do You want to initialize IVXV Collector (Y=yes) ?'):
             return 1
 
-    # remove crontab if exist
-    remove_backup_crontab()
+    # remove ivxv-admin crontab if exist
+    remove_ivxv_admin_crontab()
 
     # initialize data directories
     try:

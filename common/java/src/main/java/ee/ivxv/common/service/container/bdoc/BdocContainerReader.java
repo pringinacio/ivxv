@@ -7,25 +7,19 @@ import ee.ivxv.common.service.container.Container;
 import ee.ivxv.common.service.container.ContainerReader;
 import ee.ivxv.common.service.container.InvalidContainerException;
 import ee.ivxv.common.util.Util;
-import eu.europa.esig.dss.tsl.Condition;
-import eu.europa.esig.dss.tsl.ServiceInfo;
-import eu.europa.esig.dss.tsl.ServiceInfoStatus;
-import eu.europa.esig.dss.util.TimeDependentValues;
-import eu.europa.esig.dss.x509.CertificateToken;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
 import java.security.cert.X509Certificate;
-import java.util.Arrays;
 import java.util.Base64;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
@@ -36,10 +30,7 @@ import javax.xml.crypto.dsig.XMLSignature;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.apache.xml.security.Init;
 import org.apache.xml.security.c14n.Canonicalizer;
-import org.digidoc4j.Configuration;
-import org.digidoc4j.ContainerBuilder;
-import org.digidoc4j.ContainerValidationResult;
-import org.digidoc4j.TSLCertificateSource;
+import org.digidoc4j.*;
 import org.digidoc4j.impl.asic.tsl.TSLCertificateSourceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,7 +45,7 @@ public class BdocContainerReader implements ContainerReader {
     private static final String SIG_FILE_PREFIX = "META-INF/signatures";
     private static final String SIG_VALUE_EL = "SignatureValue";
 
-    private Configuration conf;
+    private final Configuration conf;
 
     static {
         Init.init();
@@ -70,13 +61,13 @@ public class BdocContainerReader implements ContainerReader {
     }
 
     private static Configuration createConfiguration(Conf conf, int nThreads) {
-        ConfigurationBuilder cb = ConfigurationBuilder.aConfiguration().withNThreads(nThreads);
-
-        conf.getCaCerts().forEach(cb::withCaCert);
-        conf.getOcspCerts().forEach(cb::withOcspCert);
-        conf.getTsaCerts().forEach(cb::withTsaCert);
-
-        return cb.build();
+        return ConfigurationBuilder
+                .aConfiguration()
+                .withNThreads(nThreads)
+                .withX509Certs(conf.getCaCerts())
+                .withX509Certs(conf.getOcspCerts())
+                .withX509Certs(conf.getTsaCerts())
+                .build();
     }
 
     @Override
@@ -91,14 +82,21 @@ public class BdocContainerReader implements ContainerReader {
     @Override
     public final Container read(String path) throws InvalidContainerException {
         log.debug("readContainer({}) called", path);
-        return read(ContainerBuilder.aContainer().fromExistingFile(path).withConfiguration(conf),
-                path);
+        ContainerBuilder cb = ContainerBuilder
+                .aContainer()
+                .fromExistingFile(path)
+                .withConfiguration(conf);
+        return read(cb, path);
     }
 
     @Override
     public final Container read(InputStream input, String ref) throws InvalidContainerException {
         log.debug("readContainer(<InputStream>, {}) called", ref);
-        return read(ContainerBuilder.aContainer().fromStream(input).withConfiguration(conf), ref);
+        ContainerBuilder cb = ContainerBuilder
+                .aContainer()
+                .fromStream(input)
+                .withConfiguration(conf);
+        return read(cb, ref);
     }
 
     private Container read(ContainerBuilder containerBuilder, String ref)
@@ -107,11 +105,20 @@ public class BdocContainerReader implements ContainerReader {
             org.digidoc4j.Container c = containerBuilder.build();
 
             if (log.isDebugEnabled()) {
-                String files = c.getDataFiles().stream().map(f -> f.getName())
+                String files = c
+                        .getDataFiles()
+                        .stream()
+                        .map(DataFile::getName)
                         .collect(Collectors.joining(", "));
-                String signers = c.getSignatures().stream()
-                        .map(s -> Optional.ofNullable(s.getSigningCertificate())
-                                .map(sc -> sc.getSubjectName()).orElse("null"))
+                Function<Signature, String> subjNameOrNull =
+                        (s) -> Optional
+                                .ofNullable(s.getSigningCertificate())
+                                .map(X509Cert::getSubjectName)
+                                .orElse("null");
+                String signers = c
+                        .getSignatures()
+                        .stream()
+                        .map(subjNameOrNull)
                         .collect(Collectors.joining(", "));
                 log.debug("container {}, files: {}", ref, files);
                 log.debug("container {}, signers: {}", ref, signers);
@@ -130,8 +137,8 @@ public class BdocContainerReader implements ContainerReader {
     /**
      * Validates the specified container, i.e. throws a runtime exception if the container is not
      * valid. Subclasses can override it to bypass validation, which is generally not recommended.
-     * 
-     * @param c
+     *
+     * @param c digidoc container
      * @param ref The reference name of the container
      * @throws InvalidContainerException if the specified BDOC container is invalid.
      */
@@ -147,13 +154,14 @@ public class BdocContainerReader implements ContainerReader {
 
     @Override
     public byte[] combine(byte[] bdoc, byte[] ocsp, byte[] ts, String tsC14nAlg) {
+        Objects.requireNonNull(ts);
         ByteArrayOutputStream out = new ByteArrayOutputStream(5000);
         byte[] buffer = new byte[1024];
 
         log.debug("combine(): combining container data");
 
         try (ZipInputStream zis = new ZipInputStream(new ByteArrayInputStream(bdoc), CHARSET);
-                ZipOutputStream zos = new ZipOutputStream(out, CHARSET)) {
+             ZipOutputStream zos = new ZipOutputStream(out, CHARSET)) {
             for (ZipEntry ze; (ze = zis.getNextEntry()) != null;) {
                 zos.putNextEntry(new ZipEntry(ze.getName()));
 
@@ -183,22 +191,23 @@ public class BdocContainerReader implements ContainerReader {
         String ocspRespStr = Base64.getEncoder().encodeToString(ocsp);
         unsignedProps = unsignedProps.replace(OCSP_RESP_KEY, ocspRespStr);
 
-        // Insert Timestamp, if provided
-        String tsStr = "";
-        if (ts != null) {
-            String c14nEl = tsC14nAlg == null ? "" : TS_C14N_EL.replace(TS_C14N_ALG_KEY, tsC14nAlg);
-            String tsRespStr = Base64.getEncoder().encodeToString(ts);
+        // Insert Timestamp
+        String c14nEl = tsC14nAlg == null ? "" : TS_C14N_EL.replace(TS_C14N_ALG_KEY, tsC14nAlg);
+        String tsRespStr = Base64.getEncoder().encodeToString(ts);
+        String tsStr = TS_EL;
+        tsStr = tsStr.replace(TS_C14N_EL_KEY, c14nEl);
+        tsStr = tsStr.replaceAll(TS_RESP_KEY, tsRespStr);
 
-            tsStr = TS_EL;
-            tsStr = tsStr.replace(TS_C14N_EL_KEY, c14nEl);
-            tsStr = tsStr.replaceAll(TS_RESP_KEY, tsRespStr);
-        }
         unsignedProps = unsignedProps.replace(TS_EL_KEY, tsStr);
 
         // First remove any traces of possible existing 'UnsignedProperties' element
-        String cleanSigXml = REMOVE_USP.matcher(sigXml).replaceAll("");
+        String cleanSigXml = REMOVE_USP
+                .matcher(sigXml)
+                .replaceAll("");
         // Then add new 'UnsignedProperties' element
-        String result = ADD_USP.matcher(cleanSigXml).replaceFirst("$1\n" + unsignedProps);
+        String result = ADD_USP
+                .matcher(cleanSigXml)
+                .replaceFirst("$1\n" + unsignedProps);
 
         return Util.toBytes(result);
     }
@@ -226,7 +235,10 @@ public class BdocContainerReader implements ContainerReader {
 
         Canonicalizer c11r = Canonicalizer.getInstance(c14nAlg);
 
-        return c11r.canonicalizeSubtree(nl.item(0));
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        c11r.canonicalizeSubtree(nl.item(0), bos);
+
+        return bos.toByteArray();
     }
 
     @Override
@@ -285,16 +297,7 @@ public class BdocContainerReader implements ContainerReader {
      */
     static class ConfigurationBuilder {
 
-        private static final String OCSP_SERVICE_INFO_TYPE =
-                "http://uri.etsi.org/TrstSvc/Svctype/Certstatus/OCSP/QC";
-        private static final String TSA_SERVICE_INFO_TYPE =
-                "http://uri.etsi.org/TrstSvc/Svctype/TSA";
-        private static final String OCSP_SERVICE_INFO_STATUS =
-                "http://uri.etsi.org/TrstSvc/TrustedList/Svcstatus/undersupervision";
-        private static final String TSA_SERVICE_INFO_STATUS =
-                "http://uri.etsi.org/TrstSvc/TrustedList/Svcstatus/undersupervision";
-
-        private TSLCertificateSource certSource = new TSLCertificateSourceImpl();
+        private final TSLCertificateSource certSource = new TSLCertificateSourceImpl();
         private int nThreads;
 
         static ConfigurationBuilder aConfiguration() {
@@ -306,18 +309,27 @@ public class BdocContainerReader implements ContainerReader {
             return this;
         }
 
-        ConfigurationBuilder withCaCert(X509Certificate cert) {
+        /**
+         * Add x509 certificate to the runtime Trusted Service List (TSL).
+         * TSL will be used by digidocj to ensure that {@code cert}
+         * is authorized to act as an intermediate or root CA to validate:
+         * <ul>
+         *     <li>user's certificate</li>
+         *     <li>OCSP response</li>
+         *     <li>TSA timestamp</li>
+         * </ul>
+         * NB! Use with caution, if user's certificate issuer is {@code cert}
+         * then digidocj will authorize that {@code cert} and no
+         * full certificate chain needed
+         *
+         * @param cert intermediate/root CA (to validate user cert, OCSP response or TSA response)
+         */
+        void withX509Cert(X509Certificate cert) {
             certSource.addTSLCertificate(cert);
-            return this;
         }
 
-        ConfigurationBuilder withOcspCert(X509Certificate cert) {
-            certSource.addCertificate(new CertificateToken(cert), createOcspServiceInfo(cert));
-            return this;
-        }
-
-        ConfigurationBuilder withTsaCert(X509Certificate cert) {
-            certSource.addCertificate(new CertificateToken(cert), createTsaServiceInfo(cert));
+        ConfigurationBuilder withX509Certs(List<X509Certificate> certs) {
+            certs.forEach(this::withX509Cert);
             return this;
         }
 
@@ -327,30 +339,6 @@ public class BdocContainerReader implements ContainerReader {
             conf.setThreadExecutor(createExecutorService());
             conf.setAllowASN1UnsafeInteger(true);
             return conf;
-        }
-
-        private ServiceInfo createOcspServiceInfo(X509Certificate cert) {
-            ServiceInfo serviceInfo = new ServiceInfo();
-
-            Map<String, List<Condition>> qualifiers = new HashMap<>(); // Must not be null!
-            ServiceInfoStatus status =
-                    new ServiceInfoStatus(OCSP_SERVICE_INFO_TYPE, OCSP_SERVICE_INFO_STATUS,
-                            qualifiers, null, null, null, cert.getNotBefore(), cert.getNotAfter());
-
-            serviceInfo.setStatus(new TimeDependentValues<>(Arrays.asList(status)));
-            return serviceInfo;
-        }
-
-        private ServiceInfo createTsaServiceInfo(X509Certificate cert) {
-            ServiceInfo serviceInfo = new ServiceInfo();
-
-            Map<String, List<Condition>> qualifiers = new HashMap<>(); // Must not be null!
-            ServiceInfoStatus status =
-                    new ServiceInfoStatus(TSA_SERVICE_INFO_TYPE, TSA_SERVICE_INFO_STATUS,
-                            qualifiers, null, null, null, cert.getNotBefore(), cert.getNotAfter());
-
-            serviceInfo.setStatus(new TimeDependentValues<>(Arrays.asList(status)));
-            return serviceInfo;
         }
 
         private ExecutorService createExecutorService() {

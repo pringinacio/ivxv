@@ -26,7 +26,7 @@ import ee.ivxv.common.service.bbox.impl.verify.TsVerifier;
 import ee.ivxv.common.service.console.Progress;
 import ee.ivxv.common.service.container.InvalidContainerException;
 import ee.ivxv.common.util.Util;
-import eu.europa.esig.dss.DSSException;
+import eu.europa.esig.dss.model.DSSException;
 import java.time.Instant;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
@@ -45,6 +45,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import org.slf4j.Logger;
@@ -66,10 +67,16 @@ class IvxvBboxLoader<T extends Record<?>, U extends Record<?>, RT extends Keyabl
     final Profile<T, U, RT, RU> profile;
     final LoaderHelper<BbRef> helper;
     private final int nThreads;
+    private static final String BALLOT_CONTAINER_EXT = "bdoc";
 
     public IvxvBboxLoader(Profile<T, U, RT, RU> profile, FileSource source, Progress.Factory pf,
             Reporter<BbRef> reporter, int nThreads) throws InvalidBboxException {
         this(profile, new LoaderHelper<>(source, new BbRefProvider(), pf, reporter), nThreads);
+    }
+
+    public IvxvBboxLoader(Profile<T, U, RT, RU> profile, FileSource source, Progress.Factory pf,
+                          Reporter<BbRef> reporter, int nThreads, long maxSignedBallotSizeInBytes) throws InvalidBboxException {
+        this(profile, new LoaderHelper<>(source, new BbRefProvider(), pf, reporter), nThreads, maxSignedBallotSizeInBytes);
     }
 
     IvxvBboxLoader(Profile<T, U, RT, RU> profile, LoaderHelper<BbRef> helper, int nThreads)
@@ -79,6 +86,33 @@ class IvxvBboxLoader<T extends Record<?>, U extends Record<?>, RT extends Keyabl
         this.helper = helper;
         this.nThreads = nThreads;
         log.info("ZipBboxLoader instantiated with thread count {}", nThreads);
+    }
+
+    IvxvBboxLoader(Profile<T, U, RT, RU> profile, LoaderHelper<BbRef> helper, int nThreads, long maxSignedBallotSizeInBytes)
+            throws InvalidBboxException {
+        super(helper.getAllFileNames(signedBallotSizeCheckFunction(maxSignedBallotSizeInBytes)).size());
+        this.profile = profile;
+        this.helper = helper;
+        this.nThreads = nThreads;
+        log.info("ZipBboxLoader instantiated with thread count {} and max signed ballot size of {} bytes", nThreads,
+                maxSignedBallotSizeInBytes);
+    }
+
+    /**
+     * signedBallotSizeCheckFunction returns a function that checks whether a ballot is <= signedBallotMaxSizeInBytes.
+     * @param signedBallotMaxSizeInBytes
+     * @return
+     */
+    private static BiFunction<String, Long, Boolean> signedBallotSizeCheckFunction(long signedBallotMaxSizeInBytes) {
+        return (fileType, fileSize) -> {
+
+            // File is not a signed ballot, omit check
+            if (!fileType.equals(BALLOT_CONTAINER_EXT)) {
+                return true;
+            }
+
+            return signedBallotMaxSizeInBytes >= fileSize;
+        };
     }
 
     @Override
@@ -275,7 +309,7 @@ class IvxvBboxLoader<T extends Record<?>, U extends Record<?>, RT extends Keyabl
         /**
          * Ensure the uniqueness of all responses (response signatures/keys). In case of recurrence
          * only use the earliest one, remove others and report.
-         * 
+         *
          * @param ballots
          */
         private void removeRecurrentResponses(Map<BbRef, BallotResponse> ballots) {

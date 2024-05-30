@@ -31,6 +31,13 @@ func NewEHSService(elections []conf.EHS, batchMaxSize int) EHSService {
 func (e EHSService) GetElections() Elections {
 	elections := []Election{}
 	for _, election := range e.elections {
+		// GetSeqNo is the fastest call, that helps determine the backend state
+		_, err := e.GetSeqNo(election.Name)
+		if err != nil {
+			// If particular backend responds with err then from xroad-service
+			// perspective it is an inactive backend
+			continue
+		}
 		elections = append(elections, Election{Name: election.Name})
 	}
 	return Elections{elections}
@@ -65,10 +72,7 @@ func (e EHSService) GetSeqNo(electionName string) (ElectionSeqNo, error) {
 	var resp SeqNo
 	err = client.Call("RPC.VotesSeqNo", nil, &resp)
 	if err != nil {
-		if stderrors.Is(err, errors.ErrVotingEnd) {
-			return ElectionSeqNo{}, err
-		}
-		return ElectionSeqNo{}, fmt.Errorf("EHS: %s", err)
+		return ElectionSeqNo{}, err
 	}
 	return ElectionSeqNo{electionName, resp.SeqNo}, nil
 }
@@ -121,12 +125,8 @@ func (e EHSService) GetBatch(electionName string, seqNo int) (ElectionBatch, err
 				Code:  errors.ErrNotFound.Error(),
 				Field: "fromSeqNo",
 				Value: seqNo}.ToErr()
-			return ElectionBatch{}, err
-		case stderrors.Is(err, errors.ErrVotingEnd):
-			return ElectionBatch{}, err
-		default:
-			return ElectionBatch{}, fmt.Errorf("EHS: %s", err)
 		}
+		return ElectionBatch{}, err
 	}
 
 	return ElectionBatch{Name: electionName, SeqNo: seqNo, BatchMaxSize: e.batchMaxSize, EVotingsBatch: resp}, nil
@@ -154,8 +154,11 @@ func (e EHSService) ehsConn(addr string, certLoc string, clientcert string, clie
 	if err != nil {
 		return nil, fmt.Errorf("EHS client cert %s: ", err)
 	}
-	conn, err := tls.Dial("tcp", addr, &tls.Config{RootCAs: certPool,
-		Certificates: []tls.Certificate{clientCert}, ServerName: serverName})
+	conn, err := tls.Dial("tcp", addr, &tls.Config{
+		RootCAs:      certPool,
+		Certificates: []tls.Certificate{clientCert},
+		ServerName:   serverName,
+		MinVersion:   tls.VersionTLS12})
 
 	if err != nil {
 		return nil, fmt.Errorf("EHS connection error: %s", err)

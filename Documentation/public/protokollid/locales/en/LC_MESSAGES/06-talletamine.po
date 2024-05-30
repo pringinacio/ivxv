@@ -1,0 +1,165 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, Cybernetica AS
+# This file is distributed under the same license as the Elektroonilise
+# hääletamise infosüsteem package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Elektroonilise hääletamise infosüsteem 1.8.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-29 10:34+0200\n"
+"PO-Revision-Date: 2024-03-01 12:50+0200\n"
+"Last-Translator: \n"
+"Language-Team: en <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.10.3\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: ../../06-talletamine.rst:5
+msgid "Elektroonilise hääle kvalifitseerimine talletamiseks"
+msgstr "Qualifying an electronic vote for storage"
+
+#: ../../06-talletamine.rst:8
+msgid "Kvalifitseeritud hääl"
+msgstr "Qualified vote"
+
+#: ../../06-talletamine.rst:10
+msgid ""
+"Valijarakenduse töö tulemusena saadetakse kogumisteenusesse talletamiseks "
+"topeltümbrik, mis sisaldab endas valija tahteavaldust krüpteeritud kujul, "
+"valija allkirja krüpteeritud tahteavaldusel kooskõlastatud allkirja- ja "
+"konteinervormingus ning valija allkirjastamissertifikaati X509-vormingus."
+msgstr ""
+"As a result of the work of the voting application, a double envelope "
+"containing the voter's intent in encrypted form, the voter's signature on "
+"the encrypted ballot, and the voter's signature certificate in X509 format "
+"is sent to the collection service for storage."
+
+#: ../../06-talletamine.rst:15
+msgid ""
+"Hääle edukaks talletamiseks näeb IVXV protokoll ette hääle registreerimise "
+"välise registreerimisteenuse osutaja juures ning registreerimistõendi "
+"valijarakendusele kättesaadavaks tegemise. Valimise korraldaja võib hääle "
+"kvalifitseerimiseks näha ette täiendavaid samme lisaks registreerimisele -- "
+"näiteks kehtivuskinnituse hankimist hääle allkirjastanud sertifikaadi kohta."
+msgstr ""
+"In order to ensure the successful storage of votes, IVXV protocol provides "
+"for the registration of votes with an external registration service provider "
+"and the availability of the registration confirmation in the voting "
+"application. In order to qualify a vote, the election organiser may provide "
+"for additional steps beyond registration -- for example, obtaining a "
+"validation certificate for the certificate that signed the vote."
+
+#: ../../06-talletamine.rst:21
+msgid ""
+"Kõik kogumisteenuse poolt hangitavad kvalifitseerivad elemendid, mis "
+"määravad hääle staatuse hilisemates töötlusetappides, tuleb esitada "
+"valijarakendusele ning nõudmise korral ka kontrollrakendusele tagamaks, et "
+"valija saab oma hääle korrektse menetlemise võimalikkusest õigeaegselt teada."
+msgstr ""
+"All qualifying elements obtained by the collection service that determine "
+"the status of the vote at subsequent stages of processing must be provided "
+"to the voting application and, on request, to the verification application "
+"to ensure that the voter is informed in a timely manner of the possibility "
+"of their vote being processed correctly."
+
+#: ../../06-talletamine.rst:27
+msgid "OCSP kehtivuskinnitus"
+msgstr "OCSP validity confirmation"
+
+#: ../../06-talletamine.rst:29
+msgid ""
+"OCSP (*Online Certificate Status Protocol*) on standartne protokoll X509-"
+"sertifikaatide kehtivusinfo pärimiseks. Kogumisteenus võib seda protokolli "
+"kasutada hääle allkirjastanud sertifikaadi kehtivuse teadasaamiseks. OCSP "
+"vastus ütleb, et sertifikaat kehtis päringu tegemise ajahetkel, kuid ei "
+"seosta OCSP vastust konkreetse allkirjaga."
+msgstr ""
+"OCSP (*Online Certificate Status Protocol*) is a standard protocol for "
+"requesting validity information for X509 certificates. The collection "
+"service can use this protocol to know the validity of the certificate that "
+"signed the vote. The OCSP response indicates that the certificate was valid "
+"at the time of the request, but does not link the OCSP response to a "
+"specific signature."
+
+#: ../../06-talletamine.rst:36
+msgid "RFC3161 ajatempel"
+msgstr "RFC3161 timestamp"
+
+#: ../../06-talletamine.rst:38
+msgid ""
+"RFC3161 ajatempli protokolliga saadakse usaldusteenuse pakkujalt kinnitus, "
+"et mingi andmekogum eksisteeris enne teatud ajahetke. BDOC-TS kontekstis "
+"ajatembeldatakse allkirja element ``SignatureValue`` kanoniseeritud kujul. "
+"Klassikaline OCSP vastus koos RFC 3161 vormingus ajatempliga "
+"kvalifitseerivad BDOC-TS allkirja."
+msgstr ""
+"The RFC3161 timestamp protocol is used to obtain confirmation from a trust "
+"service provider that a dataset existed before a certain point in time. In "
+"the context of BDOC-TS, the signature element ``SignatureValue`` is "
+"timestamped in canonicalized form. A classical OCSP response with a "
+"timestamp in RFC 3161 format qualifies a BDOC-TS signature."
+
+#: ../../06-talletamine.rst:47
+msgid "Talletamine"
+msgstr "Storage"
+
+#: ../../06-talletamine.rst:49
+msgid "Elektroonilise hääle talletamine kogumisteenuses tähendab:"
+msgstr "Storing an electronic ballot in a collection service means:"
+
+#: ../../06-talletamine.rst:51
+msgid ""
+"hääle vastuvõtmist valijarakenduselt ning hääletaja allkirja "
+"verifitseerimist;"
+msgstr ""
+"acceptance of the vote from the voting application and verification of the "
+"voter's signature;"
+
+#: ../../06-talletamine.rst:54
+msgid ""
+"hääle võimalikku kvalifitseerimist -- näiteks sertifikaadi kehtivuse "
+"tõendamist hääle allkirjastamisele lähedasel ajahetkel;"
+msgstr ""
+"possible qualification of the vote -- for example, proof of the validity of "
+"the certificate at a point in time close to the time the vote was signed;"
+
+#: ../../06-talletamine.rst:57
+msgid "hääle registreerimist sõltumatus registreerimisteenuses;"
+msgstr "registering the vote with an independent registration service;"
+
+#: ../../06-talletamine.rst:59
+msgid "häält kvalifitseerivate elementide vahendamist valijarakendusele."
+msgstr ""
+"the transmission of vote qualifying elements to the voting application."
+
+#: ../../06-talletamine.rst:61
+msgid ""
+"Erinevad kombinatsioonid allkirjavormingust ning hääli kvalifitseerivatest "
+"teenustest võivad tekitada erinevaid IVXV-profiile. Konkreetse dokumendi "
+"raames on IVXV profiil:"
+msgstr ""
+"Different combinations of signature format and vote qualifying services can "
+"produce different IVXV profiles. In the context of a specific document, an "
+"IVXV profile is:"
+
+#: ../../06-talletamine.rst:65
+msgid "Allkirjastatud hääle vorming on BDOC-TS;"
+msgstr "The signed vote format is BDOC-TS;"
+
+#: ../../06-talletamine.rst:67
+msgid "Kehtivuskinnitusprotokolliks on standartne OCSP;"
+msgstr "The validation protocol is the standard OCSP;"
+
+#: ../../06-talletamine.rst:69
+msgid ""
+"BDOC-TS kvalifitseerimiseks kasutatav RFC3161 ajatempel on kasutusel ka "
+"registreerimistõendina."
+msgstr ""
+"The RFC3161 timestamp used for BDOC-TS qualification is also used as a "
+"confirmation of registration."

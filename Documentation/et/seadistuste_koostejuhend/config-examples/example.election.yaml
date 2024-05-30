@@ -9,6 +9,7 @@ period:
   electionstart: 2017-01-16T09:00:00+02:00
   electionstop:  2017-01-18T19:00:00+02:00
   servicestop:   2017-01-18T19:15:00+02:00
+  verificationstop:   2017-01-18T19:20:00+02:00
 
 voting:
   ratelimitstart:   50
@@ -141,3 +142,19 @@ qualification:
       responders:
         - !container TEST_of_SK_OCSP_RESPONDER_2020.pem
       retry: 2
+
+# this block defines any statistics that EHS shares with any other third-party
+stats:
+  # this block defines detail statistics that EHS shares with VIS,
+  # you can add 'common' here if implemented, or any other kind
+  detail:
+    # this block defines an automation (scheduler) for detail statistics sharing
+    scheduler:
+      # cron is a scheduler, you can add 'systemd-timer' here if implemented,
+      # only crontab syntax supported for cron: section
+      cron:
+        min: "*/15" # minutes of a hour: 00, 15, 30, 45
+        hour: "*" # each hour
+        day: "*" # each day
+        month: "*" # each month
+        weekday: "*" # each week day

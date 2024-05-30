@@ -77,7 +77,7 @@ def main():
     pidfile_path = cfg_path('ivxv_admin_data_path', 'ivxv-config-apply.pid')
     log.debug("Creating pidfile %r", pidfile_path)
     try:
-        PidLocker(pidfile_path)
+        PidLocker(pidfile_path, timeout=5)
     except IOError:
         log.error("Creating pidfile %r failed. Is another %s running?",
                   pidfile_path, os.path.basename(sys.argv[0]))

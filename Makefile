@@ -1,12 +1,10 @@
-include common/go/gopath.mk
+JAVADIRS    := common/java key processor auditor
+GODIRS      := common/collector sessionstatus/api proxy mid smartid choices voting verification storage votesorder webeid sessionstatus
+OTHERDIRS   := systemd Documentation
 
-JAVADIRS := common/java key processor auditor
-GODIRS   := common/tools/go common/collector proxy dds mid smartid choices voting verification storage votesorder
-
-DIRS        := $(JAVADIRS) $(GODIRS) systemd Documentation
 TESTDIRS    := $(patsubst %,test-%,$(JAVADIRS) $(GODIRS))
 INSTALLDIRS := $(patsubst %,install-%,$(JAVADIRS) $(GODIRS) systemd)
-CLEANDIRS   := $(patsubst %,clean-%,$(DIRS))
+CLEANDIRS   := $(patsubst %,clean-%,$(JAVADIRS) $(GODIRS) $(OTHERDIRS))
 
 export ROOT_BUILD=true
 
@@ -31,12 +29,11 @@ help:
 	@echo
 	@echo "       make external         Checkout common/external to the expected version"
 	@echo "       make update-external  Checkout common/external to the latest version"
-	@echo "       make gopath           Print the IVXV GOPATH to standard output"
 	@echo "       make version          Update version numbers in all known locations to"
 	@echo "                             the last entry in debian/changelog"
 	@echo
 	@echo "Components:"
-	$(foreach component,$(filter-out $(JAVADIRS) $(GODIRS),$(DIRS)),@echo "  $(component)"$(NEWLINE))
+	$(foreach component,$(filter-out $(JAVADIRS) $(GODIRS),$(OTHERDIRS)),@echo "  $(component)"$(NEWLINE))
 	@echo
 	@echo "  java  (meta-component which includes all of the following)"
 	$(foreach component,$(JAVADIRS),@echo "  $(component)"$(NEWLINE))
@@ -51,7 +48,7 @@ help:
 	@echo "for more details."
 
 .PHONY: all
-all: $(DIRS)
+all: $(JAVADIRS) $(GODIRS) $(OTHERDIRS)
 
 .PHONY: java
 java: $(JAVADIRS)
@@ -59,8 +56,18 @@ java: $(JAVADIRS)
 .PHONY: go
 go: $(GODIRS)
 
-.PHONY: $(DIRS)
-$(DIRS):
+.PHONY: $(GODIRS)
+$(GODIRS): --gotools
+	$(MAKE) -C $@ goimports
+	$(MAKE) -C $@ ONLINE=$(ONLINE)
+	$(MAKE) -C $@
+
+.PHONY: $(JAVADIRS)
+$(JAVADIRS):
+	$(MAKE) -C $@
+
+.PHONY: $(OTHERDIRS)
+$(OTHERDIRS):
 	$(MAKE) -C $@
 
 .PHONY: test
@@ -93,7 +100,9 @@ $(INSTALLDIRS): install-%:
 
 .PHONY: clean
 clean: $(CLEANDIRS)
-	rm -rf build dist
+	$(MAKE) -C tests $@
+	$(MAKE) -C release $@
+	rm -rf build dist common/tools/go/bin
 
 .PHONY: clean-java
 clean-java: $(JAVADIRS:%=clean-%)
@@ -105,17 +114,15 @@ clean-go: $(GODIRS:%=clean-%)
 $(CLEANDIRS): clean-%:
 	$(MAKE) -C $* clean
 
-.PHONY: gopath
-gopath:
-	@echo $(GOPATH)
-
 .PHONY: external
 external:
 	git submodule update --init
 
+
 .PHONY: update-external
 update-external:
 	git submodule update --init --remote
+
 
 .PHONY: version
 version:
@@ -124,3 +131,8 @@ version:
 # We cannot mark this target as phony without listing all possible targets.
 %-dev:
 	$(MAKE) $* DEVELOPMENT=1
+
+# Target prefixed with "--" are not seen to the call `make [target]`
+.PHONY: --gotools
+--gotools:
+	$(MAKE) -C common/collector gotools

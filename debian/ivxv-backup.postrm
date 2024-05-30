@@ -22,6 +22,7 @@ set -e
 case "$1" in
     purge)
         rm -rf /var/backups/ivxv
+        rm -rf /var/log/ivxv
     ;;
 
     remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)

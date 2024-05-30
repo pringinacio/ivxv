@@ -41,6 +41,7 @@ public class StatsTool implements Tool.Runner<StatsArgs> {
 
     private static final String OUT_JSON_TMPL = "stats.json";
     private static final String OUT_CSV_TMPL = "stats.csv";
+    private static final Long DEFAULT_MAX_VOTE_BDOC_SIZE_IN_BYTES = 32768L;
 
     private final ProcessorContext ctx;
     private final I18nConsole console;
@@ -77,7 +78,7 @@ public class StatsTool implements Tool.Runner<StatsArgs> {
             VoterProvider vp = getVoterProvider(args, dl);
             reporter.writeVlErrors(args.out.value());
 
-            BboxHelper.IntegrityChecked<?> bb = checkBallotBox(args.bb.value());
+            BboxHelper.IntegrityChecked<?> bb = checkBallotBox(args.bb.value(), args.maxSignedBallotSizeInBytes.value());
             reporter.writeBbErrors(args.out.value());
             stats = generateStatistics(args, vp, dl, bb);
         }
@@ -174,14 +175,14 @@ public class StatsTool implements Tool.Runner<StatsArgs> {
         return loader.getCurrent()::find;
     }
 
-    private BboxHelper.IntegrityChecked<?> checkBallotBox(Path path) {
+    private BboxHelper.IntegrityChecked<?> checkBallotBox(Path path, long maxSignedBallotSizeInBytes) {
         try {
             int tc = ctx.args.threads.value();
             BboxHelper.Loader<?> loader = ctx.bbox.getLoader(path, console::startProgress, tc);
 
             console.println();
             console.println(M.m_bb_loading, path);
-            BboxHelper.BboxLoader<?> bbLoader = loader.getBboxLoader(path, reporter::reportBbError);
+            BboxHelper.BboxLoader<?> bbLoader = loader.getBboxLoader(path, reporter::reportBbError, maxSignedBallotSizeInBytes);
             console.println(M.m_bb_loaded);
             console.println(M.m_bb_numof_collector_ballots, bbLoader.getNumberOfValidBallots());
 
@@ -212,6 +213,10 @@ public class StatsTool implements Tool.Runner<StatsArgs> {
     public static class StatsArgs extends Args {
 
         Arg<Path> bb = Arg.aPath(Msg.arg_ballotbox, true, false);
+        Arg<Long> maxSignedBallotSizeInBytes = Arg
+                .aLong(Msg.arg_signed_ballot_max_size_bytes)
+                .setOptional()
+                .setDefault(DEFAULT_MAX_VOTE_BDOC_SIZE_IN_BYTES);
         Arg<LocalDate> elDay = Arg.aLocalDate(Msg.arg_election_day);
         Arg<Instant> start = Arg.anInstant(Msg.arg_period_start).setOptional();
         Arg<Instant> end = Arg.anInstant(Msg.arg_period_end).setOptional();
@@ -225,6 +230,7 @@ public class StatsTool implements Tool.Runner<StatsArgs> {
 
         public StatsArgs() {
             args.add(bb);
+            args.add(maxSignedBallotSizeInBytes);
             args.add(elDay);
             args.add(start);
             args.add(end);

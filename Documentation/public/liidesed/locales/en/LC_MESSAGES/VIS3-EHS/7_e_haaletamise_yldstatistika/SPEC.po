@@ -1,0 +1,59 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, Cybernetica AS
+# This file is distributed under the same license as the Elektroonilise
+# hääletamise infosüsteem package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Elektroonilise hääletamise infosüsteem 1.9.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-29 10:34+0200\n"
+"PO-Revision-Date: 2024-03-02 13:48+0200\n"
+"Last-Translator: \n"
+"Language-Team: en <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.10.3\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: ../../VIS3-EHS/7_e_haaletamise_yldstatistika/SPEC.md:1
+msgid "7 E-hääletamisest osavõtu üldstatistika"
+msgstr "7 General statistics on participation in e-voting"
+
+#: ../../VIS3-EHS/7_e_haaletamise_yldstatistika/SPEC.md:3
+msgid ""
+"EHS annab lühikese perioodiga (nt 15 min) VIS3-le andmeid kui palju "
+"valijaid on e-hääletanud."
+msgstr ""
+"The EHS will provide VIS3 with information on how many voters have e-voted "
+"in a short period of time (e.g. 15 min)."
+
+#: ../../VIS3-EHS/7_e_haaletamise_yldstatistika/SPEC.md:5
+msgid "EHS teeb seda HTTPS päringutega VIS3 poolt pakutava otspunkti vastu."
+msgstr ""
+"EHS does this by HTTPS requests against the endpoint provided by VIS3."
+
+#: ../../VIS3-EHS/7_e_haaletamise_yldstatistika/SPEC.md:7
+msgid "Päringu vastuses tagastatav fail:"
+msgstr "The file to be returned in response to the query:"
+
+#: ../../VIS3-EHS/7_e_haaletamise_yldstatistika/SPEC.md:9
+msgid "JSON-skeem: [online-voters-total.schema](online-voters-total.schema)"
+msgstr "JSON schema: [online-voters-total.schema](online-voters-total.schema)"
+
+#: ../../VIS3-EHS/7_e_haaletamise_yldstatistika/SPEC.md:11
+msgid ""
+"Valimissündmuse identifikaator peab vastama formaadile [Valimissündmuse "
+"identifikaator](../valimissündmuse_identifikaator.md)."
+msgstr ""
+"The election event identifier must conform to the format [Election event "
+"identifier](../valimissündmuse_identifikaator.md)."
+
+#: ../../VIS3-EHS/7_e_haaletamise_yldstatistika/SPEC.md:13
+msgid "Näide (JSON): [online-voters-total.json](online-voters-total.json)"
+msgstr "Example (JSON): [online-voters-total.json](online-voters-total.json)"

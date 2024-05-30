@@ -21,4 +21,4 @@ The voting service
 The vote container and signature format, qualifying properties, and storage
 protocols are all abstracted and can be replaced with new implementations.
 
-.. _`storage service`: https://ivxv.ee/storage
+.. _`storage service`: https://ivxv.ee/common/collector/storage

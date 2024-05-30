@@ -18,10 +18,11 @@ Makefile  := $(lastword $(filter-out $(common.mk),$(MAKEFILE_LIST)))
 
 # You can set these variables from the command line, and also
 # from the environment for the first two.
-SPHINXOPTS    ?= -W -c $(dir $(common.mk))
+SPHINXOPTS    ?= -c $(dir $(common.mk))
 SPHINXBUILD   ?= sphinx-build
 SOURCEDIR     = $(dir $(Makefile))
 BUILDDIR      = $(SOURCEDIR)_build
+SPHINXINTL    ?= sphinx-intl
 
 # Set IVXV_DOCUMENT to the name of the source directory. This will be used as
 # the key to look up configuration from documents.py.
@@ -32,6 +33,19 @@ export IVXV_DOCUMENT := $(notdir $(patsubst %/,%,$(abspath $(SOURCEDIR))))
 .PHONY: help
 help:
 	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+
+
+translation:
+	@$(SPHINXBUILD) -M gettext "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+	@$(SPHINXINTL) update -p _build/gettext -l en
+
+
+english: clean
+	export SPHINXOPTS="-D language='en'" && $(SPHINXBUILD) -M latexpdf "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+
+estonian: clean
+	@$(SPHINXBUILD) -M latexpdf "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+
 
 # Special case the clean target: skip prerequisites and perform extra steps.
 .PHONY: clean
@@ -53,6 +67,19 @@ $(common.mk) $(Makefile): ;
 differ.sh := $(dir $(common.mk))differ.sh
 master    := $(dir $(common.mk))_master/
 gitdir    := $(patsubst $(shell git rev-parse --show-toplevel)%,%,$(abspath $(SOURCEDIR)))
+olddir    := $(master)$(gitdir)
+
+ifeq ("$(olddir)", "../../_master//Documentation/public/protokollid")
+	olddir := "../../_master//Documentation/et/protokollid"
+endif
+
+ifeq ("$(olddir)", "../../_master//Documentation/public/uldsisukord")
+	olddir := "../../_master//Documentation/et/uldsisukord"
+endif
+
+ifeq ("$(olddir)", "../../_master//Documentation/public/arhitektuur")
+	olddir := "../../_master//Documentation/et/arhitektuur"
+endif
 
 .PHONY: diff
 diff: latex master-latex
@@ -62,16 +89,20 @@ diff: latex master-latex
 
 .PHONY: master-latex
 master-latex: $(master)
-	if [ -d $(master)$(gitdir) ]; then \
-		$(MAKE) -C $(master)$(gitdir) BUILDDIR=$(abspath $(BUILDDIR))/master latex; \
+	if [ -d $(olddir) ]; then \
+		$(MAKE) -C $(olddir) BUILDDIR=$(abspath $(BUILDDIR))/master latex; \
 	fi
 
 $(master):
-	git worktree add $@ 1.7.7
+	git worktree add $@ 1.8.3
 
 # Installation rules.
 .PHONY: install-pdf
-install-pdf: latexpdf
+install-pdf: estonian
+	cp --update $(filter-out %-diff.pdf,$(wildcard $(BUILDDIR)/latex/*.pdf)) "$(DESTDIR)"
+
+.PHONY: install-en-pdf
+install-en-pdf: english
 	cp --update $(filter-out %-diff.pdf,$(wildcard $(BUILDDIR)/latex/*.pdf)) "$(DESTDIR)"
 
 .PHONY: install-html

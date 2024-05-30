@@ -1,11 +1,10 @@
 package ee.ivxv.common.crypto;
 
-import static javax.xml.bind.DatatypeConverter.printHexBinary;
-
 import ee.ivxv.common.asn1.Field;
 import ee.ivxv.common.util.Util;
 import java.math.BigInteger;
 import java.util.Arrays;
+import java.util.HexFormat;
 
 /**
  * Plaintext instance represents an immutable plaintext suitable for encryption. It includes
@@ -72,7 +71,7 @@ public class Plaintext {
 
     @Override
     public String toString() {
-        return String.format("Plaintext(%s)", printHexBinary(msg));
+        return String.format("Plaintext(%s)", HexFormat.of().formatHex(msg).toUpperCase());
     }
 
     /**

@@ -52,6 +52,8 @@ DB_KEYS = {
     'election/servicestart': '',
     # collector service stop time
     'election/servicestop': '',
+    # verification service stop time
+    'election/verificationstop': '',
 }
 #: Database keys for service hosts with default values
 DB_HOST_SUBKEYS = {
@@ -185,12 +187,13 @@ class IVXVManagerDb:
         # set value
         if key in [
                 'election/election-id', 'logmonitor/address',
-                'logmonitor/last-data'
+                'logmonitor/last-data', 'stats/detail/scheduler/cron',
+                'stats/voting_facts/scheduler/cron',
         ]:
             pass
         elif key == 'collector/state':
             assert value in COLLECTOR_STATES, f"Invalid value for {key!r}: {value!r}"
-        elif re.match('election/(election|service)(start|stop)$', key):
+        elif re.match('election/(election|service|verification)(start|stop)$', key):
             assert not value or dateutil.parser.parse(value)
         elif (re.match('election/auth/.+$', key)
               or key == 'election/tsp-qualification'):
@@ -256,7 +259,9 @@ class IVXVManagerDb:
         values = {}
         for key in sorted(self.keys()):
             path = key.split('/')
-            assert len(path) in (2, 3)
+            # len(path) == 4 is for stats/detail/scheduler/cron
+            # or stats/voting_facts/scheduler/cron
+            assert len(path) in (2, 3, 4)
             if path[0] not in values:
                 values[path[0]] = {}
             if len(path) == 2:

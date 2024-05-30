@@ -95,7 +95,8 @@ def download_ballots():
 @get("/download-voter-detail-stats")
 def download_voter_stats():
     """Download voter stats."""
-    cmd = ["ivxv-voterstats", "detail"]
+    # import detail stats from Collector, don't export to VIS
+    cmd = ["ivxv-voterstats", "detail", "--action=import"]
     log.info("Executing command: %s", " ".join(cmd))
     proc = subprocess.run(
         cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=False

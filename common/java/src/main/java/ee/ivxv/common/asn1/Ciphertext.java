@@ -1,6 +1,7 @@
 package ee.ivxv.common.asn1;
 
 import java.io.IOException;
+import java.util.Arrays;
 import org.bouncycastle.asn1.ASN1Encodable;
 import org.bouncycastle.asn1.ASN1InputStream;
 import org.bouncycastle.asn1.ASN1ObjectIdentifier;
@@ -91,6 +92,22 @@ public class Ciphertext implements ee.ivxv.common.asn1.ASN1Encodable, ASN1Decoda
         if (!(p instanceof ASN1Sequence)) {
             throw new ASN1DecodingException("Input not ASN1 SEQUENCE");
         }
+
+        // ASN1InputStream returns parsers for the objects that it encounters
+        // but does not error if it encounters also unparseable data. Compare the
+        // obtained object with the input to make sure that everything was parsed.
+        byte[] checkBytes;
+        try {
+            checkBytes = p.getEncoded("DER");
+        } catch (IOException e) {
+            throw new ASN1DecodingException("Invalid ASN1 DER");
+        }
+
+        if (!Arrays.equals(in, checkBytes)) {
+            throw new ASN1DecodingException("Bytes do not correspond to Ciphertext structure");
+        }
+
+
         ASN1Sequence s = (ASN1Sequence) p;
         if (s.size() != 2) {
             throw new ASN1DecodingException("Bytes do not correspond to Ciphertext structure");

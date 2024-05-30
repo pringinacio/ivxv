@@ -20,9 +20,9 @@ unzip master.zip
 rm master.zip
 mv ivxv-master/ ivxv
 cd ivxv/common/external/
-wget -O gradle-6.4.zip https://services.gradle.org/distributions/gradle-6.4-bin.zip
-unzip gradle-6.4.zip
-rm gradle-6.4.zip
+wget -O gradle-8.3.zip https://services.gradle.org/distributions/gradle-8.3-bin.zip
+unzip gradle-8.3.zip
+rm gradle-8.3.zip
 cd ..
 cd java/
 make sync

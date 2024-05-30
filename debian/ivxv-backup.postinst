@@ -33,6 +33,9 @@ case "$1" in
             /var/backups/ivxv/management-conf \
             /var/backups/ivxv/log \
             /var/backups/ivxv/ballot-box
+    mkdir --parents /var/log/ivxv
+    chown --changes syslog:syslog /var/log/ivxv
+    chmod --changes 755 /var/log/ivxv
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

@@ -30,6 +30,7 @@ public class SquashTool implements Tool.Runner<SquashArgs> {
     private static final String OUT_IVLJSON_TMPL = "ivoterlist.json";
     private static final String OUT_IVLPDF_TMPL = "ivoterlist.pdf";
     private static final String OUT_RR_TMPL = "revocation-report.csv";
+    private static final String OUT_LOG_DISCRIMINATOR = "squash";
 
     private final ProcessorContext ctx;
     private final I18nConsole console;
@@ -69,7 +70,10 @@ public class SquashTool implements Tool.Runner<SquashArgs> {
                 Reporter.AnonymousFormatter.NOT_ANONYMOUS);
         reporter.writeRevocationReport(out.resolve(OUT_RR_ANONYMOUS), bb.getElection(), revocationRecords,
                 Reporter.AnonymousFormatter.REVOCATION_REPORT_CSV);
-        reporter.writeLog2(out, bb.getElection(), log2Records);
+
+        // There should still be an empty .log2 file even if there are no squashed records
+        reporter.writeEmptyLogFiles(out, OUT_LOG_DISCRIMINATOR, Reporter.LogType.LOG2, bb);
+        reporter.writeLog2(out, bb.getElection(), OUT_LOG_DISCRIMINATOR, log2Records);
 
         tool.writeJsonBb(bb, out.resolve(OUT_BB));
 

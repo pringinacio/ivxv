@@ -1,0 +1,51 @@
+@startuml
+
+Title Subservice State Diagram of the Collection Service
+
+skinparam state {
+  BackgroundColor<<OK>> LightGreen
+  BackgroundColor<<Invalid>> LightCoral
+}
+
+state NotInstalled
+state Installed
+state Configured <<OK>>
+state Error <<Invalid>>
+state Removed
+
+NotInstalled: Service described in technical settings,
+NotInstalled: but the service software is not installed or
+NotInstalled: no technical settings have been applied to the service.
+
+Installed : Service software is installed and the status of applied configurations is:
+Installed : - root certificates are applied;
+Installed : - technical settings are applied;
+Installed : - election settings are not applied.
+
+Configured : Service is operational
+
+Error : Service is not operational
+
+Removed : Service has been removed from the collection service
+Removed : composition
+
+[*] --> NotInstalled
+
+NotInstalled --> Installed : Management service installs \n service software and \n applies root and \n technical settings
+
+Installed --> Configured : Management service applies \n election settings to the service
+Installed --> Removed : Service is removed \n from the collection service
+
+Configured --> Error : Management service \n loses connection \n to the service
+Configured --> Removed : Service is removed \n from the collection service
+
+Error --> Configured : Error in the \n configured service \n is resolved
+Error --> Removed : Service is removed \n from the collection service
+Error --> [*] : Voting period \n ends
+
+Configured --> [*] : Voting period \n ends
+
+Removed --> [*]
+
+@enduml
+

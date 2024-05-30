@@ -1,0 +1,4 @@
+[submodule "Documentation/public/liidesed/VIS3-EHS"]
+  path = Documentation/public/liidesed/VIS3-EHS
+  url = https://github.com/e-gov/VIS3-EHS.git
+  branch = feature/tervikdokument

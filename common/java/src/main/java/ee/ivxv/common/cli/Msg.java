@@ -24,7 +24,7 @@ public enum Msg implements NameHolder {
 
     // Used by Arg, CommandLine and YamlData
     e_arg_parse_error, //
-    e_invalid_boolean, e_invalid_choice, e_invalid_int, e_invalid_number, //
+    e_invalid_boolean, e_invalid_choice, e_invalid_int, e_invalid_long, e_invalid_number, //
     e_invalid_instant, e_invalid_local_date, //
     e_invalid_path_exists, e_invalid_path_not_exists, e_invalid_path_not_dir, //
     e_invalid_path_not_file, e_invalid_public_key, //

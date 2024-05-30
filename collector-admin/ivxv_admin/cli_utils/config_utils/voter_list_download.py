@@ -58,7 +58,7 @@ def main():
         if output_report_filepath:
             with open(output_report_filepath, "w") as fd:
                 json.dump(
-                    {"voter-list-changeset": {"status": f"Skipped"}}, fd, indent=True
+                    {"voter-list-changeset": {"status": "Skipped"}}, fd, indent=True
                 )
         return 0
     changeset_no += 1

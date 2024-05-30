@@ -1,3 +1,135 @@
+ivxv (1.9.10) jammy; urgency=medium
+
+  * Hotfix to admin web, don't export detailstats to VIS when downloading
+  * Hotfix to ivxv-storage install/uninstall .deb scripts
+  * Hotfix to admin web, removed old CAs to validate ID-card certificate
+  * Hotfix to admin web, check client certificate with OCSP
+  * Hotfix to disable Apache web server directories indexing
+  * Hotfix to admin web, disable weak ciphers, only allow TLSv1.3
+  * Hotfix to admin web, remove sensitive info from server response
+  * Hotfix to ivxv-admin-sudo install-pkg, extract filename only from path
+  * ivxv-storageorder runs under cron
+  * Processor should check a ballot size to prevent zip-bomb attack
+
+ -- IVXV Developer <info@ivotingcentre.ee>  Tue, 14 May 2024 05:37:36 +0000
+
+ivxv (1.9.9) jammy; urgency=medium
+
+  * Add script to prepare csv for ivxv-storageorder
+  * Hotfix to ivxv-storageorder SeqNo == successful vote per voterid check
+  * Hotfix to xroad-service HTTP errors handling
+  * Hotfix to IVXV logs directory creation
+
+ -- IVXV Developer <info@ivotingcentre.ee>  Tue, 30 Apr 2024 10:45:58 +0000
+
+ivxv (1.9.8) jammy; urgency=medium
+
+  * Add backend error logs monitoring docs
+  * Check qualification times, that set in "qualification:" (election.yml) as
+    [a.Time <= b.Time <= ...]
+  * Refactor election.yml period processing
+
+ -- IVXV Developer <info@ivotingcentre.ee>  Fri, 19 Apr 2024 14:27:30 +0000
+
+ivxv (1.9.7) jammy; urgency=medium
+
+  * Ensure that votesorder data is not lost if etcd txn has "Succeeded: false"
+  * Proper logging of votesorder errors
+
+ -- IVXV Developer <info@ivotingcentre.ee>  Thu, 11 Apr 2024 06:37:53 +0000
+
+ivxv (1.9.6) jammy; urgency=medium
+
+  * Hotfix to votesorder error handling
+  * Set systemd startup timeout for ivxv-storage service
+  * All IVXV logs are stored in /var/log/ivxv/
+  * Hotfix to ivxv-sessionstatus Documentation
+  * Hotfix to sessionstatus etcd timeouts usage
+  * Store vote as follows: vote, then tspreg, then ocsp
+  * Hotfix to xtee service docs
+
+ -- IVXV Developer <info@ivotingcentre.ee>  Tue, 09 Apr 2024 12:06:53 +0000
+
+ivxv (1.9.4) jammy; urgency=medium
+
+  * Hotfix to sessionstatus service to return errors properly
+
+ -- IVXV Developer <info@ivotingcentre.ee>  Mon, 01 Apr 2024 15:50:02 +0000
+
+ivxv (1.9.3) jammy; urgency=medium
+
+  *  Hotfix to processor export votes extension
+  *  Hotfix to RPC.Verify when ignorevoterlist is set
+  *  Hotfix to ivxv-storage.postrm
+
+ -- IVXV Developer <info@ivotingcentre.ee>  Fri, 22 Mar 2024 11:50:57 +0000
+
+ivxv (1.9.2) jammy; urgency=medium
+
+  * Hotfix to VIS URL
+  * Hotfix to day-order of detailed statistics
+
+ -- IVXV Developer <info@ivotingcentre.ee>  Tue, 12 Mar 2024 17:07:07 +0000
+
+ivxv (1.9.1) jammy; urgency=medium
+
+  * Java applications
+    - implement tools for processor integrity verification
+  * Collector
+    - improve transactions for storing votes
+  * Documentation
+    - Adjust documentation for easier translation
+
+ -- IVXV Developer <info@ivotingcentre.ee>  Sat, 02 Mar 2024 15:10:28 +0200
+
+ivxv (1.9.0+hotfix.3) jammy; urgency=medium
+
+  * Hotfix to properly handle DER encoding in PKCS15 cards
+
+ -- IVXV Developer <info@ivotingcentre.ee>  Tue, 30 Jan 2024 11:14:38 +0000
+
+ivxv (1.9.0+hotfix.2) jammy; urgency=medium
+
+  * Hotfix version to parse webeid origin
+
+ -- IVXV Developer <info@ivotingcentre.ee>  Thu, 18 Jan 2024 13:02:23 +0000
+
+ivxv (1.9.0+hotfix.1) jammy; urgency=medium
+
+  * Hotfix version to include etcd dependency
+
+ -- IVXV Developer <info@ivotingcentre.ee>  Wed, 17 Jan 2024 10:52:51 +0000
+
+ivxv (1.9.0) jammy; urgency=low
+
+  * Operating system
+    - upgrade from Ubuntu 20.04 LTS to Ubuntu 22.04 LTS
+    - upgrade debhelper from 11 to 13
+    - python dependencies for management interface are shipped in separate .deb
+    - `dpkg-buildpackage` on Ubuntu 22.04 LTS uses .zst compression instead of .xz
+  * Management interface
+    - upgrade PyPi dependencies to the latest possible
+  * Online voting components
+    - upgrade from Go 1.14 to Go 1.21
+    - switch from GOPATH layout to go.mod
+    - upgrade from Python 3.8 to 3.10
+  * Offline voting component
+    - upgrade Java from 1.11 to 1.17
+  * Tests
+    - `docker-compose` is deprecated, use `docker compose` instead
+    - newer version of systemd support in docker
+  * Web eID
+    - support Web eID authentication method for IVXV backend
+  * Session status
+    - new microservice to report SessionID status to IVXV services.
+      This could help IVXV services to detect whether SessionID
+      has been tampered or not.
+  * BDOC
+    - remove TM profiles support for backend as it is not anymore
+      supported by digidoc-tool
+
+ -- IVXV Developer <info@ivotingcentre.ee>  Mon, 23 Jan 2023 18:11:51 +0000
+
 ivxv (1.8.2) focal; urgency=medium
 
   * General

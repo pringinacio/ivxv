@@ -71,7 +71,7 @@ function loadPageData() {
                 if (stats_key === 'authentication-methods') {
                   var method = 'ID-kaart';
                   if (stats_table_val[0] === 'ticket') {
-                    method = 'Mobiil-ID/Smart-ID';
+                    method = 'Mobiil-ID/Smart-ID/Web eID';
                   }
                   $('#auth-os').append(
                     '<tr><td>' +

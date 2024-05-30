@@ -13,7 +13,7 @@ import ee.ivxv.common.math.ProductGroupElement;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import javax.xml.bind.DatatypeConverter;
+import java.util.HexFormat;
 
 /**
  * DataParser is a utility class for performing operations with ByteTree objects.
@@ -49,7 +49,7 @@ public class DataParser {
         if (groupdesc.length() % 2 == 1 && groupdesc.charAt(groupdesc.length() - 1) == '\n') {
             groupdesc = groupdesc.substring(0, groupdesc.length() - 1);
         }
-        byte[] groupdescb = DatatypeConverter.parseHexBinary(groupdesc);
+        byte[] groupdescb = HexFormat.of().parseHex(groupdesc);
         ByteTree G = ByteTree.parse(groupdescb);
         if (G.isLeaf()) {
             throw new ShuffleException("Invalid pgroup description bytetree");

@@ -13,25 +13,40 @@
 DESTDIR = _build
 
 # Build all Estonian and English documentation with a few exceptions.
-DOCS := $(wildcard et/* en/*)
+DOCS := $(wildcard internal/* public/* et/*)
 DOCS := $(filter-out et/example-config,$(DOCS)) # Does not contain reST.
-DOCS := $(filter-out et/formal,$(DOCS))         # Does not contain reST.
-DOCS := $(filter-out et/ivxv-pyapi,$(DOCS))     # Too many Python dependencies.
-DOCS := $(filter-out et/entroopia,$(DOCS))      # Does not have a Makefile?
+DOCS := $(filter-out internal/formal,$(DOCS))         # Does not contain reST.
+DOCS := $(filter-out internal/ivxv-pyapi,$(DOCS))     # Too many Python dependencies.
+DOCS := $(filter-out internal/entroopia,$(DOCS))      # Does not have a Makefile?
+DOCS := $(filter-out internal/stresstesting,$(DOCS))  # Does not have a Makefile?
 
 PDFDOCS   := $(DOCS:%=pdf-%)
+DIFFDOCS   := $(DOCS:%=diff-%)
 HTMLDOCS  := $(DOCS:%=html-%)
 
 .PHONY: all
-all: pdf $(if $(DEVELOPMENT),html)
+all: release
 
 .PHONY: pdf
 pdf: $(PDFDOCS)
+	$(MAKE) -C public/arhitektuur install-en-pdf DESTDIR=$(abspath $(DESTDIR)/pdf)
+	$(MAKE) -C public/liidesed install-en-pdf DESTDIR=$(abspath $(DESTDIR)/pdf)
+	$(MAKE) -C public/protokollid install-en-pdf DESTDIR=$(abspath $(DESTDIR)/pdf)
 
 .PHONY: $(PDFDOCS)
 $(PDFDOCS): pdf-%:
 	mkdir -p $(DESTDIR)/pdf
 	$(MAKE) -C $* install-pdf DESTDIR=$(abspath $(DESTDIR)/pdf)
+
+
+.PHONY: diff
+diff: $(DIFFDOCS)
+
+.PHONY: $(DIFFDOCS)
+$(DIFFDOCS): diff-%:
+	mkdir -p $(DESTDIR)/diff
+	$(MAKE) -C $* install-diff DESTDIR=$(abspath $(DESTDIR)/diff)
+
 
 .PHONY: html
 html: $(HTMLDOCS)
@@ -45,63 +60,75 @@ $(HTMLDOCS): html-%:
 # Rules for generating release documentation.
 
 RELEASE1 = "$(abspath $(DESTDIR))/1. Ülddokumendid"
-DOCS1 := et/uldsisukord
+DOCS1ET := public/uldsisukord
 
 RELEASE2 = "$(abspath $(DESTDIR))/2. Spetsifikatsioonid"
-DOCS2 := \
-	et/arhitektuur \
+DOCS2ET := \
+	public/arhitektuur \
+	public/liidesed \
 	et/kasutusmall \
-	et/protokollid \
-	et/votmerakendus \
-	en/architecture \
-	en/protocols
+	public/protokollid \
+	et/xteeteenus \
+	et/votmerakendus
+DOCS2EN := \
+	public/arhitektuur \
+	public/liidesed \
+	public/protokollid
 
 RELEASE3 = "$(abspath $(DESTDIR))/3. Juhendid"
-DOCS3 := \
+DOCS3ET := \
 	et/haldusteenus \
-	et/ivxvapi \
 	et/kogumisteenuse_haldusjuhend \
 	et/seadistuste_koostejuhend \
 	et/audiitor
 
 RELEASE4 = "$(abspath $(DESTDIR))/4. Näited"
-DOCS4 := \
+DOCS4ET := \
 	et/example-config \
 	et/seadistuste_koostejuhend/config-examples/android-ios-config.json
 
 RELEASE5 = "$(abspath $(DESTDIR))/5. Muudatused"
 
-RELEASEDOCS := $(patsubst %,release-%,$(DOCS1) $(DOCS2) $(DOCS3) $(DOCS4))
+RELEASEDOCSET := $(patsubst %,release-et-%,$(DOCS1ET) $(DOCS2ET) $(DOCS3ET) $(DOCS4ET))
+RELEASEDOCSEN := $(patsubst %,release-en-%,$(DOCS1EN) $(DOCS2EN))
 
 # If releasing locally (i.e., no explicit DESTDIR is given), then use
 # _build/release. RELEASE[1-5] must be recursively expanded for this to work.
-$(RELEASEDOCS): DESTDIR := $(DESTDIR)/release
+$(RELEASEDOCSET): DESTDIR := $(DESTDIR)/release
+$(RELEASEDOCSEN): DESTDIR := $(DESTDIR)/release
 
 .PHONY: release
-release: $(RELEASEDOCS)
+release: $(RELEASEDOCSET) $(RELEASEDOCSEN)
 
-.PHONY: $(RELEASEDOCS)
-$(DOCS1:%=release-%): release-%:
+.PHONY: $(RELEASEDOCSET)
+$(DOCS1ET:%=release-et-%): release-et-%:
 	mkdir -p $(RELEASE1)
 	$(MAKE) -C $* install-pdf DESTDIR=$(RELEASE1)
 	mkdir -p $(RELEASE5)
 	$(MAKE) -C $* install-diff DESTDIR=$(RELEASE5)
 
-$(DOCS2:%=release-%): release-%:
+$(DOCS2ET:%=release-et-%): release-et-%:
 	mkdir -p $(RELEASE2)
 	$(MAKE) -C $* install-pdf DESTDIR=$(RELEASE2)
 	mkdir -p $(RELEASE5)
 	$(MAKE) -C $* install-diff DESTDIR=$(RELEASE5)
 
-$(DOCS3:%=release-%): release-%:
+$(DOCS3ET:%=release-et-%): release-et-%:
 	mkdir -p $(RELEASE3)
 	$(MAKE) -C $* install-pdf DESTDIR=$(RELEASE3)
 	mkdir -p $(RELEASE5)
 	$(MAKE) -C $* install-diff DESTDIR=$(RELEASE5)
 
-$(DOCS4:%=release-%): release-%:
+$(DOCS4ET:%=release-et-%): release-et-%:
 	mkdir -p $(RELEASE4)
 	cp --recursive --update $* $(RELEASE4)
+
+
+.PHONY: $(RELEASEDOCSEN)
+$(DOCS2EN:%=release-en-%): release-en-%:
+	mkdir -p $(RELEASE2)
+	$(MAKE) -C $* install-en-pdf DESTDIR=$(RELEASE2)
+
 
 # Cleanup.
 

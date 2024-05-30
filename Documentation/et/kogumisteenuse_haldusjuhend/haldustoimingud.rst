@@ -280,6 +280,18 @@ vastava teenuse tarkvarapakk teenuse hostist:
 
       $ apt purge ivxv-smartid
 
+* Web eID tugiteenuse paki eemaldamine:
+
+   .. code-block:: shell-session
+
+      $ apt purge ivxv-webeid
+
+* Session status tugiteenuse paki eemaldamine:
+
+   .. code-block:: shell-session
+
+      $ apt purge ivxv-sessionstatus
+
 * Vahendusteenuse paki eemaldamine:
 
    .. code-block:: shell-session
@@ -430,7 +442,7 @@ Logide varundamine
 ^^^^^^^^^^^^^^^^^^
 
 Logikogumisteenustes kogutud logifailide varundamine toimub logifailide
-:file:`/var/log/ivxv-YYYY-MM-DD.log` kopeerimisega varundusserverisse. Logide
+:file:`/var/log/ivxv/ivxv-YYYY-MM-DD.log` kopeerimisega varundusserverisse. Logide
 varundamist viib läbi haldusteenus.
 
 Logide varukoopiast taastamise protseduuri pole kogumisteenuses ette nähtud.

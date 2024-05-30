@@ -33,7 +33,7 @@ public class Signature {
     }
 
     public enum Profile {
-        UNKNOWN, BDOC_TM, BDOC_TS;
+        UNKNOWN, BDOC_TS;
     }
 
 }

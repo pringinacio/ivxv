@@ -1,7 +1,7 @@
 package ee.ivxv.common.util;
 
 import java.util.Arrays;
-import javax.xml.bind.DatatypeConverter;
+import java.util.HexFormat;
 
 /**
  * Class to wrap byte array to make it suitable for hash key.
@@ -29,6 +29,6 @@ public class ByteArrayWrapper {
 
     @Override
     public String toString() {
-        return DatatypeConverter.printHexBinary(data).toLowerCase();
+        return HexFormat.of().formatHex(data);
     }
 }

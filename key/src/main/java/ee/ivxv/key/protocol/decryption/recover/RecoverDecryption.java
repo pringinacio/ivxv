@@ -26,6 +26,7 @@ public class RecoverDecryption implements DecryptionProtocol {
     private final ThresholdParameters tparams;
     private final boolean withProof;
     private ElGamalPrivateKey sk;
+    private int modByteLen;
 
     /**
      * Initialize the protocol from values.
@@ -62,6 +63,7 @@ public class RecoverDecryption implements DecryptionProtocol {
     private void recoverKey() throws ProtocolException {
         if (this.sk == null) {
             this.sk = forceKeyRecover();
+            this.modByteLen = (this.sk.getParameters().getOrder().bitLength() + 7) / 8;
         }
     }
 
@@ -152,16 +154,27 @@ public class RecoverDecryption implements DecryptionProtocol {
             throw new ProtocolException("Secret key not reconstructed");
         }
         ElGamalCiphertext ct = new ElGamalCiphertext(this.sk.getParameters(), msg);
+        ElGamalDecryptionProof dp;
         try {
             if (withProof) {
-                return this.sk.provableDecrypt(ct);
+                dp = this.sk.provableDecrypt(ct);
             } else {
                 Plaintext pt = this.sk.decrypt(ct, true);
-                return new ElGamalDecryptionProof(ct, pt, this.sk.getPublicKey());
+                dp = new ElGamalDecryptionProof(ct, pt, this.sk.getPublicKey());
             }
         } catch (MathException e) {
             throw new ProtocolException("Arithmetic error: " + e.toString());
         }
+
+        // Check if the recovered padded message is the same size as the ElGamal field prime.
+        // The padded message must be padded to the byte-length of the field prime, otherwise
+        // the ballot should be declared invalid due to not respecting the padding requirements.
+        // The well-formedness of the actual padding is asserted later.
+        if (dp.decrypted.getMessage().length != this.modByteLen) {
+            throw new ProtocolException("Message not padded to correct length");
+        }
+
+        return dp;
     }
 
     /**

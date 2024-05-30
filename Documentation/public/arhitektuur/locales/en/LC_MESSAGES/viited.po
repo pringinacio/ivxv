@@ -1,0 +1,81 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, Cybernetica AS
+# This file is distributed under the same license as the Elektroonilise
+# hääletamise infosüsteem package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Elektroonilise hääletamise infosüsteem 1.8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-10 09:47+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.10.3\n"
+
+#: ../../viited.rst:4
+msgid "Viited"
+msgstr "References"
+
+#: ../../viited.rst:6
+msgid ""
+"Desmedt, Y. & Frankel, Y. Brassard, G. (Ed.) Threshold Cryptosystems "
+"Advances in Cryptology - CRYPTO '89, 9th Annual International Cryptology "
+"Conference, Santa Barbara, California, USA, August 20-24, 1989, "
+"Proceedings, Springer, 1989, 435, 307-315."
+msgstr ""
+"Desmedt, Y. & Frankel, Y. Brassard, G. (Ed.) Threshold Cryptosystems "
+"Advances in Cryptology - CRYPTO '89, 9th Annual International Cryptology "
+"Conference, Santa Barbara, California, USA, August 20-24, 1989, "
+"Proceedings, Springer, 1989, 435, 307-315."
+
+#: ../../viited.rst:11
+msgid ""
+"Sven Heiberg, Tarvi Martens, Priit Vinkel, Jan Willemson, Improving the "
+"verifiability of the Estonian Internet Voting scheme. In Robert Krimmer, "
+"Melanie Volkamer, Jordi Barrat, Josh Benaloh, Nicole Goodman, Peter Y.A. "
+"Ryan, Oliver Spycher, Vanessa Teague, Gregor Wenda (Eds.), The "
+"International Conference on Electronic Voting E-Vote-ID 2016, 18-21 "
+"October 2016, Lochau/Bregenz, Austria, TUT Press, pp. 213-229, ISBN "
+"978-9949-83-022-0"
+msgstr ""
+"Sven Heiberg, Tarvi Martens, Priit Vinkel, Jan Willemson, Improving the "
+"verifiability of the Estonian Internet Voting scheme. In Robert Krimmer, "
+"Melanie Volkamer, Jordi Barrat, Josh Benaloh, Nicole Goodman, Peter Y.A. "
+"Ryan, Oliver Spycher, Vanessa Teague, Gregor Wenda (Eds.), The "
+"International Conference on Electronic Voting E-Vote-ID 2016, 18-21 "
+"October 2016, Lochau/Bregenz, Austria, TUT Press, pp. 213-229, ISBN "
+"978-9949-83-022-0"
+
+#: ../../viited.rst:18
+msgid ""
+"Tehniline kirjeldus. Elektroonilise hääletamise infosüsteemi arenduse "
+"hange, Vabariigi Valimiskomisjon, 2016"
+msgstr ""
+"Technical description. Tender for the development of an electronic voting"
+" information system, National Electoral Committee, 2016"
+
+#: ../../viited.rst:21
+msgid ""
+"Elektroonilise hääletamise üldraamistik ja selle kasutamine Eesti "
+"riiklikel valimistel. Elektroonilise Hääletamise Komisjon, Tallinn 2016"
+msgstr ""
+"General framework for electronic voting and its use in Estonian national "
+"elections. Electronic Voting Commission, Tallinn 2016"
+
+#~ msgid ""
+#~ "ProVerif: Cryptographic protocol verifier in"
+#~ " the formal model, "
+#~ "http://prosecco.gforge.inria.fr/personal/bblanche/proverif/"
+#~ msgstr ""
+#~ "ProVerif: Cryptographic protocol verifier in"
+#~ " the formal model, "
+#~ "http://prosecco.gforge.inria.fr/personal/bblanche/proverif/"
+

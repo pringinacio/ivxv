@@ -16,7 +16,7 @@ public class SkipCommandUtil {
     public static SkipCommand readSkipCommand(InputStream in) {
 
         Yaml yaml = new Yaml();
-        Map<String, Object> obj = (Map<String, Object>)yaml.load(in);
+        Map<String, Object> obj = yaml.load(in);
         return new SkipCommand(
                 String.valueOf(obj.get("changeset")),
                 String.valueOf(obj.get("election")),

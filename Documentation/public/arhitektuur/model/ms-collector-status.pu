@@ -1,0 +1,42 @@
+@startuml
+
+Title TR_MS_STATE_TITLE()
+
+skinparam state {
+  BackgroundColor<<OK>> LightGreen
+  BackgroundColor<<Error>> LightCoral
+}
+
+state "TR_MS_S_UNINSTALLED()" as s_uninstalled
+s_uninstalled : TR_MS_S_UNINSTALLED_TXT()
+
+state "TR_MS_S_INSTALLED()" as s_installed <<OK>>
+s_installed : TR_MS_S_INSTALLED_TXT()
+
+state "TR_MS_S_SETUP()" as s_setup <<OK>>
+s_setup : TR_MS_S_SETUP_TXT()
+
+state "TR_MS_S_FAILURE()" as s_failure <<Error>>
+s_failure : TR_MS_S_FAILURE_TXT()
+
+state "TR_MS_S_PARTIAL_FAILURE()" as s_partial_failure
+s_partial_failure : TR_MS_S_PARTIAL_FAILURE_TXT()
+
+
+[*] --> s_uninstalled
+
+s_uninstalled --> s_installed : TR_MS_TRANS_INSTALL()
+
+s_installed --> s_setup : TR_MS_TRANS_SETUP()
+
+s_setup --> s_partial_failure : TR_MS_TRANS_FAIL()
+s_setup --> [*]
+
+s_partial_failure --> s_setup : TR_MS_TRANS_RECOVERY()
+s_partial_failure --> s_failure
+s_partial_failure --> [*]
+
+s_failure --> s_partial_failure
+s_failure --> [*]
+
+@enduml

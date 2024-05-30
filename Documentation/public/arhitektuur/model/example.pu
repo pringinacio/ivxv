@@ -1,0 +1,39 @@
+@startuml
+
+!include skin.inc
+
+actor "TR_STAKEHOLDER()" <<TR_NEC()>> as a_owner
+
+
+package TR_APPLICATION() {
+
+    interface "TR_INTERFACE()" <<TR_IVXV()>> as liides_1
+    interface "TR_UNSPECIFIED_INTERFACE()" <<TR_UNSPECIFIED()>> as liides_3
+    [TR_COMPONENT()] <<TR_IVXV()>> as komponent_1
+
+    komponent_1 - liides_1
+    komponent_1 -up- liides_3
+}
+
+a_owner --> liides_3
+
+package TR_SERVICE() {
+
+    interface "TR_INTERFACE()" <<TR_IVXV()>> as liides_2
+    [TR_IVXV_COMPONENT()] <<TR_IVXV()>> as komponent_2
+    [TR_EXTERNAL_COMPONENT()] <<TR_EXTERNAL()>> as komponent_3
+
+    komponent_2 --> komponent_3
+    komponent_2 - liides_2
+
+    database "TR_DATABASE()" as andmebaas {
+    }
+
+    komponent_2 --> andmebaas
+
+}
+
+liides_1 --> liides_2
+
+
+@enduml

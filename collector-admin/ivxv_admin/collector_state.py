@@ -193,6 +193,7 @@ def generate_election_state(state):
     electionstop = get_ts('electionstop')
     servicestart = get_ts('servicestart')
     servicestop = get_ts('servicestop')
+    verificationstop = get_ts('verificationstop')
     ts_format = '%Y-%m-%dT%H:%M %Z'
 
     phases = [
@@ -217,7 +218,12 @@ def generate_election_state(state):
             and datetime.datetime.now(servicestop.tzinfo) < servicestop,
             'WAITING FOR SERVICE STOP', electionstop, servicestop
         ],
-        [True, 'FINISHED', servicestop, None],
+        [
+            verificationstop
+            and datetime.datetime.now(verificationstop.tzinfo) < verificationstop,
+            'WAITING FOR VERIFICATION SERVICE STOP', servicestop, verificationstop
+        ],
+        [True, 'FINISHED', verificationstop, None],
     ]
     for phase_active, name, start_time, stop_time in phases:
         if phase_active:

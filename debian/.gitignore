@@ -6,6 +6,7 @@ files
 
 # package dirs
 tmp
+python3-ivxv-common
 ivxv-admin
 ivxv-backup
 ivxv-choices
@@ -13,8 +14,10 @@ ivxv-common
 ivxv-log
 ivxv-mid
 ivxv-smartid
+ivxv-webeid
 ivxv-proxy
 ivxv-storage
 ivxv-verification
 ivxv-voting
 ivxv-votesorder
+ivxv-sessionstatus

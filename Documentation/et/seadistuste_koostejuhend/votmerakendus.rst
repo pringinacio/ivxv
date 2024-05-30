@@ -280,6 +280,12 @@ dekrüpteerimine võimalik.
       Valikuline korrektse dekrüpteerimise tõestuse väljastamine. Vaikimisi
       väärtus on tõene.
 
+:decrypt.prove_invalid:
+
+      Valikuline korrektse dekrüpteerimise tõestuse väljastamine ka
+      ebakorrektsete sedelite kohta. Eeldab dekrüpteerimise tõestuse
+      väljastamist. Vaikimisi väärtus on väär.
+
 :decrypt.check_decodable:
 
       Krüptogrammide korrektsuse kontrollimine enne dekrüpteerimist. Juhul kui
@@ -294,9 +300,13 @@ dekrüpteerimine võimalik.
 
       #. Elektroonilise hääletamise tulemus
       #. Elektroonilise hääletamise tulemuse signatuur
+      #. Dekrüpteeritud valimiskast
+      #. Dekrüpteeritud valimiskasti signatuur
       #. Loend kehtetutest sedelitest
-      #. Lugemistõend
+      #. Kehtivate sedelite lugemistõend
+      #. Kehtetude sedelite lugemistõend (valikuline)
 
+Dekrüpteeritud valimiskast tundlikke andmeid ei sisalda.
 
 :file:`key.decrypt.yaml`:
 
@@ -320,6 +330,9 @@ sammud:
     -signature decout/TESTCONF.tally.signature decout/TESTCONF.tally
 
 Korrektse allkirja korral kuvatakse väärtust `Verified OK`.
+
+Sarnaste sammudega on võimalik kontrollida ka väljastatud dekrüpteeritud
+valimiskasti signatuuri korrektsust.
 
 Võtmerakenduse täiendavad tööriistad
 ------------------------------------

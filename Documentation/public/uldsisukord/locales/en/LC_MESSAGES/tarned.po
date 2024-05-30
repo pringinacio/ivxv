@@ -1,0 +1,995 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, Cybernetica AS
+# This file is distributed under the same license as the Elektroonilise
+# hääletamise infosüsteem package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Elektroonilise hääletamise infosüsteem 1.8.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-13 13:12+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.10.3\n"
+
+#: ../../tarned.rst:4 ../../tarned.rst:100
+msgid "Tarned"
+msgstr "Tarned"
+
+#: ../../tarned.rst:8
+msgid "Muudatused tarne 1.9.4 koosseisus, erinevused võrreldes tarnega 1.8.2"
+msgstr ""
+"Changes in the composition of delivery 1.9.4, differences compared to "
+"delivery 1.8.2"
+
+#: ../../tarned.rst:11 ../../tarned.rst:106 ../../tarned.rst:175
+#: ../../tarned.rst:249 ../../tarned.rst:323 ../../tarned.rst:405
+#: ../../tarned.rst:482 ../../tarned.rst:564 ../../tarned.rst:645
+#: ../../tarned.rst:735 ../../tarned.rst:824
+msgid "Kogumisteenus"
+msgstr "Collection service"
+
+#: ../../tarned.rst:13 ../../tarned.rst:108 ../../tarned.rst:177
+#: ../../tarned.rst:251 ../../tarned.rst:325 ../../tarned.rst:407
+#: ../../tarned.rst:484 ../../tarned.rst:566 ../../tarned.rst:647
+#: ../../tarned.rst:737
+msgid "Üldised muutused"
+msgstr "General changes"
+
+#: ../../tarned.rst:15 ../../tarned.rst:95
+msgid "Ubuntu 22.04 tugi"
+msgstr "Support for Ubuntu 22.04"
+
+#: ../../tarned.rst:16
+msgid "Go versiooniuuendus"
+msgstr "Go version upgrade"
+
+#: ../../tarned.rst:17
+msgid "etcd versiooniuuendus ja seadistamine"
+msgstr "etcd version upgrade and configuration"
+
+#: ../../tarned.rst:18
+msgid "Sõltuvuste ajakohastamine"
+msgstr "Update of dependencies"
+
+#: ../../tarned.rst:19
+msgid "Web eID autentimismeetodi lisamine"
+msgstr "Add Web eID authentication method"
+
+#: ../../tarned.rst:20
+msgid "Session status mikroteenuse lisamine"
+msgstr "Adding a session status microservice"
+
+#: ../../tarned.rst:21
+msgid "EHS statistikaliidese töökindluse tõstmine"
+msgstr "Improving the reliability of statistics interface"
+
+#: ../../tarned.rst:22
+msgid "Valimiste järkjärguline lõpp"
+msgstr "Gradual stop of an event"
+
+#: ../../tarned.rst:23
+msgid "Seansiidentifikaatori muutmine kohustuslikuks"
+msgstr "Mandatory SessionID"
+
+#: ../../tarned.rst:24
+msgid "ASiC vormingutäpsustus"
+msgstr "ASiC format clarifications"
+
+#: ../../tarned.rst:25
+msgid "VIS tugi detailstatistikale"
+msgstr "VIS detailed statistics"
+
+#: ../../tarned.rst:26
+msgid "SmartID toe täpsustused"
+msgstr "Improved SmartID support"
+
+#: ../../tarned.rst:27
+msgid "Erinevad pisiparandused vastvalt muutuste logile"
+msgstr "Minor changes/improvements according to `changelog` file"
+
+#: ../../tarned.rst:30 ../../tarned.rst:116 ../../tarned.rst:186
+#: ../../tarned.rst:264 ../../tarned.rst:340 ../../tarned.rst:421
+#: ../../tarned.rst:499 ../../tarned.rst:579 ../../tarned.rst:663
+#: ../../tarned.rst:754 ../../tarned.rst:856
+msgid "Registreerimisteenus"
+msgstr "Registration service"
+
+#: ../../tarned.rst:32 ../../tarned.rst:51
+msgid "Muudatused puuduvad"
+msgstr ""
+
+#: ../../tarned.rst:35 ../../tarned.rst:121 ../../tarned.rst:191
+#: ../../tarned.rst:269 ../../tarned.rst:345 ../../tarned.rst:426
+#: ../../tarned.rst:504 ../../tarned.rst:584 ../../tarned.rst:667
+#: ../../tarned.rst:758 ../../tarned.rst:860
+msgid "Kontrollrakendused"
+msgstr "Control applications"
+
+#: ../../tarned.rst:37 ../../tarned.rst:123 ../../tarned.rst:193
+#: ../../tarned.rst:271 ../../tarned.rst:347 ../../tarned.rst:428
+#: ../../tarned.rst:506 ../../tarned.rst:586 ../../tarned.rst:669
+#: ../../tarned.rst:760 ../../tarned.rst:862
+msgid "Android"
+msgstr "Android"
+
+#: ../../tarned.rst:39 ../../tarned.rst:45 ../../tarned.rst:77
+msgid "TLS 1.3"
+msgstr "TLS 1.3"
+
+#: ../../tarned.rst:40
+msgid "Sertide pinnimisest loobumine"
+msgstr "Deprecating certificate pinning"
+
+#: ../../tarned.rst:41 ../../tarned.rst:46
+msgid "Valikute nimekirja kontroll"
+msgstr "Verification of a choice list"
+
+#: ../../tarned.rst:43 ../../tarned.rst:128 ../../tarned.rst:199
+#: ../../tarned.rst:275 ../../tarned.rst:352 ../../tarned.rst:432
+#: ../../tarned.rst:510 ../../tarned.rst:590 ../../tarned.rst:675
+#: ../../tarned.rst:765 ../../tarned.rst:866
+msgid "iOS"
+msgstr "iOS"
+
+#: ../../tarned.rst:49 ../../tarned.rst:133 ../../tarned.rst:206
+#: ../../tarned.rst:280 ../../tarned.rst:358 ../../tarned.rst:437
+#: ../../tarned.rst:515 ../../tarned.rst:595 ../../tarned.rst:680
+#: ../../tarned.rst:772 ../../tarned.rst:871
+msgid "Mixnet"
+msgstr "Mixnet"
+
+#: ../../tarned.rst:54 ../../tarned.rst:138 ../../tarned.rst:211
+#: ../../tarned.rst:285 ../../tarned.rst:363 ../../tarned.rst:443
+#: ../../tarned.rst:520 ../../tarned.rst:600 ../../tarned.rst:685
+#: ../../tarned.rst:777 ../../tarned.rst:875
+msgid "Töötleja rakendused"
+msgstr "Processor applications"
+
+#: ../../tarned.rst:56 ../../tarned.rst:140 ../../tarned.rst:213
+#: ../../tarned.rst:287 ../../tarned.rst:365 ../../tarned.rst:445
+#: ../../tarned.rst:522 ../../tarned.rst:602 ../../tarned.rst:687
+msgid "Üldised"
+msgstr "General"
+
+#: ../../tarned.rst:58
+msgid "Java 17"
+msgstr "Java 17"
+
+#: ../../tarned.rst:60 ../../tarned.rst:144 ../../tarned.rst:217
+#: ../../tarned.rst:291 ../../tarned.rst:369 ../../tarned.rst:449
+#: ../../tarned.rst:526 ../../tarned.rst:606 ../../tarned.rst:693
+#: ../../tarned.rst:779 ../../tarned.rst:876
+msgid "Võtmerakendus"
+msgstr "Key application"
+
+#: ../../tarned.rst:62
+msgid "Kehtetute sedelite korrektse dekrüpteerimise tõestamine"
+msgstr "Proof of correct decryption of invalid ciphertexts"
+
+#: ../../tarned.rst:65 ../../tarned.rst:148 ../../tarned.rst:221
+#: ../../tarned.rst:295 ../../tarned.rst:373 ../../tarned.rst:453
+#: ../../tarned.rst:530 ../../tarned.rst:613 ../../tarned.rst:697
+#: ../../tarned.rst:783 ../../tarned.rst:880
+msgid "Töötlemisrakendus"
+msgstr "Processing application"
+
+#: ../../tarned.rst:67 ../../tarned.rst:97
+msgid "Statistika arvutuste täpsustamine"
+msgstr "Calculation of statistics"
+
+#: ../../tarned.rst:68
+msgid "Töötlemisprotseduuride auditeerimise täpsustamine"
+msgstr "Clarification of auditing tools for processing steps"
+
+#: ../../tarned.rst:70 ../../tarned.rst:152 ../../tarned.rst:225
+#: ../../tarned.rst:299 ../../tarned.rst:377 ../../tarned.rst:457
+#: ../../tarned.rst:534 ../../tarned.rst:617 ../../tarned.rst:701
+#: ../../tarned.rst:790 ../../tarned.rst:884
+msgid "Auditirakendus"
+msgstr "Audit application"
+
+#: ../../tarned.rst:72
+msgid "Kehtetute sedelite korrektse dekrüpteerimise kontrollimine"
+msgstr "Checking the correct decryption of invalid ciphertexts"
+
+#: ../../tarned.rst:75 ../../tarned.rst:157 ../../tarned.rst:230
+#: ../../tarned.rst:304 ../../tarned.rst:382 ../../tarned.rst:462
+#: ../../tarned.rst:540 ../../tarned.rst:622 ../../tarned.rst:706
+#: ../../tarned.rst:795 ../../tarned.rst:889
+msgid "Valijarakendused ja seadistusrakendus"
+msgstr "Voting applications and configuration app"
+
+#: ../../tarned.rst:78
+msgid "Mitme PKCS11 tokeni tugi"
+msgstr "Support for multiple PKCS11 tokens"
+
+#: ../../tarned.rst:79
+msgid "Windowsi serdituvastuse parendamine"
+msgstr "Improvement of cert handling under Windows"
+
+#: ../../tarned.rst:80
+msgid "Aegunud sertide tuvastamine"
+msgstr "Detection of outdated certificates"
+
+#: ../../tarned.rst:81
+msgid "DLL laadimisvigade parandamine"
+msgstr "Fix errors in DLL loading"
+
+#: ../../tarned.rst:82
+msgid "Ligipääsetavus macOS platvormil"
+msgstr "Accessibility on macOS"
+
+#: ../../tarned.rst:83
+msgid "Kasutajaliidese muudatused"
+msgstr "General GUI changes"
+
+#: ../../tarned.rst:84
+msgid "Kuvatõmmiste automatiseerimine"
+msgstr "Automated screenshots in configuration app"
+
+#: ../../tarned.rst:87 ../../tarned.rst:162 ../../tarned.rst:236
+#: ../../tarned.rst:309 ../../tarned.rst:389 ../../tarned.rst:467
+#: ../../tarned.rst:546 ../../tarned.rst:627 ../../tarned.rst:718
+#: ../../tarned.rst:806 ../../tarned.rst:899
+msgid "Dokumentatsioon"
+msgstr "Documentation"
+
+#: ../../tarned.rst:89
+msgid "Web eID autentimismeetodiga seotud dokumentatsiooni lisamine"
+msgstr "Adding documentation related to the Web eID authentication method"
+
+#: ../../tarned.rst:90
+msgid "Eesti- ja ingliskeelse dokumentatsiooni ühtlustamine"
+msgstr "Unifying documentation in Estonian and in English"
+
+#: ../../tarned.rst:93 ../../tarned.rst:167 ../../tarned.rst:241
+#: ../../tarned.rst:314 ../../tarned.rst:394 ../../tarned.rst:472
+#: ../../tarned.rst:553 ../../tarned.rst:637 ../../tarned.rst:724
+#: ../../tarned.rst:812 ../../tarned.rst:903
+msgid "Logimonitor"
+msgstr "Logmonitor"
+
+#: ../../tarned.rst:96
+msgid "Grafana versiooni uuendamine"
+msgstr "Grafana version update"
+
+#: ../../tarned.rst:103
+msgid "Muudatused tarne 1.8.2 koosseisus, erinevused võrreldes tarnega 1.8.1"
+msgstr ""
+"Changes in the composition of delivery 1.8.2, differences compared to "
+"delivery 1.8.1."
+
+#: ../../tarned.rst:110 ../../tarned.rst:142
+msgid "Valijate nimekirjade vormingu muutus"
+msgstr "Change to the format of electoral rolls"
+
+#: ../../tarned.rst:111
+msgid "EHS/VIS X-tee liidese CI lisandumine"
+msgstr "Addition of CI to the EHS/VIS X-road interface"
+
+#: ../../tarned.rst:112
+msgid "EHS/VIS X-tee liidese dokumentatsiooni täpsustumine"
+msgstr "Specification of EHS/VIS X-Road interface documentation"
+
+#: ../../tarned.rst:113 ../../tarned.rst:159
+msgid "Väiksemad veaparandused"
+msgstr "Minor bug fixes"
+
+#: ../../tarned.rst:118 ../../tarned.rst:130 ../../tarned.rst:135
+#: ../../tarned.rst:146 ../../tarned.rst:154 ../../tarned.rst:169
+#: ../../tarned.rst:188 ../../tarned.rst:208 ../../tarned.rst:219
+#: ../../tarned.rst:227 ../../tarned.rst:253 ../../tarned.rst:257
+#: ../../tarned.rst:261 ../../tarned.rst:266 ../../tarned.rst:273
+#: ../../tarned.rst:277 ../../tarned.rst:289 ../../tarned.rst:293
+#: ../../tarned.rst:297 ../../tarned.rst:301 ../../tarned.rst:306
+#: ../../tarned.rst:316 ../../tarned.rst:342 ../../tarned.rst:371
+#: ../../tarned.rst:379 ../../tarned.rst:423 ../../tarned.rst:430
+#: ../../tarned.rst:434 ../../tarned.rst:455 ../../tarned.rst:459
+#: ../../tarned.rst:501 ../../tarned.rst:512 ../../tarned.rst:581
+#: ../../tarned.rst:588 ../../tarned.rst:592 ../../tarned.rst:597
+#: ../../tarned.rst:604 ../../tarned.rst:615 ../../tarned.rst:619
+#: ../../tarned.rst:664 ../../tarned.rst:677 ../../tarned.rst:682
+#: ../../tarned.rst:703 ../../tarned.rst:755 ../../tarned.rst:781
+#: ../../tarned.rst:792
+msgid "Muudatusi ei ole"
+msgstr "No changes"
+
+#: ../../tarned.rst:125
+msgid "RSA eemaldamine"
+msgstr "RSA removal"
+
+#: ../../tarned.rst:126
+msgid "Veaparandused"
+msgstr "Bug fixes"
+
+#: ../../tarned.rst:150
+msgid "Töövoogude konsolideerimine"
+msgstr "Workflow consolidation"
+
+#: ../../tarned.rst:164
+msgid "Täpsustused seoses muudatustega tarkvaras"
+msgstr "Clarifications due to software changes"
+
+#: ../../tarned.rst:172
+msgid "Muudatused tarne 1.8.1 koosseisus, erinevused võrreldes tarnega 1.7.7"
+msgstr ""
+"Changes in the composition of delivery 1.8.1, differences compared to "
+"delivery 1.7.7"
+
+#: ../../tarned.rst:179
+msgid "Smart-ID toe lisandumine"
+msgstr "Addition of Smart-ID support"
+
+#: ../../tarned.rst:180
+msgid "EHS/VIS X-tee liidese lisandumine"
+msgstr "Addition of EHS/VIS X-road interface"
+
+#: ../../tarned.rst:181
+msgid "Hääletamisfaktide järjestamine"
+msgstr "Ranking of voting facts"
+
+#: ../../tarned.rst:182 ../../tarned.rst:197 ../../tarned.rst:203
+msgid "Seadistatav SNI"
+msgstr "Configurable SNI"
+
+#: ../../tarned.rst:195 ../../tarned.rst:201 ../../tarned.rst:215
+msgid "Smart-ID"
+msgstr "Smart ID"
+
+#: ../../tarned.rst:196 ../../tarned.rst:202
+msgid "Täpsustatud krüptogrammi kontroll"
+msgstr "Advanced cryptogram verification"
+
+#: ../../tarned.rst:223
+msgid "Töövoogude konsolideerimine, täpsustused parameetrites"
+msgstr "Consolidation of workflows, refinement of parameters"
+
+#: ../../tarned.rst:232 ../../tarned.rst:243
+msgid "SmartID"
+msgstr "SmartID"
+
+#: ../../tarned.rst:233
+msgid "Uuendatud väljanägemine"
+msgstr "Updated look"
+
+#: ../../tarned.rst:238
+msgid "Täpsustused seoses muudatustega tarkvaras - SmartID, jne."
+msgstr "Clarifications regarding changes in software - SmartID, etc."
+
+#: ../../tarned.rst:246
+msgid "Muudatused tarne 1.7.7 koosseisus, erinevused võrreldes tarnega 1.7.6"
+msgstr ""
+"Changes in the composition of delivery 1.7.7, differences compared to "
+"delivery 1.7.6"
+
+#: ../../tarned.rst:255 ../../tarned.rst:331 ../../tarned.rst:412
+#: ../../tarned.rst:490 ../../tarned.rst:570 ../../tarned.rst:654
+#: ../../tarned.rst:742 ../../tarned.rst:826
+msgid "Haldusteenus"
+msgstr "Management service"
+
+#: ../../tarned.rst:259 ../../tarned.rst:335 ../../tarned.rst:416
+#: ../../tarned.rst:494 ../../tarned.rst:574 ../../tarned.rst:658
+#: ../../tarned.rst:747 ../../tarned.rst:839
+msgid "IVXV mikroteenused"
+msgstr "IVXV microservices"
+
+#: ../../tarned.rst:282
+msgid "Muudatused seoses entroopia allika valikulise tühjendamisega"
+msgstr "Changes regarding selective emptying of the entropy source"
+
+#: ../../tarned.rst:311
+msgid "Muudatused seoses miksneti muutustega"
+msgstr "Changes due to changes in the mixnet"
+
+#: ../../tarned.rst:320
+msgid "Muudatused tarne 1.7.6 koosseisus, erinevused võrreldes tarnega 1.6.0"
+msgstr ""
+"Changes in the composition of delivery 1.7.6, differences compared to "
+"delivery 1.6.0."
+
+#: ../../tarned.rst:327
+msgid "Muudatused seoses sisendnimekirjade haldamisega VIS3's"
+msgstr "Changes regarding the management of input lists in VIS3"
+
+#: ../../tarned.rst:328 ../../tarned.rst:360
+msgid "Muudatused seoses Ubuntu 20.04 toetamisega"
+msgstr "Changes related to Ubuntu 20.04 support"
+
+#: ../../tarned.rst:329 ../../tarned.rst:333 ../../tarned.rst:337
+#: ../../tarned.rst:410 ../../tarned.rst:414 ../../tarned.rst:418
+#: ../../tarned.rst:488 ../../tarned.rst:492 ../../tarned.rst:496
+#: ../../tarned.rst:568 ../../tarned.rst:572 ../../tarned.rst:576
+#: ../../tarned.rst:639 ../../tarned.rst:656 ../../tarned.rst:660
+#: ../../tarned.rst:729 ../../tarned.rst:745 ../../tarned.rst:751
+msgid "Väiksemad muutused/veaparandused vastavalt `changelog` failile"
+msgstr "Minor changes/improvements according to `changelog` file"
+
+#: ../../tarned.rst:349
+msgid "Muudatused seoses API versioonile 28 liikumisega"
+msgstr "Changes related to the move to API version 28"
+
+#: ../../tarned.rst:350 ../../tarned.rst:355 ../../tarned.rst:386
+msgid "Aegunud rakenduse tuvastamine"
+msgstr "Detection of outdated application"
+
+#: ../../tarned.rst:354
+msgid "Muudatused seoses iOS versioonile 12 liikumisega"
+msgstr "Changes related to the move to iOS version 12"
+
+#: ../../tarned.rst:367
+msgid "Muudatused seoses sisendnimekirjade haldamisega VIS3s"
+msgstr "Changes to the management of input lists in VIS3"
+
+#: ../../tarned.rst:375
+msgid "Töötlemise töövoogude optimeerimine"
+msgstr "Optimising processing workflows"
+
+#: ../../tarned.rst:384
+msgid "M1 protsessoritüübi toetamine macOS platvormil"
+msgstr "M1 processor support on macOS platform"
+
+#: ../../tarned.rst:385
+msgid "FLTK, OpenSSL ja teiste alusteekide versiooniuuendused"
+msgstr "Updates to FLTK, OpenSSL and other base decks."
+
+#: ../../tarned.rst:391
+msgid "Muudatused seoses muutustega seadistustes ning terminoloogias"
+msgstr "Changes due to configuration and terminology changes"
+
+#: ../../tarned.rst:396
+msgid "Kaasatud tarnesse"
+msgstr "Included in delivery"
+
+#: ../../tarned.rst:402
+msgid "Muudatused tarne 1.6.0 koosseisus, erinevused võrreldes tarnega 1.5.0"
+msgstr ""
+"Changes in the composition of delivery 1.6.0, differences compared to "
+"delivery 1.5.0"
+
+#: ../../tarned.rst:409
+msgid "Mobiil-ID REST teenuse toetamine"
+msgstr "Support for Mobile-ID REST service"
+
+#: ../../tarned.rst:439 ../../tarned.rst:447
+msgid "Java versiooni 11 kasutuselevõtt"
+msgstr "Java version 11 rollout"
+
+#: ../../tarned.rst:440
+msgid "Verificatumi versiooniuuendus"
+msgstr "Verificatum upgrade"
+
+#: ../../tarned.rst:451
+msgid "RSA võtmete serialiseerimise uus vorming"
+msgstr "New format for RSA key serialisation"
+
+#: ../../tarned.rst:464 ../../tarned.rst:469
+msgid "Mobiil-ID REST teenuse tugi"
+msgstr "Mobile-ID REST service support"
+
+#: ../../tarned.rst:474
+msgid "Eemaldatud tarnest seoses litsentsi lõppemisega"
+msgstr "Removed from delivery due to expiry of licence"
+
+#: ../../tarned.rst:479
+msgid "Muudatused tarne 1.5.0 koosseisus, erinevused võrreldes tarnega 1.4.1"
+msgstr ""
+"Changes in the composition of delivery 1.5.0, differences compared to "
+"delivery 1.4.1."
+
+#: ../../tarned.rst:486
+msgid "Kõigi päringute logimine"
+msgstr "Logging all requests"
+
+#: ../../tarned.rst:487
+msgid "etcd Debian buster repositooriumist, uusima golang-google-rpc saamiseks"
+msgstr ""
+"etcd from the Debian buster repository, to get the latest golang-google-"
+"rpc."
+
+#: ../../tarned.rst:508
+msgid "Muudatused seoses koodiläbivaatuse ja veatöötluse parendamisega"
+msgstr "Changes to improve code review and error handling"
+
+#: ../../tarned.rst:517
+msgid "Muudatused seoses 300K hääle miksimisega"
+msgstr "Changes to the 300K vote mixing process"
+
+#: ../../tarned.rst:524
+msgid "Valimise identifikaatori kasutamine läbiva prefiksina"
+msgstr "Use of a selection identifier as a passing prefix"
+
+#: ../../tarned.rst:528
+msgid "Muudatused seoses koodiläbivaatusega"
+msgstr "Changes related to code review"
+
+#: ../../tarned.rst:532 ../../tarned.rst:537
+msgid "Muudatused seoses 300K hääle töötlemisega"
+msgstr "Changes regarding the processing of 300K votes"
+
+#: ../../tarned.rst:536
+msgid "Edenemisriba"
+msgstr "Edenemisriba"
+
+#: ../../tarned.rst:542 ../../tarned.rst:624
+msgid "MSAA toe täpsustamine"
+msgstr "Specification of MSAA support"
+
+#: ../../tarned.rst:543
+msgid "Süsteemsete PIN-dialoogide kasutamine Windows platvormil"
+msgstr "Using system PIN dialogues on the Windows platform"
+
+#: ../../tarned.rst:548
+msgid "IVXV audiitori juhendi lisamine"
+msgstr "Addition of IVXV auditor's manual"
+
+#: ../../tarned.rst:549
+msgid "Muudatusdokumentide lisamine tarnesse"
+msgstr "Inclusion of change documents in the delivery"
+
+#: ../../tarned.rst:555
+msgid "Muutused/veaparandused vastavalt `changelog` failile"
+msgstr "Changes/improvements according to `changelog` file"
+
+#: ../../tarned.rst:561
+msgid "Muudatused tarne 1.4.1 koosseisus, erinevused võrreldes tarnega 1.4.0"
+msgstr ""
+"Changes in the composition of the delivery 1.4.1, differences compared to"
+" delivery 1.4.0."
+
+#: ../../tarned.rst:608
+msgid "Tööriista *init* väljundfailide muutus"
+msgstr "Tool *init* change in output files"
+
+#: ../../tarned.rst:609
+msgid "Tööriista *init* SN ja CN parameetrite muutus"
+msgstr "Change in tool *init* SN and CN parameters"
+
+#: ../../tarned.rst:610
+msgid "Tööriista *testkey* sisendparameetrite muutus"
+msgstr "Change in input parameters of *testkey* tool"
+
+#: ../../tarned.rst:611
+msgid "Tööriista *decrypt* kasutatud kaardinumbrite kuvamine"
+msgstr "Displaying the card numbers used by the *decrypt* toolbar"
+
+#: ../../tarned.rst:629
+msgid "IVXV protokollid - registreerimisprotokolli lisamine"
+msgstr "Protocols IVXV - Addition to the record of registrations"
+
+#: ../../tarned.rst:630
+msgid ""
+"IVXV seadistuste koostejuhend - läbivad täiendused ning käsiraamatuga "
+"ühtlustamine."
+msgstr ""
+"IVXV Compilation manual for setups - cross-cutting improvements and "
+"alignment with the manual."
+
+#: ../../tarned.rst:632
+msgid "IVXV valijarakendus - läbivad täiendused."
+msgstr "IVXV voter application - cross-cutting improvements."
+
+#: ../../tarned.rst:633
+msgid "IVXV mixnet - dokument hõlmatud seadistuste koostejuhendisse, eemaldatud."
+msgstr "IVXV mixnet - document included in the configuration manual, removed."
+
+#: ../../tarned.rst:634
+msgid ""
+"IVXV registreerimisteenus - dokument hõlmatud protokollistikku, "
+"eemaldatud."
+msgstr "IVXV registration service - document included in the minutes, removed."
+
+#: ../../tarned.rst:642
+msgid "Muudatused tarne 1.4.0 koosseisus, erinevused võrreldes tarnega 1.3.0"
+msgstr ""
+"Changes in the configuration of delivery 1.4.0, differences compared to "
+"delivery 1.3.0"
+
+#: ../../tarned.rst:649
+msgid ""
+"OCSP ja ajatemplipäringute automaatne kordamine vastavalt "
+"konfiguratsioonile"
+msgstr "Automatic repetition of OCSP and timestamp requests as configured"
+
+#: ../../tarned.rst:651
+msgid "BDOC-TS allkirjakonteinerite toetamine"
+msgstr "Support for BDOC-TS signature containers"
+
+#: ../../tarned.rst:652
+msgid "Tühjade valijanimekirjade tugi"
+msgstr "Support for empty electoral rolls"
+
+#: ../../tarned.rst:671
+msgid "TLS 1.2 toetamine API-versioonide < 19 korral"
+msgstr "TLS 1.2 support for API versions < 19"
+
+#: ../../tarned.rst:672
+msgid "Abiinfo vaate asendamine süsteemse brauseriga"
+msgstr "Replacing the help view with a system browser"
+
+#: ../../tarned.rst:673
+msgid "Kuvast väljuvate tekstide automaatne lühendamine nuppude korral"
+msgstr "Automatic abbreviation of texts in the image when buttons are pressed"
+
+#: ../../tarned.rst:689
+msgid "Jaoskonnanumbri unikaalsusnõuete täpsustamine"
+msgstr "Specifying the uniqueness requirements for the section number"
+
+#: ../../tarned.rst:690
+msgid "Tühja valijatenimekirja tugi"
+msgstr "Support for an empty electoral roll"
+
+#: ../../tarned.rst:691
+msgid "Kodeeringuvigadega sertifikaatide toetamine rakendustes"
+msgstr "Support for certificates with coding errors in applications"
+
+#: ../../tarned.rst:695
+msgid "Eemaldatud LOG4 ja LOG5"
+msgstr "Removed LOG4 and LOG5"
+
+#: ../../tarned.rst:699
+msgid "Eemaldatud PDF vormingus valijate nimekiri faasist *revoke*"
+msgstr "Removed PDF voter list from *revoke* phase."
+
+#: ../../tarned.rst:708
+msgid "macOS 10.11 toetamine"
+msgstr "macOS 10.11 support"
+
+#: ../../tarned.rst:709
+msgid "32bit Linuxi toetamine"
+msgstr "32bit Linux support"
+
+#: ../../tarned.rst:710
+msgid "UPX versiooni uuendamine"
+msgstr "Upgrading UPX"
+
+#: ../../tarned.rst:711
+msgid "Pinpad kaardilugejate töökindluse tõstmine (Win)"
+msgstr "Improving the reliability of Pinpad card readers (Win)"
+
+#: ../../tarned.rst:712
+msgid "ID-kaardi suhtlusvigade parandamine (Win7/ECC)"
+msgstr "Fix ID card communication errors (Win7/ECC)"
+
+#: ../../tarned.rst:713
+msgid "Nii PEM kui DER vormingus andmete import (Seadistaja)"
+msgstr "Import data in both PEM and DER format (Configurator)"
+
+#: ../../tarned.rst:714
+msgid "Lisatud Seadistuste valideerimisvõimalus (Seadistaja)"
+msgstr "Added Configuration validation option (Configurator)"
+
+#: ../../tarned.rst:715
+msgid "Parandatud käitumine liigsuurte seadistuste korral (Seadistaja)"
+msgstr "Corrected behaviour in case of excessive settings (Configurator)"
+
+#: ../../tarned.rst:720
+msgid ""
+"Dokumentatsiooni uuendamine muudatuste kajastamiseks ning DEMO2018 "
+"tagasiside arvestamiseks"
+msgstr "Updating documentation to reflect changes and feedback from DEMO2018."
+
+#: ../../tarned.rst:726
+msgid "MTA sõltuvuse lisamine"
+msgstr "Adding MTA dependency"
+
+#: ../../tarned.rst:727
+msgid "CSV logiväljavõtte täpsustamine, algus- ja lõpuaja lisamine"
+msgstr "Specifying the CSV log field, adding start and end times"
+
+#: ../../tarned.rst:728
+msgid "Logianalüüsi optimeerimine mitmetuumalise riistvara jaoks"
+msgstr "Optimising logic analysis for multi-core hardware"
+
+#: ../../tarned.rst:732
+msgid "Muudatused tarne 1.3.0 koosseisus, erinevused võrreldes tarnega 1.2.0"
+msgstr ""
+"Changes in the composition of delivery 1.3.0, differences compared to "
+"delivery 1.2.0"
+
+#: ../../tarned.rst:739 ../../tarned.rst:814
+msgid "Ubuntu 18.04 LTS (Bionic Beaver) kasutuselevõtmine"
+msgstr "Deploying Ubuntu 18.04 LTS (Bionic Beaver)"
+
+#: ../../tarned.rst:740
+msgid "Krahhitaaste protseduuride kirjeldamine"
+msgstr "Description of crash response procedures"
+
+#: ../../tarned.rst:744
+msgid "Parandatud tööriistad teenuste seisundiinfo saamiseks"
+msgstr "Improved tools for getting service status information"
+
+#: ../../tarned.rst:749
+msgid "golang keeleversioon 1.9 kasutuselevõtmine"
+msgstr "golang language version 1.9 rollout"
+
+#: ../../tarned.rst:750
+msgid "Eesti ID-kaardi uuenenud profiili toetamine (PNOEE)"
+msgstr "Supporting the renewed profile of the Estonian ID card (PNOEE)"
+
+#: ../../tarned.rst:762 ../../tarned.rst:767
+msgid "ESTEID2018 sertifikaatide toetamine"
+msgstr "Support for ESTEID2018 certificates"
+
+#: ../../tarned.rst:763
+msgid "Täpsustatud vigase ASN1-kodeeringuga avalike võtmete käitlemist"
+msgstr "Improved handling of public keys with corrupt ASN1 coding"
+
+#: ../../tarned.rst:768
+msgid "iPhone 10 X muudatused"
+msgstr "iPhone 10 X changes"
+
+#: ../../tarned.rst:769
+msgid "XCode 10 ja iOS 12 SDK kasutamine"
+msgstr "Using XCode 10 and iOS 12 SDK"
+
+#: ../../tarned.rst:774
+msgid "Verificatumi AGPL versiooni kasutuselevõtmine"
+msgstr "Deployment of the AGPL version of Verificatum"
+
+#: ../../tarned.rst:785
+msgid "Lisatud tööriist StatsTool valimiskastist statistikafaili genereerimiseks"
+msgstr "Added tool StatsTool to generate a statistics file from the ballot box."
+
+#: ../../tarned.rst:786
+msgid "Lisatud tööriist StatsDiffTool kahe statistikafaili võrdlemiseks"
+msgstr "Added tool StatsDiffTool to compare two statistics files"
+
+#: ../../tarned.rst:787 ../../tarned.rst:800
+msgid "ESTEID2018 sertifikaatide ja profiili toetamine"
+msgstr "ESTEID2018 certificates and profile support"
+
+#: ../../tarned.rst:788
+msgid "digidoc4j 2.1.0 kasutamine"
+msgstr "digidoc4j 2.1.0 usage"
+
+#: ../../tarned.rst:797
+msgid "Valijarakenduses kandidaatide otsingu võimaldamine"
+msgstr "Enabling the search for candidates in the voter application"
+
+#: ../../tarned.rst:798
+msgid "Valijarakenduses erakondade ja kandidaatide kaustana kuvamine"
+msgstr ""
+"Displaying political parties and candidates as a folder in the voter "
+"application"
+
+#: ../../tarned.rst:799
+msgid ""
+"Valijarakenduse ja Seadistusrakenduse üleviimine JSON-vormingus "
+"seadistustele"
+msgstr "Migrating the Selector app and Configuration app to JSON format settings"
+
+#: ../../tarned.rst:801
+msgid "Win: IDEMIA minidraiveri toetamine"
+msgstr "Win: IDEMIA minidriver support"
+
+#: ../../tarned.rst:802
+msgid "Linux/macOS: IDEMIA PKCS11 draiveri toetamine"
+msgstr "Linux/macOS: IDEMIA PKCS11 driver support"
+
+#: ../../tarned.rst:803
+msgid "macOS 10.14 toetamine"
+msgstr "macOS 10.14 support"
+
+#: ../../tarned.rst:808
+msgid "Dokumentatsiooni uuendamine muudatuste kajastamiseks"
+msgstr "Updating documentation to reflect changes"
+
+#: ../../tarned.rst:809
+msgid "Ingliskeelse arhitekuuridokumendi ja protokollistiku lisamine"
+msgstr "Inclusion of an English-language archival document and protocol."
+
+#: ../../tarned.rst:815
+msgid "Võetud kasutusele Grafana 5.3.4"
+msgstr "Introduced Grafana 5.3.4"
+
+#: ../../tarned.rst:816
+msgid ""
+"Parandatud vanusepõhise statistika genereerimine ja vanusegruppidesse "
+"jaotumine"
+msgstr "Generation of revised age-specific statistics and age group breakdowns"
+
+#: ../../tarned.rst:818
+msgid "CSV väljundi võtmine seanssidest"
+msgstr "Extracting CSV output from sessions"
+
+#: ../../tarned.rst:821
+msgid ""
+"Muudatused tarne 1.2.0 koosseisus, erinevused võrreldes KOV2017 "
+"valimistega."
+msgstr ""
+"Changes in the composition of the supply 1.2.0, differences compared to "
+"the MOV2017 elections."
+
+#: ../../tarned.rst:828
+msgid "Lisatud tööriist vigaste valijanimekirjade eemaldamiseks."
+msgstr "Added a tool to remove invalid picklists."
+
+#: ../../tarned.rst:829
+msgid "Lisatud tööriist jaoskondade/ringkondade nimekirja lisamiseks."
+msgstr "Added a tool to add a list of wards/districts."
+
+#: ../../tarned.rst:830
+msgid "Lisatud ringkonnapõhine statistika."
+msgstr "Statistics by district are included."
+
+#: ../../tarned.rst:831
+msgid "Lisatud varundusteenus."
+msgstr "Added backup service."
+
+#: ../../tarned.rst:832
+msgid "Lisatud tööriist varundatud valimiskastide konsolideerimiseks."
+msgstr "Added tool to consolidate backed up ballot boxes."
+
+#: ../../tarned.rst:833
+msgid "Lisatud tööriist nimekirjade kooskõlalisuse kontrolliks."
+msgstr "Added a tool to check the consistency of lists."
+
+#: ../../tarned.rst:834
+msgid ""
+"Lisatud võimekus seadistusfailidele valimisspetsiifiliste prefiksite "
+"lisamiseks."
+msgstr "Added ability to add election specific prefixes to configuration files."
+
+#: ../../tarned.rst:835
+msgid "Täiendatud haldusliidese kasutajaliidest abinfoga."
+msgstr "Enhanced the administrative interface with help."
+
+#: ../../tarned.rst:836
+msgid "Eemaldatud aegunud konfiguratsiooniparameeter “stats.*”"
+msgstr "Removed obsolete configuration parameter \"stats.*\""
+
+#: ../../tarned.rst:837
+msgid "Parandatud sisendfailide vormingu kontrolli ja laadimist."
+msgstr "Improved input file format checking and loading."
+
+#: ../../tarned.rst:841
+msgid "Uuendatud etcd versioon."
+msgstr "Updated etcd version."
+
+#: ../../tarned.rst:842
+msgid "Lisatud võimekus etcd ajalõppude seadistamiseks keskkonnamuutujate kaudu."
+msgstr "Added ability to set etcd timeouts via environment variables."
+
+#: ../../tarned.rst:843
+msgid "Lisatud võimekus klastri modiftseerimiseks krahhitaaste eesmärgil."
+msgstr "Added capability for cluster modification for crash response."
+
+#: ../../tarned.rst:844
+msgid ""
+"Parandatud klastri käitumist liidrivahetuse korral, pooleliolevate "
+"talletamiste kordamine."
+msgstr ""
+"Improved cluster behaviour in the event of a lead exchange, replay of "
+"pending deposits."
+
+#: ../../tarned.rst:845
+msgid "TLS šifrid muudetud seadistatavaks."
+msgstr "TLS shifters made configurable."
+
+#: ../../tarned.rst:846
+msgid "Parandatud BDOC profiili identifitseeriva konfiguratsioonivälja nimi."
+msgstr "Name of the configuration field identifying the corrected BDOC profile."
+
+#: ../../tarned.rst:847
+msgid ""
+"Lisatud võimekus seadistada Mobiil-ID autentimist nõudma nii isikukoodi "
+"kui telefoninumbrit."
+msgstr ""
+"Added the ability to configure Mobile ID authentication to require both "
+"an ID and a phone number."
+
+#: ../../tarned.rst:848
+msgid "Lisatud võimekus piirata korduvhääletamise sagedust."
+msgstr "Added ability to limit the frequency of re-voting."
+
+#: ../../tarned.rst:849
+msgid "Lisatud võimekus toetada Windowsi reavahetusi konfifailides."
+msgstr "Added ability to support Windows replacements in configuration files."
+
+#: ../../tarned.rst:850
+msgid "Täiustatud BDOC XML kanoniseerimist ja parsimist."
+msgstr "Improved BDOC XML canonicalisation and parsing."
+
+#: ../../tarned.rst:851
+msgid "Karmistatud DDS päringute vormingukontrolle."
+msgstr "Tightened DDS query formatting controls."
+
+#: ../../tarned.rst:852
+msgid "Logimine viidud üle RELP protokollile."
+msgstr "Logging migrated to RELP protocol."
+
+#: ../../tarned.rst:853
+msgid ""
+"Muudetud seadistusfailide ülesehitust eristamaks Koguja ja Töötleja "
+"vastutusi."
+msgstr ""
+"Changed the structure of configuration files to distinguish between the "
+"responsibilities of the Collector and the Processor."
+
+#: ../../tarned.rst:857 ../../tarned.rst:868 ../../tarned.rst:872
+#: ../../tarned.rst:878 ../../tarned.rst:882 ../../tarned.rst:886
+msgid "Muudatusi ei ole."
+msgstr "There are no changes."
+
+#: ../../tarned.rst:864
+msgid ""
+"Lisatud juhised publitseeritud kontrollrakenduse ja avalikustatud "
+"lähtekoodi vastavuse kontrollimiseks."
+msgstr ""
+"Added guidance on how to check the consistency of a published control "
+"implementation with the published source code."
+
+#: ../../tarned.rst:890
+msgid "Linux ja Mac – platvormispetsiifilisi muudatusi ei ole."
+msgstr "Linux and Mac - There are no platform-specific changes."
+
+#: ../../tarned.rst:891
+msgid ""
+"Windows – parandatud liidestumist Minidraiveriga, mingw64 "
+"kasutuselevõtmine."
+msgstr "Windows - improved interfacing with Minidraiver, introducing mingw64."
+
+#: ../../tarned.rst:892
+msgid "Lisatud ID-kaardi ECC toetamine."
+msgstr "Added support for ID card ECC."
+
+#: ../../tarned.rst:893
+msgid "Seadistatud Mobiil-ID nõudma vajadusel isikukoodi ja telefoninumbrit."
+msgstr "Set up Mobile ID to ask for an ID and phone number when needed."
+
+#: ../../tarned.rst:894
+msgid "Täiendatud veakoode."
+msgstr "Updated error codes."
+
+#: ../../tarned.rst:895
+msgid "Kohandatud seadistusrakendus muudatustega vastavusse."
+msgstr "Adjusted the configuration app to reflect the changes."
+
+#: ../../tarned.rst:896
+msgid "Kohandatud BDOC XML templated"
+msgstr "Customized BDOC XML templated"
+
+#: ../../tarned.rst:900
+msgid "Dokumentatsioon läbivalt kaasajastatud seoses muudatustega"
+msgstr "Documentation updated throughout in the light of the amendments"
+
+#: ../../tarned.rst:904
+msgid "Loobutud CrateDBst."
+msgstr "Rejected by CrateDB."
+
+#: ../../tarned.rst:905
+msgid "Võetud läbivalt kasutusele PostgreSQL."
+msgstr "Adopted PostgreSQL across the board."
+
+#: ../../tarned.rst:906
+msgid "Võetud kasutusele Grafana 5.0.1."
+msgstr "Grafana 5.0.1 has been introduced."
+
+#: ../../tarned.rst:907
+msgid "Seansside valideerimise parandused lähtudes KOV2017 logianalüüsist."
+msgstr ""
+"Improvements to the validation of the sessions based on the KOV2017 log "
+"analysis."
+
+#: ../../tarned.rst:908
+msgid "Lisatud statistika genereerimine ringkondade kaupa."
+msgstr "Generation of attached statistics by district."
+
+#~ msgid "Muudatused tarne 1.9.1 koosseisus, erinevused võrreldes tarnega 1.9.0"
+#~ msgstr ""
+#~ "Changes in the composition of delivery"
+#~ " 1.9.1, differences compared to delivery"
+#~ " 1.9.0"
+
+#~ msgid "???"
+#~ msgstr "???"
+

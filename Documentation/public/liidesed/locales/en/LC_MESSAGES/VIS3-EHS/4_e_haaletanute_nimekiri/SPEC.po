@@ -1,0 +1,121 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, Cybernetica AS
+# This file is distributed under the same license as the Elektroonilise
+# hääletamise infosüsteem package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Elektroonilise hääletamise infosüsteem 1.9.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-29 10:34+0200\n"
+"PO-Revision-Date: 2024-03-02 13:44+0200\n"
+"Last-Translator: \n"
+"Language-Team: en <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.10.3\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: ../../VIS3-EHS/4_e_haaletanute_nimekiri/SPEC.md:1
+msgid "E-hääletanute nimekiri"
+msgstr "List of e-voters"
+
+#: ../../VIS3-EHS/4_e_haaletanute_nimekiri/SPEC.md:3
+msgid "Protseduur"
+msgstr "Procedure"
+
+#: ../../VIS3-EHS/4_e_haaletanute_nimekiri/SPEC.md:5
+msgid ""
+"E-hääletanute nimekiri on pärast e-hääletamise lõppu EHS poolt genereeritav "
+"ja väljastatav nimekiri e-hääletanud isikutest. E-hääletanute nimekiri "
+"loetakse sisse VIS3-e (moodul NIM)."
+msgstr ""
+"The e-vote list is the list of e-voters generated and issued by EHS after "
+"the end of e-voting. The list of e-voters shall be read into VIS3 (module "
+"NIM)."
+
+#: ../../VIS3-EHS/4_e_haaletanute_nimekiri/SPEC.md:7
+msgid "E-hääletanute nimekiri edastakse inim-masin-protseduuriga:"
+msgstr "The list of e-voters is transmitted by human-machine procedure:"
+
+#: ../../VIS3-EHS/4_e_haaletanute_nimekiri/SPEC.md:9
+msgid "EHS operaator laeb JSON-faili EHS-st alla;"
+msgstr "The EHS operator downloads the JSON file from the EHS;"
+
+#: ../../VIS3-EHS/4_e_haaletanute_nimekiri/SPEC.md:11
+msgid ""
+"EHS operaator allkirjastab faili digitaalselt väljaspool EHS-i ja annab "
+"selle VIS peakasutajale;"
+msgstr ""
+"The EHS operator digitally signs the file outside the EHS and gives it to "
+"the VIS head user;"
+
+#: ../../VIS3-EHS/4_e_haaletanute_nimekiri/SPEC.md:13
+msgid "VIS peakasutaja laeb digikonteinerist välja võetud faili VIS3-i."
+msgstr ""
+"The VIS head user uploads the file taken from the digital container to VIS3."
+
+#: ../../VIS3-EHS/4_e_haaletanute_nimekiri/SPEC.md:15
+msgid "Fail on JSON-formaadis. Faili näidised on tööülesandes."
+msgstr "The file is in JSON format. File examples are in the appendix."
+
+#: ../../VIS3-EHS/4_e_haaletanute_nimekiri/SPEC.md:17
+msgid "Faili struktuur on kirjeldatud JSON-skeemiga."
+msgstr "The file structure is described by a JSON schema."
+
+#: ../../VIS3-EHS/4_e_haaletanute_nimekiri/SPEC.md:19
+msgid "Edastatav fail"
+msgstr "Transmitted file"
+
+#: ../../VIS3-EHS/4_e_haaletanute_nimekiri/SPEC.md:21
+msgid ""
+"Aluseks on EHS senine liides VIS2-ga, mis on spetsifitseeritud dokumendis "
+"\"IVXV protokollide kirjeldus\" (v 1.5.0, IVXV-PR-1.5.0, 20.04.2019), "
+"[https://www.valimised.ee/sites/default/files/uploads/eh/IVXV-protokollid."
+"pdf](https://www.valimised.ee/sites/default/files/uploads/eh/IVXV-"
+"protokollid.pdf), jaotises \"E-hääletanute nimekiri\" (jaotis 9.2)."
+msgstr ""
+"It is based on the current interface of the EHS with VIS2, as specified in "
+"the document \"Description of the IVXV protocols\" (v 1.5.0, IVXV-PR-1.5.0, "
+"20.04.2019), [https://www.valimised.ee/sites/default/files/uploads/eh/IVXV-"
+"protokollid.pdf](https://www.valimised.ee/sites/default/files/uploads/eh/"
+"IVXV-protokollid.pdf), section \"E-voting list\" (section 9.2)."
+
+#: ../../VIS3-EHS/4_e_haaletanute_nimekiri/SPEC.md:23
+msgid ""
+"Faili struktuur (JSON-skeem): [onlinevoters.schema](onlinevoters.schema)"
+msgstr ""
+"File structure (JSON schema): [onlinevoters.schema](onlinevoters.schema)"
+
+#: ../../VIS3-EHS/4_e_haaletanute_nimekiri/SPEC.md:25
+msgid ""
+"Valimissündmuse identifikaator peab vastama formaadile [Valimissündmuse "
+"identifikaator](../valimissündmuse_identifikaator.md)."
+msgstr ""
+"The election event identifier must conform to the format [Election event "
+"identifier](../valimissündmuse_identifikaator.md)."
+
+#: ../../VIS3-EHS/4_e_haaletanute_nimekiri/SPEC.md:27
+msgid "Faili näited (JSON):"
+msgstr "File examples (JSON):"
+
+#: ../../VIS3-EHS/4_e_haaletanute_nimekiri/SPEC.md:29
+msgid "[onlinevoters_EP.json](onlinevoters_EP.json)"
+msgstr "[onlinevoters_EP.json](onlinevoters_EP.json)"
+
+#: ../../VIS3-EHS/4_e_haaletanute_nimekiri/SPEC.md:30
+msgid "[onlinevoters_KOV.json](onlinevoters_KOV.json)"
+msgstr "[onlinevoters_KOV.json](onlinevoters_KOV.json)"
+
+#: ../../VIS3-EHS/4_e_haaletanute_nimekiri/SPEC.md:31
+msgid "[onlinevoters_RH.json](onlinevoters_RH.json)"
+msgstr "[onlinevoters_RH.json](onlinevoters_RH.json)"
+
+#: ../../VIS3-EHS/4_e_haaletanute_nimekiri/SPEC.md:32
+msgid "[onlinevoters_RK.json](onlinevoters_RK.json)"
+msgstr "[onlinevoters_RK.json](onlinevoters_RK.json)"

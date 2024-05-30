@@ -3,8 +3,6 @@ run:
 
 linters:
   enable:
-    - bodyclose
-    - deadcode
     - dupl
     - errcheck
     - exportloopref
@@ -13,24 +11,20 @@ linters:
     - gocyclo
     - gofmt
     - goimports
-    - golint
     - gosec
     - gosimple
     - govet
     - ineffassign
     - lll
-    - noctx
     - nolintlint
     - revive
     - staticcheck
-    - structcheck
     - stylecheck
     - typecheck
     - unconvert
-    - unparam
     - unused
-    - varcheck
-    - wastedassign
+  disable:
+    - structcheck
 
 linters-settings:
   goimports:

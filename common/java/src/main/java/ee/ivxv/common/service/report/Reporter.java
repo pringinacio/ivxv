@@ -71,12 +71,13 @@ public interface Reporter {
      *
      * @param dir
      * @param eid
+     * @param disc
      * @param type
      * @param records
      * @return The map from question id to the corresponding log file path used.
      * @throws UncheckedIOException
      */
-    Map<String, Path> writeLogN(Path dir, String eid, LogType type, Stream<LogNRecord> records)
+    Map<String, Path> writeLogN(Path dir, String eid, String disc, LogType type, Stream<LogNRecord> records)
             throws UncheckedIOException;
 
     /**
@@ -85,12 +86,28 @@ public interface Reporter {
      *
      * @param dir
      * @param eid
+     * @param disc
      * @param type
      * @param rmap
      * @return
      */
-    Map<String, Path> writeRecords(Path dir, String eid, LogType type,
+    Map<String, Path> writeRecords(Path dir, String eid, String disc, LogType type,
             Map<String, List<Record>> rmap);
+
+    /**
+     * Writes empty log records of the specified type into a file in the specified directory and
+     * returns the corresponding log file path.
+     *
+     * @param outDir
+     * @param electionID
+     * @param logDiscriminator
+     * @param type
+     * @param questionID
+     * @return The corresponding log file path used.
+     * @throws UncheckedIOException
+     */
+    Path writeEmptyLog(Path outDir, String electionID, String logDiscriminator, LogType type, String questionID)
+            throws UncheckedIOException;
 
     /**
      * Writes the i-voter list of the specified ballot box into the specified file.

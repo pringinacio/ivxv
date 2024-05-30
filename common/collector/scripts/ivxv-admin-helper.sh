@@ -42,7 +42,7 @@ copy_logs_to_logmon() {
   LOGMON_ADDR="$2"
   LOGFILE_PATTERN='ivxv-????-??-??.log'
 
-  cd /var/log
+  cd /var/log/ivxv
 
   # check if log file exists
   if [ "$(echo ${LOGFILE_PATTERN})" = "${LOGFILE_PATTERN}" ]; then

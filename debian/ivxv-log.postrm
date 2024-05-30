@@ -23,6 +23,9 @@ case "$1" in
     purge)
         echo "# Restarting rsyslog log server"
         deb-systemd-invoke restart rsyslog
+
+        echo "# Deleting /var/log/ivxv/* files"
+        rm -rf /var/log/ivxv
     ;;
 
     remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)

@@ -4,6 +4,8 @@ import ee.ivxv.common.crypto.CryptoUtil.PublicKeyHolder;
 import ee.ivxv.common.service.bbox.Result;
 import ee.ivxv.common.service.bbox.impl.ResultException;
 import java.math.BigInteger;
+import org.bouncycastle.asn1.ASN1ObjectIdentifier;
+import org.bouncycastle.asn1.DERNull;
 import org.bouncycastle.asn1.tsp.MessageImprint;
 import org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 import org.bouncycastle.operator.DefaultDigestAlgorithmIdentifierFinder;
@@ -37,11 +39,27 @@ public class TsVerifier {
         TimeStampTokenInfo info = token.getTimeStampInfo();
 
         TsSignature s = parseNonce(info.getNonce());
+        ASN1ObjectIdentifier sOid = digestAlgFinder.find(s.getAlg()).getAlgorithm();
 
-        AlgorithmIdentifier digestAlg = digestAlgFinder.find(s.getAlg());
-        if (digestAlg == null || !info.getMessageImprintAlgOID().equals(digestAlg.getAlgorithm())) {
+        /*
+         * AlgorithmIdentifier ::= SEQUENCE {
+         *   algorithm OBJECT IDENTIFIER,
+         *   parameters ANY DEFINED BY algorithm OPTIONAL
+         * }
+         *
+         * If "parameters" is null, then NULL value should be added to the ASN1
+         *
+         * digestAlg ::= SEQUENCE {
+         *  sOid
+         *  NULL
+         * }
+         *
+        */
+        AlgorithmIdentifier digestAlg = new AlgorithmIdentifier(sOid, DERNull.INSTANCE);
+
+        if (digestAlg.getAlgorithm() == null || !info.getMessageImprintAlgOID().equals(digestAlg.getAlgorithm())) {
             throw new ResultException(Result.REG_NONCE_ALG_MISMATCH,
-                    digestAlg == null ? "null" : digestAlg.getAlgorithm(),
+                    digestAlg.getAlgorithm() == null ? "null" : digestAlg.getAlgorithm(),
                     info.getMessageImprintAlgOID());
         }
 

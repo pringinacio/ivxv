@@ -1,0 +1,4 @@
+#!/usr/bin/dh-exec
+
+common/external/python/wheels /usr/lib/python3.10/.cache/pip/
+common/external/python/requirements.txt /usr/lib/python3.10/.cache/pip/

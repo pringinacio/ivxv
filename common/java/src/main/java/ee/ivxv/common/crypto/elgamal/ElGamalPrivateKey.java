@@ -25,7 +25,7 @@ public class ElGamalPrivateKey {
 
     /**
      * Initialize using ElGamal parameters and the private key.
-     * 
+     *
      * @param parameters
      * @param key
      * @throws IllegalArgumentException
@@ -38,9 +38,9 @@ public class ElGamalPrivateKey {
 
     /**
      * Initialize using serialized private key.
-     * 
+     *
      * @see #getBytes()
-     * 
+     *
      * @param packed
      * @throws IllegalArgumentException When parsing fails
      */
@@ -75,7 +75,7 @@ public class ElGamalPrivateKey {
      * Initialize using armored private key file.
      * <p>
      * The input key file should be MIME-encoded private key file with private key headers.
-     * 
+     *
      * @param p
      * @throws IllegalArgumentException When decoding or parsing fails.
      * @throws IOException When reading fails
@@ -86,7 +86,7 @@ public class ElGamalPrivateKey {
 
     /**
      * Compute the public key which corresponds to the private key.
-     * 
+     *
      * @return
      */
     public ElGamalPublicKey getPublicKey() {
@@ -102,7 +102,7 @@ public class ElGamalPrivateKey {
 
     /**
      * Get the key parameters.
-     * 
+     *
      * @return
      */
     public ElGamalParameters getParameters() {
@@ -111,7 +111,7 @@ public class ElGamalPrivateKey {
 
     /**
      * Get the key value.
-     * 
+     *
      * @return
      */
     public BigInteger getSecretPart() {
@@ -122,10 +122,10 @@ public class ElGamalPrivateKey {
      * Serialize the private as PKCS8 private key
      * <p>
      * The key is represented as ASN1 INTEGER and parameters as ElGamalParameters.
-     * 
+     *
      * @see ee.ivxv.common.asn1.PKCS8PrivateKey
      * @see ee.ivxv.common.crypto.elgamal.ElGamalParameters#getBytes()
-     * 
+     *
      * @return
      */
     public byte[] getBytes() {
@@ -143,7 +143,7 @@ public class ElGamalPrivateKey {
      * Decrypt a ciphertext using the private key.
      * <p>
      * This method performs checks to ensure that the ciphertext is correct.
-     * 
+     *
      * @param ct Ciphertext.
      * @return Decrypted message
      * @throws MathException When decryption fails.
@@ -158,7 +158,11 @@ public class ElGamalPrivateKey {
      * If the user is sure that the ciphertext is correct, then it is possible to omit correctness
      * checking, gaining a 3x speedup during decryption. If the ciphertext is identified falsely as
      * correct, then the outcome is undefined.
-     * 
+     * <p>
+     * Padding is not removed from the decrypted message as a decryption proof must be generated
+     * on the exact decrypted data. This is crucial for auditing purposes, otherwise it is not
+     * possible to prove that a ballot was malformed (e.g., wrong padding) but correctly decrypted.
+     *
      * @param ct Ciphertext.
      * @param assumeDecodable If true, omit decodability checks.
      * @return Decrypted message
@@ -176,8 +180,8 @@ public class ElGamalPrivateKey {
         } else {
             throw new MathException("Message is not decodable");
         }
-        Plaintext unpadded = decoded.stripPadding();
-        return unpadded;
+
+        return decoded;
     }
 
     /**
@@ -185,9 +189,9 @@ public class ElGamalPrivateKey {
      * <p>
      * See the documentation of decryption proof for the explanation of the values of the proof.
      * This method does not check that the message is actually decodable.
-     * 
+     *
      * @see ee.ivxv.common.crypto.elgamal.ElGamalDecryptionProof
-     * 
+     *
      * @param ct Ciphertext
      * @return Proof of correct decryption (includes decrypted message)
      * @throws MathException When computation fails.

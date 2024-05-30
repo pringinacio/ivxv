@@ -66,6 +66,12 @@ töötlemisele kuluvat aega.
         Kui määramata, siis ei väljastata korrastatud e-valimiskasti järgmisteks
         etappideks. Kasulik mitte-lõpliku e-valimiskasti valimisaegseks kontrolliks.
 
+:check.signed_ballot_max_size_bytes:
+        Kogumisteenusest väljastatud e-valimiskasti üksiku allkirjastatud hääle
+        maksimaalne lubatud pikkus baitides.
+
+        Kui määramatata, siis vaikimisi kasutatakse 32768 baiti.
+
 :check.districts:
         Digitaalselt allkirjastatud ringkondade nimekiri.
 
@@ -121,15 +127,13 @@ töötlemisele kuluvat aega.
         #. Tervikluskontrolliga korrastatud e-valimiskasti räsi
            :file:`<valimise id>-bb-1.json.sha256sum`;
 
-        #. E-valimiskasti töötlemisvigade raport :file:`ballotbox_errors.txt`
-           (valikuline);
+        #. E-valimiskasti töötlemisvigade raport :file:`ballotbox_errors.txt`;
 
         #. Valijate nimekirjade töötlemisvigade raport
-           :file:`voterlist_errors.txt` (valikuline);
+           :file:`voterlist_errors.txt`;
 
         #. *Log1* fail ehk vastvõetud hääled
-           :file:`<valimise id>.<küsimuse id>.log1`.
-
+           :file:`<valimise id>.<küsimuse id>.check.log1`.
 
 :file:`processor.check.yaml`:
 
@@ -184,7 +188,7 @@ eemaldatakse kõik varasemad hääled.
            id>-revocation-report.csv.anonymous`;
 
         #. *Log2* fail ehk tühistatud hääled :file:`<valimise id>.<küsimuse
-           id>.log2`.
+           id>.squash.log2`.
 
 :file:`processor.squash.yaml`:
 
@@ -234,7 +238,7 @@ rakendab sellele sisendiks antud tühistus- ja ennistusnimekirjad.
            id>-ivoterlist.json``;
 
         #. *Log2* fail e. tühistatud hääled
-           :file:`<valimise id>.<küsimuse id>.log2`.
+           :file:`<valimise id>.<küsimuse id>.revoke.log2`.
 
 :file:`processor.revoke.yaml`:
 
@@ -269,8 +273,7 @@ sellest valijate info.
            id>-bb-4.json.sha256sum`;
 
         #. *Log3* fail e. lugemisele läinud hääled :file:`<valimise
-           id>.<küsimuse id>.log3`.
-
+           id>.<küsimuse id>.anonymize.log3`.
 
 :file:`processor.anonymize.yaml`:
 
@@ -312,6 +315,12 @@ võimalik eksportida nii kõiki hääli korraga, kui konkreetse valija hääli.
 :export.ballotbox_checksum:
         Kogumisteenusest väljastatud e-valimiskasti digitaalselt allkirjastatud räsi.
 
+:export.signed_ballot_max_size_bytes:
+        Kogumisteenusest väljastatud e-valimiskasti üksiku allkirjastatud hääle
+        maksimaalne lubatud pikkus baitides.
+
+        Kui määramatata, siis vaikimisi kasutatakse 32768 baiti.
+
 :export.voter_id:
         Valija identifikaator (valikuline).
 
@@ -344,6 +353,12 @@ kontrolli digitaalallkirju, häälte töötlemiseks tuleb kasutada *check*,
         E-valimiskast, mille põhjal statistika koostada. Kui faili laiendiks on
         ``.json``, siis peab see olema olema töödeldud e-valimiskast. Vastasel juhul
         peab see olema kogumisteenusest väljastatud e-valimiskast.
+
+:stats.signed_ballot_max_size_bytes:
+        Kogumisteenusest väljastatud e-valimiskasti üksiku allkirjastatud hääle
+        maksimaalne lubatud pikkus baitides.
+
+        Kui määramatata, siis vaikimisi kasutatakse 32768 baiti.
 
 :stats.election_day:
         Valimispäev. Kõikide e-hääletanute vanused arvutatakse statistika
@@ -418,7 +433,11 @@ kust on lahutatud võrreldava faili väärtused.
         Statistika võrdluse alusfail JSON-vormingus.
 
 :statsdiff.to:
-        Võrreldav statistika fail JSON-vormingus.
+        Võrreldav statistika fail JSON-vormingus. Võrreldav statistika fail on pärit
+        IVXV logmonitorist. Selleks et kasutada *statsdiff* utiliidi tuleb antud failist
+        eemaldada **time:** ja **meta:** JSON kirjed. Need kirjed ei oma tähtsust
+        statistika võrdlemisel ja on lihtsalt statistika faili geneererimise ajatempel,
+        mis on alati erinev **statsdiff.compare** ja **statsdiff.to** failides.
 
 :statsdiff.diff:
         Tööriista väljundfail. Sellesse faili salvestatakse statistikate vahe
@@ -450,6 +469,12 @@ Rohkem infot teostavate operatsioonide kohta leidub alapeatükkides:
 
         Kui määramata, siis ei väljastata korrastatud e-valimiskasti järgmisteks
         etappideks. Kasulik mitte-lõpliku e-valimiskasti valimisaegseks kontrolliks.
+
+:checkAndSquash.signed_ballot_max_size_bytes:
+        Kogumisteenusest väljastatud e-valimiskasti üksiku allkirjastatud hääle
+        maksimaalne lubatud pikkus baitides.
+
+        Kui määramatata, siis vaikimisi kasutatakse 32768 baiti.
 
 :checkAndSquash.districts:
         Digitaalselt allkirjastatud ringkondade nimekiri.

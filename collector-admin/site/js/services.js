@@ -24,6 +24,8 @@ function loadPageData() {
     'choices': 'Nimekirjateenus',
     'mid': 'Mobiil-ID abiteenus',
     'smartid': 'Smart-ID abiteenus',
+    'webeid': 'Web-eID abiteenus',
+    'sessionstatus': 'SessionID staatust raporteeriv abiteenus',
     'proxy': 'Vahendusteenus',
     'storage': 'Talletusteenus',
     'log': 'Logikogumisteenus',

@@ -26,7 +26,7 @@ Hääletaja
 - hääletamiseks Valijarakendusega,
 - hääle kontrollimiseks Kontrollrakendusega.
 
-Hääletajal on elektrooniline isikutunnistus – ID-kaart, Mobiil-ID või Smart-ID.
+Hääletajal on elektrooniline isikutunnistus – ID-kaart, Mobiil-ID, Smart-ID või Web eID.
 
 Koguja
 ------
@@ -110,7 +110,7 @@ Allkirjastamisteenus
 *Allkirjastamisteenus* on teenus, mida kasutatakse vajadusel hääle
 allkirjastamisel ja sellele kehtivuskinnituse saamisel. Vajadus
 Allkirjastamisteenuse järele sõltub allkirja andmise vahendist - Mobiil-ID,
-Smart-ID ja ID-kaardi korral on nende teenuste ülesehitus erinev.
+Smart-ID, Web eID ja ID-kaardi korral on nende teenuste ülesehitus erinev.
 
 Registreerimisteenus
 --------------------

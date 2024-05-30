@@ -17,7 +17,7 @@ public class Proof {
 
     /**
      * Initialize using election identifier.
-     * 
+     *
      * @param election
      */
     public Proof(String election) {
@@ -27,7 +27,7 @@ public class Proof {
 
     /**
      * Initialize using serialized values.
-     * 
+     *
      * @param election
      * @param proofs
      */
@@ -41,7 +41,7 @@ public class Proof {
 
     /**
      * Get election identifier.
-     * 
+     *
      * @return
      */
     public String getElection() {
@@ -50,7 +50,7 @@ public class Proof {
 
     /**
      * Get list of serializable decryption proofs.
-     * 
+     *
      * @return
      */
     public List<ProofJson> getProofs() {
@@ -59,17 +59,17 @@ public class Proof {
 
     /**
      * Add decryption proof.
-     * 
+     *
      * @param proof
      */
     public void addProof(ElGamalDecryptionProof proof) {
         proofs.add(new ProofJson(proof.ciphertext.getBytes(),
-                proof.decrypted.getUTF8DecodedMessage(), proof.getBytes()));
+                proof.decrypted.getMessage(), proof.getBytes()));
     }
 
     /**
      * Get the number of decryption proofs.
-     * 
+     *
      * @return
      */
     @JsonIgnore
@@ -82,12 +82,12 @@ public class Proof {
      */
     public static class ProofJson {
         private final byte[] ciphertext;
-        private final String message;
+        private final byte[] message;
         private final byte[] proof;
 
         /**
          * Initialize using serialized values.
-         * 
+         *
          * @param ciphertext
          * @param message
          * @param proof
@@ -95,7 +95,7 @@ public class Proof {
         @JsonCreator
         private ProofJson( //
                 @JsonProperty("ciphertext") byte[] ciphertext, //
-                @JsonProperty("message") String message, //
+                @JsonProperty("message") byte[] message, //
                 @JsonProperty("proof") byte[] proof) {
             this.ciphertext = ciphertext;
             this.message = message;
@@ -104,7 +104,7 @@ public class Proof {
 
         /**
          * Get the ciphertext for which the proof is for.
-         * 
+         *
          * @return
          */
         public byte[] getCiphertext() {
@@ -113,16 +113,16 @@ public class Proof {
 
         /**
          * Get the message for which the proof is for.
-         * 
+         *
          * @return
          */
-        public String getMessage() {
+        public byte[] getMessage() {
             return message;
         }
 
         /**
          * Get serialized proof.
-         * 
+         *
          * @return
          */
         public byte[] getProof() {

@@ -42,7 +42,7 @@ public class ElGamalDecryptionProof {
      * <p>
      * Use this constructor if the proof is already constructed and the goal is to verify the
      * correctness of decryption.
-     * 
+     *
      * @param ciphertext
      * @param decrypted
      * @param publickey
@@ -66,7 +66,7 @@ public class ElGamalDecryptionProof {
      * <p>
      * Use this constructor if the proof is already constructed and the goal is to verify the
      * correctness of decryption.
-     * 
+     *
      * @param ciphertext
      * @param decrypted
      * @param publickey
@@ -90,9 +90,9 @@ public class ElGamalDecryptionProof {
      * Initialize using serialized value.
      * <p>
      * Use this constructor if the proof is already constructed and serialized.
-     * 
+     *
      * @see #getBytes()
-     * 
+     *
      * @param ciphertext
      * @param decrypted
      * @param publickey
@@ -125,7 +125,7 @@ public class ElGamalDecryptionProof {
 
     /**
      * Initialize using components for creating a proof.
-     * 
+     *
      * @param ciphertext
      * @param decrypted
      * @param publickey
@@ -139,7 +139,7 @@ public class ElGamalDecryptionProof {
 
     /**
      * Initialize using components for creating a proof.
-     * 
+     *
      * @param publickey
      */
     ElGamalDecryptionProof(ElGamalPublicKey publickey) {
@@ -148,7 +148,7 @@ public class ElGamalDecryptionProof {
 
     /**
      * Set the ciphertext.
-     * 
+     *
      * @param ciphertext
      */
     public void setCiphertext(ElGamalCiphertext ciphertext) {
@@ -157,7 +157,7 @@ public class ElGamalDecryptionProof {
 
     /**
      * Get the decrypted value.
-     * 
+     *
      * @return
      */
     public Plaintext getDecrypted() {
@@ -166,7 +166,7 @@ public class ElGamalDecryptionProof {
 
     /**
      * Set the decrypted value.
-     * 
+     *
      * @param decrypted
      */
     public void setDecrypted(Plaintext decrypted) {
@@ -177,7 +177,7 @@ public class ElGamalDecryptionProof {
      * Set the message commitment.
      * <p>
      * The message commitment should be the value {@literal blind^r}
-     * 
+     *
      * @param com
      */
     public void setMessageCommitment(GroupElement com) {
@@ -188,7 +188,7 @@ public class ElGamalDecryptionProof {
      * Set the key commitment.
      * <p>
      * The key commitment should be the value {@literal g^r}.
-     * 
+     *
      * @param com
      */
     public void setKeyCommitment(GroupElement com) {
@@ -200,7 +200,7 @@ public class ElGamalDecryptionProof {
      * <p>
      * The prover response should be the value {@literal k*x+r}, where {@literal k} is the
      * challenge.
-     * 
+     *
      * @param resp
      */
     public void setResponse(BigInteger resp) {
@@ -209,10 +209,10 @@ public class ElGamalDecryptionProof {
 
     /**
      * Verify the correctness of proofs.
-     * 
+     *
      * @see #verifyDecryptionProof(BigInteger)
      * @see #verifySecretKeyProof(BigInteger)
-     * 
+     *
      * @return Boolean indicating if both proofs verified.
      * @throws MathException
      */
@@ -223,7 +223,7 @@ public class ElGamalDecryptionProof {
 
     /**
      * Verify the proof of knowledge of the secret key
-     * 
+     *
      * @param challenge
      * @return
      * @throws MathException
@@ -231,7 +231,7 @@ public class ElGamalDecryptionProof {
     public boolean verifySecretKeyProof(BigInteger challenge) throws MathException {
         // verify that c1^s = a * (c2/d)^k
         ElGamalParameters params = publickey.getParameters();
-        GroupElement d = params.getGroup().encode(params.getGroup().pad(decrypted));
+        GroupElement d = params.getGroup().encode(decrypted);
         GroupElement left = ciphertext.getBlind().scale(response);
         GroupElement right =
                 d.inverse().op(ciphertext.getBlindedMessage()).scale(challenge).op(msgCommitment);
@@ -240,7 +240,7 @@ public class ElGamalDecryptionProof {
 
     /**
      * Verify the proof of correct decryption.
-     * 
+     *
      * @param challenge
      * @return
      * @throws MathException
@@ -271,7 +271,7 @@ public class ElGamalDecryptionProof {
      * {@link ee.ivxv.common.crypto.rnd.DPRNG} for using with
      * {@link ee.ivxv.common.math.IntegerConstructor } to generate the challenge not larger than the
      * order of the generator in the corresponding group.
-     * 
+     *
      * @return Challenge encoded as a positive BigInteger
      */
     public BigInteger computeChallenge() {
@@ -322,7 +322,7 @@ public class ElGamalDecryptionProof {
      *   response      INTEGER
      *   )
      * }
-     * 
+     *
      * @return
      */
     public byte[] getBytes() {

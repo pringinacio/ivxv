@@ -1,0 +1,47 @@
+@startuml
+
+Title Collector Service Component State Change on Management Server
+
+partition Installation {
+  :NEW;
+
+    while (Can the service state be queried under the service account?) is (no)
+      if (Can the service package state be queried under the root account of the service machine?) then (yes)
+        :Install the service package;
+        :Create access to the service account;
+      else (no)
+        :Set new state to FAULTY;
+        stop
+      endif
+    endwhile (yes)
+
+    while (Can access be granted to the root account of the service machine?) is (yes)
+      :Remove access to the root account of the service machine;
+    endwhile (no)
+}
+
+partition Configuration {
+  :INSTALLED;
+    while (Are the latest configurations applied to the service?) is (no)
+      :Load configurations into the service machine;
+      :Apply configurations to the service;
+    endwhile (yes)
+}
+
+partition Execution {
+  :CONFIGURED;
+    while (Is it possible to query the service state?) is (yes)
+      :Load the latest data into the management service;
+      :Wait;
+      if (Is the service disabled by the administrator?) then (yes)
+        :Set new state to DISABLED;
+        stop
+      else (no)
+      endif
+    endwhile (no)
+}
+
+:FAULTY;
+
+@enduml
+

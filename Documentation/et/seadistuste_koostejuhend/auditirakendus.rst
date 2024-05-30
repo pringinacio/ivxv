@@ -16,16 +16,20 @@ IVXV kasutab e-häälte miksimiseks tarkvara Verificatum, mis võtab
 sisendiks krüpteeritud hääled ning annab väljundiks miksitud
 krüpteeritud hääled ja miksimistõendi.
 
-Miksimistõendi ja lugemistõendi kontroll toimub auditirakendusega, mis
-koosneb tööriistadest *convert*, *mixer* ja *decrypt*.
+Miksimistõendi ja lugemistõendi kontroll toimub auditirakenduse tööriistadega
+*convert*, *mixer* ja *decrypt*.
+
+Töötlemisrakenduse toimingute kontroll toimub auditirakenduse tööriistaga
+*integrity*.
 
 #. Tööriist *convert* kontrollib, teisenduste korrektsust IVXV
    andmevormingute ja Verificatumi andmevormingute vahel.
 #. Tööriist *mixer* kontrollib miksimistõendi korrektsust.
 #. Tööriist *decrypt* kontrollib lugemistõendi korrektsust.
+#. Tööriist *integrity* kontrollib töötlemisrakenduse logide korrektsust.
 
 E-häälte korrektse kokkulugemise kontrolliks on vajalik ja piisav
-kasutada kõiki kolme auditirakenduse tööriista.
+kasutada kõiki nelja auditirakenduse tööriista.
 
 Kõigi tööriistade kasutamine eeldab allkirjastatud usaldusjuure ja
 konkreetse tööriista seadistuste olemasolu. Alljärgnevalt kirjeldame
@@ -91,17 +95,70 @@ E-häälte lugemistõendi kontroll
 
 Tööriist *decrypt* kontrollib lugemistõendi korrektsust.
 
-:decrypt.input: Lugemistõendi asukoht
+:decrypt.proofs: Kehtivate sedelite lugemistõendi asukoht.
 
 :decrypt.pub: Dekrüpteerimiseks kasutatud salajasele võtmele vastava avaliku
               võtme asukoht.
+
+:decrypt.discarded: Loend kehtetutest sedelitest.
+
+:decrypt.anon_bb: Töötlemisrakenduse või miksimisrakenduse poolt loodud
+                  e-valimiskast anonüümistatud häältega.
+
+:decrypt.plain_bb: Dekrüpteeritud valimiskast.
+
+:decrypt.tally: Elektroonilise hääletamise tulemus.
+
+:decrypt.candidates: Valimise valikute nimekiri allkirjastatud kujul.
+
+:decrypt.districts: Valimise ringkondade nimekiri allkirjastatud kujul.
 
 :decrypt.out: Lugemistõendi kontrolli tulemuste asukoht. Tegemist on
               kataloogiga kuhu salvestatakse sedelid, mille
               lugemistõend oli kehtetu.
 
+:decrypt.invalidity_proofs: Valikuline kehtetute sedelite lugemistõendi
+                            asukoht.
+
+:decrypt.abort_early: Valikuline auditirakenduse peatamine esimese läbikukutud
+                      kontrolli korral. Vaikimisi väärtus on tõene.
+
 :file:`auditor.decrypt.yaml`:
 
 .. literalinclude:: config-examples/auditor.decrypt.yaml
+   :language: yaml
+   :linenos:
+
+.. _auditor-integrity:
+
+Töötlemisrakenduse logide kontroll
+----------------------------------
+
+Tööriist *integrity* kontrollib, et töötlemisrakenduse poolt väljastatud
+logid ühendavad e-valimiskasti anonüümitud e-valimiskastiga.
+
+:integrity.ballotbox: Kogumisteenusest väljastatud e-valimiskast.
+
+:integrity.anon_bb: Töötlemisrakenduse poolt loodud e-valimiskast
+                    anonüümistatud häältega.
+
+:integrity.log_accepted: Vastuvõetud häälte *log1* fail.
+
+:integrity.log_squashed: Tühistatud korduvhäälte häälte *log2* fail.
+
+:integrity.log_revoked: Jaoskonnainfo põhjal tühistatud ja ennistatud häälte
+                        *log2* fail.
+
+:integrity.log_anonymised: Lugemisele läinud häälte *log3* fail.
+
+:integrity.bb_errors: E-valimiskasti töötlemisvigade raport.
+
+:integrity.abort_early: Valikuline auditirakenduse peatamine esimese
+                        läbikukutud kontrolli korral. Vaikimisi
+                        väärtus on tõene.
+
+:file: `auditor.integrity.yaml`:
+
+.. literalinclude:: config-examples/auditor.integrity.yaml
    :language: yaml
    :linenos:

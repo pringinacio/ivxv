@@ -35,6 +35,7 @@ public class RevokeTool implements Tool.Runner<RevokeArgs> {
     private static final String OUT_BB_TMPL = "bb-3.json";
     private static final String OUT_RR_TMPL = "revocation-report.csv";
     private static final String OUT_IVLJSON_TMPL = "ivoterlist.json";
+    private static final String OUT_LOG_DISCRIMINATOR = "revoke";
 
     final ProcessorContext ctx;
     final I18nConsole console;
@@ -69,7 +70,10 @@ public class RevokeTool implements Tool.Runner<RevokeArgs> {
                 Reporter.AnonymousFormatter.NOT_ANONYMOUS);
         reporter.writeRevocationReport(out.resolve(OUT_RR_ANONYMOUS), bb.getElection(), loader.revRecords,
                 Reporter.AnonymousFormatter.REVOCATION_REPORT_CSV);
-        reporter.writeLog2(out, bb.getElection(), loader.getLog2Records());
+
+        // There should still be an empty .log2 file even if there are no revoked records
+        reporter.writeEmptyLogFiles(out, OUT_LOG_DISCRIMINATOR, Reporter.LogType.LOG2, bb);
+        reporter.writeLog2(out, bb.getElection(), OUT_LOG_DISCRIMINATOR, loader.getLog2Records());
 
         tool.writeJsonBb(bb, out.resolve(OUT_BB));
 

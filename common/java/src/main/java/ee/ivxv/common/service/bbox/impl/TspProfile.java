@@ -130,64 +130,6 @@ abstract class TspProfile<T extends TspRespRecord<?>, U extends TspReqRecord<?>>
     }
 
     /**
-     * Time-mark profile. Consists of the following files:
-     * <ul>
-     * <li>bdoc - the BES type vote container</li>
-     * <li>ocsptm - the OCSP response, also the timestamp - the source of voting time</li>
-     * <li>tspreg - the registration response</li>
-     * <li>version - the voterlist version</li>
-     * </ul>
-     *
-     * <b>NB!</b> Not fully implemented! Add OCSP nonce verification.
-     */
-    static class TmProfile extends TspProfile<TspRespRecord<TmType>, TspReqRecord<RegType>> {
-
-        TmProfile(ContainerReader container) {
-            super(container);
-        }
-
-        @Override
-        byte[] getContainer(TspRespRecord<TmType> record) {
-            return record.get(TmType.bdoc);
-        }
-
-        @Override
-        public TspRespRecord<TmType> createBbRecord() {
-            return new TspRespRecord<>(TmType.class, TmType.tspreg);
-        }
-
-        @Override
-        public TspReqRecord<RegType> createRegRecord() {
-            return new TspReqRecord<>(RegType.class, RegType.request);
-        }
-
-        @Override
-        public byte[] combineBallotContainer(TspRespRecord<TmType> record) {
-            byte[] besBdoc = record.get(TmType.bdoc);
-            byte[] ocsptm = record.get(TmType.ocsptm);
-            // Timestamp is not used in case of TM profile
-            return container.combine(besBdoc, ocsptm, null, null);
-        }
-
-        @Override
-        public Ballot createBallot(FileName<Ref.BbRef> name, TspRespRecord<TmType> record,
-                VoterProvider vp, TsVerifier tsv)
-                throws Exception, InvalidContainerException, ResultException {
-            String version = Util.toString(record.get(TmType.version));
-            Voter voter = findVoter(vp, name.ref.voter, version);
-
-            FileName<Ref.BbRef> bdocName = name.forType(TmType.bdoc);
-            Container c = container.open(combineBallotContainer(record), bdocName.path);
-
-            checkSignatureProfiles(c, Signature.Profile.BDOC_TM);
-
-            tsv.verify(record.getRegResponse());
-
-            return createBallot(bdocName, c, version, voter);
-        }
-    }
-
-    /**
      * Timestamp profile. Consists of the following files:
      * <ul>
      * <li>bdoc - the BES type vote container</li>
@@ -241,10 +183,6 @@ abstract class TspProfile<T extends TspRespRecord<?>, U extends TspReqRecord<?>>
 
             return createBallot(bdocName, c, version, voter);
         }
-    }
-
-    enum TmType {
-        version, bdoc, ocsptm, tspreg;
     }
 
     enum TsType {

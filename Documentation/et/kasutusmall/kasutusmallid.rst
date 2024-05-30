@@ -760,9 +760,9 @@ Põhiprotsess – Mobiil-ID
 7. Hääletaja saab mobiiltelefonile allkirjastamissõnumi.
 8. Hääletaja võrdleb allkirjastamissõnumi kontrollkoodi Valijarakenduses kuvatavaga.
 9. Hääletaja sisestab allkirjastamisvõtme kasutamiseks PIN2 koodi.
-10. Kogumisteenus ja Mobiil-ID teenus viivad läbi allkirjastamise, Kogumisteenuse saadetakse digitaalselt allkirjastatud ja kehtivuskinnitusega TM vormingus BDOC konteiner.
+10. Kogumisteenus ja Mobiil-ID teenus viivad läbi allkirjastamise, Kogumisteenuse saadetakse digitaalselt allkirjastatud ja kehtivuskinnitusega TS vormingus BDOC konteiner.
 11. Valijarakendus küsib regulaarselt, kas allkirjastamine on toimunud, Kogumisteenus vastab.
-12. TM vormingus BDOC konteiner edastatakse Valijarakendusele verifitseerimiseks.
+12. TS vormingus BDOC konteiner edastatakse Valijarakendusele verifitseerimiseks.
 
 Laiendid
 ''''''''
@@ -794,13 +794,13 @@ Põhiprotsess
 ''''''''''''
 1. Kogumisteenus tuvastab profiili, millest lähtudes kontroll läbi viia:
 
-    1. ID-kaardiga allkirjastatud hääl võib olla BES või TM vormingus, tohib sisaldada mitut andmefaili ja täpselt ühte allkirja.
-    2. Mobiil-ID'ga allkirjastatud hääl peab olema TM vormingus, tohib sisaldada mitut andmefaili ja täpselt ühte allkirja.
-    3. Muud failid peavad olema TM vormingus, tohivad sisaldada täpselt ühte andmefaili ja täpselt ühte allkirja.
+    1. ID-kaardiga allkirjastatud hääl võib olla BES või TS vormingus, tohib sisaldada mitut andmefaili ja täpselt ühte allkirja.
+    2. Mobiil-ID'ga allkirjastatud hääl peab olema TS vormingus, tohib sisaldada mitut andmefaili ja täpselt ühte allkirja.
+    3. Muud failid peavad olema TS vormingus, tohivad sisaldada täpselt ühte andmefaili ja täpselt ühte allkirja.
 
 2. Kogumisteenus veendub allkirja vastavuses nõutud profiilile.
-3. Kui allkiri on BES vormingus, siis pöördub Kogumisteenus kehtivuskinnitusteenuse poole sertifikaadi kehtivuse kontrolliks. Kogumisteenus liidab kehtivuskinnituse digitaalallkirjale, tulemuseks on TM vormingus allkiri.
-4. Kogumisteenus kontrollib TM vormingus allkirja:
+3. Kui allkiri on BES vormingus, siis pöördub Kogumisteenus kehtivuskinnitusteenuse poole sertifikaadi kehtivuse kontrolliks. Kogumisteenus liidab kehtivuskinnituse digitaalallkirjale, tulemuseks on TS vormingus allkiri.
+4. Kogumisteenus kontrollib TS vormingus allkirja:
 
     1. Signatuuri.
     2. Sertifikaadi kehtivuskinnitust.

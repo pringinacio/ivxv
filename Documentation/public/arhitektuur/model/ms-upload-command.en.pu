@@ -1,0 +1,44 @@
+@startuml
+
+Title Execution of Commands in the Management Service
+
+Actor "User (Browser)" as Browser
+participant "Web Server \n (Apache)" as WSGI
+participant "Daemon \n (HTTP)" as Daemon_HTTP
+participant "Management \n Library" as Util
+Database "File System" as FS
+participant Service
+
+Browser -> WSGI : Uploading \n command
+Activate Browser
+Activate WSGI
+
+WSGI -> FS : Saving command
+
+alt Command is valid
+
+  WSGI -> Daemon_HTTP : Request to \n apply command
+  Activate Daemon_HTTP
+  Daemon_HTTP -> Util : Request to apply \n command
+
+  Activate Util
+  Util <- FS : Reading command
+  Util -> Util : Validating command
+  alt Immediate application
+    Util -> Service : Applying command
+  else Issuing digital ballot-box
+    Service -> Util : Loading digital ballot-box
+  end
+  Util -> Daemon_HTTP : Response to apply \n command
+  Deactivate Util
+
+  Daemon_HTTP -> WSGI : Sending response
+  Deactivate Daemon_HTTP
+end
+
+WSGI -> Browser : Sending response
+
+Deactivate WSGI
+Deactivate Browser
+
+@enduml

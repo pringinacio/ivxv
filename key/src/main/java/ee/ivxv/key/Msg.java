@@ -26,7 +26,7 @@ public enum Msg implements NameHolder {
     // 'decrypt' tool arguments
     d_anonballotbox, d_anonballotbox_checksum, //
     d_questioncount, d_candidates, d_districts, d_recover, d_protocol, //
-    d_provable, d_check_decodable, //
+    d_provable, d_check_decodable, d_prove_invalid, //
 
     // 'groupgen' tool arguments
     g_length("l"), g_init_template,
@@ -49,7 +49,7 @@ public enum Msg implements NameHolder {
     m_certificates_generated, m_generate_decryption_key, m_test_decryption_key, //
     m_generate_signature_key, m_test_signature_key, m_votecount, //
     m_abb_dist_verifying, m_abb_dist_ok, m_protocol_init, m_protocol_init_ok, //
-    m_dec_start, m_dec_done, m_out_tally, m_out_proof, m_out_invalid, m_out_logs, //
+    m_dec_start, m_dec_done, m_out_tally, m_out_plainbb, m_out_proof, m_out_proof_invalid, m_out_invalid, m_out_logs, //
     m_keys_saved, m_collecting_required_randomness, m_with_proof, m_without_proof, m_card_id, //
     m_fastmode_disabled, m_fastmode_enabled, m_storing_shares, m_generating_certificate;
 

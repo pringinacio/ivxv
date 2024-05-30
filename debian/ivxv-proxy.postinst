@@ -71,6 +71,10 @@ case "$1" in
             echo "# Restarting rsyslog"
             deb-systemd-invoke restart rsyslog
         fi
+
+        mkdir --parents /var/log/ivxv
+        chown --changes syslog:syslog /var/log/ivxv
+        chmod --changes 755 /var/log/ivxv
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

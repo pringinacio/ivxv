@@ -12,27 +12,15 @@ import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HexFormat;
 import java.util.List;
 import javax.smartcardio.Card;
 import javax.smartcardio.CardChannel;
 import javax.smartcardio.CardException;
 import javax.smartcardio.CardTerminal;
 import javax.smartcardio.ResponseAPDU;
-import javax.xml.bind.DatatypeConverter;
 
-import org.bouncycastle.asn1.ASN1Encodable;
-import org.bouncycastle.asn1.ASN1EncodableVector;
-import org.bouncycastle.asn1.ASN1InputStream;
-import org.bouncycastle.asn1.ASN1OctetString;
-import org.bouncycastle.asn1.ASN1Primitive;
-import org.bouncycastle.asn1.ASN1TaggedObject;
-import org.bouncycastle.asn1.DERApplicationSpecific;
-import org.bouncycastle.asn1.DERBitString;
-import org.bouncycastle.asn1.DEROctetString;
-import org.bouncycastle.asn1.DERSequence;
-import org.bouncycastle.asn1.DERTaggedObject;
-import org.bouncycastle.asn1.DERUTF8String;
-import org.bouncycastle.asn1.DLSequence;
+import org.bouncycastle.asn1.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -257,10 +245,7 @@ public class PKCS15Card implements ee.ivxv.common.service.smartcard.Card {
         storeBlobRetry(null, CardInfo.IDENTIFIER, data.encode(), RETRY_COUNT);
     }
 
-    private DLSequence[] getDODF() throws CardException, IOException, PKCS15Exception {
-        short len = selectDODF();
-        byte[] dodfBytes = apdu.readBinary(len);
-        // Get the metainfo of objects written to the card
+    public static DLSequence[] decodeDODF(byte[] dodfBytes) throws IOException, PKCS15Exception {
         ASN1Primitive[] vals = readObjects(dodfBytes);
         DLSequence[] res = new DLSequence[vals.length];
         for (int i = 0; i < vals.length; i++) {
@@ -276,7 +261,14 @@ public class PKCS15Card implements ee.ivxv.common.service.smartcard.Card {
         return res;
     }
 
-    private byte[] getAvailablePath(DLSequence[] blobmetas) throws PKCS15Exception {
+    private DLSequence[] getDODF() throws CardException, IOException, PKCS15Exception {
+        short len = selectDODF();
+        byte[] dodfBytes = apdu.readBinary(len);
+        // Get the metainfo of objects written to the card
+        return decodeDODF(dodfBytes);
+    }
+
+    static public byte[] getAvailablePath(DLSequence[] blobmetas) throws PKCS15Exception {
         byte[] path = Util.concatAll(PKCS15_PATH, DEF_DF_PATH);
         if (blobmetas.length == 0) {
             return path;
@@ -299,10 +291,11 @@ public class PKCS15Card implements ee.ivxv.common.service.smartcard.Card {
                 path[path.length - 1] = (byte) (objpath[objpath.length - 1] + 1);
             }
         }
+        log.debug("Available path: {}", HexFormat.of().formatHex(path).toUpperCase());
         return path;
     }
 
-    private byte[] getRelativePath(byte[] objpath) {
+    private static byte[] getRelativePath(byte[] objpath) {
         if (objpath[0] == MF_PATH[0] && objpath[1] == MF_PATH[1]) {
             return Arrays.copyOfRange(objpath, 2, objpath.length);
         }
@@ -389,7 +382,7 @@ public class PKCS15Card implements ee.ivxv.common.service.smartcard.Card {
                 retryThrow(e, retryThreshold);
             }
         }
-        log.debug("Blob path: {}", DatatypeConverter.printHexBinary(path));
+        log.debug("Blob path: {}", HexFormat.of().formatHex(path).toUpperCase());
         for (retryCount = 0; true;) {
             try {
                 createNewFile(path, blob, readAuth);
@@ -494,7 +487,7 @@ public class PKCS15Card implements ee.ivxv.common.service.smartcard.Card {
             verifyAid((DLSequence) seq.getObjectAt(0), aid);
         }
         // get path of blob data
-        path = getPath((DERTaggedObject) seq.getObjectAt(2));
+        path = getPath((ASN1TaggedObject) seq.getObjectAt(2));
         // read the blob
         for (retryCount = 0; true;) {
             try {
@@ -534,21 +527,50 @@ public class PKCS15Card implements ee.ivxv.common.service.smartcard.Card {
         return null;
     }
 
-    private byte[] getPath(ASN1TaggedObject obj) throws PKCS15Exception {
-        DERSequence seq = (DERSequence) obj.getObject();
+    public static byte[] getPath(ASN1TaggedObject obj) throws PKCS15Exception {
+        ASN1Sequence seq = getSingleSequence(obj);
+
+        ASN1Encodable el = getSingleElement(seq);
+
+        if (el instanceof ASN1Sequence) {
+            ASN1Encodable nestedEl = getSingleElement((ASN1Sequence) el);
+
+            if (nestedEl instanceof DEROctetString) {
+                return ((DEROctetString) nestedEl).getOctets();
+            }
+
+            // Handle the newer Aventra myEID driver structure
+            if (nestedEl instanceof ASN1Sequence) {
+                ASN1Encodable innerEl = getSingleElement((ASN1Sequence) nestedEl);
+
+                if (innerEl instanceof DEROctetString) {
+                    return ((DEROctetString) innerEl).getOctets();
+                }
+            }
+        }
+
+        throw new PKCS15Exception("Invalid ASN1 structure");
+    }
+
+    private static ASN1Sequence getSingleSequence(ASN1TaggedObject obj) throws PKCS15Exception {
+        ASN1Sequence seq = (ASN1Sequence) obj.getBaseUniversal(false, BERTags.SEQUENCE);
+
         if (seq.size() != 1) {
             throw new PKCS15Exception("Invalid ASN1 structure");
         }
-        ASN1Encodable el = seq.getObjectAt(0);
-        if (el instanceof DERSequence) {
-            // newer Aventra myEID driver creates different structure
-            el = ((DERSequence) el).getObjectAt(0);
-        }
-        DEROctetString octetString = (DEROctetString) el;
-        return octetString.getOctets();
+
+        return seq;
     }
 
-    private ASN1TaggedObject getObjByTagNo(byte[] bytes, int tagNo) throws IOException {
+    private static ASN1Encodable getSingleElement(ASN1Sequence seq) throws PKCS15Exception {
+        if (seq.size() != 1) {
+            throw new PKCS15Exception("Invalid ASN1 structure");
+        }
+
+        return seq.getObjectAt(0);
+    }
+
+    public static ASN1TaggedObject getObjByTagNo(byte[] bytes, int tagNo) throws IOException {
         ASN1Primitive[] vals = readObjects(bytes);
         ASN1TaggedObject vv;
         for (ASN1Primitive v : vals) {
@@ -621,15 +643,16 @@ public class PKCS15Card implements ee.ivxv.common.service.smartcard.Card {
         return res;
     }
 
-    private short getFileLen(byte[] bytes) throws IOException {
+    public static short getFileLen(byte[] bytes) throws IOException {
+        log.debug("DEBUGFILEAPDU {}", HexFormat.of().formatHex(bytes).toUpperCase());
         ASN1InputStream stream = new ASN1InputStream(new ByteArrayInputStream(bytes));
-        DERApplicationSpecific parent = (DERApplicationSpecific) stream.readObject();
+        ASN1ApplicationSpecific parent = (ASN1ApplicationSpecific) stream.readObject();
         stream = new ASN1InputStream(new ByteArrayInputStream(parent.getContents()));
         ASN1TaggedObject obj;
         do {
             obj = (ASN1TaggedObject) stream.readObject();
-        } while (obj.getTagNo() != 0);
-        DEROctetString octetString = (DEROctetString) obj.getObject();
+        } while ((obj.getTagNo() != 0) || (obj.getTagClass() != BERTags.CONTEXT_SPECIFIC));
+        DEROctetString octetString = (DEROctetString) obj.getBaseUniversal(false, BERTags.OCTET_STRING);
         return new BigInteger(1, octetString.getOctets()).shortValueExact();
     }
 
@@ -672,8 +695,8 @@ public class PKCS15Card implements ee.ivxv.common.service.smartcard.Card {
         byte[] foundAid = octetString.getOctets();
         if (!Arrays.equals(foundAid, aid)) {
             throw new PKCS15Exception(String.format("Aid mismatch! required: %s, found: %s",
-                    DatatypeConverter.printHexBinary(aid),
-                    DatatypeConverter.printHexBinary(foundAid)));
+                    HexFormat.of().formatHex(aid).toUpperCase(),
+                    HexFormat.of().formatHex(foundAid).toUpperCase()));
         }
     }
 

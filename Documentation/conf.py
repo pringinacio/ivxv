@@ -18,6 +18,16 @@ import documents
 
 # -- Project information -----------------------------------------------------
 
+def detect_language():
+    opts = os.environ.get('SPHINXOPTS')
+    # expecting "-D language='en'"
+    if opts is not None and 'en' in opts:
+        return 'en'
+    return 'et'
+
+
+language = detect_language()
+
 project = documents.project
 copyright = documents.copyright
 author = documents.author
@@ -25,14 +35,12 @@ release = documents.release
 
 document = os.environ['IVXV_DOCUMENT']
 
-version = documents.get(document, 'version')
-today = documents.get(document, 'changed')
-document_prefix = documents.get(document, 'document_prefix')
-document_type = documents.get(document, 'document_type')
-document_title = documents.get(document, 'document_title')
-document_target_name = documents.get(document, 'document_target_name')
-
-language = documents.get(document, 'lang')
+version = documents.get(document, 'version', language)
+today = documents.get(document, 'changed', language)
+document_prefix = documents.get(document, 'document_prefix', language)
+document_type = documents.get(document, 'document_type', language)
+document_title = documents.get(document, 'document_title', language)
+document_target_name = documents.get(document, 'document_target_name', language)
 
 document_number = f'{document_prefix}-{version}'
 
@@ -42,6 +50,11 @@ numfig = True
 numfig_format = {
     'section': '{name} (ptk. {number})'
 }
+
+# sphinx-intl
+locale_dirs = ['locales/']
+gettext_compact = False
+
 
 # -- General configuration ---------------------------------------------------
 
@@ -54,6 +67,7 @@ extensions = [
     'sphinx.ext.imgmath',
     'sphinx.ext.todo',
     'sphinx_rtd_theme',
+    'myst_parser',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -63,7 +77,10 @@ templates_path = ['_templates']
 # You can specify multiple suffix as a list of string:
 #
 # source_suffix = ['.rst', '.md']
-source_suffix = '.rst'
+source_suffix = {
+    '.rst': 'restructuredtext',
+    '.md': 'markdown',
+}
 
 # The master toctree document.
 master_doc = 'index'

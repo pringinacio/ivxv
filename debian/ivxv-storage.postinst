@@ -20,6 +20,11 @@ set -e
 
 case "$1" in
     configure)
+        # install db for ivxv-storage
+        if [ -f "/usr/bin/ivxv-storage_db_install.sh" ]; then
+            /usr/bin/ivxv-storage_db_install.sh
+        fi
+
         # CONFIGURE ivxv-storage USER
         # add user account
         if ! getent passwd ivxv-storage > /dev/null; then
@@ -38,14 +43,13 @@ case "$1" in
         chmod 600 ~ivxv-storage/.ssh/authorized_keys
         chown ivxv-storage:ivxv ~ivxv-storage/.ssh/authorized_keys
 
+        mkdir --parents /var/log/ivxv
+        chown --changes syslog:syslog /var/log/ivxv
+        chmod --changes 755 /var/log/ivxv
+
         # enable user to automatically start service
         loginctl enable-linger ivxv-storage
 
-        # ensure the system-wide etcd is stopped and masked,
-        # warn the user that we are doing this
-        echo "# Stopping and masking system-wide etcd"
-        deb-systemd-invoke stop etcd
-        deb-systemd-helper mask etcd
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

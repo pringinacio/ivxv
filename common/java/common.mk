@@ -1,7 +1,10 @@
-rootdir := $(abspath $(dir $(abspath $(lastword $(MAKEFILE_LIST))))../../)/
-G := $(rootdir)/common/external/gradle-6.4/bin/gradle
+COMMONDIR := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
+ROOTDIR   := $(abspath $(COMMONDIR)../../)/
+
+include $(COMMONDIR)javavar.mk
 
 .PHONY: all
+all: GFLAGS += --warning-mode all
 all:
 	$(G) build installDist $(if $(DEVELOPMENT),-P development=1) $(GFLAGS)
 
@@ -11,10 +14,11 @@ all-dev:
 
 .PHONY: test
 test:
-	$(G) test
+test:
+	$(G) test $(GFLAGS)
 
 .PHONY: install
-install: GFLAGS := -x test
+install: GFLAGS += -x test
 install: all
 ifndef DESTDIR
 	$(error $$DESTDIR must be set to install Java applications)
@@ -24,10 +28,7 @@ endif
 		cp build/distributions/*.zip $(DESTDIR)/; \
 	fi
 
-.PHONY: sync
-sync:
-	SYNC_EXTERNAL=1 $(G) syncRemoteRepositories
-
 .PHONY: clean
 clean:
-	$(G) clean
+clean:
+	$(G) clean $(GFLAGS)

@@ -22,6 +22,8 @@ import java.util.Optional;
 public class ExportTool implements Tool.Runner<ExportArgs> {
 
     private static final String OUT_EXP = "export";
+    private static final String EXPORT_VOTE_EXTENSION = "asice";
+    private static final Long DEFAULT_MAX_VOTE_BDOC_SIZE_IN_BYTES = 32768L;
 
     private final ProcessorContext ctx;
     private final I18nConsole console;
@@ -51,16 +53,16 @@ public class ExportTool implements Tool.Runner<ExportArgs> {
             BboxHelper.Loader<?> loader =
                     ctx.bbox.getLoader(args.bb.value(), console::startProgress, tc);
 
-            export(args.bb.value(), args.voter.value(), loader, args.out.value().resolve(OUT_EXP));
+            export(args.bb.value(), args.voter.value(), loader, args.out.value().resolve(OUT_EXP), args.maxSignedBallotSizeInBytes.value());
         } catch (InvalidBboxException e) {
             throw new MessageException(e, Msg.e_bb_read_error, e.path, e);
         }
     }
 
-    private <T> void export(Path path, String voterId, BboxHelper.Loader<T> l, Path out) {
+    private <T> void export(Path path, String voterId, BboxHelper.Loader<T> l, Path out, long maxSignedBallotSizeInBytes) {
         console.println();
         console.println(M.m_bb_loading, path);
-        BboxHelper.BboxLoader<T> loader = l.getBboxLoader(path, reporter::reportBbError);
+        BboxHelper.BboxLoader<T> loader = l.getBboxLoader(path, reporter::reportBbError, maxSignedBallotSizeInBytes);
         console.println(M.m_bb_loaded);
         console.println(M.m_bb_checking_type);
         // If no error has occurred so far, the file structure must be correct and type UNORGANIZED
@@ -83,7 +85,7 @@ public class ExportTool implements Tool.Runner<ExportArgs> {
 
     private void writeContainer(Ref.BbRef ref, byte[] bytes, Path out) {
         try {
-            String fileName = String.format("%s.%s", ref.ballot, ctx.container.getFileExtension());
+            String fileName = String.format("%s.%s", ref.ballot, EXPORT_VOTE_EXTENSION);
             Path ballotPath = out.resolve(ref.voter).resolve(fileName);
 
             Files.createDirectories(ballotPath.getParent());
@@ -98,6 +100,10 @@ public class ExportTool implements Tool.Runner<ExportArgs> {
 
         Arg<Path> bb = Arg.aPath(Msg.arg_ballotbox, true, false);
         Arg<Path> bbChecksum = Arg.aPath(Msg.arg_ballotbox_checksum, true, false);
+        Arg<Long> maxSignedBallotSizeInBytes = Arg
+                .aLong(Msg.arg_signed_ballot_max_size_bytes)
+                .setOptional()
+                .setDefault(DEFAULT_MAX_VOTE_BDOC_SIZE_IN_BYTES);
         Arg<String> voter = Arg.aString(Msg.arg_voter_id).setOptional();
 
         Arg<Path> out = Arg.aPath(Msg.arg_out, false, null);
@@ -105,6 +111,7 @@ public class ExportTool implements Tool.Runner<ExportArgs> {
         public ExportArgs() {
             args.add(bb);
             args.add(bbChecksum);
+            args.add(maxSignedBallotSizeInBytes);
             args.add(voter);
             args.add(out);
         }

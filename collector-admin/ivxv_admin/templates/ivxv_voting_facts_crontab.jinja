@@ -1,0 +1,23 @@
+{#
+
+IVXV Internet voting framework
+
+Crontab template file to automate ivxv-storageorder tool.
+
+-#}
+# Crontab for IVXV Management Service ivxv-storageorder automation
+
+# This file is managed by IVXV Management Service
+# Current version is generated @ {{ time_generated }}
+
+# This file is (re)generated automatically on the following events:
+#
+# - `ivxv-cmd-load election <digitally signed election configuration>`
+#
+# This file is removed automatically on the following events:
+#
+# - `ivxv-collector-init`
+
+# Generate .csv file from Logmonitor logs of failed voting facts and run ivxv-storageorder on first active Collector host
+{{ minute }} {{ hour }} {{ day }} {{ month }} {{ weekday }} if [ -x /usr/bin/ivxv-voting-facts ]; then /usr/bin/ivxv-voting-facts; fi
+

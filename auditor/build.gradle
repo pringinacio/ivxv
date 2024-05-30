@@ -12,6 +12,7 @@ dependencies {
     testImplementation testFixtures(project(":common"))
 }
 
-mainClassName = "ee.ivxv.audit.Audit"
-
-applicationDefaultJvmArgs = ["-Xmx8G"]
+application {
+	mainClass = "ee.ivxv.audit.Audit"
+	applicationDefaultJvmArgs = ["-Xmx8G"]
+}

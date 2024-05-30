@@ -1,0 +1,10 @@
+# We depend on pip-tools being installed to venv.
+#
+# Add dependencies to this file
+# pip-compile to update requirements.txt
+# pip-sync to update venv
+
+docopt
+schema
+polib
+deepl

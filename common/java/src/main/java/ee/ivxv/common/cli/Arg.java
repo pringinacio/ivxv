@@ -44,6 +44,7 @@ public abstract class Arg<T> {
     private static final Parser<Boolean> BOOLEAN_PARSER = new BooleanParser();
     private static final Parser<byte[]> BYTE_ARRAY_PARSER = new ByteArrayParser();
     private static final Parser<Integer> INT_PARSER = new IntParser();
+    private static final Parser<Long> LONG_PARSER = new LongParser();
     private static final Parser<BigInteger> BIGINT_PARSER = new BigIntParser();
     private static final Parser<Instant> INSTANT_PARSER = new InstantParser();
     private static final Parser<LocalDate> LOCAL_DATE_PARSER = new LocalDateParser();
@@ -90,6 +91,10 @@ public abstract class Arg<T> {
 
     public static Arg<Integer> anInt(NameHolder n) {
         return new SingleValueArg<>(n, INT_PARSER);
+    }
+
+    public static Arg<Long> aLong(NameHolder n) {
+        return new SingleValueArg<>(n, LONG_PARSER);
     }
 
     public static Arg<BigInteger> aBigInt(NameHolder n) {
@@ -474,6 +479,17 @@ public abstract class Arg<T> {
                 return Integer.parseInt(s);
             } catch (NumberFormatException e) {
                 throw new ParseException(Msg.e_invalid_int, s);
+            }
+        }
+    }
+
+    static class LongParser implements Parser<Long> {
+        @Override
+        public Long parse(String s, Resolver r) {
+            try {
+                return Long.parseLong(s);
+            } catch (NumberFormatException e) {
+                throw new ParseException(Msg.e_invalid_long, s);
             }
         }
     }

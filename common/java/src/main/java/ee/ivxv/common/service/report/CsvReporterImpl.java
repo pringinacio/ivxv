@@ -5,6 +5,7 @@ import ee.ivxv.common.util.Util;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.UncheckedIOException;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
@@ -55,6 +56,8 @@ public class CsvReporterImpl extends DefaultReporter implements Reporter {
             throws UncheckedIOException {
         try {
             Util.createFile(out);
+        } catch (FileAlreadyExistsException e) {
+            // do nothing, since file is allowed to exist already
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
@@ -80,7 +83,7 @@ public class CsvReporterImpl extends DefaultReporter implements Reporter {
             throw new UncheckedIOException(e);
         }
     }
-    
+
     /**
      * Formats a single report record as a {@code CSV} record, using tabs as separators.
      * In case of anonymous output - hides requested data according to the AnonymousFormatter type.

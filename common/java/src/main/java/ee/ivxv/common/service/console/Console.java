@@ -9,6 +9,8 @@ public interface Console {
 
     void println(String format, Object... args);
 
+    void printlnraw(String format, Object... args);
+
     String readln();
 
     String readPw();

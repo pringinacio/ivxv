@@ -171,8 +171,8 @@ Failinime võimalik eesliide peab alati lõppema punktiga.
 
         Alamblokk, mis sisaldab piletipõhise valija tuvastamise seadistust.
 
-        Piletipõhist valija tuvastamist kasutatakse Mobiil-ID/Smart-ID puhul,
-        kus ``mid``/``smartid`` teenus tuvastab valija ning väljastab talle
+        Piletipõhist valija tuvastamist kasutatakse Mobiil-ID/Smart-ID/Web eID puhul,
+        kus ``mid``/``smartid``/``webeid`` teenus tuvastab valija ning väljastab talle
         pileti, millega teistele teenustele ennast tuvastada.
 
         See alamblokk on tühi, aga tema olemasolek või puudumine määrab, kas
@@ -305,9 +305,8 @@ Failinime võimalik eesliide peab alati lõppema punktiga.
 
         Kohustuslik väli.
         Häälte allkirjadelt nõutav BDOC profiil. Toetatud valikud on ``BES``
-        (põhiprofiil kirjeldatud BDOC spetsifikatsiooni jaotises 5), ``TM``
-        (ajamärkidega profiil kirjeldatud BDOC spetsifikatsiooni jaotises 6.1)
-        ja ``TS`` (ajatemplitega profiil kirjeldatud BDOC spetsifikatsiooni
+        (põhiprofiil kirjeldatud BDOC spetsifikatsiooni jaotises 5) ja
+        ``TS`` (ajatemplitega profiil kirjeldatud BDOC spetsifikatsiooni
         jaotises 6.2).
 
         See peaks olema ``BES``, kuna kõikide allkirjastamisvahendite puhul ei
@@ -505,8 +504,7 @@ Failinime võimalik eesliide peab alati lõppema punktiga.
 
         Kohustuslik väli.
         Kvalifitseeriva päringu protokoll. Hetkel toetatud ``ocsp``
-        (harilik OCSP), ``ocsptm`` (OCSP ajamärgendina), ``tsp`` (PKIX
-        ajatempel) ja ``tspreg`` (PKIX ajatempel
+        (harilik OCSP), ``tsp`` (PKIX ajatempel) ja ``tspreg`` (PKIX ajatempel
         registreerimistõendina).
 
 :qualification.*.conf:
@@ -522,8 +520,7 @@ Failinime võimalik eesliide peab alati lõppema punktiga.
 
 :qualification.*.conf.responders:
 
-        Kasutatakse ainult juhul kui ``qualification.*.protocol`` on ``ocsp``
-        või ``ocsptm``.
+        Kasutatakse ainult juhul kui ``qualification.*.protocol`` on ``ocsp``.
 
         OCSP reponderi sertifikaadid. Kui nende hulgast responderi sertifikaati
         ei leita, siis otsitakse vastuses olevate sertifikaatide hulgast

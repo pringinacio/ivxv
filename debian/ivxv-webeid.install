@@ -1,0 +1,4 @@
+#!/usr/bin/dh-exec
+usr/bin/webeid => usr/bin/ivxv-webeid
+
+usr/lib/systemd/user/ivxv-webeid@.service

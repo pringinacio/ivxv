@@ -3,9 +3,11 @@
 
 import argparse
 import atexit
+import errno
 import fcntl
 import logging
 import os
+import signal
 import sys
 import time
 
@@ -24,31 +26,61 @@ class PidLocker:
     Raise IOError on locking failure.
 
     >>> try:
-    ...     PidLocker("/path/to/pidfile")
+    ...     PidLocker("/path/to/pidfile", timeout = 5)
     ... except IOError:
-    ...     print('Locking failed')
+    ...     print('Locking failed even after waiting 5 seconds')
     ...     exit(1)
     """
 
     filepath = None  #: Pidfile name
     fp = None  #: Pidfile descriptor
 
-    def __init__(self, pidfile_name):
+    def __init__(self, pidfile_name, timeout=0):
         """Create and lock pidfile.
 
-        :raises IOError: On locking failure
+        :raises OSError: On locking failure
         """
+        self.fp = None
         self.filepath = pidfile_name
-        self.fp = open(pidfile_name, "ab")
-        fcntl.flock(self.fp, fcntl.LOCK_EX | fcntl.LOCK_NB)
         atexit.register(self.rm_pid)
+        self.fp = open(pidfile_name, "ab")
+        self.acquire_lock_with_timeout(timeout)
         self.fp.write(bytes(f"{os.getpid()}\n", "ASCII"))
         self.fp.flush()
+
+    def acquire_lock_with_timeout(self, to):
+
+        def handler(signum, frame):
+            raise OSError(errno.EACCES,
+                          f"Failed to lock {self.filepath} in {to} sec")
+
+        signal.signal(signal.SIGALRM, handler)
+
+        retry_interval = 0.1
+
+        try:
+            signal.alarm(to)
+            while True:
+                try:
+                    fcntl.flock(self.fp, fcntl.LOCK_EX | fcntl.LOCK_NB)
+                    # Successfully acquired a lock
+                    break
+                except Exception:  # pylint: disable=broad-except
+                    if to == 0:
+                        raise OSError(errno.EACCES,
+                                      f"Failed to lock {self.filepath} in {to} sec.")
+                    # Wait for another process to release the lock
+                    time.sleep(retry_interval)
+
+        finally:
+            signal.alarm(0)
 
     def rm_pid(self):
         """Remove pidfile."""
         try:
             os.remove(self.filepath)
+            if self.fp is not None:
+                self.fp.close()
         except FileNotFoundError:
             log.warning("PID file %r already removed", self.filepath)
 

@@ -30,6 +30,10 @@ network:
       smartid:
         - id:          smartid@smartid1.ivxv.ee
           address:     smartid1.ivxv.ee:443
+      webeid:
+        - id:          webeid@webeid1.ivxv.ee
+          address:     webeid1.ivxv.ee:443
+          origin:      https://ivxv1.mydomain.ivxv.ee:443 # address that client sees
       choices:
         - id:          choices@choices1.ivxv.ee
           address:     choices1.ivxv.ee:443
@@ -39,10 +43,22 @@ network:
       verification:
         - id:          verification@verification1.ivxv.ee
           address:     verification1.ivxv.ee:443
+      sessionstatus:
+        - id:          sessionstatus@sessionstatus1.ivxv.ee
+          address:     sessionstatus1.ivxv.ee:443
       storage:
         - id:          storage@storage1.ivxv.ee
           address:     storage1.ivxv.ee:2379
           peeraddress: storage1.ivxv.ee:2380
+
+status:
+  session:
+    name: session
+    servername: session.status.inttest.ivxv.ee
+    authttl: 60 # ttl in seconds!
+    choicettl: 90
+    votettl: 60
+    verifyttl: 60
 
 logging:
   - address: logserver1.ivxv.ee
@@ -56,6 +72,10 @@ storage:
     ca: !container etcd_CA.pem
     conntimeout: 5
     optimeout: 10
+    size: 2147483648 # bytes
+    snapshotcount: 10000 # etcd revisions
+    heartbeattimeout: 100 # ms
+    electiontimeout: 1000 # ms
     bootstrap:
       - storage@storage1.ivxv.ee
   ordertimeout: 10

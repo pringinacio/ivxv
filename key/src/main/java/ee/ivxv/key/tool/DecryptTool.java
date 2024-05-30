@@ -143,7 +143,8 @@ public class DecryptTool implements Tool.Runner<DecryptArgs> {
         console.println(Msg.m_dec_start);
         Path out = args.outputPath.value();
         ElectionResult result = processVotes(abb, dec, candidates, districts,
-                args.doProvable.value(), args.checkDecodable.value(), ctx.args.threads.value());
+                args.doProvable.value(), args.checkDecodable.value(), args.proveInvalid.value(),
+                ctx.args.threads.value());
         console.println(Msg.m_dec_done);
 
         console.println();
@@ -153,9 +154,17 @@ public class DecryptTool implements Tool.Runner<DecryptArgs> {
         console.println(Msg.m_out_tally);
         result.outputTally(out, signer);
 
+        console.println(Msg.m_out_plainbb);
+        result.outputPlainBB(out, signer);
+
         if (args.doProvable.value()) {
             console.println(Msg.m_out_proof);
             result.outputProof(out);
+
+            if (args.proveInvalid.value()) {
+                console.println(Msg.m_out_proof_invalid);
+                result.outputInvalidProof(out);
+            }
         }
 
         console.println(Msg.m_out_invalid);
@@ -168,9 +177,9 @@ public class DecryptTool implements Tool.Runner<DecryptArgs> {
 
     private ElectionResult processVotes(AnonymousBallotBox abb, DecryptionProtocol dec,
             CandidateList candidates, DistrictList districts, boolean withProof,
-            boolean checkDecodable, int threadCount) throws Exception {
+            boolean checkDecodable, boolean proveInvalid, int threadCount) throws Exception {
         ElectionResult result =
-                new ElectionResult(abb.getElection(), candidates, districts, withProof);
+                new ElectionResult(abb.getElection(), candidates, districts, withProof, proveInvalid);
         // WorkerFactory consumer = new WorkerFactory(getDecConsumer(dec, result));
 
         ExecutorService ioExecutor = Executors.newFixedThreadPool(3);
@@ -232,8 +241,7 @@ public class DecryptTool implements Tool.Runner<DecryptArgs> {
                     vote.setProof(dp);
                 } catch (Exception e) {
                     // catch the exception, but omit the stack-trace as it may contain identifiable
-                    // information about the error. The possible reasons for decryption failure are
-                    // different padding errors.
+                    // information about the error.
                 }
             }
             // the vote is added to the result even if it is not correctly encoded - it is counted
@@ -266,6 +274,7 @@ public class DecryptTool implements Tool.Runner<DecryptArgs> {
         Arg<Path> outputPath = Arg.aPath(Msg.arg_out, false, null);
         Arg<Boolean> doProvable = Arg.aFlag(Msg.d_provable).setDefault(true);
         Arg<Boolean> checkDecodable = Arg.aFlag(Msg.d_check_decodable).setDefault(false);
+        Arg<Boolean> proveInvalid = Arg.aFlag(Msg.d_prove_invalid).setDefault(false);
 
         // protocols
 
@@ -286,6 +295,7 @@ public class DecryptTool implements Tool.Runner<DecryptArgs> {
             args.add(outputPath);
             args.add(doProvable);
             args.add(checkDecodable);
+            args.add(proveInvalid);
             args.add(protocol);
         }
     }

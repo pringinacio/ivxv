@@ -1,0 +1,12 @@
+# Hardening the binaries with relro and pie is not necessary since memory
+# errors should not occur in Go binaries. Although we could use -buildmode=pie,
+# we have not tested the effect this will have, so leave it off for now.
+ivxv-sessionstatus: hardening-no-relro usr/bin/ivxv-sessionstatus
+ivxv-sessionstatus: hardening-no-pie usr/bin/ivxv-sessionstatus
+
+# We do not provide manpages, since these packages are not meant for
+# distribution.
+ivxv-sessionstatus: binary-without-manpage
+
+# The package depends on ivxv-common, which depends on adduser.
+ivxv-sessionstatus: maintainer-script-needs-depends-on-adduser postinst

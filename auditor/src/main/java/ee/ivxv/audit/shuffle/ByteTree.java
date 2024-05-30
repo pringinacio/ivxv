@@ -16,7 +16,7 @@ import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.file.Path;
-import javax.xml.bind.DatatypeConverter;
+import java.util.HexFormat;
 import org.bouncycastle.util.Arrays;
 
 /**
@@ -464,7 +464,7 @@ public class ByteTree {
         public String toString(int indent) {
             String spaces = new String(new char[indent]).replace("\0", " ");
             return String.format("%s%s %d %s", spaces, getPrefix(), getLength(),
-                    DatatypeConverter.printHexBinary(getValue()));
+                    HexFormat.of().formatHex(getValue()).toUpperCase());
         }
     }
 

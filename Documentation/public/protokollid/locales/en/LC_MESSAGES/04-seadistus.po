@@ -1,0 +1,73 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, Cybernetica AS
+# This file is distributed under the same license as the Elektroonilise
+# hääletamise infosüsteem package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Elektroonilise hääletamise infosüsteem 1.8.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-29 10:34+0200\n"
+"PO-Revision-Date: 2024-02-29 17:21+0200\n"
+"Last-Translator: \n"
+"Language-Team: en <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.10.3\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: ../../04-seadistus.rst:5
+msgid "Valimise definitsioon"
+msgstr "Election definition"
+
+#: ../../04-seadistus.rst:7
+msgid ""
+"Valimise defineerib valimise korraldaja. Eesti riiklikel valimistel "
+"jagunevad kõik hääleõiguslikud isikud ühte või mitmesse valimisringkonda. "
+"Valijal on võimalik hääletamisel valida ainult selle ringkonna kandidaatide "
+"vahel, kuhu ta kuulub."
+msgstr ""
+"The election is defined by the election organiser. In national elections in "
+"Estonia, all eligible voters are divided into one or more constituencies / "
+"electoral districts. Voters can only vote for candidates in the "
+"constituency to which they belong."
+
+#: ../../04-seadistus.rst:12
+msgid "Valimise defineerimiseks tuleb määratleda vähemalt"
+msgstr "To define an election, at least the following have to be defined"
+
+#: ../../04-seadistus.rst:14
+msgid ""
+"valimise unikaalne identifikaator ning küsimuste unikaalsed "
+"identifikaatorid;"
+msgstr ""
+"a unique identifier for the election and unique identifiers for the "
+"questions;"
+
+#: ../../04-seadistus.rst:16
+msgid "täielik loend valimisringkondadest ja -jaoskondadest;"
+msgstr "a full list of electoral districts and polling stations;"
+
+#: ../../04-seadistus.rst:18
+msgid "hääleõiguslike isikute nimekiri ja jagunemine valimisringkondadesse;"
+msgstr ""
+"the list of persons entitled to vote and the division into electoral "
+"districts;"
+
+#: ../../04-seadistus.rst:20
+msgid "kandidaatide nimekiri ja jagunemine valimisringkondadesse."
+msgstr "the list of candidates and the division into electoral districts."
+
+#: ../../04-seadistus.rst:22
+msgid ""
+"Valimise sisendandmed koostatakse Valimise Infosüsteemis (VIS), "
+"vormingukirjeldused on spetsifitseeritud `VIS ja EHS ühisspetsifikatsioonis "
+"<https://github.com/e-gov/VIS3-EHS/>`_."
+msgstr ""
+"Election input data is compiled in the Election Information System (VIS), "
+"the format specifications are specified in the 'Common Specification for "
+"VIS and EHS <https://github.com/e-gov/VIS3-EHS/>`_."

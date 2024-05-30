@@ -12,14 +12,10 @@ end_of_line = lf
 indent_style = space
 indent_size = 4
 
-[*.{json,schema}]
+[*.{json,schema,schema.example}]
 indent_style = space
 indent_size = 4
 insert_final_newline = false
-
-[Jenkinsfile]
-indent_style = space
-indent_size = 4
 
 [*.{css,feature,js,pu,sh,yaml,yml}]
 indent_style = space
@@ -35,10 +31,10 @@ indent_style = tab
 [*.mk]
 indent_style = tab
 
-[**/debian/*{preinst,postinst,prerm,postrm}]
+[debian/*{preinst,postinst,prerm,postrm}]
 indent_style = space
 indent_size = 4
 
-[**/debian/changelog]
+[debian/changelog]
 indent_style = space
 indent_size = 2

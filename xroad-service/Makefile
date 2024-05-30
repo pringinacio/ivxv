@@ -3,7 +3,7 @@ help:
 	@echo "usage: make clean          Clean build"
 
 all:
-	goreleaser release --skip-publish --rm-dist --snapshot
+	goreleaser release --skip-publish --clean --snapshot
 
 clean:
 	rm -r dist

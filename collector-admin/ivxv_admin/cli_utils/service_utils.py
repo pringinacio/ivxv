@@ -10,8 +10,10 @@ import random
 import subprocess
 import sys
 import tempfile
+import time
 import zipfile
 from collections import OrderedDict
+from jinja2 import Environment, PackageLoader
 
 import fasteners
 import yaml
@@ -642,6 +644,7 @@ def voterstats_util():
         """
     )
     stats_type = args["<TYPE>"]
+    action = args["--action"]
     filepath = args["--file"]
     if not filepath:
         filepath = f"/var/lib/ivxv/admin-ui-data/voterstats-{stats_type}.json"
@@ -687,19 +690,20 @@ def voterstats_util():
 
     # import stats
     try:
-        import_voterstats(stats_type, service, filepath, args["--log-level"])
+        if action in ["all", "import"]:
+            import_voterstats(stats_type, service, filepath, args["--log-level"])
     except IvxvError:
         log.error("Failed to import %s stats from service %r", stats_type, service_id)
         return 1
 
-    # export stats
-    if stats_type == "common":
-        command_file.log.setLevel(args["--log-level"])
-        try:
+    # export stats to VIS only if requested
+    command_file.log.setLevel(args["--log-level"])
+    try:
+        if action in ["all", "export"]:
             export_voterstats(stats_type, filepath)
-        except IvxvError:
-            log.error("Failed to export %s stats to VIS", stats_type)
-            return 1
+    except IvxvError:
+        log.error("Failed to export %s stats to VIS", stats_type)
+        return 1
 
     return 0
 
@@ -749,7 +753,7 @@ def export_voterstats(stats_type, filepath):
             fd.write("\n".join(cfg["vis"]["ca"]))
 
     # upload voter stats
-    url = f"{cfg['vis']['url']}online-voters"
+    url = f"{cfg['vis']['url']}voters-by-county"
     log.info("Upload voter stats to %r", url)
     resp = requests.post(
         url,
@@ -858,3 +862,445 @@ def import_voting_sessions(
     except subprocess.CalledProcessError as err:
         raise IvxvError("Failed to import voting sessions") from err
     log.info("Voting sessions file successfully imported from Log Monitor")
+
+
+def remove_ivxv_admin_crontab():
+    """Remove ivxv-admin user crontab if exists."""
+    log.info('Removing ivxv-admin user crontab (if exists)')
+    proc = subprocess.run(["crontab", "-r"], check=False)
+    assert proc.returncode in [0, 1], 'Unexpected exit code for crontab command'
+
+
+def generate_detail_stats_crontab(cfg: dict):
+    """Generate crontab for detailed statistics exchange with VIS.
+    Generated file will be stored to db.
+
+    :param cfg: content of configuration file
+    :type cfg: dict
+    """
+
+    # load Jinja2 crontab template for detailed statistics
+    template_dir = Environment(loader=PackageLoader('ivxv_admin', 'templates'))
+    template = template_dir.get_template('ivxv_detail_stats_crontab.jinja')
+
+    # read `stats:` section from a configuration file,
+    # use default values if configuration file doesn't have `stats:` section
+    cron_cfg = cfg.get('stats', {}).get('detail', {}).get('scheduler', {})
+    crontab_params = {
+        'minute': cron_cfg.get('cron', {}).get('min', '*/15') or '*/15',
+        'hour': cron_cfg.get('cron', {}).get('hour', '*') or '*',
+        'day': cron_cfg.get('cron', {}).get('day', '*') or '*',
+        'month': cron_cfg.get('cron', {}).get('month', '*') or '*',
+        'weekday': cron_cfg.get('cron', {}).get('weekday', '*') or '*',
+    }
+
+    # render Jinja2 template
+    rendered_template = template.render(
+        time_generated=datetime.datetime.now().strftime('%d.%M.%Y %H:%M:%S'),
+        **crontab_params,
+    )
+
+    # override crontab rendered template in a db
+    with IVXVManagerDb(for_update=True) as db:
+        db.set_value('stats/detail/scheduler/cron', rendered_template)
+
+
+def detail_stats_crontab_editor() -> int:
+    args = init_cli_util("""
+    Generate crontab for IVXV detail statistics export to VIS automation.
+
+    This utility must be called as editor by crontab utility:
+
+        $ env VISUAL=ivxv-detail-stats-crontab crontab -e
+
+    Usage: ivxv-detail-stats-crontab <filename>
+    """)
+    filepath = args['<filename>']
+
+    # when you run `crontab -e`, cron generates temporary file at '/tmp/XYZ/crontab',
+    # and that temporary file is passed here as args['<filename>'], i.e 'filepath'
+    crontab_tmp_file_content: str
+
+    # read crontab temporary file
+    with open(filepath, 'r') as fp:
+        try:
+            crontab_tmp_file_content = fp.read()
+        except Exception as err:
+            msg = "Can't read crontab temporary file %r: %s"
+            log.error(msg, filepath, err.__str__())
+            return 1
+
+    # get rendered Jinja2 crontab template for detail stats from a db
+    with IVXVManagerDb() as db:
+        # get from db
+        detail_stats_crontab = db.get_value('stats/detail/scheduler/cron')
+        # remove old block:
+        # ### block ivxv_detail_stats_crontab ###
+        # ...
+        # ### endblock ivxv_detail_stats_crontab ###
+        # from a crontab temporary file if any exists
+        try:
+            without_detail_stats_crontab = remove_detail_stats_crontab(
+                data=crontab_tmp_file_content)
+        except ValueError as err:
+            msg = "Can't remove ivxv_detail_stats block from a temporary file %r: %s"
+            log.error(msg, filepath, err.__str__())
+            return 1
+        # add new block to a crontab temporary file
+        crontab = insert_detail_stats_crontab(
+            data=without_detail_stats_crontab, crontab=detail_stats_crontab)
+
+    # Pause for 1 second. Crontab checks mtime to detect file modifications. It
+    # seems that crontab can't detect mtime change if changes happens too
+    # quickly (tested in Ubuntu Xenial).
+    time.sleep(1)
+
+    # override crontab temporary file with a new content
+    with open(filepath, "w") as fp:
+        try:
+            fp.write(crontab)
+        except Exception as err:
+            msg = "Can't write to a crontab temporary file %r: %s"
+            log.error(msg, filepath, err.__str__())
+            return 1
+
+
+def remove_detail_stats_crontab(data: str) -> str:
+    """Remove ivxv_detail_stats_crontab block from a data.
+
+    :param data: any data
+    :type data: str
+    :return: data without ivxv_detail_stats_crontab block
+    :rtype: str
+    """
+    block, found = __get_detail_stats_crontab_block(data=data)
+    if not found:
+        return data
+    return data.replace(block, '').strip()
+
+
+def insert_detail_stats_crontab(data: str, crontab: str) -> str:
+    """Wrap crontab in an ivxv_detail_stats_crontab block and insert it to a data.
+
+    :param data: any data
+    :type data: str
+    :param crontab: rendered ivxv_detail_stats Jinja2 crontab template file
+    :type crontab: str
+    :return: data with an ivxv_detail_stats_crontab block
+    :rtype: str
+    """
+    header = '### block ivxv_detail_stats_crontab ###'
+    tail = '### endblock ivxv_detail_stats_crontab ###'
+    return data + "\n\n" + header + "\n" + crontab + "\n" + tail + "\n"
+
+
+def __get_detail_stats_crontab_block(data: str) -> (str, bool):
+    """Get ivxv_detail_stats_crontab block from a data.
+
+    :param data: any data
+    :type data: str
+    :return: ivxv_detail_stats_crontab block and True on success,
+    otherwise data and False
+    :rtype: str, bool
+    :raise ValueError: if ivxv_detail_stats_crontab block's header/tail is malformed,
+    however though, if both header and tail are malformed then function assumes that
+    ivxv_detail_stats_crontab block doesn't exist in a data
+    """
+    header = '### block ivxv_detail_stats_crontab ###'
+    tail = '### endblock ivxv_detail_stats_crontab ###'
+
+    # remove leading and trailing whitespaces/newlines
+    data_stripped = data.strip()
+
+    # get start index of a header
+    header_start_index = data_stripped.find(header)
+
+    # get start index of a tail
+    tail_start_index = data_stripped.find(tail)
+
+    # both header and tail aren't present in a data_stripped
+    if header_start_index < 0 and tail_start_index < 0:
+        return data, False
+    # both header and tail present in a data_stripped
+    elif header_start_index >= 0 and tail_start_index >= 0:
+        # get end index of a tail
+        tail_end_index = tail_start_index + len(tail)
+        # extract ivxv_detail_stats_crontab block from a data_stripped
+        return data_stripped[header_start_index:tail_end_index], True
+    else:
+        if header_start_index < 0:
+            raise ValueError("malformed ### block ivxv_detail_stats_crontab ###")
+        else:
+            raise ValueError("malformed ### endblock ivxv_detail_stats_crontab ###")
+
+
+def install_detail_stats_crontab():
+    """Install crontab for detail stats export with VIS automation."""
+    subprocess.run(
+        ["env", "VISUAL=ivxv-detail-stats-crontab", "crontab", "-e"], check=True)
+
+
+def generate_voting_facts_crontab(cfg: dict):
+    """Generate crontab for ivxv-storageorder automation.
+    Generated file will be stored to db.
+
+    :param cfg: content of configuration file
+    :type cfg: dict
+    """
+
+    # load Jinja2 crontab template for voting facts
+    template_dir = Environment(loader=PackageLoader('ivxv_admin', 'templates'))
+    template = template_dir.get_template('ivxv_voting_facts_crontab.jinja')
+
+    # read `stats:` section from a configuration file,
+    # use default values if configuration file doesn't have `stats:` section
+    cron_cfg = cfg.get('stats', {}).get('voting_facts', {}).get('scheduler', {})
+    crontab_params = {
+        'minute': cron_cfg.get('cron', {}).get('min', '*/15') or '*/15',
+        'hour': cron_cfg.get('cron', {}).get('hour', '*') or '*',
+        'day': cron_cfg.get('cron', {}).get('day', '*') or '*',
+        'month': cron_cfg.get('cron', {}).get('month', '*') or '*',
+        'weekday': cron_cfg.get('cron', {}).get('weekday', '*') or '*',
+    }
+
+    # render Jinja2 template
+    rendered_template = template.render(
+        time_generated=datetime.datetime.now().strftime('%d.%M.%Y %H:%M:%S'),
+        **crontab_params,
+    )
+
+    # override crontab rendered template in a db
+    with IVXVManagerDb(for_update=True) as db:
+        db.set_value('stats/voting_facts/scheduler/cron', rendered_template)
+
+
+def voting_facts_crontab_editor() -> int:
+    args = init_cli_util("""
+    Generate crontab for ivxv-storageorder automation.
+
+    This utility must be called as editor by crontab utility:
+
+        $ env VISUAL=ivxv-voting-facts-crontab crontab -e
+
+    Usage: ivxv-voting-facts-crontab <filename>
+    """)
+    filepath = args['<filename>']
+
+    # when you run `crontab -e`, cron generates temporary file at '/tmp/XYZ/crontab',
+    # and that temporary file is passed here as args['<filename>'], i.e 'filepath'
+    crontab_tmp_file_content: str
+
+    # read crontab temporary file
+    with open(filepath, 'r') as fp:
+        try:
+            crontab_tmp_file_content = fp.read()
+        except Exception as err:
+            msg = "Can't read crontab temporary file %r: %s"
+            log.error(msg, filepath, err.__str__())
+            return 1
+
+    # get rendered Jinja2 crontab template for voting facts from a db
+    with IVXVManagerDb() as db:
+        # get from db
+        voting_facts_crontab = db.get_value('stats/voting_facts/scheduler/cron')
+        # remove old block:
+        # ### block ivxv_voting_facts_crontab ###
+        # ...
+        # ### endblock ivxv_voting_facts_crontab ###
+        # from a crontab temporary file if any exists
+        try:
+            without_voting_facts_crontab = remove_voting_facts_crontab(
+                data=crontab_tmp_file_content)
+        except ValueError as err:
+            msg = "Can't remove ivxv_voting_facts_crontab block from a tmp file %r: %s"
+            log.error(msg, filepath, err.__str__())
+            return 1
+        # add new block to a crontab temporary file
+        crontab = insert_voting_facts_crontab(
+            data=without_voting_facts_crontab, crontab=voting_facts_crontab)
+
+    # Pause for 1 second. Crontab checks mtime to detect file modifications. It
+    # seems that crontab can't detect mtime change if changes happens too
+    # quickly (tested in Ubuntu Xenial).
+    time.sleep(1)
+
+    # override crontab temporary file with a new content
+    with open(filepath, "w") as fp:
+        try:
+            fp.write(crontab)
+        except Exception as err:
+            msg = "Can't write to a crontab temporary file %r: %s"
+            log.error(msg, filepath, err.__str__())
+            return 1
+
+
+def remove_voting_facts_crontab(data: str) -> str:
+    """Remove ivxv_voting_facts_crontab block from a data.
+
+    :param data: any data
+    :type data: str
+    :return: data without ivxv_voting_facts_crontab block
+    :rtype: str
+    """
+    block, found = __get_voting_facts_crontab_block(data=data)
+    if not found:
+        return data
+    return data.replace(block, '').strip()
+
+
+def insert_voting_facts_crontab(data: str, crontab: str) -> str:
+    """Wrap crontab in an ivxv_voting_facts_crontab block and insert it to a data.
+
+    :param data: any data
+    :type data: str
+    :param crontab: rendered ivxv_voting_facts_crontab Jinja2 crontab template file
+    :type crontab: str
+    :return: data with an ivxv_voting_facts_crontab block
+    :rtype: str
+    """
+    header = '### block ivxv_voting_facts_crontab ###'
+    tail = '### endblock ivxv_voting_facts_crontab ###'
+    return data + "\n\n" + header + "\n" + crontab + "\n" + tail + "\n"
+
+
+def __get_voting_facts_crontab_block(data: str) -> (str, bool):
+    """Get ivxv_voting_facts_crontab block from a data.
+
+    :param data: any data
+    :type data: str
+    :return: ivxv_voting_facts_crontab block and True on success,
+    otherwise data and False
+    :rtype: str, bool
+    :raise ValueError: if ivxv_voting_facts_crontab block's header/tail is malformed,
+    however though, if both header and tail are malformed then function assumes that
+    ivxv_voting_facts_crontab block doesn't exist in a data
+    """
+    header = '### block ivxv_voting_facts_crontab ###'
+    tail = '### endblock ivxv_voting_facts_crontab ###'
+
+    # remove leading and trailing whitespaces/newlines
+    data_stripped = data.strip()
+
+    # get start index of a header
+    header_start_index = data_stripped.find(header)
+
+    # get start index of a tail
+    tail_start_index = data_stripped.find(tail)
+
+    # both header and tail aren't present in a data_stripped
+    if header_start_index < 0 and tail_start_index < 0:
+        return data, False
+    # both header and tail present in a data_stripped
+    elif header_start_index >= 0 and tail_start_index >= 0:
+        # get end index of a tail
+        tail_end_index = tail_start_index + len(tail)
+        # extract ivxv_voting_facts_crontab block from a data_stripped
+        return data_stripped[header_start_index:tail_end_index], True
+    else:
+        if header_start_index < 0:
+            raise ValueError("malformed ### block ivxv_voting_facts_crontab ###")
+        else:
+            raise ValueError("malformed ### endblock ivxv_voting_facts_crontab ###")
+
+
+def install_voting_facts_crontab():
+    """Install crontab for ivxv-storageorder automation."""
+    subprocess.run(
+        ["env", "VISUAL=ivxv-voting-facts-crontab", "crontab", "-e"], check=True)
+
+
+def voting_facts_util():
+    """Launch log analyzer on IVXV Logmonitor to search for missing voting facts, then
+    export these facts as .csv file and run 'ivxv-storageorder' on a first Collector
+    host, where operation succeeds, in case of unsuccessful operation it will choose
+    another Collector host, until succeeds, or returns an error."""
+    init_cli_util(
+        """
+        Launch log analyzer on IVXV Logmonitor to search for missing voting facts, then
+        export these facts as .csv file and then run 'ivxv-storageorder' on a first
+        Collector host, where operation succeeds, in case of unsuccessful operation it
+        will choose another Collector host, until succeeds, or returns an error.
+
+        Usage: ivxv-voting-facts
+        """
+    )
+
+    filename = f"votesorder-{time.time_ns()}.csv"
+
+    with IVXVManagerDb() as db:
+        collector_state = db.get_value("collector/state")
+        services = db.get_all_values("service")
+        logmon_host = db.get_value('logmonitor/address')
+        if not logmon_host:
+            log.error("Log monitor is not defined")
+            return 1
+    if collector_state != COLLECTOR_STATE_CONFIGURED:
+        if not sys.stdout.isatty():  # suppress warning if executed from crontab
+            return 0
+        log.warning("Collector is not configured")
+        return 1
+
+    votesorder_services = {}
+
+    # Find all votesorder service host addresses
+    for service_id, service in services.items():
+        service_type = service["service-type"]
+        is_votesorder_service = service_type == "votesorder"
+        if is_votesorder_service and service["state"] != SERVICE_STATE_REMOVED:
+            votesorder_services[service_id] = service["ip-address"].split(":")[0]
+
+    if len(votesorder_services.keys()) < 1:
+        log.error("No votesorder services found")
+        return 1
+
+    # Prepare missing voting facts .csv file on first succeeded Logmonitor host
+    logmon_account = f"logmon@{logmon_host}"
+    proc = exec_remote_cmd(['ssh', logmon_account,
+                            "ivxv-storageorder-prepare-csv.sh",
+                            "--filename", filename])
+    if proc.returncode:
+        logmon_account = ""
+        if proc.returncode == 2:
+            log.info("No missing voting facts found")
+            return 0
+        log.error(
+            f"Error while preparing .csv: {proc}")
+
+    if logmon_account == "":
+        log.error(f"Logmonitor host is not active {proc}")
+        return 1
+
+    # Copy .csv file from succeeded Log host to first active Collector host
+    collector_account = ""
+    for service_host in votesorder_services.values():
+        collector_account = f"ivxv-votesorder@{service_host}"
+        proc = exec_remote_cmd(
+            ["scp", f"{logmon_account}:{filename}", f"{collector_account}:{filename}"])
+        if proc.returncode:
+            collector_account = ""
+            log.error(
+                f"Cannot copy .csv file from {logmon_account} to {collector_account} "
+                f"due to an error: {proc}")
+            continue
+
+    if collector_account == "":
+        log.error(f"No active Collector hosts among {votesorder_services.values()}")
+        return 1
+
+    # Add missing voting facts using ivxv-storageorder
+    for service_id, service_host in votesorder_services.items():
+        collector_account = f"ivxv-votesorder@{service_host}"
+        proc = exec_remote_cmd(
+            ["ssh", f"{collector_account}",
+             "ivxv-storageorder", "-file", f"{filename}",
+             "-instance", f"{service_id}"])
+        if proc.returncode:
+            collector_account = ""
+            log.error(f"Running ivxv-storageorder failed with error: {proc}")
+            continue
+
+    if collector_account == "":
+        log.error(f"ivxv-storageorder failed on {votesorder_services.values()} hosts")
+        return 1
+
+    return 0

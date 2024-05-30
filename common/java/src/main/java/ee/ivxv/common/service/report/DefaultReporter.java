@@ -12,6 +12,8 @@ import ee.ivxv.common.service.i18n.MessageException;
 import ee.ivxv.common.util.Json;
 import ee.ivxv.common.util.PdfDoc;
 import ee.ivxv.common.util.PdfDoc.Alignment;
+
+import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UncheckedIOException;
 import java.nio.file.Files;
@@ -34,6 +36,8 @@ import java.util.TreeSet;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import ee.ivxv.common.util.Util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -96,27 +100,40 @@ public abstract class DefaultReporter implements Reporter {
     }
 
     @Override
-    public Map<String, Path> writeLogN(Path dir, String eid, LogType type,
+    public Map<String, Path> writeLogN(Path dir, String eid, String disc, LogType type,
             Stream<LogNRecord> records) throws UncheckedIOException {
         Map<String, List<Record>> rmap = new LinkedHashMap<>();
 
         records.forEach(r -> r.records.forEach(
                 (qid, record) -> rmap.computeIfAbsent(qid, x -> new ArrayList<>()).add(record)));
 
-        return writeRecords(dir, eid, type, rmap);
+        return writeRecords(dir, eid, disc, type, rmap);
     }
 
     @Override
-    public Map<String, Path> writeRecords(Path dir, String eid, LogType type,
+    public Path writeEmptyLog(Path outDir, String electionID, String logDiscriminator, LogType type, String questionID) throws UncheckedIOException {
+
+        Path outFile = logNName(outDir, type, logDiscriminator, questionID);
+        try {
+            Util.createFile(outFile);
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+
+        return outFile;
+    }
+
+    @Override
+    public Map<String, Path> writeRecords(Path dir, String eid, String disc, LogType type,
             Map<String, List<Record>> rmap) {
         Map<String, Path> paths = new TreeMap<>();
-        rmap.forEach((qid, rs) -> write(paths.computeIfAbsent(qid, x -> logNName(dir, type, qid)),
+        rmap.forEach((qid, rs) -> write(paths.computeIfAbsent(qid, x -> logNName(dir, type, disc, qid)),
                 eid, rs, AnonymousFormatter.NOT_ANONYMOUS, type.value));
         return paths;
     }
 
-    private Path logNName(Path dir, LogType type, String qid) {
-        String name = String.format("%s.%s", qid, type.name().toLowerCase())
+    private Path logNName(Path dir, LogType type, String disc, String qid) {
+        String name = String.format("%s.%s.%s", qid, disc, type.name().toLowerCase())
                 .replaceAll("[^a-zA-Z0-9.-]", "_");
         return dir.resolve(name);
     }

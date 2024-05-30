@@ -1,0 +1,12 @@
+{
+    "id": 0.0,
+    "method": "RPC.Token",
+    "params": [
+        {
+            "OS": "Operating System,2,0",
+            "Token": "{\"unverifiedCertificate":"MIICnDCCA...",
+            "SessionID": "057229fdfa2df7d3c7f4ced81b02760b",
+            "Bearer": "xtYW+YAOyXV7xEGS9YWxtYW+YAOtsTur4XV7xEGS9LB1..."
+        }
+    ]
+}

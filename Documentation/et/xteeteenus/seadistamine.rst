@@ -29,4 +29,12 @@ Teenuse konfigureerimiseks kasutatakse ``xroad-service.json`` faili.
 
 ``elections.clientkey`` - Kliendi võti
 
+Käivitamine
+===========
 
+Teenus ei lähe iseseisvalt püsti, ning kui "Seadistamine" on tehtud, tuleb juurkasutajalt käivitada `systemctl start xroad-service`.
+
+Seiskamine
+==========
+
+Kui teenus läheb maha erinevatel põhjustel (masina taaskäivitamine, veaolukorrad, manuaalne seiskamine `systemctl stop xroad-service` abil), siis tuleb korrata "Käivitamine" protseduuri et teenust taas püsti ajada.

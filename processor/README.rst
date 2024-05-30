@@ -20,7 +20,7 @@ Building
 IVXV java applications have 2 levels of build systems:
 
 * *make* - the build system facade. Must be installed on the user's machine.
-* *gradle* - the implementation of the build system. Gradle is located under ``common/external/gradle-6.4``, with the executable ``bin/gradle(.bat)``.
+* *gradle* - the implementation of the build system. Gradle is located under ``common/external/gradle-8.3``, with the executable ``bin/gradle(.bat)``.
 
 Building:
 

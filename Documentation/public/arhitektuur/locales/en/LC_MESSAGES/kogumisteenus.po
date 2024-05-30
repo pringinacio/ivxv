@@ -1,0 +1,1608 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, Cybernetica AS
+# This file is distributed under the same license as the Elektroonilise
+# hääletamise infosüsteem package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Elektroonilise hääletamise infosüsteem 1.8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-08 12:14+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.10.3\n"
+
+#: ../../kogumisteenus.rst:4
+msgid "Kogumisteenus"
+msgstr "Collection service"
+
+#: ../../kogumisteenus.rst:6
+msgid "Üldkirjelduse [ÜK2016]_ põhjal on Kogumisteenus:"
+msgstr "Based on the general description [ÜK2016]_, the Collection Service is:"
+
+#: ../../kogumisteenus.rst:10
+msgid ""
+"Süsteemi keskne komponent, mida käitab Koguja. Teenus abistab Hääletajat "
+"e-hääle koostamisel ning registreerib selle enne salvestamist "
+"e-valimiskasti. Kogumisteenus kasutab väliseid teenuseid (tuvastamine, "
+"allkirjastamine, registreerimine). Kogumisteenusel on peale Koguja enda "
+"teisigi haldureid (Korraldaja, Klienditugi), kelle jaoks on "
+"Kogumisteenusel eraldi haldusliidesed."
+msgstr ""
+"The central component of the system, operated by the Collector. The "
+"service assists the Voter in compiling the e-Vote and registers it before"
+" storing it in the digital ballotbox. The Collection Service makes use of "
+"external services (authentication, signing, registration). In addition to"
+" the Collector, the Collection Service has other administrators "
+"(Organiser, Customer Support) for which the Collection Service has "
+"separate administrative interfaces."
+
+#: ../../kogumisteenus.rst:17
+msgid ""
+"Kogumisteenus töötab sidusrežiimis ning vähemalt valija- ja "
+"kontrollrakenduse suunalised liidesed on avatud internetile. Seega "
+"töötleb Kogumisteenus potentsiaalselt ebausaldusväärsest allikast pärit "
+"päringuid. Tulenevalt tarkvarale seatavast turvatasemest, "
+"kõrgkäideldavuse, skaleeritavuse, kihilise evitatavuse ning laiendatavuse"
+" nõuetest on kogumisteenus omakorda liigendatud ühte konkreetset teenust "
+"osutavateks mikroteenusteks, mida on võimalik paindlikult evitada."
+msgstr ""
+"The collection service works in online mode and at least the interfaces "
+"to the voter and the verification application are open to the internet. Thus, "
+"the Collection Service processes queries from potentially unreliable "
+"sources. In turn, due to the security level, high availability, "
+"scalability, deployment and extensibility requirements of the "
+"software, the Collection Service is broken down into microservices "
+"providing one specific service, which can be flexibly extensible."
+
+#: ../../kogumisteenus.rst:25
+msgid ""
+"Kõik kogumisteenuse komponendid programmeeritakse keeles `Go "
+"<https://golang.org>`_. Keelel Go on:"
+msgstr ""
+"All collection service components are programmed in `Go "
+"<https://golang.org>`_. The language Go is:"
+
+#: ../../kogumisteenus.rst:28
+msgid ""
+"staatiline tüüpimine, mis võimaldab tüübivigade avastamist enne programmi"
+" käivitamist;"
+msgstr ""
+"static typing, which allows typing errors to be detected before the program is "
+"run;"
+
+#: ../../kogumisteenus.rst:31
+msgid ""
+"automaatne mäluhaldus, mis välistab rakenduse vigasest mäluhaldusest "
+"tulenevad turvaaugud;"
+msgstr ""
+"automatic memory management, which eliminates security holes caused by "
+"incorrect memory management in the application;"
+
+#: ../../kogumisteenus.rst:34
+msgid "kompilaator avatud lähtekoodiga;"
+msgstr "open source compiler;"
+
+#: ../../kogumisteenus.rst:36
+msgid ""
+"ribastamine/rööprapse, mis võimaldab kasutada paralleelsust "
+"mitmetuumalistes süsteemides."
+msgstr "goroutines, allowing parallelism to be used in multi-CPU systems."
+
+#: ../../kogumisteenus.rst:39
+msgid ""
+"Kogumisteenuse andmeedastuseks kasutatakse üldjuhul JSON-vormingut, välja"
+" arvatud olukordades, kus välised asjaolud tingivad mõne muu "
+"andmevormingu kasutamist (näiteks BDOC-vorming põhineb XML-il)."
+msgstr ""
+"The JSON format will generally be used for the data transmission of the "
+"collection service, except in situations where external circumstances "
+"dictate the use of another data format (for example, the BDOC format "
+"based on XML)."
+
+#: ../../kogumisteenus.rst:43
+msgid ""
+"Kogumisteenus toetab Riigikogu valimisi, kohaliku omavalitsuse volikogu "
+"valimisi, Euroopa parlamendi valimisi ning rahvahääletusi."
+msgstr ""
+"The collection service supports elections to the Riigikogu, local "
+"council elections, European Parliament elections and referendums."
+
+#: ../../kogumisteenus.rst:46
+msgid ""
+"Kogumisteenuse komponendid arvestavad virtualiseerimistehnoloogiate "
+"kasutamisega ning kogumisteenust on võimalik evitada nii ühel "
+"virtuaalriistvara instantsil, kui ka mikroteenuste kaupa erinevatel "
+"instantsidel. Kogumisteenuse komponendid on evitatavad Ubuntu 22.04 LTS "
+"(Jammy Jellyfish) operatsioonisüsteemil 64-bitisel arhitektuuril."
+msgstr ""
+"The collection service components take into account the use of "
+"virtualisation technologies and the collection service can be hosted on a"
+" single virtual hardware instance or on a microservice-by-microservice "
+"basis on different instances. The collection service components are "
+"executable on Ubuntu 22.04 LTS (Jammy Jellyfish) operating system on 64-bit "
+"architecture."
+
+#: ../../kogumisteenus.rst:52
+msgid ""
+"Andmesäilitus on teostatud kasutades võti-väärtus andmebaasi (etcd). "
+"Testotstarbel on teostatud ka andmesäilitus failisüsteemi ning mällu, "
+"kuid neid ei ole soovituslik kasutada tootekeskkonnas. Lisaks on "
+"kogumisteenusel olemas liides uute talletusprotokollide lisamiseks. "
+"Lõplik otsus kasutatava lahenduse kohta tehakse kogumisteenuse haldurite "
+"poolt teenust seadistades."
+msgstr ""
+"Data storage is performed using a key-value database (etcd). For testing "
+"purposes, data storage on the file system and in memory has also been "
+"implemented, but is not recommended for use in the production environment. "
+"In addition, the collection service has an interface for adding new "
+"storage protocols. The final decision on the solution to be used will be "
+"made by the collection administrators when configuring the service."
+
+#: ../../kogumisteenus.rst:59
+msgid "Mikroteenused"
+msgstr "Microservices"
+
+#: ../../kogumisteenus.rst:63
+msgid "Kogumisteenuse jaotus mikroteenusteks"
+msgstr "Breakdown of collection service into microservices"
+
+#: ../../kogumisteenus.rst:65
+msgid ""
+"Kogumisteenus on jaotatud põhiteenusteks ja abiteenusteks. Põhiteenused -"
+" vahendusteenus, nimekirjateenus, hääletamisteenus, kontrollteenus ning "
+"talletamisteenus - on arhitektuuri tehnilise lihtsuse mõttes piiritletud "
+"ühe valimisega, kuid ühel riistvaral, ühe operatsioonisüsteemi kontekstis"
+" võivad käia mitme valimise mikroteenused. Täiendavalt võib "
+"kogumisteenuse juures kasutada abiteenuseid - tuvastusteenust hääletaja "
+"isiku tuvastamiseks ning allkirjateenust valijarakenduse poolt hääle "
+"allkirjastamise hõlbustamiseks."
+msgstr ""
+"The collection service is broken down into basic and helper services. "
+"The basic services - dispatcher, choice-list, voting, verification and storage"
+" - are limited to a single election for the sake of technical simplicity"
+" of the architecture, but multiple election microservices can run on a "
+"single hardware, in the context of a single operating system. In "
+"addition, the collection service may use helper services - an "
+"authentication service to authenticate the voter, and a signature service to "
+"facilitate the signing of the vote by the voting application."
+
+#: ../../kogumisteenus.rst:73
+msgid ""
+"Teenuseid on võimalik evitada nii eraldatult kui koos erinevates "
+"konfiguratsioonides, mis teeb võimalikuks kihilise arhitektuuri. Lähtudes"
+" funktsioonist on otstarbekas hoida Vahendus- ning Talletamisteenused "
+"teistest eraldi."
+msgstr ""
+"Services can be provided both separately and together in different "
+"configurations, enabling a layered architecture. Based on the function, "
+"it makes sense to keep the dispatcher and storage services separate "
+"from each other."
+
+#: ../../kogumisteenus.rst:78
+msgid ""
+"Teenused kasutavad transpordiprotokollina TLS-i, ühendused on vähemalt "
+"serveripoolselt autenditud. Rakenduskihi protokoll on JSON-RPC."
+msgstr ""
+"The services use TLS as transport protocol, all connections are at least "
+"server-side authenticated. The application layer protocol is JSON-RPC."
+
+#: ../../kogumisteenus.rst:81
+msgid ""
+"Kõik teenused tekitavad tegevuslogi, mida säilitatakse nii lokaalselt kui"
+" logitakse syslog protokolli vahendusel kesksesse logikogujasse."
+msgstr ""
+"All services generate an activity log, which is both stored locally and "
+"logged via the syslog protocol to a central log collector."
+
+#: ../../kogumisteenus.rst:85
+msgid "Vahendusteenuse funktsioon ja tehniline liides"
+msgstr "Dispatcher service function and technical interface"
+
+#: ../../kogumisteenus.rst:87
+msgid ""
+"Vahendusteenuse põhifunktsioon on ühe sisenemispunkti (port 443) "
+"pakkumine Valijarakendusele ja Kontrollrakendusele. Vahendusteenus on "
+"dispetšerteenus teiste komponentide vahel, mis võimaldab sisemiselt "
+"evitada kogumisteenust mikroteenustena, ent omada süsteemil ainult ühte "
+"sisenemispunkti. Lisaks suudab see dubleeritud evituse puhul täita "
+"koormusjaoturi ülesannet."
+msgstr ""
+"The main function of the Dispatcher Service is to provide a single "
+"entry point (port 443) to the Voting Application and the Verification "
+"Application. The Dispatcher Service is dispatching between "
+"other components, allowing the collection service to be provided "
+"internally as microservices, but with only one entry point on the system."
+" In addition, it is able to act as a load balancer in the case of "
+"distributed deployment."
+
+#: ../../kogumisteenus.rst:93
+msgid ""
+"Vahendusteenus ei termineeri TLS-ühendust vaid kasutab sihtpunkti "
+"tuvastamiseks TLS-i *Server Name Indication* (SNI) laiendust. Kliendid "
+"panevad TLS ``ClientHello`` sõnumisse SNI-laiendi, kus avatekstis "
+"määravad, millise teenusega soovivad suhelda: vahendusteenus näeb seda, "
+"võtab ühendust vastavat teenust pakkuva isendiga ja hakkab kliendi ning "
+"teenuse vahelisi sõnumeid vahendama. Vahendusteenus EI termineeri TLS-i "
+"ning ei näe sõnumite sisu. Vahendusteenusel on andmed kõigi teiste "
+"teenuste asukohtadest (aadress:port) ning teenus vahendab sõnumivahetust "
+"kõigi osapoolte vahel."
+msgstr ""
+"The dispatcher service does not terminate the TLS connection but uses the "
+"TLS *Server Name Indication* (SNI) extension to identify the destination."
+" Clients put an SNI extension in the TLS ``ClientHello`` message, where "
+"they specify in the plain text which service they wish to communicate "
+"with: the dispatcher service sees this, contacts the host providing the "
+"corresponding service and starts dispatching messages between the client "
+"and the service. The dispatcher service does NOT terminate the TLS and "
+"does not see the content of the messages. The dispatcher service has "
+"information about the locations of all other services (address:port) and "
+"mediates the messaging between all parties."
+
+#: ../../kogumisteenus.rst:102
+msgid ""
+"Vahendusteenus on olekuvaba komponent, mida on võimalik horisontaalselt "
+"skaleerida."
+msgstr ""
+"The dispatcher service is a stateless component that can be scaled "
+"horizontally."
+
+#: ../../kogumisteenus.rst:106
+msgid "Vahendusteenuse teostus"
+msgstr "Implementation of the dispatcher service"
+
+#: ../../kogumisteenus.rst:108
+msgid ""
+"Vahendusteenuse teostus kasutab vabavaralist HAProxy serverit, mis on "
+"üldlevinud tarkvaraline koormusjaotur ja proksi. Kuna Vahendusteenus on "
+"esimene puutepunkt avalikust internetist tulevate ühenduste jaoks, siis "
+"on mõistlik kasutada tarkvara, mille töökindlus on juba tõestatud."
+msgstr ""
+"The dispatcer service is implemented using the freeware HAProxy server, "
+"which is a ubiquitous software load balancer and proxy. As the Dispatcher "
+"Service is the first point of contact for connections from the public "
+"Internet, it makes sense to use software that is already proven to be "
+"reliable."
+
+#: ../../kogumisteenus.rst:113
+msgid ""
+"Kuigi HAProxyt kasutatakse tihti HTTP-režiimis, kus see analüüsib "
+"liiklust, siis vahendusteenuse rollis on see TCP-režiimis ning ei näe "
+"vahendatava krüpteeritud TLS-kanali sisse."
+msgstr ""
+"While HAProxy is often used in HTTP mode, where it analyses traffic, in "
+"the role of a proxy service it is in TCP mode and does not see into the "
+"encrypted TLS channel being proxied."
+
+#: ../../kogumisteenus.rst:117
+msgid ""
+"IVXV seadistusest genereeritakse HAProxy seadistusfail, mis sisaldab "
+"teiste teenuste asukohti, ning ühenduste vahendamise ülesanne jääb "
+"viimase kanda. Lisaks on võimalik HAProxyt ka seadistada ühenduste "
+"sagedusi piirama lähteaadressi või mõne muu nimetaja põhjal. See aga jääb"
+" süsteemihalduri ülesandeks."
+msgstr ""
+"The IVXV configuration generates a HAProxy configuration file containing "
+"the locations of the other services, and leaves the connection brokering "
+"to the latter. In addition, it is also possible to configure HAProxy to "
+"limit connections based on the source address or some other "
+"denominator. This, however, is left to the system administrator."
+
+#: ../../kogumisteenus.rst:123
+msgid ""
+"Kuigi HAProxy on võimeline ise teostama koormusjaoturi ülesannet, on seda"
+" võimalik evitada ka teiste, potentsiaalselt riistvaraliste "
+"koormusjaoturite taha, kus see jääb täitma ainult SNI põhjal vahendmise "
+"ülesannet."
+msgstr ""
+"Although HAProxy is capable of performing the load balancer task itself, "
+"it can also be exported behind other, potentially hardware load "
+"balancers, where it remains to perform only the task of dispatching on the "
+"basis of SNI."
+
+#: ../../kogumisteenus.rst:127
+msgid ""
+"HAProxy lähtekood on avalik ja sobiva litsentsiga ning pakendatud "
+"kogumisteenuse alusplatvormi ametlikus hoidlas (vt. :ref:`tehnoloogiad`)."
+msgstr ""
+"The HAProxy source code is public and suitably licensed and packaged in "
+"the official repository of the underlying collection service platform "
+"(see :ref:`tehnoloogiad`)."
+
+#: ../../kogumisteenus.rst:131
+msgid "Nimekirjateenuse funktsioon ja tehniline liides"
+msgstr "Functionality and technical interface of the choice-list service"
+
+#: ../../kogumisteenus.rst:133
+msgid ""
+"Nimekirjateenuse põhifunktsioon on valikute nimekirjade vahendamine "
+"Valijarakendusele. Nimekirjateenusesse jõuab informatsioon tuvastatud "
+"valija kohta ning Nimekirjateenus väljastab valija ringkonnale vastava "
+"valikute nimekirja Talletamisteenusest Valijarakendusse."
+msgstr ""
+"The main function of the choice-list service is to provide choice list to "
+"the Voting application. The Choice List Service receives information about the"
+" authenticated voter and issues the corresponding list of choices to the "
+"voter's precinct to the Voting Application."
+
+#: ../../kogumisteenus.rst:138
+msgid ""
+"Nimekirjateenus on olekuvaba komponent, mida on võimalik horisontaalselt "
+"skaleerida."
+msgstr ""
+"The choice-list service is a stateless component that can be scaled "
+"horizontally."
+
+#: ../../kogumisteenus.rst:142
+msgid "Kontrollteenuse funktsioon ja tehniline liides"
+msgstr "Verification service functionality and technical interface"
+
+#: ../../kogumisteenus.rst:144
+msgid ""
+"Kontrollteenuse põhifunktsioon on kontrollpäringute töötlemine ning "
+"kontrollitava hääle väljastamine Talletamisteenusest Kontrollrakendusse."
+msgstr ""
+"The main function of the Verification Service is to process verification "
+"requests and output the vote to be verified from the Storage Service to "
+"the Verification Application."
+
+#: ../../kogumisteenus.rst:147
+msgid ""
+"Kontrollteenus on olekuvaba komponent, mida on võimalik horisontaalselt "
+"skaleerida."
+msgstr ""
+"The verification service is a stateless component that can be scaled "
+"horizontally."
+
+#: ../../kogumisteenus.rst:151
+msgid "Hääletamisteenuse funktsioon ja tehniline liides"
+msgstr "Voting service function and technical interface"
+
+#: ../../kogumisteenus.rst:153
+msgid ""
+"Hääletamisteenuse põhifunktsioon on hääletamispäringute töötlemine. "
+"Hääletamisteenus verifitseerib sissetuleva hääle, registreerib selle "
+"Registreerimisteenuses ning talletab Talletamisteenusesse."
+msgstr ""
+"The main function of the voting service is the processing of voting "
+"requests. The Voting Service verifies the incoming vote, registers it in "
+"the Registration Service and stores it in the Storage Service."
+
+#: ../../kogumisteenus.rst:157
+msgid ""
+"Hääletamisteenus on olekuvaba komponent, mida on võimalik horisontaalselt"
+" skaleerida."
+msgstr ""
+"The voting service is a stateless component that can be scaled "
+"horizontally."
+
+#: ../../kogumisteenus.rst:161
+msgid "Talletamisteenuse funktsioon ja tehniline liides"
+msgstr "Functionality and technical interface of the storage service"
+
+#: ../../kogumisteenus.rst:163
+msgid ""
+"Talletamisteenuse põhifunktsioon on valikute ja valijanimekirjade ning "
+"häälte pikaajaline talletamine."
+msgstr ""
+"The main function of the storage service is the long-term storage of "
+" lists of choices, lists of voters and votes."
+
+#: ../../kogumisteenus.rst:166
+msgid ""
+"Talletamisteenuse horisontaalseks skaleerimiseks kasutatakse "
+"hajustalletamist võimaldavat säilitustehnoloogiat."
+msgstr ""
+"Storage technology that enables distributed storage is used for "
+"horizontal scaling of the storage service."
+
+#: ../../kogumisteenus.rst:170
+msgid "Talletamisteenuse teostus"
+msgstr "Implementation of storage service"
+
+#: ../../kogumisteenus.rst:172
+msgid ""
+"Talletamisteenus ei ole teadlik IVXV protokollist ega talletatavate "
+"andmete spetsiifikast, vaid on üldkasutatav võti-väärtus andmebaas "
+"binaarandmete säilitamiseks. Kogu teadmus talletatavate andmete "
+"struktuurist ja võtmete hierarhiast on teistes, Talletamisteenust "
+"kasutatavates teenustes, mis käituvad nii-öelda \"tarkade\" klientidena."
+msgstr ""
+"The storage service is not aware of the IVXV protocol or the specifics of"
+" the data being stored, but is a public key-value database for storing "
+"binary data. All the knowledge about the structure of the stored data and"
+" the hierarchy of keys is in the other services using the Storage "
+"Service, which behave as \"smart\" clients."
+
+#: ../../kogumisteenus.rst:178
+msgid ""
+"Selline lähenemine lubab ilma suurema vaevata kasutada "
+"Talletamisteenusena ükskõik millist üldlevinud võti-väärtus andmebaasi: "
+"ainsateks ülesanneteks on IVXV seadistuse teisendamine andmebaasi jaoks "
+"sobilikku vormingusse ning teenuse käivitamine. Andmebaasi tarkvara peab "
+"võimaldama vaid võtme järgi talletamist ja lugemist, võtmete prefiksi "
+"järgi loetlemist ning atomaarset võrdle-ja-vaheta (*compare-and-swap*) "
+"operatsiooni."
+msgstr ""
+"This approach allows any common key-value database to be used as a "
+"Storage Service without much effort: the only tasks are to convert the "
+"IVXV configuration into a database-appropriate format and to start the "
+"service. The database software only needs to support key-by-key storage "
+"and read, key-by-prefix read, and atomic *compare-and-swap* operation."
+
+#: ../../kogumisteenus.rst:185
+msgid ""
+"Talletamisteenus on kogumisteenuse töökiiruse oluliseks määrajaks, "
+"mistõttu mõjutab seda teenust pakkuv riistvara kogu süsteemi jõudlust "
+"ning see tuleks vastavalt kasutatavale andmebaasile dimensioneerida."
+msgstr ""
+"The storage service is an important determinant of the performance of the"
+" collection service, so the hardware that provides this service affects "
+"the performance of the whole system and should be dimensioned according "
+"to the database used."
+
+#: ../../kogumisteenus.rst:189
+msgid ""
+"Hetkel ainus tooteks mõeldud Talletamisteenuse teostus kasutab hajusat "
+"võti-väärtus andmebaasi etcd. Selle puhul tuleks järgida etcd autorite "
+"`riistvara soovitusi <https://coreos.com/etcd/docs/latest/op-"
+"guide/hardware.html>`_."
+msgstr ""
+"Currently, the only Storage Service implementation for the production uses a"
+" distributed key-value database etcd. For this, the `hardware "
+"recommendations <https://coreos.com/etcd/docs/latest/op-guide/hardware.html>`_ of the etcd authors "
+" should be followed."
+
+#: ../../kogumisteenus.rst:195
+msgid "Tuvastusteenuse funktsioon ja tehniline liides"
+msgstr "Authentication service function and technical interface"
+
+#: ../../kogumisteenus.rst:197
+msgid ""
+"Tuvastusteenuse põhifunktsioon on valija identiteedi tuvastamine. "
+"Tuvastusteenus on vajalik näiteks Mobiil-ID autentimise korral."
+msgstr ""
+"The main function of the authentication service is to identify and authenticate the "
+"voter. For example, the authentication service must be "
+"implemented for Mobile-ID authentication."
+
+#: ../../kogumisteenus.rst:201
+msgid "Web-eID abiteenuse teostus"
+msgstr "Implementation of the Web-eID authentication service"
+
+#: ../../kogumisteenus.rst:203
+msgid ""
+"IVXV koosseisu kuulub Web-eID abiteenus, mis realiseerib Tuvastusteenuse "
+"ID-kaardi kasutamiseks Web-eID raamistikus."
+msgstr "IVXV includes Web-eID authentication service for using ID-card in the Web-eID framework"
+
+#: ../../kogumisteenus.rst:206
+msgid ""
+"Eduka Web-eID isikutuvastuse korral väljastab abiteenus Valijarakendusele"
+" pileti, mille abil on võimalik teistele teenustele valija identiteeti "
+"kinnitada. Iga piletiga saab hääletada ainult ühe korra."
+msgstr ""
+"In case of a successful Web-eID authentication, the service issues"
+" a ticket to the Voting Application, which can be used to confirm the voter's "
+"identity to other services. Each ticket can be used to vote only once."
+
+
+#: ../../kogumisteenus.rst:210
+msgid ""
+"Web-eID ei paku allkirjateenust, hääle allkirjastamine toimub Valija "
+"seadmes lokaalselt analoogselt klassikalisele ID-kaardiga "
+"autentimisele/allkirjastamisele."
+msgstr ""
+"Web-eID does not provide signature service. The signing of the vote"
+" takes place in the Voting Application in the same way as with ID-card."
+
+#: ../../kogumisteenus.rst:214
+msgid ""
+"Web-eID abiteenus on olekuvaba komponent. Tänu sellele on võimalik Web-"
+"eID abiteenust horisontaalselt skaleerida."
+msgstr ""
+"The Web-eID service is a stateless component that can be scaled "
+"horizontally."
+
+#: ../../kogumisteenus.rst:219
+msgid "Allkirjateenuse funktsioon ja tehniline liides"
+msgstr "Signature service functionality and technical interface"
+
+#: ../../kogumisteenus.rst:221
+msgid ""
+"Allkirjateenuse funktsioon on Valijarakenduse toetamine hääle "
+"allkirjastamisel. Allkirjateenus on vajalik näiteks Mobiil-ID "
+"allkirjastamise korral."
+msgstr ""
+"The function of the Signature Service is to support the Voting Application in "
+"signing a vote. For example, the signature service is required for "
+"Mobile-ID signing."
+
+#: ../../kogumisteenus.rst:226
+msgid "Mobiil-ID abiteenuse teostus"
+msgstr "Implementation of the Mobile-ID service"
+
+#: ../../kogumisteenus.rst:228
+msgid ""
+"IVXV koosseisu kuulub Mobiil-ID abiteenus, mis käitub Mobiil-ID jaoks nii"
+" Tuvastusteenusena kui ka Allkirjateenusena. Valijarakendus esitab IVXV "
+"päringud Mobiil-ID abiteenusele, mis teisendab need Mobiil-ID päringuteks"
+" ning edastab Mobiil-ID teenusepakkujale."
+msgstr ""
+"IVXV includes the Mobile-ID Service, which acts as both an "
+"Authentication Service and a Signature Service for Mobile-ID. The Voting "
+"Application submits the IVXV requests to the Mobile-ID Service, which "
+"converts them into Mobile-ID requests and forwards them to the Mobile-ID "
+"Service Provider."
+
+#: ../../kogumisteenus.rst:233
+msgid ""
+"Eduka Mobiil-ID isikutuvastuse korral väljastab abiteenus "
+"Valijarakendusele pileti, mille abil on võimalik teistele teenustele "
+"valija identiteeti kinnitada. Iga piletiga saab hääletada ainult ühe "
+"korra."
+msgstr ""
+"In case of a successful Mobile-ID authentication, the help service issues"
+" a ticket to the Voting Application, which can be used to confirm the voter's "
+"identity to other services. Each ticket can be used to vote only once."
+
+#: ../../kogumisteenus.rst:237
+msgid ""
+"Allkirjastamise korral saadab Valijarakendus Mobiil-ID abiteenusele vaid "
+"allkirjastatava hääle räsi ning kasutab vastuseks saadud signatuuri "
+"samamoodi kui ID-kaardiga loodud signatuuri."
+msgstr ""
+"In the case of a signature, the Voting Application sends only the hash of the "
+"vote to be signed to the Mobile ID Service and uses the signature "
+"received in response in the same way as the signature created with an ID-card."
+
+#: ../../kogumisteenus.rst:241
+msgid ""
+"Mobiil-ID abiteenus sisaldab küll olekut pooleliolevate tuvastusseansside"
+" kohta, aga muus osas on tegu olekuvaba komponendiga. Tänu sellele on "
+"võimalik Mobiil-ID abiteenust horisontaalselt skaleerida."
+msgstr ""
+"The Mobile-ID service does contain a status for pending "
+"authentication sessions, but otherwise it is a stateless component. This "
+"makes it possible to horizontally scale the Mobile-ID Service."
+
+#: ../../kogumisteenus.rst:246
+msgid "Smart-ID abiteenuse teostus"
+msgstr "Implementation of Smart-ID service"
+
+#: ../../kogumisteenus.rst:248
+msgid ""
+"IVXV koosseisu kuulub Smart-ID abiteenus, mis käitub Smart-ID jaoks nii "
+"Tuvastusteenusena kui ka Allkirjateenusena. Valijarakendus esitab IVXV "
+"päringud Smart-ID abiteenusele, mis teisendab need Smart-ID päringuteks "
+"ning edastab Smart-ID teenusepakkujale."
+msgstr ""
+"IVXV includes the Smart-ID Service, which acts as both an "
+"Authentication Service and a Signature Service for Smart-ID. The Voting "
+"Application submits the IVXV requests to the Smart-ID Service, which "
+"converts them into Smart-ID requests and forwards them to the Smart-ID "
+"Service Provider."
+
+
+#: ../../kogumisteenus.rst:253
+msgid ""
+"Eduka Smart-ID isikutuvastuse korral väljastab abiteenus "
+"Valijarakendusele pileti, mille abil on võimalik teistele teenustele "
+"valija identiteeti kinnitada. Iga piletiga saab hääletada ainult ühe "
+"korra."
+msgstr ""
+"In case of a successful Smart-ID authentication, the help service issues"
+" a ticket to the Voting Application, which can be used to confirm the voter's "
+"identity to other services. Each ticket can be used to vote only once."
+
+
+#: ../../kogumisteenus.rst:257
+msgid ""
+"Allkirjastamise korral saadab Valijarakendus Smart-ID abiteenusele vaid "
+"allkirjastatava hääle räsi ning kasutab vastuseks saadud signatuuri "
+"samamoodi kui ID-kaardiga loodud signatuuri."
+msgstr ""
+"In the case of signing, the Voting App sends only the hash of the "
+"vote to be signed to the Smart-ID Service and uses the signature "
+"received in response in the same way as the signature created with an ID-card."
+
+#: ../../kogumisteenus.rst:261
+msgid ""
+"Smart-ID abiteenus sisaldab küll olekut pooleliolevate tuvastusseansside "
+"kohta, aga muus osas on tegu olekuvaba komponendiga. Tänu sellele on "
+"võimalik Smart-ID abiteenust horisontaalselt skaleerida."
+msgstr ""
+"The Smart-ID service does contain a status for pending "
+"authentication sessions, but otherwise it is a stateless component. This "
+"makes it possible to horizontally scale the Smart-ID Service."
+
+#: ../../kogumisteenus.rst:267
+msgid "Hääletamisfaktide järjekorrateenus"
+msgstr "Votesorder service"
+
+#: ../../kogumisteenus.rst:269
+msgid ""
+"Hääletamisfaktide järjekorrateenuse põhifunktsiooniks on "
+"hääletamisfaktide edastamine Valimiste Infosüsteemile X-tee abiteenuse "
+"vahendusel."
+msgstr "Main function of the votesorder service is to provide information about votes received to the Election Management System over X-road service"
+
+#: ../../kogumisteenus.rst:273
+msgid "Kogumisteenuse mikroteenuste evitamine"
+msgstr "Deployment of collection microservices"
+
+#: ../../kogumisteenus.rst:275
+msgid ""
+"Kogumisteenuse mikroteenused sõltuvad välistest pakkidest minimaalselt. "
+"Vajalikud sõltuvused on:"
+msgstr ""
+"Collection microservices rely minimally on external packages. The "
+"necessary dependencies are:"
+
+#: ../../kogumisteenus.rst:278
+msgid ""
+"SSH-server haldustegevuste läbiviimiseks (seda kasutab mikroteenuste "
+"haldamiseks haldusteenus)."
+msgstr ""
+"SSH server for administrative activities (used by the management service "
+"for microservices)."
+
+#: ../../kogumisteenus.rst:281
+msgid "rsyslog logide kogumiseks logikogumisteenustesse."
+msgstr "rsyslog for log collection services."
+
+#: ../../kogumisteenus.rst:283
+msgid ""
+"Kogumisteenuse mikroteenused pakendatakse deb-vormingus, neid on võimalik"
+" evitada ka docker'i-laadsete konteineritena."
+msgstr ""
+"The collection microservices are packaged in deb format and can also be "
+"delivered in docker-like containers."
+
+#: ../../kogumisteenus.rst:287
+msgid "Välised teenused ja laiendatavus"
+msgstr "External services and scalability"
+
+#: ../../kogumisteenus.rst:291
+msgid "Kogumisteenuse laiendusmoodulid ja välised teenused"
+msgstr "Collection Service Extensions and External Services"
+
+#: ../../kogumisteenus.rst:293
+msgid ""
+"Kogumisteenuse mikroteenused kasutavad laiendusmooduleid teostamaks "
+"erinevaid mehhanisme valija tuvastamiseks, digiallkirjade "
+"verifitseerimiseks ja täiendamiseks, sealhulgas hääle registreerimiseks. "
+"Laiendusmoodulid võivad teostuse võimaldamiseks kasutada väliseid "
+"teenuseid. Mikroteenuste laiendatavuse huvides on defineeritud Go API, "
+"mille alusel saab teostada ka täiendavaid mooduleid. Hetkel on teostatud "
+"järgmised moodulid:"
+msgstr ""
+"Collection microservices use plug-ins to perform various mechanisms for "
+"voter authentication, digital signature verification and qualification, "
+"including vote registration. The extension modules may use external "
+"services to enable the implementation. For the extensibility of the "
+"microservices, a Go API has been defined to allow the execution of "
+"additional modules. The following modules are currently implemented:"
+
+#: ../../kogumisteenus.rst:300
+msgid "Autentimine TLS-sertifikaadiga (ID-kaart);"
+msgstr "Authentication with TLS certificate (ID card);"
+
+#: ../../kogumisteenus.rst:302
+msgid "Autentimine Tuvastusteenuse piletiga (Mobiil-ID, Smart-ID, Web-eID);"
+msgstr "Authentication with an Authentication Service Ticket (Mobile-ID, Smart-ID, Web-eID);"
+
+#: ../../kogumisteenus.rst:304
+msgid "BDOC verifitseerimine;"
+msgstr "BDOC verification;"
+
+#: ../../kogumisteenus.rst:306
+msgid "Kehtivuskinnitusteenus OCSP;"
+msgstr "Certificate validity service OCSP;"
+
+#: ../../kogumisteenus.rst:308
+msgid "Ajatempliteenus RFC 3161;"
+msgstr "Timestamp Service RFC 3161;"
+
+#: ../../kogumisteenus.rst:310
+msgid "Registreerimisteenus OCSP;"
+msgstr "Registration service OCSP;"
+
+#: ../../kogumisteenus.rst:312
+msgid "Registreerimisteenus RFC 3161."
+msgstr "Registration service RFC 3161."
+
+#: ../../kogumisteenus.rst:314
+msgid ""
+"IVXV krüptograafilises protokollis on kesksel kohal Registreerimisteenus,"
+" mis osaleb samuti häälte pikaajalisel talletamisel."
+msgstr ""
+"Central to the IVXV cryptographic protocol is the Registration Service, "
+"which is also involved in the long-term storage of votes."
+
+#: ../../kogumisteenus.rst:318
+msgid "Registreerimisteenuse funktsioon"
+msgstr "Registration service function"
+
+#: ../../kogumisteenus.rst:320
+msgid ""
+"Registreerimisteenuse põhifunktsioon on võtta Hääletamisteenuselt vastu "
+"allkirjastatud registreerimispäringuid, kinnitada need omapoolse "
+"allkirjastatud vastusega ning säilitada hilisemaks auditeerimiseks "
+"vähemalt hääletamisperioodi lõpuni."
+msgstr ""
+"The main function of the Registration Service is to receive signed "
+"registration requests from the Voting Service, validate them with a "
+"signed response from the Voting Service, and store them for later audit "
+"at least until the end of the voting period."
+
+#: ../../kogumisteenus.rst:325
+msgid "Auditeerimisel tekkivate võimalike erisuste lahendamiseks on oluline, et"
+msgstr ""
+"In order to address possible differences in auditing, it is important "
+"that."
+
+#: ../../kogumisteenus.rst:327
+msgid ""
+"Registreerimisteenus on võimeline tõestama, et igale tema poolt "
+"väljastatud kinnitusele eelnes Talletamisteenuse poolne "
+"registreerimispäring;"
+msgstr ""
+"The Registration service is able to prove that each confirmation issued by it was "
+"preceded by a registration request from the Storage;"
+
+#: ../../kogumisteenus.rst:330
+msgid ""
+"Talletamisteenus on võimeline tõestama, et iga tema poolt talletatud "
+"hääle kohta on olemas Registreerimisteenuse kinnitus."
+msgstr ""
+"The Storage is able to prove that there is a confirmation from the "
+"Registration Service for each vote it has stored."
+
+#: ../../kogumisteenus.rst:333
+msgid ""
+"Piisav protokoll sellise tõendamistaseme saavutamiseks on, kus mõlemal "
+"osapoolel on olemas võtmepaar allkirjastamiseks, päringud ja vastused on "
+"allkirjastatud ning kumbki pool peab registrit teise poole teadete üle. "
+"Selline protokoll on realiseeritav näiteks OCSP-põhise "
+"Registreerimisteenuse korral. Samas võib esineda juhtumeid, kus näiteks "
+"registreerimispäringute allkirjastamine ei ole standardsete vahenditega "
+"võimalik (RFC 3161 põhine registreerimine). Sellisel juhul tuleb "
+"registreerimisteenusele vajalik tõendusmaterjal anda muude "
+"organisatsioonilis-tehniliste vahenditega."
+msgstr ""
+"A sufficient protocol to achieve this level of confirmation is where "
+"both parties have a key pair to sign, queries and responses are signed, "
+"and each party keeps a record of the other party's messages. Such a "
+"protocol is feasible, for example, in the case of an OCSP-based "
+"Registration Service. However, there may be cases where, for example, "
+"signing of registration requests is not possible by standard means (RFC "
+"3161-based registration). In such cases, the necessary evidence for the "
+"Registration Service must be provided by other organisational/technical "
+"means."
+
+#: ../../kogumisteenus.rst:342
+msgid "Registreerimisteenusel on praegu kaks erinevat teostust:"
+msgstr "The registration service currently has two different implementations:"
+
+#: ../../kogumisteenus.rst:344
+msgid ""
+"OCSP-liides eeldab Eestis rakendatava OCSP-põhise ajamärgendamisteenuse "
+"kasutamist, kus allkirjastatud OCSP-päringu nonsiks on Hääletamisteenuse "
+"poolt pandud hääle räsi. Päring on allkirjastatud standardsete OCSP "
+"vahenditega;"
+msgstr ""
+"The OCSP interface requires the use of the OCSP-based timemarking "
+"service implemented in Estonia, where the nonce of a signed OCSP "
+"request is the hash of the vote cast by the Voting Service. The query is "
+"signed using standard OCSP tools;"
+
+#: ../../kogumisteenus.rst:349
+msgid ""
+"RFC 3161 liides, mille korral ebastandardse lahendusena pannakse "
+"ajatemplipäringu nonsiks Hääletamisteenuse poolt allkirjastatud hääle "
+"räsi."
+msgstr ""
+"RFC 3161 interface, where as a non-standard solution the nonce of a timestamp "
+"request is set to a hash of the vote signed by the Vote Service."
+
+#: ../../kogumisteenus.rst:354
+msgid "Kogumisteenuse laiendusmoodulite lisamine"
+msgstr "Adding collection service extension modules"
+
+#: ../../kogumisteenus.rst:356
+msgid "Kogumisteenuse API defineerib kuute tüüpi laiendusmooduleid:"
+msgstr "The Collection API defines six types of extension modules:"
+
+#: ../../kogumisteenus.rst:358
+msgid "isikutuvastus (Go pakk ``ivxv.ee/auth``, näiteks ``tls``);"
+msgstr "authentication (Go package ``ivxv.ee/auth``, for example ``tls``);"
+
+#: ../../kogumisteenus.rst:360
+msgid ""
+"tuvastatud isiku sertifikaadist valija identifikaatori tuletamine (Go "
+"pakk ``ivxv.ee/identity``, näiteks ``serialnumber``);"
+msgstr ""
+"derivation of the voter identifier from the certificate of the authenticated"
+" person (Go package ``ivxv.ee/identity``, for example ``serialnumber``);"
+
+#: ../../kogumisteenus.rst:363
+msgid ""
+"valija identifikaatorist vanuse tuletamine (Go pakk ``ivxv.ee/age``, "
+"näiteks ``estpic``);"
+msgstr ""
+"deriving the age of a voter from the voter's identifier (Go package "
+"``ivxv.ee/age``, for example ``estpic``);"
+
+#: ../../kogumisteenus.rst:366
+msgid ""
+"allkirjastatud konteineri verifitseerimine (Go pakk "
+"``ivxv.ee/container``, näiteks ``bdoc``);"
+msgstr ""
+"verification of a signed container (Go package ``ivxv.ee/container``, for"
+" example ``bdoc``);"
+
+#: ../../kogumisteenus.rst:369
+msgid "allkirja kvalifitseerimine (Go pakk ``ivxv.ee/q11n``, näiteks ``tspreg``);"
+msgstr ""
+"signature qualification (Go package ``ivxv.ee/q11n``, for example "
+"``tspreg``);"
+
+#: ../../kogumisteenus.rst:371
+msgid "andmetalletusprotokoll (Go pakk ``ivxv.ee/storage``, näiteks ``etcd``)."
+msgstr "storage protocol (Go package ``ivxv.ee/storage``, for example ``etcd``)."
+
+#: ../../kogumisteenus.rst:373
+msgid ""
+"Uue mooduli lisamiseks tuleb moodulpakki lisada mooduli identifikaator "
+"ning mooduli teostusega alampakk. Alampaki alglaadimisel tuleb mooduli "
+"registreerimiseks kutsuda välja moodulpaki ``Register`` funktsioon."
+msgstr ""
+"In order to add a new module, the module identifier and the sub-package "
+"with the module implementation must be added to the module package. The "
+"``Register`` function of the module package must be called to register "
+"the module when the sub-package is initially loaded."
+
+#: ../../kogumisteenus.rst:377
+msgid ""
+"Uue mooduli kasutamiseks tuleb selle identifikaator lisada seadistusse "
+"vastava moodulitüübi seadistuse juurde koos alammooduli seadistusega. "
+"Laiendusmoodulile antakse ette tema identifikaatoriga viidatud "
+"seadistusblokk, mida see mooduli-siseselt edasi töötleb."
+msgstr ""
+"In order to use a new module, its identifier must be added to the "
+"configuration of the corresponding module type, together with the "
+"configuration of the sub-module. The extension module shall be provided "
+"with a configuration block referenced by its identifier, which it shall "
+"further process within the module."
+
+#: ../../kogumisteenus.rst:382
+msgid ""
+"Moodulpakid ja nende moodulitelt nõutavad liidesed on täpsemalt "
+"kirjeldatud vastavates lähtekoodifailides. Samuti on iga mooduli kohta "
+"olemas vähemalt üks teostus, mida saab kasutada eeskujuna."
+msgstr ""
+"The module packages and the interfaces required from these modules are "
+"described in more detail in the source code. There is also at "
+"least one implementation of each module that can be used as an example."
+
+#: ../../kogumisteenus.rst:388
+msgid "Monitooring"
+msgstr "Monitoring"
+
+#: ../../kogumisteenus.rst:392
+msgid "Monitooringulahendus"
+msgstr "Monitoring solution"
+
+#: ../../kogumisteenus.rst:395
+msgid "Logimine"
+msgstr "Logging"
+
+#: ../../kogumisteenus.rst:397
+msgid ""
+"Iga mikroteenuse poolt genereeritav logi defineeritakse süstemaatiliselt,"
+" lähtudes protokollikirjeldusest ning teenuse osutamise olekudiagrammist."
+" Logitakse minimaalselt:"
+msgstr ""
+"Each log generated by a microservice is systematically defined based on "
+"the protocol description and the service provision status diagram. Logs "
+"shall be kept to a minimum:"
+
+#: ../../kogumisteenus.rst:401
+msgid "iga päringu kättesaamise fakt ning töötlemise algus;"
+msgstr "the fact of receipt of each request and the start of processing;"
+
+#: ../../kogumisteenus.rst:403
+msgid "töötlemise üleandmine välisele komponendile;"
+msgstr "transfer of processing to an external component;"
+
+#: ../../kogumisteenus.rst:405
+msgid "töötlemisjärje naasmine komponenti;"
+msgstr "the processing stage return component;"
+
+#: ../../kogumisteenus.rst:407
+msgid "päringu töötlemise lõpp ning tulemus;"
+msgstr "the end of query processing and the result;"
+
+#: ../../kogumisteenus.rst:409
+msgid "täiendavalt oluliste etappide läbimine protsessi olekumudelis."
+msgstr "additional key steps in the process status model."
+
+#: ../../kogumisteenus.rst:411
+msgid "Logimisel järgitakse järgmisi põhimõtteid:"
+msgstr "Logging is based on the following principles:"
+
+#: ../../kogumisteenus.rst:413
+msgid ""
+"Logimiseks kasutatakse rsyslog teenust, mis registreerib logiteate "
+"kirjutamise hetke millisekundi täpsusega;"
+msgstr ""
+"Logging is done using the rsyslog service, which records the time of "
+"writing a log message to the nearest millisecond;"
+
+#: ../../kogumisteenus.rst:416
+msgid ""
+"Iga seansi alustamisel genereerib süsteem unikaalse identifikaatori, mida"
+" klientrakendus kasutab oma päringutel kesksüsteemi poole pöördumiseks;"
+msgstr ""
+"At the start of each session, the system generates a unique identifier "
+"that the client application uses in its queries to access the central "
+"system;"
+
+#: ../../kogumisteenus.rst:419
+msgid ""
+"Kõik ühe seansi alla kuuluvad logikirjed sisaldavad sama "
+"seansiidentifikaatorit;"
+msgstr ""
+"All the logs belonging to one session contain the same session "
+"identifier;"
+
+#: ../../kogumisteenus.rst:422
+msgid "Logikirje on unikaalselt identifitseeritav;"
+msgstr "The log record is uniquely identifiable;"
+
+#: ../../kogumisteenus.rst:424
+msgid ""
+"Iga logitava teate juures on võimalik unikaalse tunnuse abil üksüheselt "
+"tuvastada teate tekkimise koht monitooritavas süsteemis;"
+msgstr ""
+"For each logged message it is possible to uniquely identify, by means of "
+"a unique identifier, where the message originated in the monitored "
+"system;"
+
+#: ../../kogumisteenus.rst:427
+msgid ""
+"Logikirje on JSON vormingus, automaatse monitooringu jaoks on "
+"masinloetavus primaarne ning inimloetavus sekundaarne;"
+msgstr ""
+"The log record is in JSON format, with machine readability primary and "
+"human readability secondary for automatic monitoring;"
+
+#: ../../kogumisteenus.rst:430
+msgid ""
+"Logisse minev info saneeritakse (urlencode) ja sellele rakendatakse "
+"pikkuse piirangut (piirang terve logiteate ja samuti parameetri kaupa);"
+msgstr ""
+"The information that goes into the log is sanitized (urlencode) and a "
+"length limit is applied (limit per whole log message and also per "
+"parameter);"
+
+#: ../../kogumisteenus.rst:433
+msgid ""
+"Süsteemiperimeetrist väljastpoolt pärinevat infot logitakse ainult "
+"saneerituna ja ainult etteantud pikkuses."
+msgstr ""
+"Information coming from outside the system perimeter is logged only as "
+"redundant and only at a predefined length."
+
+#: ../../kogumisteenus.rst:436
+msgid ""
+"Kuna logimine toimub rsyslog vahendusel, on võimalik Guardtime mooduli "
+"kasutamine logide tervikluse tagamiseks."
+msgstr ""
+"Since logging is done via rsyslog, it is possible to use the Guardtime "
+"module to ensure log integrity."
+
+#: ../../kogumisteenus.rst:441
+msgid "Üldstatistika"
+msgstr "General statistics"
+
+#: ../../kogumisteenus.rst:443
+msgid "Järgmise statistika jälgimiseks kasutatakse staatilist veebiliidest:"
+msgstr "A static web interface is used to monitor the following statistics:"
+
+#: ../../kogumisteenus.rst:445
+msgid "edukalt kogutud hääled/hääletajate hulk;"
+msgstr "number of votes successfully collected/votes cast;"
+
+#: ../../kogumisteenus.rst:447
+msgid ""
+"hääletajate jagunemine sugude, vanusegruppide, operatsioonisüsteemide "
+"ning autentimisvahendite kaupa;"
+msgstr ""
+"breakdown of voters by gender, age group, operating system and "
+"authentication means;"
+
+#: ../../kogumisteenus.rst:450
+msgid "edukalt kontrollitud häälte/hääletajate hulk;"
+msgstr "the number of successfully verified votes/votes;"
+
+#: ../../kogumisteenus.rst:452
+msgid "korduvhääletamiste statistika;"
+msgstr "statistics on re-votes;"
+
+#: ../../kogumisteenus.rst:454
+msgid "hääletajate jagunemine riigiti IP-aadressi põhjal."
+msgstr "breakdown of voters by country, based on IP address."
+
+#: ../../kogumisteenus.rst:458
+msgid "Detailstatistika"
+msgstr "Detailed statistics"
+
+#: ../../kogumisteenus.rst:460
+msgid ""
+"Detailstatistika agregeeritakse logide põhjal kasutades SCCEIV "
+"logianalüsaatorit, mis  analüüsib rakenduste tegevuslogi eeldefineeritud "
+"profiili suhtes ning võimaldab seansi-/veatüübipõhist analüüsi."
+msgstr ""
+"Detailed statistics are aggregated from logs using the SCCEIV log "
+"analyser, which analyses the activity logs of applications against a "
+"predefined profile and allows for a session/vehicle type analysis."
+
+#: ../../kogumisteenus.rst:464
+msgid "Detailstatistika on kättesaadav üle HTTPS-liidese."
+msgstr "Detailed statistics are available over HTTPS."
+
+#: ../../kogumisteenus.rst:470
+msgid "Haldus"
+msgstr "Administration"
+
+#: ../../kogumisteenus.rst:472
+msgid ""
+"Kogumisteenuse haldamine toimub digitaalallkirjastatud seadistuspakkide "
+"abil."
+msgstr ""
+"The collection service is managed by means of digitally signed "
+"configuration packs."
+
+#: ../../kogumisteenus.rst:474
+msgid "Kogumisteenus pakub seadistuspakkide laadimiseks kahte liidest:"
+msgstr ""
+"The collection service provides two interfaces for loading configuration "
+"packages:"
+
+#: ../../kogumisteenus.rst:476
+msgid ""
+"Käsurealiides – rakendus verifitseerib allkirja, valideerib korralduste "
+"vormingut, kooskõlalisust ja sobivust kogumisteenuse seisundi suhtes. "
+"Korralduse rakendamine toimub eraldi utiliidi abil."
+msgstr ""
+"Command line interface - the application verifies the signature, validates the "
+"format, consistency and appropriateness of the orders against the status "
+"of the collection service. The execution of the order is done "
+"through a separate utility."
+
+#: ../../kogumisteenus.rst:480
+msgid ""
+"Veebiliides – veebiliides vahendab seadistuspaki käsurealiidesele ja "
+"tagastab kasutajale info laadimise tulemuse kohta. Eduka laadimise korral"
+" toimub automaatselt ja samadel põhimõtetel ka seadistuspaki rakendamine."
+msgstr ""
+"Web interface - the web interface passes the configuration package to the"
+" command line interface and returns information about the result of the "
+"loading to the user. In case of a successful load, the implementation of "
+"the configuration package is automatic and follows the same principles."
+
+#: ../../kogumisteenus.rst:484
+msgid "Veebiliidese funktsioonideks on:"
+msgstr "The features of the web interface are:"
+
+#: ../../kogumisteenus.rst:486
+msgid "Kogumisteenuse mikroteenuste seisundi jälgimine;"
+msgstr "Monitoring the status of collection microservices;"
+
+#: ../../kogumisteenus.rst:488
+msgid "Valimiste nimekirjade haldus;"
+msgstr "Management of voter lists;"
+
+#: ../../kogumisteenus.rst:490
+msgid "Statistika kuvamine e-hääletamise kulgemise kohta;"
+msgstr "Displaying statistics on the progress of e-voting;"
+
+#: ../../kogumisteenus.rst:492
+msgid "Haldusteenuse kasutajate haldus;"
+msgstr "Management of users of the management service;"
+
+#: ../../kogumisteenus.rst:494
+msgid "Kogumisteenuse halduse logi kuvamine."
+msgstr "Display the collection service management log."
+
+#: ../../kogumisteenus.rst:496
+msgid ""
+"Kõik rakendusele antud korraldused säilitatakse - ka need mida ei "
+"rakendatud. Vigaseid (mittevalideeruvaid) korraldusi ei säilitata."
+msgstr ""
+"All orders given to the application are kept - even those that were not "
+"applied. Incorrect (non-validated) orders are not retained."
+
+#: ../../kogumisteenus.rst:499
+msgid "Kogumisteenuse haldusteenus sooritab järgmisi tegevusi automaatselt:"
+msgstr ""
+"The collection management service automatically performs the following "
+"actions:"
+
+#: ../../kogumisteenus.rst:501
+msgid "Valijate nimekirjade muudatuste laadimine Valimiste Infosüsteemist;"
+msgstr ""
+"Downloading changes to electoral rolls from the Election Information "
+"System;"
+
+#: ../../kogumisteenus.rst:503
+msgid ""
+"Hääletamise statistika kogumine hääletusteenusest ja eksportimine "
+"Valimiste Infosüsteemi;"
+msgstr ""
+"Collection of voting statistics from the voting service and export to the"
+" Election Information System;"
+
+#: ../../kogumisteenus.rst:506
+msgid "Talletatud häälte, logide ning seadistuste varundamine varundusteenusesse."
+msgstr "Backing up saved voices, logs and settings to a backup service."
+
+#: ../../kogumisteenus.rst:510
+msgid "Haldusteenuse komponendid"
+msgstr "Components of a management service"
+
+#: ../../kogumisteenus.rst:514
+msgid "Kogumisteenuse haldusteenuse komponendid"
+msgstr "Components of a collection management service"
+
+#: ../../kogumisteenus.rst:516
+msgid ""
+"**Halduse veebiserver** on süsteemse kasutaja ``www-data`` õigustes "
+"töötav Apache server, mille ülesanded on:"
+msgstr ""
+"The **Administrative Web Server** is an Apache server running as ``www-"
+"data`` for the system user, whose functions are:"
+
+#: ../../kogumisteenus.rst:519
+msgid "Kasutajatelt tulevate HTTPS-päringute esmane teenindamine:"
+msgstr "Serving HTTPS requests from users on a first-come, first-served basis:"
+
+#: ../../kogumisteenus.rst:521
+msgid "Haldusteenuse usaldusväärsuse tõestamine (TLS-sertifikaat);"
+msgstr "Proof of trustworthiness of the management service (TLS certificate);"
+
+#: ../../kogumisteenus.rst:523
+msgid "Kasutajate autentimine;"
+msgstr "User authentication;"
+
+#: ../../kogumisteenus.rst:525
+msgid ""
+"Valmisgenereeritud veebilehtede ja andmefailide serveerimine "
+"andmehoidlast."
+msgstr "Serving pre-built web pages and data files from the repository."
+
+#: ../../kogumisteenus.rst:528
+msgid ""
+"Üldiste taustaandmete päringu vastuse varustamine sisseloginud kasutaja "
+"andmetega (WSGI)."
+msgstr ""
+"Supplying the response to a general background query with the logged-in "
+"user's data (WSGI)."
+
+#: ../../kogumisteenus.rst:531
+msgid ""
+"Üleslaaditavate korralduste esmane valideerimine ja vahendamine "
+"haldusdeemonile ning haldusdeemoni sellekohaste vastuste vahendamine "
+"kliendile (WSGI)."
+msgstr ""
+"Initial validation and transmission of uploaded instructions to the "
+"management daemon and transmission of the management daemon's responses "
+"to the client (WSGI)."
+
+#: ../../kogumisteenus.rst:535
+msgid ""
+"**Haldusdeemon** on kasutajakonto ``ivxv-admin`` õigustes töötav ja "
+"kohalikul (``localhost``) liidesel kuulav veebiserver mille ülesanded on:"
+msgstr ""
+"The **administrative daemon** is a web server running under ``ivxv-"
+"admin`` privileges and listening on the local (``localhost``) interface "
+"with the following tasks:"
+
+#: ../../kogumisteenus.rst:538
+msgid "Üleslaaditavate korralduste valideerimine;"
+msgstr "Validation of downloadable orders;"
+
+#: ../../kogumisteenus.rst:540
+msgid "Üleslaaditavate korralduste vahetu rakendamine (kasutajate haldus);"
+msgstr "Immediate implementation of uploading instructions (user management);"
+
+#: ../../kogumisteenus.rst:542
+msgid ""
+"Üleslaaditavate korralduste salvestamine hilisemaks rakendamiseks "
+"(seadistuse ja valimisnimekirjade rakendamiseks teenusele);"
+msgstr ""
+"Saving of uploaded orders for later implementation (configuration and "
+"implementation of dialing lists for the service);"
+
+#: ../../kogumisteenus.rst:545
+msgid "E-valimiskasti allalaadimise vahendamine."
+msgstr "Facilitating the downloading of the digital ballot box."
+
+#: ../../kogumisteenus.rst:547
+msgid ""
+"**Agentdeemon** on kasutajakonto ``ivxv-admin`` õigustes töötav deemon, "
+"mille ülesanded on:"
+msgstr ""
+"The **Agentdeemon** is a daemon with ``ivxv-admin`` privileges, whose "
+"tasks are:"
+
+#: ../../kogumisteenus.rst:550
+msgid "Andmete kogumine ja registreerimine:"
+msgstr "Data collection and recording:"
+
+#: ../../kogumisteenus.rst:552
+msgid "Teadaolevate mikroteenuste seisund;"
+msgstr "Status of known microservices;"
+
+#: ../../kogumisteenus.rst:554
+msgid "Tegevusmonitooringu statistika allalaadimine;"
+msgstr "Download statistics of activity;"
+
+#: ../../kogumisteenus.rst:556
+msgid ""
+"**Andmehoidla** on failisüsteemis asuv kataloog, kuhu haldusteenuse "
+"komponendid hoiavad kogutud ja genereeritud andmeid (vaata üksikasjalist "
+"kirjeldust ``IVXV kogumisteenuse haldusjuhendi`` lisadest);"
+msgstr ""
+"**Remote repository** is the directory in the file system where the "
+"components of the management service store the collected and generated "
+"data (see detailed description in the annexes of the ``IVXV Collection "
+"Management Guide``);"
+
+#: ../../kogumisteenus.rst:560
+msgid "Välised komponendid, millega haldusteenus kokku puutub:"
+msgstr "External components with which the management service comes into contact:"
+
+#: ../../kogumisteenus.rst:562
+msgid ""
+"**Kogumisteenuse alamteenused** - paigaldamine, seadistamine ja seisundi "
+"andmete kogumine toimub agentdeemoni kaudu (SSH-ühendus teenuse "
+"masinasse);"
+msgstr ""
+"**Collection Service Subservices** - installation, configuration and "
+"status data collection is done via agent daemon (SSH connection to the "
+"service machine);"
+
+#: ../../kogumisteenus.rst:565
+msgid ""
+"**Seireserver** - üldstatistika andmete allalaadimine haldusteenuses "
+"kuvamiseks;"
+msgstr ""
+"**Monitoring** - download of general statistics data for display in the "
+"administrative service;"
+
+#: ../../kogumisteenus.rst:570
+msgid "Korralduste laadimine haldusteenusesse"
+msgstr "Uploading orders to the management service"
+
+#: ../../kogumisteenus.rst:574
+msgid "Kogumisteenuse seisundid"
+msgstr "Collection service conditions"
+
+#: ../../kogumisteenus.rst:576
+msgid ""
+"Kogumisteenuse seisund kajastab teenuse kõigi alamteenuste seisundit, "
+"kasutuselolevate väliste teenuste seisundit ja eelneva põhal tuletatud "
+"üldseisundit. Kogumisteenuse üldseisundi tuvastamisega tegeleb "
+"haldusteenus."
+msgstr ""
+"The state of the collection service reflects the state of all sub-"
+"services of the service, the state of the external services in use and "
+"the overall state derived from the previous buffer. The identification of"
+" the overall status of the collection service is handled by the "
+"management service."
+
+#: ../../kogumisteenus.rst:580
+msgid "Üldseisundi olekud on:"
+msgstr "The overall status is:"
+
+#: ../../kogumisteenus.rst:582
+msgid ""
+"**Paigaldamata** - alates haldusteenuse paigaldamisest kuni kõigi "
+"alamteenuste paigaldamiseni;"
+msgstr ""
+"**Uninstalled** - from the installation of the management service to the "
+"installation of all sub-services;"
+
+#: ../../kogumisteenus.rst:585
+msgid ""
+"**Paigaldatud** - kõik alamteenused on paigaldatud, neile on rakendatud "
+"tehnilised seadistused ja teenuse toimimiseks vajalikud krüptovõtmed. "
+"Valimiste seadistust pole rakendatud (kuid see võib olla laaditud "
+"haldusteenusesse);"
+msgstr ""
+"**Installed** - all sub-services have been installed, with the technical "
+"settings and cryptographic keys necessary for the service to work. The "
+"configuration for elections has not been applied (but may be loaded into "
+"the management service);"
+
+#: ../../kogumisteenus.rst:590
+msgid ""
+"**Seadistatud** - kogumisteenus on seadistatud ja töökorras, sellega on "
+"võimalik häälte kogumist läbi viia ja e-valimiskasti väljastada."
+msgstr ""
+"**Set up** - the collection service is set up and operational, it is able"
+" to vote and issue digital ballot box."
+
+#: ../../kogumisteenus.rst:593
+msgid ""
+"**Osaline tõrge** - kogumisteenus on seadistatud ja osaliselt töökorras, "
+"mõned alamteenused pole töökorras, kuid see ei takista kogumisteenuse "
+"toimimist."
+msgstr ""
+"**Partial failure** - the collection service is configured and partially "
+"operational, some of the sub-services are not operational but this does "
+"not prevent the collection service from working."
+
+#: ../../kogumisteenus.rst:597
+msgid ""
+"**Tõrge** - kogumisteenuse oluline sõlm pole töökorras, teenuse "
+"nõuetekohane osutamine pole võimalik."
+msgstr ""
+"**Failure** - an essential node of the collection service is not in "
+"working order, the proper provision of the service is not possible."
+
+#: ../../kogumisteenus.rst:603
+msgid ""
+"Kogumisteenuse olekudiagramm. Olekud vastavalt värvusele: kollane - "
+"seadistamisel, punane - viga, roheline - töökorras."
+msgstr ""
+"Collection service status diagram. LEDs according to colour: yellow - in "
+"configuration, red - error, green - operational."
+
+#: ../../kogumisteenus.rst:608
+msgid "Kogumisteenuse alamteenuste seisundid"
+msgstr "Collection sub-service statuses"
+
+#: ../../kogumisteenus.rst:613
+msgid ""
+"Haldusteenuse poolt registreeritud alamteenuse olekudiagramm. Olekud "
+"vastavalt värvusele: kollane - seadistamisel, punane - viga, roheline - "
+"töökorras."
+msgstr ""
+"Status diagram of a sub-service registered by the management service. "
+"LEDs according to colour: yellow - in configuration, red - error, green -"
+" operational."
+
+#: ../../kogumisteenus.rst:619
+msgid "Kogumisteenuse seisundi muutused"
+msgstr "Changes in the status of the collection service"
+
+#: ../../kogumisteenus.rst:621
+msgid ""
+"Kogumisteenuse seisund on jälgitav alates haldusteenuse edukast "
+"paigaldamisest, algne seisund on **Paigaldamata**."
+msgstr ""
+"The status of the collection service is traceable from the successful "
+"installation of the management service, the initial status is "
+"**Uninstalled**."
+
+#: ../../kogumisteenus.rst:626
+msgid "Paigaldamata"
+msgstr "Not yet installed"
+
+#: ../../kogumisteenus.rst:628
+msgid "Toimub usaldusjuure ja tehnilise seadistuse rakendamine kogumisteenusele:"
+msgstr ""
+"Implementation of the trust root and technical setup for the collection "
+"service:"
+
+#: ../../kogumisteenus.rst:630
+msgid "Seadistuste laadimine kogumisteenusesse;"
+msgstr "Uploading settings to the collection service;"
+
+#: ../../kogumisteenus.rst:632
+msgid "Tehnilises seadistuses kirjeldatud alamteenuste paigaldus;"
+msgstr "Installation of the sub-services described in the technical configuration;"
+
+#: ../../kogumisteenus.rst:634
+msgid "Usaldusjuure ja tehniliste seadistuste rakendamine alamteenustele;"
+msgstr "Implementation of trust root and technical settings for sub-services;"
+
+#: ../../kogumisteenus.rst:636
+msgid ""
+"Seadistuste eduka rakendamise tulemusena saab süsteemi uueks seisundiks "
+"**Paigaldatud**."
+msgstr ""
+"Successful implementation of the settings will result in a new system "
+"status of **Installed**."
+
+#: ../../kogumisteenus.rst:641
+msgid "Paigaldatud"
+msgstr "Installed"
+
+#: ../../kogumisteenus.rst:643
+msgid ""
+"Kogumisteenuse seadistused on rakendatud kõigile alamteenustele, "
+"valimiste seadistused pole rakendatud. Toimub valimiste seadistuse "
+"laadimine haldusteenusesse ja rakendamine alamteenustele."
+msgstr ""
+"Collection service settings are applied to all sub-services, election "
+"settings are not applied. Election settings are being loaded into the "
+"management service and applied to sub-services."
+
+#: ../../kogumisteenus.rst:647
+msgid ""
+"Valimiste seadistuse eduka rakendamise korral saab süsteemi uueks "
+"seisundiks **Seadistatud**."
+msgstr ""
+"If the configuration is successfully implemented, the system will have a "
+"new status of **Set up**."
+
+#: ../../kogumisteenus.rst:652
+msgid "Seadistatud"
+msgstr "Set up"
+
+#: ../../kogumisteenus.rst:654
+msgid ""
+"Kõik kogumisteenuse alamteenused on seadistatud ja töökorras. "
+"Haldusteenusel on kõikidest alamteenustest värsked seisundiraportid. "
+"Süsteemiga on võimalik hääletust läbi viia ja e-valimiskasti väljastada."
+msgstr ""
+"All sub-services of the collection service are configured and "
+"operational. The management service has up-to-date status reports for all"
+" sub-services. The system is able to conduct voting and issue digital ballot "
+"box."
+
+#: ../../kogumisteenus.rst:658
+msgid "Kui süsteemis tuvastatakse tõrge, saab süsteemi uueks **Osaline tõrge**."
+msgstr ""
+"If a fault is detected in the system, the system will be reset to "
+"**Partial fault**."
+
+#: ../../kogumisteenus.rst:660
+msgid ""
+"**Seadistatud** olekust ei pöörduta enam kunagi tagasi olekutesse "
+"**paigaldamata** või **paigaldatud**, kuigi uute alamteenuste lisamisel "
+"(kuni need on olekus **paigaldamata/paigaldatud**) oleks vastavad "
+"tingimused täidetud."
+msgstr ""
+"The **Set-up** state will never return to the **Uninstalled** or "
+"**Installed** states, even if new sub-services are added (as long as they"
+" are in the **Uninstalled/Installed** state)."
+
+#: ../../kogumisteenus.rst:667
+msgid "Osaline tõrge"
+msgstr "Partial failure"
+
+#: ../../kogumisteenus.rst:669
+msgid ""
+"Süsteem on seadistatud ja osaliselt töökorras, mõned süsteemi dubleeritud"
+" osad pole töökorras, kuid see ei takista süsteemil toimimast."
+msgstr ""
+"The system is configured and partially operational, some duplicated parts"
+" of the system are not operational, but this does not prevent the system "
+"from working."
+
+#: ../../kogumisteenus.rst:672
+msgid ""
+"Rikke süvenemisel piirini, kus süsteem pole võimeline teenust osutama, "
+"saab süsteemi uueks olekuks **Tõrge**. Kõigi rikete kõrvaldamise järel "
+"saab süsteemi uueks olekuks **Seadistatud**."
+msgstr ""
+"If the failure reaches the point where the system is unable to provide "
+"service, the system will be set to a new status of **Failure**. When all "
+"faults have been cleared, the system will be set to **Set up**."
+
+#: ../../kogumisteenus.rst:678
+msgid "Tõrge"
+msgstr "Failure"
+
+#: ../../kogumisteenus.rst:680
+msgid "Seadistatud süsteemil on tuvastatud rike, mis takistab teenuse osutamist."
+msgstr ""
+"A fault has been detected in the configured system, preventing the "
+"service from being provided."
+
+#: ../../kogumisteenus.rst:682
+msgid ""
+"Rikete kõrvaldamisel olukorrani, kus süsteemiga on võimalik teenust "
+"osutada, saab süsteemi uueks olekuks **Osaline tõrge**."
+msgstr ""
+"When the fault is rectified to a state where the system can provide "
+"service, the system will be set to a new status of **Partial failure**."
+
+#: ../../kogumisteenus.rst:687
+msgid "Eemaldatud"
+msgstr "Removed"
+
+#: ../../kogumisteenus.rst:689
+msgid "Teenus on konfiguratsioonist eemaldatud."
+msgstr "The service has been removed from the configuration."
+
+#: ../../kogumisteenus.rst:693
+msgid "Valijate nimekirjade olekud haldusteenuses"
+msgstr "Statuses of electoral rolls in the administrative service"
+
+#: ../../kogumisteenus.rst:695
+msgid "Valijate nimekirja olek võib olla:"
+msgstr "The status of the voters list may be:"
+
+#: ../../kogumisteenus.rst:697
+msgid "**Rakendamise ootel** - nimekiri on laaditud haldusteenusesse;"
+msgstr "**Pending** - the list has been uploaded to the management service;"
+
+#: ../../kogumisteenus.rst:699
+msgid "**Rakendatud** - nimekiri on rakendatud kogumisteenusele;"
+msgstr "**Applied** - the list is applied to the collection service;"
+
+#: ../../kogumisteenus.rst:701
+msgid ""
+"**Vigane** - nimekiri on märgitud vigaseks, haldusteenus uusi valijate "
+"nimekirjade muudatusi ei laadi;"
+msgstr ""
+"**Invalid** - the list is marked as invalid, the administrative service "
+"does not create new voter list changes;"
+
+#: ../../kogumisteenus.rst:704
+msgid "**Vahele jäetud** - vigane nimekiri on märgitud vahelejätmiseks."
+msgstr "**Skipped** - an invalid list is marked for skipping."
+
+#: ../../kogumisteenus.rst:708
+msgid "Valijate nimekirja olekudiagramm"
+msgstr "Voters list status diagram"
+
+#: ../../kogumisteenus.rst:710
+msgid "Siirdeprotsessid:"
+msgstr "Transition processes:"
+
+#: ../../kogumisteenus.rst:712
+msgid "Nimekirja laadimine haldusteenusesse:"
+msgstr "Uploading the list to the management service:"
+
+#: ../../kogumisteenus.rst:714
+msgid ""
+"Algnimekirja laadib kogumisteenuse operaator, nimekirja olekuks saab "
+"**Rakendamise ootel**;"
+msgstr ""
+"The initial list will be loaded by the collection service operator, the "
+"status of the list will be **Pending**;"
+
+#: ../../kogumisteenus.rst:717
+msgid ""
+"Muudatusnimekirja laadib haldusteenus. Vastavalt valideerimise tulemusele"
+" saab nimekirja olekuks kas **Rakendamise ootel** või **Vigane**;"
+msgstr ""
+"The change list is loaded by the management service. Depending on the "
+"result of the validation, the status of the list will be either "
+"**Pending** or **Viable**;"
+
+#: ../../kogumisteenus.rst:720
+msgid ""
+"**Rakendamine kogumisteenusele**: viib läbi haldusteenus **rakendamise "
+"ootel** olekus nimekirjaga. Õnnestumisel määratakse nimekirja olekuks "
+"**Rakendatud**, vea korral **Vigane**;"
+msgstr ""
+"**Upgrading to collection service**: carries out a management service "
+"with a list in the **pending** state. If successful, the status of the "
+"list is set to **Applied**, if not successful, the status is set to "
+"**Invalid**;"
+
+#: ../../kogumisteenus.rst:724
+msgid ""
+"**Vahelejätmine**: operaator määrab olekuga **Vigane** nimekirjale oleku "
+"**Vahele jäetud**."
+msgstr ""
+"**Skip**: the operator assigns the status **Invalid** to the list with the "
+"status **Skipped**."
+

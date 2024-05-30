@@ -6,11 +6,11 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
+import java.util.HexFormat;
 import javax.smartcardio.CardChannel;
 import javax.smartcardio.CardException;
 import javax.smartcardio.CommandAPDU;
 import javax.smartcardio.ResponseAPDU;
-import javax.xml.bind.DatatypeConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -240,7 +240,7 @@ public class Apdu {
                     }
                 }
             }
-            success = processVerifyResponse(DatatypeConverter.printHexBinary(resp));
+            success = processVerifyResponse(HexFormat.of().formatHex(resp).toUpperCase());
         } while (!success);
     }
 
@@ -292,7 +292,7 @@ public class Apdu {
     private void checkResponseStatus(Instruction command, ResponseAPDU r)
             throws SmartCardException {
         if (r.getSW() != APDU_RESPONSE_CODE_SUCCESS) {
-            log.debug("BADRESPONSE: {}", DatatypeConverter.printHexBinary(r.getBytes()));
+            log.debug("BADRESPONSE: {}", HexFormat.of().formatHex(r.getBytes()).toUpperCase());
             String code = Integer.toHexString(r.getSW());
             throw new SmartCardException(
                     String.format("Non-successful response code to %s: %s", command, code));

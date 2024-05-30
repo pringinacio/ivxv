@@ -1,8 +1,8 @@
 # IVXV Internet voting framework
 """Collector Management Service."""
 
-__version__ = '1.8.2'
-DEB_PKG_VERSION = '1.8.2'
+__version__ = '1.9.10'
+DEB_PKG_VERSION = '1.9.10'
 
 #: Management daemon data
 MANAGEMENT_DAEMON_PORT = 8080
@@ -163,6 +163,13 @@ SERVICE_TYPE_PARAMS = {
         'tspreg': False,
         'mobile_id': True,
     },
+    'webeid': {
+        'main_service': True,
+        'require_config': True,
+        'require_tls': True,
+        'tspreg': False,
+        'mobile_id': True,
+    },
     'storage': {
         'main_service': True,
         'require_config': True,
@@ -184,6 +191,13 @@ SERVICE_TYPE_PARAMS = {
         'tspreg': True,
         'mobile_id': True,
     },
+    'sessionstatus': {
+        'main_service': True,
+        'require_config': True,
+        'require_tls': True,
+        'tspreg': False,
+        'mobile_id': False,
+    },
 }
 
 #: Service secret types
@@ -201,7 +215,7 @@ SERVICE_SECRET_TYPES = {
         'shared': False,
     },
     'mid-token-key': {
-        'description': 'Mobile-ID/Smart-ID identity token',
+        'description': 'Mobile-ID/Smart-ID/Web eID identity token',
         'db-key': 'mid-token-key',
         'target-path': '/var/lib/ivxv/service/ticket.key',
         'shared': True,
@@ -224,10 +238,12 @@ COLLECTOR_PKG_FILENAMES = {
     'ivxv-mid': f'ivxv-mid_{DEB_PKG_VERSION}_amd64.deb',
     'ivxv-votesorder': f'ivxv-votesorder_{DEB_PKG_VERSION}_amd64.deb',
     'ivxv-smartid': f'ivxv-smartid_{DEB_PKG_VERSION}_amd64.deb',
+    'ivxv-webeid': f'ivxv-webeid_{DEB_PKG_VERSION}_amd64.deb',
     'ivxv-proxy': f'ivxv-proxy_{DEB_PKG_VERSION}_amd64.deb',
     'ivxv-storage': f'ivxv-storage_{DEB_PKG_VERSION}_amd64.deb',
     'ivxv-verification': f'ivxv-verification_{DEB_PKG_VERSION}_amd64.deb',
     'ivxv-voting': f'ivxv-voting_{DEB_PKG_VERSION}_amd64.deb',
+    'ivxv-sessionstatus': f'ivxv-sessionstatus_{DEB_PKG_VERSION}_amd64.deb',
 }
 
 #: Event log filename

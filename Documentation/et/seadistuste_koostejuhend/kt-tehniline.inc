@@ -113,6 +113,12 @@ Failinime võimalik eesliide peab alati lõppema punktiga.
 :network.*.services.smartid:
         Loetelu, mis sisaldab Smart-ID toeteenuste isendite seadistust.
 
+:network.*.services.webeid:
+        Loetelu, mis sisaldab Web eID toeteenuste isendite seadistust.
+
+:network.*.services.sessionstatus:
+        Loetelu, mis sisaldab Session status toeteenuste isendite seadistust.
+
 :network.*.services.choices:
         Loetelu, mis sisaldab nimekirjateenuste isendite seadistust.
 
@@ -155,6 +161,49 @@ Failinime võimalik eesliide peab alati lõppema punktiga.
                 saavad teised isendid teenusele ligi. Kui sisemine ja välimine
                 aadress hakkavad erinema, siis tuleb see parameeter lüüa
                 kaheks.
+
+:network.*.services.*.origin:
+        Kohustuslik väli.
+        Mikroteenuse isendi täielik domeeninimi ja -port.
+
+----
+
+:status:
+        Kohustuslik väli.
+        Alamblokk, mis sisaldab loetelu staatust raporteeriva serveritest.
+
+:status.name:
+        Kohustuslik väli. Hetkel toetatud ainult ``session``.
+
+        Staatust raporteeriva serveri nimi.
+
+:status.servername:
+        Kohustuslik väli.
+        Staatust raporteeriva serveri SNI.
+
+:status.authttl:
+        Kohustuslik väli.
+        Aeg sekundites. Vaikeväärtus 0.
+
+        Maksimaalne aeg autentimiseks.
+
+:status.choicettl:
+        Kohustuslik väli.
+        Aeg sekundites. Vaikeväärtus 0.
+
+        Maksimaalne aeg valiku tegemiseks.
+
+:status.votettl:
+        Kohustuslik väli.
+        Aeg sekundites. Vaikeväärtus 0.
+
+        Maksimaalne aeg hääle andmiseks.
+
+:status.verifyttl:
+        Kohustuslik väli.
+        Aeg sekundites. Vaikeväärtus 0.
+
+        Maksimaalne aeg hääle verifitseerimiseks.
 
 ----
 

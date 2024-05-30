@@ -11,16 +11,14 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
+import java.util.function.*;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * Helper class for common logic of BboxLoader and RegDataLoader.
- * 
+ *
  * @param <T> The reference type
  */
 public class LoaderHelper<T extends Ref> {
@@ -56,9 +54,34 @@ public class LoaderHelper<T extends Ref> {
         return initialData.keySet();
     }
 
+    Set<T> getAllFileNames(BiFunction<String, Long, Boolean> fileSizeChecker) {
+        Map<T, Boolean> initialData = new LinkedHashMap<>();
+
+        source.listFileNamesAndSizes((path, fileSize) -> {
+            T fileName = null;
+            try {
+                FileName<T> name = new FileName<>(path, refProvider);
+                boolean ok = fileSizeChecker.apply(name.type, fileSize);
+                if (!ok) {
+                    fileName = name.ref;
+                    throw new InvalidFileSizeException(name.path, fileSize);
+                }
+                initialData.put(name.ref, Boolean.TRUE);
+            } catch (FileName.InvalidNameException e) {
+                log.warn("Invalid file name: {}", path, e);
+                reporter.report(null, Result.INVALID_FILE_NAME, e.path, e.expected);
+            } catch (InvalidFileSizeException e) {
+                log.warn("Invalid file size: {}", path, e);
+                reporter.report(fileName, Result.INVALID_FILE_SIZE, e.path, e.gotSize);
+            }
+        });
+
+        return initialData.keySet();
+    }
+
     /**
      * Performs the integrity-check for the data being loaded.
-     * 
+     *
      * @param supplier Record supplier.
      * @param total Total number of records for progress reporting.
      * @return Returns integrity-checked map from reference to record.
@@ -176,6 +199,19 @@ public class LoaderHelper<T extends Ref> {
         public NameRecord(FileName<T> name, U record) {
             this.name = name;
             this.record = record;
+        }
+    }
+
+    static class InvalidFileSizeException extends RuntimeException {
+        private static final long serialVersionUID = 6878488000246512904L;
+
+        final String path;
+        final Long gotSize;
+
+        InvalidFileSizeException(String path, Long gotSize) {
+            super("Invalid file '" + path + "' size - " + gotSize);
+            this.path = path;
+            this.gotSize = gotSize;
         }
     }
 

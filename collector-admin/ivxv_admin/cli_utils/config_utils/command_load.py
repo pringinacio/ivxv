@@ -7,6 +7,13 @@ import re
 import shutil
 import subprocess
 
+from ...cli_utils.service_utils import (
+    remove_ivxv_admin_crontab,
+    generate_detail_stats_crontab,
+    generate_voting_facts_crontab,
+    install_detail_stats_crontab,
+    install_voting_facts_crontab
+)
 from ... import CFG_TYPES, CMD_DESCR, CMD_TYPES, VOTING_LIST_TYPES
 from ...command_file import (
     check_cmd_signature,
@@ -24,7 +31,6 @@ from ...lib import (
     populate_user_permissions,
     register_tech_cfg_items,
 )
-from ...service.backup_service import remove_backup_crontab
 from .. import init_cli_util, log
 
 
@@ -98,7 +104,7 @@ def main():
         db = IVXVManagerDb()
         db.reset()
 
-        remove_backup_crontab()
+        remove_ivxv_admin_crontab()
         register_service_event('COLLECTOR_RESET')
 
     # register new and removed services on technical config loading
@@ -114,6 +120,13 @@ def main():
         log.info("Writing simplified district list to %r", districts_filename)
         with open(districts_filename, 'w') as fp:
             json.dump(districts_list, fp)
+
+    # generate detail stats crontab
+    elif cmd_type == 'election':
+        generate_detail_stats_crontab(cfg_data)
+        install_detail_stats_crontab()
+        generate_voting_facts_crontab(cfg_data)
+        install_voting_facts_crontab()
 
     # register loaded config
     cfg_state = None
@@ -199,7 +212,7 @@ def register_cfg(
             # start/stop times
             for key in [
                     'servicestart', 'electionstart', 'electionstop',
-                    'servicestop'
+                    'servicestop', 'verificationstop'
             ]:
                 db.set_value(f"election/{key}", cfg_data["period"][key])
                 register_service_event(

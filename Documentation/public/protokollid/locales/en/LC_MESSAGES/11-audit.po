@@ -1,0 +1,153 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, Cybernetica AS
+# This file is distributed under the same license as the Elektroonilise
+# hääletamise infosüsteem package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Elektroonilise hääletamise infosüsteem 1.8.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-29 10:34+0200\n"
+"PO-Revision-Date: 2024-03-01 18:43+0200\n"
+"Last-Translator: \n"
+"Language-Team: en <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.10.3\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: ../../11-audit.rst:5
+msgid "Hääletamistulemuse audit"
+msgstr "Audit of voting results"
+
+#: ../../11-audit.rst:8
+msgid "Miksimistõendi kontroll"
+msgstr "Verification of Proof-of-Shuffle"
+
+#: ../../11-audit.rst:10
+msgid ""
+"Miksimistõendi kontrollimiseks kasutatakse algoritmi nagu on defineeritud "
+"`Verificatumi verifitseerija implementeerimise manuaalis <https://www."
+"verificatum.org/files/vmnv-3.0.3.pdf>`_."
+msgstr ""
+"The verification of the proof-of-shuffle is done using the algorithm as "
+"defined in the `Verificatum Verifier Implementation Manual <https://www."
+"verificatum.org/files/vmnv-3.0.3.pdf>`_."
+
+#: ../../11-audit.rst:14
+msgid ""
+"Märgime, et miksimistõendi koostamisel lisatakse krüptogrammile andmed "
+"valimiste, ringkonna, jaoskonna ja küsimuse identifikaatori kohta.  "
+"Lisamiseks kodeeritakse vastav väli rühma elemendina, kasutades "
+"pimendamiseks juhuslikkust 0. Näitena, kui esialgu on krüptogramm :math:"
+"`c_0 = (c_{00}, c_{01})`, kasutades avalikku võtit :math:`pk = (g, y)`, "
+"siis Verificatumi sisendina kasutatakse laia krüptogrammi :math:`C = "
+"(c_{id}, c_d, c_s, c_q, c_0)`, kus:"
+msgstr ""
+"Note that when the proof-of-shuffle is generated, the cryptogram is "
+"appended with the election, district, station and question identifier.  For "
+"the purpose of insertion, the corresponding field is coded as a group "
+"element using randomness 0 for obfuscation. As an example, if the initial "
+"cryptogram is :math:`c_0 = (c_{00}, c_{01})` using the public key :math:`pk "
+"= (g, y)`, then the input to Verificatum is a broad cryptogram :math:`C = "
+"(c_{id}, c_d, c_s, c_q, c_0)` where:"
+
+#: ../../11-audit.rst:21
+msgid ""
+"valimiste identifikaatori pseudokrüptogramm on antud kujul :math:`c_{id} = "
+"(1, encode(id))`, kus funktsioon :math:`encode` kodeerib sõne vastava rühma "
+"elemendina ja `id` on valimiste identifikaatori sõne."
+msgstr ""
+"the pseudocryptogram of the election identifier is given by :math:`c_{id} = "
+"(1, encode(id))`, where :math:`encode` encodes the seed as an element of "
+"the corresponding group and `id` is the seed of the election identifier."
+
+#: ../../11-audit.rst:24
+msgid ""
+"ringkonna identifikaatori pseudokrüptogramm on antud kujul :math:`c_d = (1, "
+"encode(d))`, kus `d` on ringkonna identifikaatori sõne."
+msgstr ""
+"the pseudocryptogram of the district identifier is given by :math:`c_d = "
+"(1, encode(d))`, where `d` is the seed of the district identifier."
+
+#: ../../11-audit.rst:26
+msgid ""
+"jaoskonna identifikaatori pseudokrüptogramm on antud kujul :math:`c_s = (1, "
+"encode(s))`, kus `s` on jaoskonna identifikaatori sõne."
+msgstr ""
+"the pseudocryptogram of the station identifier is given by :math:`c_s = (1, "
+"encode(s))`, where `s` is the seed of the station identifier."
+
+#: ../../11-audit.rst:28
+msgid ""
+"küsimuse identifikaatori pseudokrüptogramm on antud kujul :math:`c_q = (1, "
+"encode(q))`, kus `q` on küsimuse identifikaatori sõne."
+msgstr ""
+"the pseudocryptogram of the question identifier is given by :math:`c_q = "
+"(1, encode(q))`, where `q` is the seed of the question identifier."
+
+#: ../../11-audit.rst:31
+msgid ""
+"Sellisel juhul defineeritakse laia krüptogrammile vastava avaliku võtmena :"
+"math:`((g,1), (g,1), (g,1), (g,1), (g,y))`."
+msgstr ""
+"In this case, the public key corresponding to the wide cryptogram is "
+"defined as :math:`((g,1), (g,1), (g,1), (g,1), (g,y))`."
+
+#: ../../11-audit.rst:35
+msgid "Korrektse dekrüpteerimise tõendi kontroll"
+msgstr "Checking the Proof-of-Decryption"
+
+#: ../../11-audit.rst:37
+msgid ""
+"Olgu antud krüptogramm :math:`c = (c_0, c_1)`, mis deküpteeritakse "
+"väärtuseks :math:`d` antud avaliku võtmega :math:`pk` üle parameetrite :"
+"math:`(p,g)` ja dekrüpteerimistõendiga :math:`(a,b,s)`."
+msgstr ""
+"Let us have ciphertext :math:`c = (c_0, c_1)`, decrypted to the value :math:"
+"`d` with the given public key :math:`pk` over the parameters :math:`(p,g)` "
+"and with proof-of-decryption :math:`(a,b,s)`."
+
+#: ../../11-audit.rst:41
+msgid ""
+"Korrektse dekrüpteerimise kontrollimise jaoks on tarvis arvutada mitte-"
+"interaktiivne kontrollija väljakutse. Selle jaoks kodeeritakse :math:"
+"`\"DECRYPTION\" || pk || c || d || a || b` DER-kodeeringus. Baidijada "
+"kasutatakse deterministliku juhuarvugeneraatori initsialiseerimiseks ja "
+"selle väljundist loetakse rühma järgu pikkune täisarv :math:`k`."
+msgstr ""
+"To verify the proof-of-decryption it is necessary to calculate the "
+"challenge for non-interactive verifier. For this purpose, :math:"
+"`\"DECRYPTION\" || pk || c || d || a || b` is encoded in DER encoding. The "
+"byte sequence is used to initialise a deterministic random number generator "
+"and its output is read as a group-order integer :math:`k`."
+
+#: ../../11-audit.rst:47
+msgid ""
+"Korrektse dekrüpteerimsie tõendi kontrolliks tuleb kontrollida, et :math:"
+"`c_0^s = a * (c_1/d)^k` ja :math:`g^s = b * y^k`."
+msgstr ""
+"To verify correct decryption, check that :math:`c_0^s = a * (c_1/d)^k` and :"
+"math:`g^s = b * y^k`."
+
+#: ../../11-audit.rst:51
+msgid "Korrektse teisendamise kontroll"
+msgstr "Correct conversion check"
+
+#: ../../11-audit.rst:53
+msgid ""
+"Kontrollimaks, et teisendus IVXV e-valimiskasti ja Verificatumi "
+"krüptogrammide vahel on tehtud korrektselt, tuleb korrata teisendust "
+"sõltumatult. Pärast sõltumatut teisendust tuleb võrrelda saadud väljundeid. "
+"Kuna teisendamine on deterministlik protseduur, siis garanteerib kordamine "
+"tegevuse õigsuse."
+msgstr ""
+"To verify that the conversion between the IVXV ballot Box and the "
+"Verificatum cryptograms has been done correctly, the conversion must be "
+"repeated independently. After the independent conversion, the resulting "
+"outputs must be compared. Since the conversion is a deterministic "
+"procedure, the repetition guarantees the correctness of the operation."

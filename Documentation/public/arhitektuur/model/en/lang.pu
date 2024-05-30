@@ -1,0 +1,194 @@
+
+' SKIN.INC
+
+!define TR_EXTERNAL() External
+!define TR_UNSPECIFIED() Unspecified
+!define TR_NEC() NEC
+!define TR_IVXV() IVXV
+
+
+' EXAMPLE.PU
+
+!define TR_STAKEHOLDER() Stakeholder
+
+!define TR_APPLICATION() Application
+!define TR_SERVICE() Service
+
+!define TR_INTERFACE() Interface
+!define TR_UNSPECIFIED_INTERFACE() Unspecified interface
+
+!define TR_COMPONENT() Component
+!define TR_IVXV_COMPONENT() IVXV Component
+!define TR_EXTERNAL_COMPONENT() External component
+!define TR_DATABASE() Database
+
+
+' DEVELOPMENT.PU
+
+!define TR_MONITOR_DB() Logs
+!define TR_STORAGE_DB() Lists and votes
+!define TR_CONF_DB_CLS() Settings
+!define TR_CONF_DB_FORWARDER() Settings
+!define TR_CONF_DB_STORAGE() Settings
+!define TR_CONF_DB_VERIFY() Settings
+!define TR_CONF_DB_VOTE() Settings
+!define TR_CONF_DB() Settings
+!define TR_P_HELPERS() Helper modules
+!define TR_P_AUDIT() Audit application
+!define TR_P_COLLECTOR() Collection service
+!define TR_P_CONFIG() Configuration application
+!define TR_P_PROCESSOR() Processor
+!define TR_P_KEY() Key application
+!define TR_R_VOTING() Voting service
+!define TR_R_VERIFY() Verification service
+!define TR_R_EXTENSION() Extension modules
+!define TR_R_MID_AUTH() Mobiil-ID helper service
+!define TR_R_MONITORING() Monitoring
+!define TR_R_CLS() Choicelist service
+!define TR_R_STORAGE() Storage
+!define TR_R_DISPATCH() Dispatcher
+
+!define TR_ADMIN_APP() Management
+!define TR_BACKUP() Backup
+!define TR_BDOC() BDOC
+!define TR_CLS() Choicelist service
+!define TR_CONF_APP() Configuration app
+!define TR_DDOC_SERVICE() Mobile ID Service
+!define TR_DECRYPTION_VERIFIER() Decryption proof verifier
+!define TR_ELECTION_WWW() Election WWW
+!define TR_EP_ELEC() Europarliament
+!define TR_FORWARDER() Dispatcher
+!define TR_IVXV_MONITOR() Logmonitor
+!define TR_JDIGIDOC() DigiDoc4J
+!define TR_KEY_APP() Key app
+!define TR_KOV_ELEC() Local government
+!define TR_MESSENTE() Messente SMS
+!define TR_MID_AUTH() Authentication
+!define TR_MID_SIGN() Signing
+!define TR_OCSP() OCSP
+!define TR_OFFLINE_AUDIT() Audit
+!define TR_OFFLINE_PROCESSOR() Processor
+!define TR_PDF_API() PDF API
+!define TR_POP() Population register
+!define TR_REG() Registering service
+!define TR_RFC_3161() RFC3161 Registering service
+!define TR_RH_ELEC() Referendum
+!define TR_RK_ELEC() Riigikogu
+!define TR_SK_OCSP() OCSP Registering service
+!define TR_STORAGE() Storage
+!define TR_TICKET() Authentication, ticket
+!define TR_TLS() Authentication, TLS
+!define TR_TSP() Timestamp
+!define TR_VERIFY() Verification service
+!define TR_VIS() VIS
+!define TR_VOTE() Voting
+!define TR_ZABBIX_EXT() External monitoring
+
+!define TR_A_ADMIN() Local admin
+!define TR_A_AUDITOR() Auditor
+!define TR_A_HELPDESK() Helpdesk
+!define TR_A_KEYMANAGER() Keymanager
+!define TR_A_OFFLINE_PROCESSOR() Processor
+!define TR_A_OWNER() Election owner
+!define TR_A_SYSADMIN() System admin
+!define TR_A_VOTER() Voter
+
+!define TR_API_INT() IVXV API
+!define TR_APP_LOG() Application log
+!define TR_AUDIT_GUI() GUI
+!define TR_AUDIT_IN() FS Import
+!define TR_AUDIT_OUT() FS Export
+!define TR_AUTH() Authentication
+!define TR_BACKUP() Backup
+!define TR_CERTIFICATE() Certificate
+!define TR_CONF_BUNDLE() Configuration bundle
+!define TR_CONF_GUI() GUI
+!define TR_CONF_IN() FS Import
+!define TR_CONF_OUT() FS Export
+!define TR_DECRYPTION_PROOF() Decryption proof
+!define TR_ELEC() Election interface
+!define TR_ENCRYPTED_VOTES() Anonymized votes
+!define TR_EXPORT_VOTES() Votes export
+!define TR_HELPDESK() Helpdesk
+!define TR_HTTPS_EXT() HTTPS
+!define TR_INDVERIFY() Verification application
+!define TR_INVALID_VOTES() List of invalid votes
+!define TR_IVOTERS_PDF() List of i-voters, PDF
+!define TR_JAVA() DigiDoc4J
+!define TR_KEY_GUI() GUI
+!define TR_KEY_IN() FS Import
+!define TR_KEY_OUT() FS Export
+!define TR_KEY_SHARE() Key share
+!define TR_LOCALADMIN() Command line administration
+!define TR_LOG_EXT() HTTPS
+!define TR_LOG_INT() RELP-JSON
+!define TR_LOG_SMS() SMS
+!define TR_LOG_SMTP() SMTP
+!define TR_MESSENTE() Messente
+!define TR_MID() Mobile ID Service
+!define TR_MIXED_VOTES() Shuffled ballots
+!define TR_MIXING_PROOF() Proof of shuffle
+!define TR_MIXING_VERIFIER() Shuffle verifier
+!define TR_MONITOR() Monitoring
+!define TR_PKCS15() PKCS15
+!define TR_POP_VOTERS() Voterlist
+!define TR_PROCESSOR_GUI() GUI
+!define TR_PROCESSOR_IN() FS Import
+!define TR_PROCESSOR_OUT() FS Export
+!define TR_Q11N() Qualification
+!define TR_REGISTERED_VOTES() Registered votes
+!define TR_REMOTEADMIN() Remote administration
+!define TR_RFC_3161() RFC3161
+!define TR_SK_AUTH() Authentication OCSP
+!define TR_SK_OCSP() OCSP
+!define TR_SMTP() Urgent command (SMTP)
+!define TR_TLS_CLS() Choices
+!define TR_TLS_INT() TLS-SNI
+!define TR_TLS_STORAGE() TLS
+!define TR_TLS_VERIFY() Verification
+!define TR_TLS_VOTE() Voting
+!define TR_VERIFY() Verification
+!define TR_VIS_CANDS() List of choices
+!define TR_VIS_DIST() List of districts
+!define TR_VIS_RESULTS() Tally import
+!define TR_VIS_REVOKE() Revokation/restoration list
+!define TR_VIS_VOTERS() List of i-voters
+!define TR_VOTE() Voting application
+!define TR_VOTING_RESULT() Voting result
+!define TR_ZABBIX() Zabbix
+
+' MS
+
+!define TR_MS_STATE_TITLE() Collection service states
+
+
+!define TR_MS_S_UNINSTALLED() Uninstalled
+!define TR_MS_S_INSTALLED() Installed
+!define TR_MS_S_SETUP() Set up
+!define TR_MS_S_FAILURE() Failure
+!define TR_MS_S_PARTIAL_FAILURE() Partial failure
+
+
+!define TR_MS_S_UNINSTALLED_TXT() - Management service is installed, \
+\n- Collector services are uninstalled.
+
+!define TR_MS_S_INSTALLED_TXT() All collector services are installed \
+\nand technical configuration applied. \
+\nElection configuration has not been applied.
+
+!define TR_MS_S_SETUP_TXT() Election configuration has been applied \
+\nto the Collection service \
+\nit is possible to vote \
+\nand export digital ballot box
+
+!define TR_MS_S_FAILURE_TXT() At least one collector service has failed. \
+\nCollection service is unfunctional
+
+!define TR_MS_S_PARTIAL_FAILURE_TXT() At least one replicated collector service \
+\nhas failed, Collection service is functional.
+
+
+!define TR_MS_TRANS_INSTALL() Installation of services
+!define TR_MS_TRANS_SETUP() Application of election configuration
+!define TR_MS_TRANS_FAIL() Failure detection
+!define TR_MS_TRANS_RECOVERY() Recovery detection

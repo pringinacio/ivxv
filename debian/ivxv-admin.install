@@ -8,7 +8,7 @@ collector-admin/site/index.html      var/www/collector-admin/
 collector-admin/site/favicon.ico     var/www/collector-admin/
 collector-admin/site/ivxv            var/www/collector-admin/
 # WSGI application
-collector-admin/site/ivxv-admin.wsgi var/www/collector-admin/
+collector-admin/site/cgi             var/www/
 # IVXV admin JavaScript
 collector-admin/site/js              var/www/collector-admin/
 

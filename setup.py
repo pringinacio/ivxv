@@ -26,7 +26,7 @@ class IvxvPackageBuilder(build_py):
 
 setup(
     name='IVXVCollectorAdminDaemon',
-    version='1.8.2',
+    version='1.9.10',
     description='IVXV Collector Management Service',
     author='IVXV Developer',
     author_email='info@ivotingcentre.ee',
@@ -92,10 +92,18 @@ setup(
             'ivxv-backup-crontab'
             '=ivxv_admin.cli_utils.backup_utils:backup_crontab_generator_util',
 
+            'ivxv-detail-stats-crontab'
+            '=ivxv_admin.cli_utils.service_utils:detail_stats_crontab_editor',
+
+            'ivxv-voting-facts-crontab'
+            '=ivxv_admin.cli_utils.service_utils:voting_facts_crontab_editor',
+
             'ivxv-copy-log-to-logmon'
             '=ivxv_admin.cli_utils.service_utils:copy_logs_to_logmon_util',
 
             'ivxv-voterstats=ivxv_admin.cli_utils.service_utils:voterstats_util',
+
+            'ivxv-voting-facts=ivxv_admin.cli_utils.service_utils:voting_facts_util',
 
             'ivxv-status=ivxv_admin.cli_utils.status_utils:status_util',
 

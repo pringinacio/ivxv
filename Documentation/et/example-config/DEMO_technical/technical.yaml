@@ -100,6 +100,7 @@ storage:
     ca: !container ca.pem
     conntimeout: 5
     optimeout: 10
+    size: 16777216 # bytes
     bootstrap:
       - storage@storage1.ivxv.ee
       - storage@storage2.ivxv.ee

@@ -1,0 +1,7 @@
+#!/bin/sh
+
+set -e
+
+pip3 uninstall --requirement /usr/lib/python3.10/.cache/pip/requirements.txt --yes
+
+exit 0

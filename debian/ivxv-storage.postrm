@@ -24,8 +24,10 @@ case "$1" in
         # stop ivxv-storage service
         deb-systemd-invoke stop "ivxv-storage@*service"
 
-        # unmask system-wide etcd
-        deb-systemd-helper unmask etcd
+        # uninstall db for ivxv-storage
+        if [ -f "/usr/bin/ivxv-storage_db_uninstall.sh" ]; then
+            /usr/bin/ivxv-storage_db_uninstall.sh
+        fi
     ;;
 
     purge)
@@ -52,10 +54,20 @@ case "$1" in
             # that is required for use deluser --remove-home option.
             deluser --system "${USER_ACCOUNT}"
             rm -rf ${USER_HOME_DIR}
+
+        fi
+
+        # uninstall db for ivxv-storage
+        if [ -f "/usr/bin/ivxv-storage_db_uninstall.sh" ]; then
+            /usr/bin/ivxv-storage_db_uninstall.sh
         fi
     ;;
 
     upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+        # uninstall db for ivxv-storage
+        if [ -f "/usr/bin/ivxv-storage_db_uninstall.sh" ]; then
+            /usr/bin/ivxv-storage_db_uninstall.sh
+        fi
     ;;
 
     *)

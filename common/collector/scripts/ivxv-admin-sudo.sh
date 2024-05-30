@@ -70,7 +70,7 @@ backup_log() {
   RET=0
   (
     ssh ${LOG_HOST} \
-      tar --create --gzip --verbose '/var/log/ivxv*.log' \
+      tar --create --gzip --verbose '/var/log/ivxv/ivxv*.log' \
       > "${BACKUP_TARGET_FILEPATH}"
   ) || RET=$?
   # ignore exit code 1 (file in grown during archiving process)
@@ -151,7 +151,8 @@ init_service() {
 # install_package {{{
 # install debian package dependencies
 install_package() {
-  DEB_FILENAME="$1"
+  # only extract file name, i.e. "../file" will resolve to "file", or "/var/lib/file" to, similarly, "file"
+  DEB_FILENAME=$(basename "$1")
 
   # operate in dumb terminal
   TERM=dumb

@@ -53,9 +53,9 @@ avalikustatud IVXV repositooriumis::
 Paigaldame Java sõltuvuspaketid::
 
   cd $HOME/ivxv/common/external
-  wget -O gradle-6.4.zip https://services.gradle.org/distributions/gradle-6.4-bin.zip
-  unzip gradle-6.4.zip
-  rm gradle-6.4.zip
+  wget -O gradle-8.3.zip https://services.gradle.org/distributions/gradle-8.3-bin.zip
+  unzip gradle-8.3.zip
+  rm gradle-8.3.zip
   cd $HOME/ivxv/common/java
   make sync
 
@@ -70,9 +70,9 @@ Ehitame Java rakendused::
 
 RVT'le tarnitavad rakendused::
 
-  $HOME/ivxv/auditor/build/distributions/auditor-1.8.2.zip
-  $HOME/ivxv/key/build/distributions/key-1.8.2.zip
-  $HOME/ivxv/processor/build/distributions/processor-1.8.2.zip
+  $HOME/ivxv/auditor/build/distributions/auditor-1.9.10.zip
+  $HOME/ivxv/key/build/distributions/key-1.9.10.zip
+  $HOME/ivxv/processor/build/distributions/processor-1.9.10.zip
 
 Käivitatavad failid::
 

@@ -5,6 +5,7 @@ import ee.ivxv.common.cli.Args;
 import ee.ivxv.common.cli.Tool;
 import ee.ivxv.common.model.AnonymousBallotBox;
 import ee.ivxv.common.model.BallotBox;
+import ee.ivxv.common.service.report.Reporter;
 import ee.ivxv.common.util.I18nConsole;
 import ee.ivxv.common.util.ToolHelper;
 import ee.ivxv.common.util.Util;
@@ -20,6 +21,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class AnonymizeTool implements Tool.Runner<AnonymizeArgs> {
 
     private static final String OUT_BB_TMPL = "bb-4.json";
+    private static final String OUT_LOG_DISCRIMINATOR = "anonymize";
 
     private static final Map<String, Object> EMPTY = new HashMap<>();
 
@@ -44,9 +46,9 @@ public class AnonymizeTool implements Tool.Runner<AnonymizeArgs> {
 
         reporter.writeBbErrors(args.out.value());
 
-        reporter.writeLog2(args.out.value(), bb,
-                (voterId, qid) -> excluded.getOrDefault(voterId, EMPTY).containsKey(qid));
-        reporter.writeLog3(args.out.value(), bb,
+        // There should still be an empty .log3 file even if there are no anonymised records
+        reporter.writeEmptyLogFiles(args.out.value(), OUT_LOG_DISCRIMINATOR, Reporter.LogType.LOG3, bb);
+        reporter.writeLog3(args.out.value(), bb, OUT_LOG_DISCRIMINATOR,
                 (voterId, qid) -> !excluded.getOrDefault(voterId, EMPTY).containsKey(qid));
 
         Path OUT_BB = Util.prefixedPath(bb.getElection(), OUT_BB_TMPL);

@@ -11,7 +11,8 @@ import ee.ivxv.common.service.container.ContainerReader;
 import ee.ivxv.common.util.Util;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import javax.xml.bind.DatatypeConverter;
+import java.util.HexFormat;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,7 +35,7 @@ public class BboxHelperImpl implements BboxHelper {
     @Override
     public byte[] getChecksum(Path path) throws Exception {
         byte[] bytes = HashType.SHA256.getFunction().digest(Files.newInputStream(path));
-        String checksum = DatatypeConverter.printHexBinary(bytes).toLowerCase();
+        String checksum = HexFormat.of().formatHex(bytes);
         return Util.toBytes(checksum);
     }
 
@@ -66,6 +67,12 @@ public class BboxHelperImpl implements BboxHelper {
         public BboxLoader<RU> getBboxLoader(Path path, Reporter<Ref.BbRef> r)
                 throws InvalidBboxException {
             return new IvxvBboxLoader<>(profile, new ZipSource(path), pf, r, nThreads);
+        }
+
+        @Override
+        public BboxLoader<RU> getBboxLoader(Path path, Reporter<Ref.BbRef> r, long maxSignedBallotSizeInBytes)
+                throws InvalidBboxException {
+            return new IvxvBboxLoader<>(profile, new ZipSource(path), pf, r, nThreads, maxSignedBallotSizeInBytes);
         }
 
         @Override

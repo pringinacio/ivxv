@@ -54,7 +54,7 @@ func xroadmain() int {
 	}
 	certPool := x509.NewCertPool()
 	if ok := certPool.AppendCertsFromPEM(xcert); !ok {
-		log.Error("unable to parse cert from %s", cert)
+		log.Error("unable to parse xroad CA file")
 		return confError
 	}
 
@@ -62,6 +62,7 @@ func xroadmain() int {
 		Certificates: []tls.Certificate{*cert},
 		ClientAuth:   tls.RequireAndVerifyClientCert,
 		ClientCAs:    certPool,
+		MinVersion:   tls.VersionTLS12,
 	}
 	srv := http.Server{
 		Addr:      conf.Server.Address,

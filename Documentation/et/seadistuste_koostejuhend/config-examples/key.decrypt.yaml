@@ -9,5 +9,6 @@ decrypt:
   candidates: TESTCONF.choices.bdoc
   districts: TESTCONF.districts.bdoc
   provable: true
+  prove_invalid: true
   check_decodable: false
   out: decout

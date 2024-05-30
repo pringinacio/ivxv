@@ -12,6 +12,8 @@ dependencies {
     testImplementation testFixtures(project(":common"))
 }
 
-mainClassName = "ee.ivxv.processor.Processor"
+application {
+	mainClass = "ee.ivxv.processor.Processor"
+	applicationDefaultJvmArgs = ["-Xmx8G"]
+}
 
-applicationDefaultJvmArgs = ["-Xmx8G"]

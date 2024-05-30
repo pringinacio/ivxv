@@ -13,7 +13,7 @@
 \newcommand{\@IVXVStringBackofTitlePage}{\copyright\ RVT, \the\year}
 \newcommand{\@IVXVStringCopyrightFooter}{\copyright\ RVT, \the\year}
 
-\DeclareOption{et-lang}{%
+\DeclareOption{estonian}{%
 	\renewcommand{\@IVXVStringConfidential}{Konfidentsiaalne}%
 	\renewcommand{\@IVXVStringDate}{Kuup\"aev:}%
 	\renewcommand{\@IVXVStringDocumentType}{Tehniline dokument}%
@@ -21,7 +21,7 @@
 	\renewcommand{\@IVXVStringPages}{lk}%
 	\renewcommand{\@IVXVStringDocument}{Dok}%
 }
-\DeclareOption{en-lang}{%
+\DeclareOption{english}{%
 	\renewcommand{\@IVXVStringConfidential}{Confidential}%
 	\renewcommand{\@IVXVStringDate}{Date:}%
 	\renewcommand{\@IVXVStringDocumentType}{Technical document}%

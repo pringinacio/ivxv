@@ -280,6 +280,9 @@ Teenuste omavaheline suhtlus
 #. Smart-ID tugiteenusest välisesse Smart-ID teenusesse
    (protokoll HTTP(S), port vastavalt tehnilisele seadistusele);
 
+#. Teistest mikroteeenustest Session status tugiteenusesse
+   (protokoll RPC, port vastavalt tehnilisele seadistusele);
+
 #. Hääletamisteenusest välisesse kvalifitseerimisteenusesse
    (protokoll HTTP(S), port vastavalt tehnilisele seadistusele);
 
@@ -643,7 +646,7 @@ käsuga :ref:`ivxv-secret-load`:
    juhul, kui ajatempliteenust kasutatakse registreerimisteenuseks (valimiste
    seadistuses on ``qualification/protocol`` välja väärtuseks ``tspreg``).
 
-**Mobiil-ID/Smart-ID identsustõendi võtme** rakendamine toimub
+**Mobiil-ID/Smart-ID/Web eID identsustõendi võtme** rakendamine toimub
 käsuga :ref:`ivxv-secret-load`:
 
 .. code-block:: shell-session
@@ -652,8 +655,8 @@ käsuga :ref:`ivxv-secret-load`:
 
 .. note::
 
-   Mobiil-ID/Smart-ID identsustõendi võti on vaja rakendada vaid
-   juhul, kui Mobiil-ID/Smart-ID tugiteenus on kasutusel
+   Mobiil-ID/Smart-ID/Web eID identsustõendi võti on vaja rakendada vaid
+   juhul, kui Mobiil-ID/Smart-ID/Web eID tugiteenus on kasutusel
    (valimiste seadistuses on olemas plokk ``auth.ticket``).
 
 Kogumisteenuse krüptovõtmete rakendamise tulemusena on hallatavate teenuste

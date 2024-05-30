@@ -59,11 +59,16 @@ class OCSPSchema(Model):
     url = URLType(required=True)
     responders = ListType(CertificateType)
     retry = IntType(default=0, min_value=0)
+    maxSkew = IntType(default=300, min_value=0)  # 300 milliseconds
+    maxAge = IntType(default=1, min_value=0)  # 1 minute
+    maxAge = IntType(default=1, min_value=0)  # 1 minute
 
 
 class OCSPSchemaNoURL(Model):
     """Validating schema for OCSP config."""
     responders = ListType(CertificateType)
+    maxSkew = IntType(default=300, min_value=0)  # 300 milliseconds
+    maxAge = IntType(default=1, min_value=0)  # 1 minute
 
 
 class TSPSchema(Model):
@@ -72,12 +77,16 @@ class TSPSchema(Model):
     signers = ListType(CertificateType, required=True)
     delaytime = IntType(required=True, min_value=0)
     retry = IntType(default=0, min_value=0)
+    maxSkew = IntType(default=2, min_value=0)  # 2 seconds
+    maxAge = IntType(default=1, min_value=0)  # 1 minute
 
 
 class TSPSchemaNoURL(Model):
     """Validating schema for timestamp protocol config."""
     signers = ListType(CertificateType, required=True)
     delaytime = IntType(required=True, min_value=0)
+    maxSkew = IntType(default=2, min_value=0)  # 2 seconds
+    maxAge = IntType(default=1, min_value=0)  # 1 minute
 
 
 class BDocSchema(Model):

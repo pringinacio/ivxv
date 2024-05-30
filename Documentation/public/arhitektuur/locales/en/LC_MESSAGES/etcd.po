@@ -1,0 +1,572 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, Cybernetica AS
+# This file is distributed under the same license as the Elektroonilise
+# hääletamise infosüsteem package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Elektroonilise hääletamise infosüsteem 1.9.10\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-13 21:03+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.15.0\n"
+
+#: ../../etcd.rst:4
+msgid "Lisa - ETCD Andmemudel"
+msgstr "Appendix - ETCD datamodel"
+
+#: ../../etcd.rst:6
+msgid ""
+"ETCD on võti-väärtus andmebaas, kus talletatakse e-hääletamise "
+"sisendnimekirju, e-hääli ning statistikat."
+msgstr ""
+"ETCD is key-value database used for storing input lists, votes and "
+"statistics of online voting"
+
+#: ../../etcd.rst:10 ../../etcd.rst:12
+msgid "Ringkondade nimekiri"
+msgstr "List of districts"
+
+#: ../../etcd.rst:16 ../../etcd.rst:70 ../../etcd.rst:123 ../../etcd.rst:155
+#: ../../etcd.rst:196 ../../etcd.rst:258
+msgid "**Võti**"
+msgstr "**Key**"
+
+#: ../../etcd.rst:16 ../../etcd.rst:70 ../../etcd.rst:123 ../../etcd.rst:155
+#: ../../etcd.rst:196 ../../etcd.rst:258
+msgid "**Väärtus**"
+msgstr "**Value**"
+
+#: ../../etcd.rst:16 ../../etcd.rst:70 ../../etcd.rst:123 ../../etcd.rst:155
+#: ../../etcd.rst:196 ../../etcd.rst:258
+msgid "**Näide**"
+msgstr "**Example**"
+
+#: ../../etcd.rst:18
+msgid "/districts"
+msgstr "/districts"
+
+#: ../../etcd.rst:18 ../../etcd.rst:72 ../../etcd.rst:125 ../../etcd.rst:157
+#: ../../etcd.rst:198 ../../etcd.rst:224 ../../etcd.rst:260
+msgid "Juurvõti"
+msgstr "Rootkey"
+
+#: ../../etcd.rst:20
+msgid "/districts/<EHAK-district>"
+msgstr "/districts/<EHAK-district>"
+
+#: ../../etcd.rst:20
+msgid ""
+"Seab valija EHAK-ringkond paarile vastavusse ringkonnaidentifikaatori, "
+"mis viitab /choices harusse"
+msgstr ""
+"Connects voter's EHAK-district pair with district identifier referring to"
+" the /choices branch"
+
+#: ../../etcd.rst:20
+msgid "/districts/05241"
+msgstr "/districts/05241"
+
+#: ../../etcd.rst:22
+msgid "0000.1"
+msgstr "0000.1"
+
+#: ../../etcd.rst:27
+msgid "/districts/counties"
+msgstr "/districts/counties"
+
+#: ../../etcd.rst:27
+msgid "Väli counties ringkondade nimekirjast"
+msgstr "Field counties from the district list"
+
+#: ../../etcd.rst:27 ../../etcd.rst:76
+msgid "{"
+msgstr "{"
+
+#: ../../etcd.rst:29
+msgid "\"0068\": ["
+msgstr "\"0068\": ["
+
+#: ../../etcd.rst:31
+msgid "\"0809\","
+msgstr "\"0809\","
+
+#: ../../etcd.rst:33
+msgid "\"0624\""
+msgstr "\"0624\""
+
+#: ../../etcd.rst:35 ../../etcd.rst:41 ../../etcd.rst:47
+msgid "],"
+msgstr "],"
+
+#: ../../etcd.rst:37
+msgid "\"0784\": ["
+msgstr "\"0784\": ["
+
+#: ../../etcd.rst:39
+msgid "\"0524\""
+msgstr "\"0524\""
+
+#: ../../etcd.rst:43
+msgid "\"0079\": ["
+msgstr "\"0079\": ["
+
+#: ../../etcd.rst:45
+msgid "\"0796\""
+msgstr "\"0796\""
+
+#: ../../etcd.rst:49
+msgid "\"0793\": ["
+msgstr "\"0793\": ["
+
+#: ../../etcd.rst:51
+msgid "\"0793\""
+msgstr "\"0793\""
+
+#: ../../etcd.rst:53
+msgid "]"
+msgstr "]"
+
+#: ../../etcd.rst:55 ../../etcd.rst:106 ../../etcd.rst:108
+msgid "}"
+msgstr "}"
+
+#: ../../etcd.rst:57
+msgid "/districts/version"
+msgstr "/districts/version"
+
+#: ../../etcd.rst:57 ../../etcd.rst:110
+msgid "Nimekirja allkirjastajad"
+msgstr "Signers of lists"
+
+#: ../../etcd.rst:57
+msgid "[\"NIMESTE,NIMI,123456 78912 2019-02-22T13:58:48Z\" ]"
+msgstr "[\"NIMESTE,NIMI,123456 78912 2019-02-22T13:58:48Z\" ]"
+
+#: ../../etcd.rst:64 ../../etcd.rst:66
+msgid "Valikute nimekiri"
+msgstr "Choices list"
+
+#: ../../etcd.rst:72
+msgid "/choices"
+msgstr "/choices"
+
+#: ../../etcd.rst:74
+msgid "/choices/<district-id>"
+msgstr "/choices/<district-id>"
+
+#: ../../etcd.rst:74
+msgid "Ringkonnale district-id vastav valikute nimekiri."
+msgstr "Choices list corresponding to district-id"
+
+#: ../../etcd.rst:74
+msgid "/choices/0000.1"
+msgstr "/choices/0000.1"
+
+#: ../../etcd.rst:78
+msgid "\"Erakond 1\":{"
+msgstr "\"Party 1\":{"
+
+#: ../../etcd.rst:80
+msgid "\"0000.101\":\"Nimi Nimeste1\","
+msgstr "\"0000.101\":\"Nimi Nimeste1\","
+
+#: ../../etcd.rst:83
+msgid "\"0000.102\":\"Nimi Nimeste2\","
+msgstr "\"0000.102\":\"Nimi Nimeste2\","
+
+#: ../../etcd.rst:86
+msgid "\"0000.103\":\"Nimi Nimeste3\""
+msgstr "\"0000.103\":\"Nimi Nimeste3\""
+
+#: ../../etcd.rst:89 ../../etcd.rst:99
+msgid "},"
+msgstr "},"
+
+#: ../../etcd.rst:91
+msgid "\"Erakond 2\":{"
+msgstr "\"Party 2\":{"
+
+#: ../../etcd.rst:93
+msgid "\"0000.104\":\"Nimi Nimeste4\","
+msgstr "\"0000.104\":\"Nimi Nimeste4\","
+
+#: ../../etcd.rst:96
+msgid "\"0000.105\":\"Nimi Nimeste5\""
+msgstr "\"0000.105\":\"Nimi Nimeste5\""
+
+#: ../../etcd.rst:101
+msgid "\"Üksikkandidaadid\":{"
+msgstr "\"Independent candidates\":{"
+
+#: ../../etcd.rst:103
+msgid "\"0000.106\":\"Nimi Nimeste6\""
+msgstr "\"0000.106\":\"Nimi Nimeste6\""
+
+#: ../../etcd.rst:110
+msgid "/choices/version"
+msgstr "/choices/version"
+
+#: ../../etcd.rst:110 ../../etcd.rst:134
+msgid "[\"NIMESTE,NIMI,123456 78912 2019-02-22T13:58:59Z\" ]"
+msgstr "[\"NIMESTE,NIMI,123456 78912 2019-02-22T13:58:59Z\" ]"
+
+#: ../../etcd.rst:117 ../../etcd.rst:119
+msgid "Valijate nimekiri"
+msgstr "Voterlist"
+
+#: ../../etcd.rst:125
+msgid "/voters"
+msgstr "/voters"
+
+#: ../../etcd.rst:127
+msgid "/voters/<version-id>"
+msgstr "/voters/<version-id>"
+
+#: ../../etcd.rst:127
+msgid "Valijanimekirja versiooni juurvõti"
+msgstr "Rootkey of voterlist version"
+
+#: ../../etcd.rst:127
+msgid "/voters/1"
+msgstr "/voters/1"
+
+#: ../../etcd.rst:130
+msgid "/voters/<version-id>/<voter-id>"
+msgstr "/voters/<version-id>/<voter-id>"
+
+#: ../../etcd.rst:130
+msgid "Valija <EHAK-district> antud nimekirjas"
+msgstr "Voter <EHAK-district> in the list"
+
+#: ../../etcd.rst:130
+msgid "/voters/1/12345678912"
+msgstr "/voters/1/12345678912"
+
+#: ../../etcd.rst:132
+msgid "05241"
+msgstr "05241"
+
+#: ../../etcd.rst:134
+msgid "/voters/<version-id>/version"
+msgstr "/voters/<version-id>/version"
+
+#: ../../etcd.rst:134
+msgid "Valijatenimekirja versioon"
+msgstr "Voterlist version"
+
+#: ../../etcd.rst:139
+msgid "/voters/version"
+msgstr "/voters/version"
+
+#: ../../etcd.rst:139
+msgid "Aktuaalse valijatenimekirja versiooni ID"
+msgstr "ID of latest voterlist"
+
+#: ../../etcd.rst:139
+msgid "1"
+msgstr "1"
+
+#: ../../etcd.rst:143
+msgid "/voters/previous"
+msgstr "/voters/previous"
+
+#: ../../etcd.rst:143
+msgid "Eelmise valijanimekirja versiooni ID"
+msgstr "ID of previous voterlist"
+
+#: ../../etcd.rst:143 ../../etcd.rst:163 ../../etcd.rst:178
+msgid "0"
+msgstr "0"
+
+#: ../../etcd.rst:149 ../../etcd.rst:151
+msgid "Talletatud e-hääl"
+msgstr "Stored i-vote"
+
+#: ../../etcd.rst:157
+msgid "/vote"
+msgstr "/vote"
+
+#: ../../etcd.rst:159
+msgid "/vote/<vote-id>"
+msgstr "/vote/<vote-id>"
+
+#: ../../etcd.rst:159
+msgid "Hääle juurvõti, unikaalne identifikaator"
+msgstr "Rootkey of a vote, unique identifier"
+
+#: ../../etcd.rst:159
+msgid "16 baiti binaarandmed"
+msgstr "16 bytes binary"
+
+#: ../../etcd.rst:163
+msgid "/vote/<vote-id>/count"
+msgstr "/vote/<vote-id>/count"
+
+#: ../../etcd.rst:163
+msgid "Hääle kontrollimise loendur"
+msgstr "Vote verification counter"
+
+#: ../../etcd.rst:166
+msgid "/vote/<vote-id>/ocsp"
+msgstr "/vote/<vote-id>/ocsp"
+
+#: ../../etcd.rst:166
+msgid "Kehtivuskinnitus"
+msgstr "Proof-of-validity"
+
+#: ../../etcd.rst:166
+msgid "DER kodeeringus OCSP vastus"
+msgstr "DER encoded OCSP response"
+
+#: ../../etcd.rst:169
+msgid "/vote/<vote-id>/time"
+msgstr "/vote/<vote-id>/time"
+
+#: ../../etcd.rst:169
+msgid "Hääle talletamise kellaaeg"
+msgstr "Time of the vote storage"
+
+#: ../../etcd.rst:169
+msgid "2019-03-03T10:56:28.8 99925926Z"
+msgstr "2019-03-03T10:56:28.8 99925926Z"
+
+#: ../../etcd.rst:172
+msgid "/vote/<vote-id>/tspreg"
+msgstr "/vote/<vote-id>/tspreg"
+
+#: ../../etcd.rst:172
+msgid "Registreerimiskinnitus"
+msgstr "Registration confirmation"
+
+#: ../../etcd.rst:172
+msgid "DER kodeeringus PKIX ajatempel"
+msgstr "DER encoded PKIX timestamp"
+
+#: ../../etcd.rst:175
+msgid "/vote/<vote-id>/type"
+msgstr "/vote/<vote-id>/type"
+
+#: ../../etcd.rst:175
+msgid "Allkirjastatud hääle konteineri tüüp"
+msgstr "Type of signed container"
+
+#: ../../etcd.rst:175
+msgid "BDOC"
+msgstr "BDOC"
+
+#: ../../etcd.rst:178
+msgid "/vote/<vote-id>/version"
+msgstr "/vote/<vote-id>/version"
+
+#: ../../etcd.rst:178
+msgid "Hääle andmisel kehtinud valijate nimekirja versiooni ID"
+msgstr "ID of the voterlist valid at the time of voting"
+
+#: ../../etcd.rst:183
+msgid "/vote/<vote-id>/vote"
+msgstr "/vote/<vote-id>/vote"
+
+#: ../../etcd.rst:183
+msgid "E-hääl allkirjastatud konteineris"
+msgstr "I-vote in signed container"
+
+#: ../../etcd.rst:183
+msgid "BDOC vormingus allkirjastatud hääl"
+msgstr "Vote in BDOC format"
+
+#: ../../etcd.rst:186
+msgid "/vote/<vote-id>/voter"
+msgstr "/vote/<vote-id>/voter"
+
+#: ../../etcd.rst:186
+msgid "Valija isikukood"
+msgstr "Voter personal code"
+
+#: ../../etcd.rst:186
+msgid "12345678912"
+msgstr "12345678912"
+
+#: ../../etcd.rst:190 ../../etcd.rst:192
+msgid "Statistikaliidesed"
+msgstr "Statisticinterfaces"
+
+#: ../../etcd.rst:198
+msgid "/votes"
+msgstr "/votes"
+
+#: ../../etcd.rst:200
+msgid "/votes/order"
+msgstr "/votes/order"
+
+#: ../../etcd.rst:200
+msgid "Hääletamisfaktide järjestuse juurvõti"
+msgstr "Rootkey of votesorder"
+
+#: ../../etcd.rst:203
+msgid "/votes/order/<seq>"
+msgstr "/votes/order/<seq>"
+
+#: ../../etcd.rst:203
+msgid "Konkreetse hääletamisfakti juurvõti"
+msgstr "Rootkey of specific vote"
+
+#: ../../etcd.rst:203
+msgid "/votes/order/1"
+msgstr "/votes/order/1"
+
+#: ../../etcd.rst:207
+msgid "/votes/order/<seq>/admincode"
+msgstr "/votes/order/<seq>/admincode"
+
+#: ../../etcd.rst:207
+msgid "Hääletamisfaktiga seotud EHAK"
+msgstr "EHAK associated with vote"
+
+#: ../../etcd.rst:207
+msgid "0796"
+msgstr "0796"
+
+#: ../../etcd.rst:210
+msgid "/votes/order/<seq>/district"
+msgstr "/votes/order/<seq>/district"
+
+#: ../../etcd.rst:210
+msgid "Hääletamisfaktiga seotud ringkonna number"
+msgstr "District associated with vote"
+
+#: ../../etcd.rst:210
+msgid "10"
+msgstr "10"
+
+#: ../../etcd.rst:214
+msgid "/votes/order/<seq>/voterid"
+msgstr "/votes/order/<seq>/voterid"
+
+#: ../../etcd.rst:214
+msgid "Hääletaja isikukood"
+msgstr "Personal code"
+
+#: ../../etcd.rst:214
+msgid "12345678901"
+msgstr "12345678901"
+
+#: ../../etcd.rst:217
+msgid "/votes/order/<seq>/votername"
+msgstr "/votes/order/<seq>/votername"
+
+#: ../../etcd.rst:217
+msgid "Hääletaja nimi"
+msgstr "Voter name"
+
+#: ../../etcd.rst:217
+msgid "NIMI NIMESTE"
+msgstr "NIMI NIMESTE"
+
+#: ../../etcd.rst:220
+msgid "/votes/stats"
+msgstr "/votes/stats"
+
+#: ../../etcd.rst:220
+msgid "Viimase hääletamisfakti järjekorranumber"
+msgstr "Sequence number of last vote"
+
+#: ../../etcd.rst:220
+msgid "12"
+msgstr "12"
+
+#: ../../etcd.rst:224
+msgid "/voted"
+msgstr "/voted"
+
+#: ../../etcd.rst:226
+msgid "/voted/latest"
+msgstr "/voted/latest"
+
+#: ../../etcd.rst:226
+msgid "Viimati antud häälte indeksi juurvõti"
+msgstr "Rootkey of last vote index"
+
+#: ../../etcd.rst:229
+msgid "/voted/latest/<voter-id>"
+msgstr "/voted/latest/<voter-id>"
+
+#: ../../etcd.rst:229
+msgid "Hääletaja poolt viimati antud hääle aeg ja identifikaator binaarkujul"
+msgstr "The time and identifier of the last vote in binary"
+
+#: ../../etcd.rst:229
+msgid "/voted/latest/1234567 8901"
+msgstr "/voted/latest/1234567 8901"
+
+#: ../../etcd.rst:232
+msgid "<2019-03-03T12:15:59Z ><vote-id>"
+msgstr "<2019-03-03T12:15:59Z ><vote-id>"
+
+#: ../../etcd.rst:235
+msgid "/voted/stats"
+msgstr "/voted/stats"
+
+#: ../../etcd.rst:235
+msgid "Jaoskonnapõhise statistika indeksi juurvõti"
+msgstr "Station statistics rootkey"
+
+#: ../../etcd.rst:239
+msgid "/voted/stats/<voter-id>"
+msgstr "/voted/stats/<voter-id>"
+
+#: ../../etcd.rst:239
+msgid "Hääle andmise kellaaeg koos jaoskonnainfoga"
+msgstr "Time of voting with station info"
+
+#: ../../etcd.rst:239
+msgid "/voted/stats/12345678 901"
+msgstr "/voted/stats/12345678 901"
+
+#: ../../etcd.rst:242
+msgid "<0796><2019-02-22T14: 17:23Z>"
+msgstr "<0796><2019-02-22T14: 17:23Z>"
+
+#: ../../etcd.rst:245
+msgid "/votes/voter/stats/<voter-id>"
+msgstr "/votes/voter/stats/<voter-id>"
+
+#: ../../etcd.rst:245
+msgid ""
+"Tühi baitide massiiv (kasutatakse väärtuse versiooni, ning mitte väärtust"
+" ennast)"
+msgstr "Empty array - we use the version of the value, not value itself"
+
+#: ../../etcd.rst:245
+msgid "/votes/voter/stats/ 394091044211"
+msgstr "/votes/voter/stats/ 394091044211"
+
+#: ../../etcd.rst:252 ../../etcd.rst:254
+msgid "Hääletamisseansid"
+msgstr "Voting sessions"
+
+#: ../../etcd.rst:260
+msgid "/session"
+msgstr "/session"
+
+#: ../../etcd.rst:262
+msgid "/session/<session-id>"
+msgstr "/session/<session-id>"
+
+#: ../../etcd.rst:262
+msgid ""
+"RPC meetod, mis kutsus antud funktsiooni välja + x1F + kasutaja "
+"autentimismeetod"
+msgstr "RPC method called + x1F + authentication method"
+
+#: ../../etcd.rst:262
+msgid "/session/0149468d2866 6fced7d73b32cc16225d"
+msgstr "/session/0149468d2866 6fced7d73b32cc16225d"

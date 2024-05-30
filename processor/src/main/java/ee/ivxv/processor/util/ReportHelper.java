@@ -17,11 +17,7 @@ import ee.ivxv.processor.Msg;
 import ee.ivxv.processor.ProcessorContext;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Queue;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.LongAdder;
@@ -48,35 +44,48 @@ public class ReportHelper {
         this.console = console;
     }
 
-    public void writeLog1(Path dir, BallotBox bb) {
-        writeLogN(dir, bb, LogType.LOG1, (x, y) -> true);
+    public void writeLog1(Path dir, BallotBox bb, String disc) {
+        writeLogN(dir, bb, disc, LogType.LOG1, (x, y) -> true);
     }
 
-    public void writeLog2(Path dir, BallotBox bb, BiPredicate<String, String> filter) {
-        writeLogN(dir, bb, LogType.LOG2, filter);
+    public void writeLog2(Path dir, BallotBox bb, String disc, BiPredicate<String, String> filter) {
+        writeLogN(dir, bb, disc, LogType.LOG2, filter);
     }
 
-    public void writeLog3(Path dir, BallotBox bb, BiPredicate<String, String> filter) {
-        writeLogN(dir, bb, LogType.LOG3, filter);
+    public void writeLog3(Path dir, BallotBox bb, String disc, BiPredicate<String, String> filter) {
+        writeLogN(dir, bb, disc, LogType.LOG3, filter);
     }
 
-    public void writeLog2(Path dir, String eid, List<Reporter.LogNRecord> records) {
-        writeLogN(dir, eid, LogType.LOG2, records.stream());
+    public void writeLog2(Path dir, String eid, String disc, List<Reporter.LogNRecord> records) {
+        writeLogN(dir, eid, disc, LogType.LOG2, records.stream());
     }
 
-    private void writeLogN(Path dir, String eid, LogType type,
+    public void writeEmptyLogFiles(Path outputDir, String logDiscriminator, LogType type, BallotBox ballotBox) {
+        Set<String> questionIDs = new HashSet<>();
+
+        ballotBox.getBallots().forEach((voterId, voterBallots) -> voterBallots.getBallots()
+                .forEach(voterBallot -> questionIDs.addAll(voterBallot.getVotes().keySet())));
+
+        // Does not print the output files to the console to avoid double printing.
+        // Potential improvement: get rid of the double printing issue to consistently print the
+        // output filename.
+        questionIDs.forEach(questionID -> ctx.reporter.writeEmptyLog(outputDir, ballotBox.getElection(),
+                logDiscriminator, type, questionID));
+        }
+
+    private void writeLogN(Path dir, String eid, String disc, LogType type,
             Stream<Reporter.LogNRecord> records) {
         try {
             console.println();
             console.println(Msg.m_writing_log_n, type.value);
-            Map<String, Path> paths = ctx.reporter.writeLogN(dir, eid, type, records);
+            Map<String, Path> paths = ctx.reporter.writeLogN(dir, eid, disc, type, records);
             paths.values().forEach(p -> console.println(Msg.m_output_file, p));
         } catch (Exception e) {
             throw new MessageException(e, Msg.e_writing_log_n, type.value, dir, e);
         }
     }
 
-    private void writeLogN(Path dir, BallotBox bb, LogType type,
+    private void writeLogN(Path dir, BallotBox bb, String disc, LogType type,
             BiPredicate<String, String> filter) {
         Map<String, List<Record>> rmap = new LinkedHashMap<>();
 
@@ -90,7 +99,7 @@ public class ReportHelper {
         try {
             console.println();
             console.println(Msg.m_writing_log_n, type.value);
-            Map<String, Path> paths = ctx.reporter.writeRecords(dir, bb.getElection(), type, rmap);
+            Map<String, Path> paths = ctx.reporter.writeRecords(dir, bb.getElection(), disc, type, rmap);
             paths.values().forEach(p -> console.println(Msg.m_output_file, p));
         } catch (Exception e) {
             throw new MessageException(e, Msg.e_writing_log_n, type.value, dir, e);
@@ -181,6 +190,8 @@ public class ReportHelper {
         switch (res) {
             case INVALID_FILE_NAME:
                 return Msg.e_bb_invalid_file_name;
+            case INVALID_FILE_SIZE:
+                return Msg.e_bb_invalid_file_size;
             case MISSING_FILE:
                 return Msg.e_bb_missing_file;
             case REPEATED_FILE:
@@ -272,15 +283,19 @@ public class ReportHelper {
     }
 
     private void writeErrors(Path out, String file, Enum<?> key) {
-        Queue<String> errs = errors.get(file);
-        if (errs == null || errs.isEmpty()) {
-            return;
-        }
-
         Path path = out.resolve(file);
-        console.println(key, path);
         try {
+            // The file should always be created for consistency...
             Util.createFile(path);
+
+            // ...however the file may be empty if there is nothing to report.
+            Queue<String> errs = errors.get(file);
+            if (errs == null || errs.isEmpty()) {
+                return;
+            }
+
+            // Only mention that there were errors if there indeed were any.
+            console.println(key, path);
             Files.write(path, errs);
         } catch (Exception e) {
             log.error("Error occurred while writing error report {}: {}", file, e.getMessage(), e);

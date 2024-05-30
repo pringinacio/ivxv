@@ -1,0 +1,20 @@
+
+!define TR_A_VOTER() Hääletaja
+!define TR_P_VOTA() Valijarakendus
+!define TR_P_VERA() Kontrollrakendus
+
+!define TR_BOX_COLLECT() Online (RIA)
+!define TR_P_COLLECT() Kogumisteenus
+
+!define TR_BOX_REG() Registreerimisteenus (SK)
+!define TR_P_REG() Registreerimisteenus
+
+!define TR_BOX_PROCESSOR() Offline (RVT)
+!define TR_P_PROCESSOR() Töötlemisrakendus
+
+
+!define TR_PHASE1() Hääletaja hääletab
+!define TR_PHASE2() Hääletaja kontrollib häält
+!define TR_PHASE3() Teenused annavad andmed üle
+!define TR_PHASE4() Töötleja kontrollib teenuste vaateid
+

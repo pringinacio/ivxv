@@ -5,11 +5,10 @@ gen_types_test.go
 gen_import.go
 gen_import_dev.go
 __pycache__
+.idea
 
 # ivxv-admin
 /build
+/dist
 /.pybuild
 /collector-admin/IVXVCollectorAdminDaemon.egg-info
-
-# release directory
-/ivxv-*

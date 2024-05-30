@@ -54,7 +54,7 @@ public interface ContainerReader {
      * 
      * @param data The initial container data without OCSP and TS data.
      * @param ocsp The OCSP response
-     * @param ts The time stamp token data. If {@code null} no timestamp info is added.
+     * @param ts The time stamp token data
      * @param tsC14nAlg The canonicalization algorithm to be used. May be {@code null}.
      * @return
      */

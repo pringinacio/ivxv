@@ -14,8 +14,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.HexFormat;
 import java.util.Map;
-import javax.xml.bind.DatatypeConverter;
 
 /**
  * DummyCardService is a card service which uses JSON storage for content.
@@ -79,7 +79,7 @@ public class DummyCardService implements CardService {
 
         @JsonIgnore
         private static String hex(byte[] in) {
-            return DatatypeConverter.printHexBinary(in);
+            return HexFormat.of().formatHex(in).toUpperCase();
         }
     }
 

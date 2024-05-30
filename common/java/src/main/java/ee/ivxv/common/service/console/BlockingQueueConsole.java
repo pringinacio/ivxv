@@ -52,6 +52,11 @@ public class BlockingQueueConsole implements Console {
 
     @Override
     public void println(String format, Object... args) {
+        queue.add(String.format(format, args).replaceAll("[0-9]{7}", "*******"));
+    }
+
+    @Override
+    public void printlnraw(String format, Object... args) {
         queue.add(String.format(format, args));
     }
 

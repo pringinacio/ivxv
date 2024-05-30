@@ -7,11 +7,13 @@
  */
 
 apply plugin: 'java'
-apply plugin: 'org.ysb33r.ivypot'
 
 group 'ee.ivxv'
-version '1.8.2'
-sourceCompatibility = 1.8
+version '1.9.10'
+
+java {
+	sourceCompatibility = JavaVersion.VERSION_17
+}
 
 ext.external = "${base}/common/external"
 
@@ -42,29 +44,12 @@ allprojects {
 }
 
 repositories {
-    if (System.env.SYNC_EXTERNAL) {
-        mavenCentral()
-    }
-    ivy {
-        url file(external).toURI()
-    }
-}
-
-syncRemoteRepositories {
-    repoRoot file(external).absolutePath
-    repositories {
-        mavenCentral()
-        // The 'ivypot' plugin
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
-    }
-    includeBuildScriptDependencies = true
+    mavenCentral()
 }
 
 task jarall(type: Jar) {
   manifest.from jar.manifest
-  classifier = 'all'
+  archiveClassifier = 'all'
   duplicatesStrategy = DuplicatesStrategy.EXCLUDE
   from {
     configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
@@ -80,5 +65,7 @@ task jarall(type: Jar) {
 }
 
 tasks.withType(JavaCompile) {
+    options.compilerArgs.add("-Xlint:unchecked")
     options.encoding = "UTF-8"
+    options.deprecation = true
 }

@@ -226,7 +226,7 @@ def manage_db_cond_value(db, service_id, key, set_value, value=None):
 
 
 def manage_db_mobileid_fields(db):
-    """Create/remove service Mobile-ID/Smart-ID token keys in database.
+    """Create/remove service Mobile-ID/Smart-ID/Web eID token keys in database.
 
     Check 'ticket' authentication method in election config and manage
     "mid-token-key" keys in management database for mid, choices and voting
@@ -235,7 +235,8 @@ def manage_db_mobileid_fields(db):
     """
     ticket_auth = 'ticket' in db.get_all_values('election').get('auth', {})
     for service_id, service_data in db.get_all_values('service').items():
-        if service_data['service-type'] not in ['mid', 'smartid', 'choices', 'voting']:
+        if service_data['service-type'] not in [
+                'mid', 'smartid', 'webeid', 'choices', 'voting']:
             continue
         key = f'service/{service_id}/mid-token-key'
         if ticket_auth:

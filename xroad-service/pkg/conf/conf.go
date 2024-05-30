@@ -10,7 +10,6 @@ import (
 	"encoding/json"
 	"encoding/pem"
 	"fmt"
-	"io/ioutil"
 	"math/big"
 	"os"
 	"time"
@@ -109,7 +108,7 @@ func (t TLS) X509Certificate() (*tls.Certificate, error) {
 }
 
 func LoadJSON(path string) (conf Conf, err error) {
-	bytes, err := ioutil.ReadFile(path)
+	bytes, err := os.ReadFile(path)
 	if err != nil {
 		return conf, fmt.Errorf("reading configuration failed: %w", err)
 	}

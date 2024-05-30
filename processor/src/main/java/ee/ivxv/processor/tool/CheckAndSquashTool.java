@@ -62,6 +62,9 @@ public class CheckAndSquashTool implements Tool.Runner<CheckAndSquashTool.CheckA
     private static final String OUT_IVLJSON_TMPL = "ivoterlist.json";
     private static final String OUT_IVLPDF_TMPL = "ivoterlist.pdf";
     private static final String OUT_RR_TMPL = "revocation-report.csv";
+    private static final String OUT_LOG_DISCRIMINATOR_CHECK = "check";
+    private static final String OUT_LOG_DISCRIMINATOR_SQUASH = "squash";
+    private static final Long DEFAULT_MAX_VOTE_BDOC_SIZE_IN_BYTES = 32768L;
     private final ProcessorContext ctx;
     private final I18nConsole console;
     private final ReportHelper reporter;
@@ -92,7 +95,9 @@ public class CheckAndSquashTool implements Tool.Runner<CheckAndSquashTool.CheckA
         BallotBox bb = readBallotBox(args, vp, dl.getElection());
         reporter.writeBbErrors(args.out.value());
 
-        reporter.writeLog1(args.out.value(), bb);
+        // There should still be an empty .log1 file even if there are no accepted records
+        reporter.writeEmptyLogFiles(args.out.value(), OUT_LOG_DISCRIMINATOR_CHECK, Reporter.LogType.LOG1, bb);
+        reporter.writeLog1(args.out.value(), bb, OUT_LOG_DISCRIMINATOR_CHECK);
 
         ElGamalPublicKey pub = new ElGamalPublicKey(args.encKey.value());
 
@@ -110,7 +115,10 @@ public class CheckAndSquashTool implements Tool.Runner<CheckAndSquashTool.CheckA
                 Reporter.AnonymousFormatter.NOT_ANONYMOUS);
         reporter.writeRevocationReport(args.out.value().resolve(OUT_RR_ANONYMOUS), bb.getElection(), revocationRecords,
                 Reporter.AnonymousFormatter.REVOCATION_REPORT_CSV);
-        reporter.writeLog2(args.out.value(), bb.getElection(), log2Records);
+
+        // There should still be an empty .log2 file even if there are no squashed records
+        reporter.writeEmptyLogFiles(args.out.value(), OUT_LOG_DISCRIMINATOR_SQUASH, Reporter.LogType.LOG2, bb);
+        reporter.writeLog2(args.out.value(), bb.getElection(), OUT_LOG_DISCRIMINATOR_SQUASH, log2Records);
 
         tool.writeJsonBb(bb, args.out.value().resolve(OUT_BB));
 
@@ -229,7 +237,7 @@ public class CheckAndSquashTool implements Tool.Runner<CheckAndSquashTool.CheckA
                     if (haveRegData || res != Result.BALLOT_WITHOUT_REG_REQ) {
                         reporter.reportBbError(ref, res, va);
                     }
-                });
+                }, args.maxSignedBallotSizeInBytes.value());
 
         if (!haveRegData) {
             console.println();
@@ -264,10 +272,11 @@ public class CheckAndSquashTool implements Tool.Runner<CheckAndSquashTool.CheckA
 
     private <T> BboxHelper.BallotsChecked<T> getCheckedBallots(Path path, VoterProvider vp,
                                                                PublicKeyHolder tsKey, Instant elStart, BboxHelper.Loader<T> l,
-                                                               BboxHelper.Reporter<Ref.BbRef> reporter) {
+                                                               BboxHelper.Reporter<Ref.BbRef> reporter,
+                                                               long maxSignedBallotSizeInBytes) {
         console.println();
         console.println(M.m_bb_loading, path);
-        BboxHelper.BboxLoader<T> loader = exec(() -> l.getBboxLoader(path, reporter));
+        BboxHelper.BboxLoader<T> loader = exec(() -> l.getBboxLoader(path, reporter, maxSignedBallotSizeInBytes));
         console.println(M.m_bb_loaded);
         console.println(M.m_bb_checking_type);
         // If no error has occurred so far, the file structure must be correct and type UNORGANIZED
@@ -351,6 +360,10 @@ public class CheckAndSquashTool implements Tool.Runner<CheckAndSquashTool.CheckA
 
         Arg<Path> bb = Arg.aPath(Msg.arg_ballotbox, true, false);
         Arg<Path> bbChecksum = Arg.aPath(Msg.arg_ballotbox_checksum, true, false).setOptional();
+        Arg<Long> maxSignedBallotSizeInBytes = Arg
+                .aLong(Msg.arg_signed_ballot_max_size_bytes)
+                .setOptional()
+                .setDefault(DEFAULT_MAX_VOTE_BDOC_SIZE_IN_BYTES);
         Arg<Path> districts = Arg.aPath(Msg.arg_districts, true, false);
         Arg<Path> rl = Arg.aPath(Msg.arg_registrationlist, true, false).setOptional();
         Arg<Path> rlChecksum =
@@ -368,6 +381,7 @@ public class CheckAndSquashTool implements Tool.Runner<CheckAndSquashTool.CheckA
         public CheckAndSquashArgs() {
             args.add(bb);
             args.add(bbChecksum);
+            args.add(maxSignedBallotSizeInBytes);
             args.add(districts);
             args.add(rl);
             args.add(rlChecksum);

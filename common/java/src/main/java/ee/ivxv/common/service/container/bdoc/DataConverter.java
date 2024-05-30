@@ -45,9 +45,6 @@ class DataConverter {
         }
         Signature.Profile profile = null;
         switch (s.getProfile()) {
-            case LT_TM:
-                profile = Signature.Profile.BDOC_TM;
-                break;
             case LT:
                 profile = Signature.Profile.BDOC_TS;
                 break;

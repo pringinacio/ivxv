@@ -1,21 +1,13 @@
-include ../../../common/go/gopath.mk
 include ../../../common/go/govar.mk
 
-.DEFAULT_GOAL := all
+.PHONY: all
+all: bin/gen
 
-# Do not install tools.
-.PHONY: install
-install:
-
-# Remove additional files in clean.
-CLEAN := src/ivxv.ee/cmd/gen/gentmpl.go
+bin/gen:
+	$(GO) generate ./...
+	env GOBIN=$(or $(IVXV_GOBIN),$(abspath bin)) \
+		$(GO) install $(if $(DEVELOPMENT),-tags development )./...
 
 .PHONY: clean
 clean:
-	$(MAKE) -f ../../../common/go/common.mk clean
-	rm -rf $(CLEAN)
-
-export NOGEN := true  # See common.mk for an explanation of this.
-%: force
-	$(MAKE) -f ../../../common/go/common.mk $@
-force ../../../common/go/gopath.mk ../../../common/go/govar.mk Makefile: ;
+	rm -rf cmd/gen/gentmpl.go

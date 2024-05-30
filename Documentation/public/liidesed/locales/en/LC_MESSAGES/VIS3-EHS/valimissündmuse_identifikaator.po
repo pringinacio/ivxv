@@ -1,0 +1,131 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, Cybernetica AS
+# This file is distributed under the same license as the Elektroonilise
+# hääletamise infosüsteem package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Elektroonilise hääletamise infosüsteem 1.9.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-03-02 12:43+0200\n"
+"PO-Revision-Date: 2024-03-02 13:19+0200\n"
+"Last-Translator: \n"
+"Language-Team: en <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.10.3\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: ../../VIS3-EHS/valimissündmuse_identifikaator.md:1
+msgid "Valimissündmuse identifikaator"
+msgstr "Election event identifier"
+
+#: ../../VIS3-EHS/valimissündmuse_identifikaator.md:3
+msgid ""
+"Üht valimist puudutav andmestik on seotud unikaalse valimissündmuse "
+"identifikaatori abil."
+msgstr ""
+"A set of data relating to a single election is linked by a unique election "
+"event identifier."
+
+#: ../../VIS3-EHS/valimissündmuse_identifikaator.md:5
+msgid ""
+"Valimissündmuse identifikaator on sõne, mis koosneb kahest kohustuslikust "
+"ja kahest valikulisest osast:"
+msgstr ""
+"The election event identifier is a string consisting of two mandatory and "
+"two optional parts:"
+
+#: ../../VIS3-EHS/valimissündmuse_identifikaator.md:6
+msgid "valimissündmuse tüüp, vastavalt allolevale tabelile, nt `RK`."
+msgstr "the type of event, according to the table below, e.g. `RK'."
+
+#: ../../VIS3-EHS/valimissündmuse_identifikaator.md:7
+msgid "aastanumbrist (nt `2023`)"
+msgstr "from the year (e.g. `2023`)"
+
+#: ../../VIS3-EHS/valimissündmuse_identifikaator.md:8
+msgid "valikulisest erakorraliste valimiste tunnusest `_E` ja"
+msgstr "the optional special election flag `_E` and"
+
+#: ../../VIS3-EHS/valimissündmuse_identifikaator.md:9
+msgid "valikulisest järjenumbrist <nr>, nt `2`."
+msgstr "from an optional sequence number <nr>, e.g. `2`."
+
+#: ../../VIS3-EHS/valimissündmuse_identifikaator.md:11
+msgid "Ülalnimetatud osad eraldatakse üksteisest allkriipsudega `_`."
+msgstr "The above parts are separated by underscores `_'."
+
+#: ../../VIS3-EHS/valimissündmuse_identifikaator.md:13
+msgid ""
+"Järjenummerdatakse tüüpide kaupa. Seejuures aasta esimese samatüübilise "
+"valimissündmuse korral järjenumbrit ei näidata."
+msgstr ""
+"Sequence numbering by type. The sequence number is not shown for the first "
+"election event of the same type in the year."
+
+#: ../../VIS3-EHS/valimissündmuse_identifikaator.md:15
+msgid "Näited:"
+msgstr "Examples:"
+
+#: ../../VIS3-EHS/valimissündmuse_identifikaator.md:16
+msgid "`KOV_2021`"
+msgstr "'KOV_2021"
+
+#: ../../VIS3-EHS/valimissündmuse_identifikaator.md:17
+msgid "`RH_2021`"
+msgstr "'RH_2021"
+
+#: ../../VIS3-EHS/valimissündmuse_identifikaator.md:18
+msgid "`RH_2021_2` (2021. a teine rahvahääletus)"
+msgstr "`RH_2021_2` (second referendum in 2021)"
+
+#: ../../VIS3-EHS/valimissündmuse_identifikaator.md:19
+msgid "`RK_2023`"
+msgstr "'RK_2023"
+
+#: ../../VIS3-EHS/valimissündmuse_identifikaator.md:20
+msgid "`RK_2023_E` (2023. a Riigikogu erakorralised valimised)"
+msgstr "`RK_2023_E` (2023 special elections to the Riigikogu)"
+
+#: ../../VIS3-EHS/valimissündmuse_identifikaator.md:21
+msgid "`RK_2023_E_2` (2023. a Riigikogu teised erakorralised valimised)."
+msgstr "`RK_2023_E_2` (other special elections to the Riigikogu in 2023)."
+
+#: ../../VIS3-EHS/valimissündmuse_identifikaator.md:23
+msgid ""
+"EHSi jaoks on valimise identifikaator kuni 28 ASCII-tähemärgi pikkune sõne "
+"ning eelnevalt kirjeldatud struktuuri põhjal EHS otsuseid ei tee."
+msgstr ""
+"For the EHS, the election identifier is a string up to 28 ASCII characters "
+"long, and the EHS does not make decisions based on the structure described "
+"above."
+
+#: ../../VIS3-EHS/valimissündmuse_identifikaator.md:25
+msgid "Valimissündmuse tüüp"
+msgstr "Type of election event"
+
+#: ../../VIS3-EHS/valimissündmuse_identifikaator.md:27
+msgid "Valimissündmuse tüüp esitatakse koodiga:"
+msgstr "The type of the election event is indicated by a code:"
+
+#: ../../VIS3-EHS/valimissündmuse_identifikaator.md:29
+msgid "`KOV` - Kohaliku omavalitsuse volikogu valimised"
+msgstr "`KOV` - Local government council elections"
+
+#: ../../VIS3-EHS/valimissündmuse_identifikaator.md:30
+msgid "`EP` - Euroopa Parlamendi valimised"
+msgstr "`EP` - European Parliament elections"
+
+#: ../../VIS3-EHS/valimissündmuse_identifikaator.md:31
+msgid "`RK` - Riigikogu valimised"
+msgstr "`RK` - Riigikogu elections"
+
+#: ../../VIS3-EHS/valimissündmuse_identifikaator.md:32
+msgid "`RH` - Rahvahääletus."
+msgstr "`RH` - Referendum."

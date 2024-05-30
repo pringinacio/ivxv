@@ -4,3 +4,7 @@ usr/bin/storageidx => usr/bin/ivxv-storageidx
 usr/bin/storageorder => usr/bin/ivxv-storageorder
 
 usr/lib/systemd/user/ivxv-storage@.service
+
+usr/bin/ivxv-storage_db_install.sh
+usr/bin/ivxv-storage_db_uninstall.sh
+usr/bin/ivxv-storage_db.tar.gz => usr/ivxv-storage_db.tar.gz

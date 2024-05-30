@@ -1,0 +1,193 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, Cybernetica AS
+# This file is distributed under the same license as the Elektroonilise
+# hääletamise infosüsteem package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Elektroonilise hääletamise infosüsteem 1.8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-10 09:47+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.10.3\n"
+
+#: ../../yldpohimotted.rst:4
+msgid "Sissejuhatus"
+msgstr "Introduction"
+
+#: ../../yldpohimotted.rst:6
+msgid ""
+"Elektroonilise hääletamise infosüsteem IVXV on loodud lähtuvalt "
+"e-hääletamise raamistikust [ÜK2016]_ ja riigihanke 171780 tehnilisest "
+"kirjeldusest [TK2016]_. Käesolevas dokumendis kirjeldatakse IVXV "
+"arhitektuurset lahendust. Elektroonilise hääletamise infosüsteem koosneb "
+"vallasrežiimirakendustest ning sidusrežiimikomponentidest. Täiendavalt "
+"sõltub infosüsteem välistest infosüsteemidest ning mõjutab vahetult "
+"elektrooniliseks hääletamiseks ja hääle kontrollimiseks kasutatavaid "
+"komponente."
+msgstr ""
+"The IVXV electronic voting information system has been developed on the "
+"basis of the e-voting framework [ÜK2016]_ and the technical specification"
+" of public procurement 171780 [TK2016]_. This document describes the "
+"architectural design of IVXV. The eVoting Information System consists of "
+"the offline applications and the online components. In addition, the "
+"information system depends on external information systems and directly "
+"affects the components used for electronic voting and vote verification."
+
+#: ../../yldpohimotted.rst:14
+msgid ""
+"Arhitektuuridokument kirjeldab IVXV komponente, nende omavahelisi "
+"liideseid ja liideseid väliste süsteemidega ning komponentide poolt "
+"realiseeritavaid protokolle."
+msgstr ""
+"The architecture document describes the IVXV components, their interfaces"
+" with each other and with external systems, and the protocols implemented"
+" by the components."
+
+#: ../../yldpohimotted.rst:18
+msgid "IVXV kontseptsioon"
+msgstr "IVXV Concept"
+
+#: ../../yldpohimotted.rst:20
+msgid ""
+"Üldine, kuid terviklik ülevaade elektroonilise hääletamise raamistiku "
+"(\"IVXV\") tehnilisest ja organisatsioonilisest poolest ning selle "
+"rakendamisest Eesti riiklikel valimistel on antud e-hääletamise "
+"raamistiku üldkirjelduses [ÜK2016]_."
+msgstr ""
+"A general but comprehensive overview of the technical and organisational "
+"aspects of the electronic voting framework (\"IVXV\") and its "
+"implementation in Estonian national elections is given in the general "
+"description of the e-voting framework [ÜK2016]_."
+
+#: ../../yldpohimotted.rst:25
+msgid ""
+"IVXV infosüsteemina teostab \"ümbrikuskeemil\" põhinevat e-hääletamise "
+"protokolli. IVXV toimib hääletamiseelsel etapil, hääletamisetapil, "
+"töötlusetapil ning lugemisetapil ja pakkub vahendeid elektroonilise "
+"hääletamise protsessis osalemiseks Korraldajale, Lugejale, Hääletajale, "
+"Kogujale, Töötlejale, Miksijale, Audiitorile, Klienditoele, Valijate "
+"nimekirja koostajale ja täiendajale."
+msgstr ""
+"As an information system, IVXV implements an e-voting protocol based on "
+"an \"double-envelope scheme\". IVXV operates at the pre-voting stage, the"
+" voting stage, the processing stage and the counting stage, and provides "
+"the tools for the participation in the electronic voting process of the "
+"Organiser, Tallier, Voter, Collector, Processor, Registrar, Auditor, "
+"Client Support and Voter List manager."
+
+#: ../../yldpohimotted.rst:32
+msgid ""
+"Infosüsteemi komponendid on Kogumisteenus, Töötlemisrakendus, "
+"Võtmerakendus ning Auditirakendus. Infosüsteemiga on tihedalt seotud "
+"Valijarakendus, Kontrollrakendus ning Miksimisrakendus."
+msgstr ""
+"The components of the information system are the Collection Service, the "
+"Processing Application, the Key Application and the Audit Application. "
+"Closely linked to the Information System are the Voting Application, the "
+"Verification Application and the Mixing Application."
+
+#: ../../yldpohimotted.rst:36
+msgid ""
+"Infosüsteem kasutab oma töös väliseid teenuseid - Tuvastusteenus, "
+"Allkirjastamisteenus, Registreerimisteenus, Valimiste Infosüsteem ning "
+"X-tee."
+msgstr ""
+"The information system uses external services - Authentication Service, "
+"Signature Service, Registration Service, Election Management System and "
+"X-Road."
+
+#: ../../yldpohimotted.rst:40
+msgid "IVXV krüptograafiline protokoll"
+msgstr "IVXV Cryptographic Protocol"
+
+#: ../../yldpohimotted.rst:42
+msgid ""
+"Elektroonilise hääletamise turvalisuse, verifitseeritavuse ning "
+"hääletamise salajasuse, hääletamise korrektsuse ja hääletaja sõltumatuse "
+"saavutamiseks on rangelt kirjeldatud elektroonilise hääletamise "
+"krüptograafiline protokoll [HMVW16]_. Protokoll annab vajaliku ja piisava"
+" ülevaate IVXV ülesehitusest ning selle turvaaspektidest. IVXV "
+"komponendid realiseerivad krüptograafilise protokolli alamosi."
+msgstr ""
+"In order to achieve the security, verifiability and secrecy of electronic"
+" voting, the correctness of the voting and the independence of the voter,"
+" the cryptographic protocol for electronic voting [HMVW16]_ is strictly "
+"described. The protocol provides a necessary and sufficient overview of "
+"the IVXV architecture and its security aspects. The components of IVXV "
+"implement sub-components of the cryptographic protocol."
+
+#: ../../yldpohimotted.rst:50
+msgid "Notatsioon"
+msgstr "Notation"
+
+#: ../../yldpohimotted.rst:52
+msgid ""
+"Arhitektuurse lahenduse visandi illustreerimiseks kasutatakse dokumendis "
+"UML-skeeme, kus eristame värvide ja märgenditega ``<<>>`` kodeeritult "
+"olemite – tegijad, liidesed, komponendid – järgmisi aspekte:"
+msgstr ""
+"To illustrate a sketch of the architectural solution, the document uses "
+"UML diagrams, where we distinguish the following aspects of entities - "
+"actors, interfaces, components - coded with colours and ``<<>>``:"
+
+#: ../../yldpohimotted.rst:56
+msgid ""
+"Märgend ``<<IVXV>>`` (Kollane) – infosüsteemi liides või komponent "
+"defineeritakse/realiseeritakse konkreetse pakkumuse raames tehtavate "
+"tööde käigus"
+msgstr ""
+"Mark ``<<IVXV>>`` (Yellow) - The information system interface or "
+"component will be defined/realised during the works of a specific tender."
+
+#: ../../yldpohimotted.rst:60
+msgid ""
+"Märgend ``<<Väline>>`` (Punane) – infosüsteem sõltub mingi "
+"funktsionaalsuse realiseerimisel kolmanda osapoole komponendist või "
+"olemasolevast liidesest, mille ümberdefineerimine eeldab ka kolmandate "
+"osapoolte tööd."
+msgstr ""
+"``<<<External>>`` (Red) - The information system depends on a third-party"
+" component or an existing interface for the implementation of some "
+"functionality, the redefinition of which also requires third-party work."
+
+#: ../../yldpohimotted.rst:64
+msgid ""
+"Märgend ``<<VVK>>`` (Pruun) – sarnane eelmisele, kuid liidese/komponendi "
+"omanikuks on VVK."
+msgstr ""
+"Flag ``<<<NEC>>`` (Brown) - similar to the previous one, but the "
+"interface/component is owned by NEC."
+
+#: ../../yldpohimotted.rst:67
+msgid ""
+"Märgend ``<<Määratlemata>>`` (Must) – infosüsteemi jaoks oluline liides "
+"on määratlemata."
+msgstr ""
+"Flag ``<<Undefined>>`` (Black) - Interface relevant to the information "
+"system is undefined."
+
+#: ../../yldpohimotted.rst:72
+msgid "Näiteskeem"
+msgstr "Example scheme"
+
+#~ msgid ""
+#~ "IVXV krüptograafiline protokoll on kirjeldatud"
+#~ " ka protokolli turvaomaduste süsteemiga "
+#~ "[ProVerif]_ formaalset verifitseerimist võimaldavas"
+#~ " notatsioonis."
+#~ msgstr ""
+#~ "The IVXV cryptographic protocol is also"
+#~ " described in a notation that allows"
+#~ " formal verification by the protocol "
+#~ "security properties system [ProVerif]_."
+

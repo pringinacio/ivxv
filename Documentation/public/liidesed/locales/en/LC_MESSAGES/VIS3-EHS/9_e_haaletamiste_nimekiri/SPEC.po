@@ -1,0 +1,742 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2024, Cybernetica AS
+# This file is distributed under the same license as the Elektroonilise
+# hääletamise infosüsteem package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Elektroonilise hääletamise infosüsteem 1.9.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-29 10:34+0200\n"
+"PO-Revision-Date: 2024-03-02 13:55+0200\n"
+"Last-Translator: \n"
+"Language-Team: en <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.10.3\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:1
+msgid "E-hääletamiste nimekiri"
+msgstr "List of e-votes"
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:3
+msgid "kavand v0.4"
+msgstr "draft v0.4"
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:5
+msgid "Muutelugu"
+msgstr "Migration story"
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:7
+msgid "Eemaldatud sõna \"jooksev\" / Priit Parmakson, 23.11.2022"
+msgstr "Removed the word \"current\" / Priit Parmakson, 23.11.2022"
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:8
+msgid ""
+"Lisatud OpenAPI kirjelduse publitseerimise teave. / Priit Parmakson, "
+"13.12.2022"
+msgstr ""
+"Added information on the publication of the OpenAPI specification / Priit "
+"Parmakson, 13.12.2022"
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:9
+msgid ""
+"Täpsustatud e-hääletamiste väljanäitamist VIS3-s. / Priit Parmakson, "
+"15.11.2022"
+msgstr ""
+"The e-voting field in VIS3 has been specified. / Priit Parmakson, 15.11.2022"
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:10
+msgid "Lisatud jõudluskaalutlused. / Priit Parmakson, 01.11.2022"
+msgstr "Performance scales added / Priit Parmakson, 01.11.2022"
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:11
+msgid ""
+"Asendatud \"e-hääletanu\" -> \"e-hääletamine\". Põhjus: inimene võib e-"
+"hääletada mitu korda (ümberhääletamine); vastavalt korrigeeritud JSON "
+"väljanimesid \"evotersbatch\" -> \"evotingsbatch\". /  Priit Parmakson, "
+"01.09.2022"
+msgstr ""
+"Replaced \"e-vote\" -> \"e-voting\". Reason: a person can e-vote multiple "
+"times (re-vote); corrected JSON field names \"evotersbatch\" -> "
+"\"evotingsbatch\" accordingly. / Priit Parmakson, 01.09.2022"
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:12
+msgid ""
+"Eemaldatud: hääletamise kuupäeva/aja edastamine. Põhjus: turvakaalutlus "
+"(häälemüügi takistamine). / Priit Parmakson, 01.09.2022 (Sven Heibergiga "
+"arutelu alusel)"
+msgstr ""
+"Removed: transmission of voting date/time. Reason: security considerations "
+"(to prevent the sale of votes) / Priit Parmakson, 01.09.2022 (in discussion "
+"with Sven Heiberg)."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:13
+msgid ""
+"Lisatud: 1) ärivajaduse täpsustus; 2) e-hääletamise fakti aja edastamine; 3) "
+"edastuse kontroll ja vajadusel täiendamine või parandamine lõpliku faili "
+"abil. / Priit Parmakson, 04.05.2022"
+msgstr ""
+"Attached: 1) specification of the business need; 2) transmission of the e-"
+"voting fact time; 3) checking of the transmission and, if necessary, "
+"completion or correction by means of the final file / Priit Parmakson, "
+"04.05.2022"
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:14
+msgid "Arutelu - RVT ja RIA inimesed, 04.05.2022"
+msgstr "Debate - RVT and RIA people, 04.05.2022"
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:15
+msgid ""
+"\"E-hääletanute jooksev nimekiri\", kavand v0.2. / Priit Parmakson, 02.05.2022"
+msgstr "\"Rolling list of e-voters\", draft v0.2. / Priit Parmakson, 02.05.2022"
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:16
+msgid "Arutelu: X-tee kasutamine, JSON - Tarmo Hanga, Priit Parmakson, apr 2022"
+msgstr "Discussion: using X-tee, JSON - Tarmo Hanga, Priit Parmakson, Apr 2022"
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:17
+msgid "\"EHS- VIS3 liidestus\" (kavand) - Indrek Leesi, apr 2022"
+msgstr "\"EHS- VIS3 interface\" (draft) - Indrek Leesi, Apr 2022"
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:19
+msgid "Ülevaade"
+msgstr "Overview"
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:21
+msgid ""
+"Käesolev spetsifikatsioon määratleb protokolli e-hääletamiste nimekirja "
+"edastamiseks e-hääletamise süsteemist (edaspidi - EHS) Valimiste infosüsteemi "
+"(edaspidi - VIS3)."
+msgstr ""
+"This specification defines the protocol for the transfer of the list of e-"
+"votes from the e-voting system (hereinafter referred to as EHS) to the "
+"Election Information System (hereinafter referred to as VIS3)."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:23
+msgid ""
+"Varasematel valimistel (k.a KOV 2021) on peale hääletamise lõppu, "
+"valimispäeval edastatud EHS-st VIS3-le e-hääletanute nimekiri (edaspidi - e-"
+"hääletanute lõplik nimekiri). See edastus on spetsifitseeritud: [E-"
+"hääletanute nimekiri](https://github.com/e-gov/VIS3-EHS/blob/"
+"main/4_e_haaletanute_nimekiri/SPEC.md)."
+msgstr ""
+"In previous elections (including Municipal elections 2021), the list of e-"
+"voters (hereafter referred to as the final list of e-voters) has been "
+"transmitted from the EHS to VIS3 after the end of voting on the day of the "
+"election. This transmission is specified in [e-vote list](https://github.com/"
+"e-gov/VIS3-EHS/blob/main/4_e_haaletanute_nimekiri/SPEC.md)."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:25
+msgid ""
+"Siiski on vajadus VIS3-s saada teavet, kas valija on e-hääletanud, juba enne "
+"ülalnimetatud lõplikku edastust. Valija, kes on e-hääletanud, võib tulla "
+"eelhääletamise perioodil valimisjaoskonda ja soovida paberil hääletada. "
+"Valimisjaoskonna töötajal oleks hea omada võimalust VIS3-st vaadata, kas "
+"valija on e-hääletanud. Seda teavet saab muuhulgas kasutada valija "
+"hoiatamiseks, et paberhääletamisega tema e-hääletamine tühistub."
+msgstr ""
+"However, there is a need to obtain information in VIS3 on whether the voter "
+"has e-voted, even before the final transmission mentioned above. A voter who "
+"has e-voted may come to a polling station during the early voting period and "
+"wish to vote by paper ballot. It would be useful for the polling station "
+"staff to have the possibility to check in VIS3 whether the voter has e-voted. "
+"This information can be used, among other things, to warn the voter that his/"
+"her e-vote will be cancelled if he/she votes by paper ballot."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:27
+msgid "E-hääletamiste nimekiri edastatakse EHS-st VIS3-e X-tee teenusega."
+msgstr ""
+"The list of e-votes will be transmitted from the EHS to VIS3 via the X-road "
+"service."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:29
+msgid ""
+"Teenust pakub EHS. VIS3 pöördub regulaarselt teenuse poole. EHS edastab e-"
+"hääletamiste andmete paki. VIS3 saab paki ja salvestab andmed VIS3 andmebaasi."
+msgstr ""
+"The service is provided by EHS. VIS3 regularly calls on the service. EHS will "
+"transmit the e-voting data packet. VIS3 receives the packet and stores the "
+"data in the VIS3 database."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:31
+msgid "Sünkroonimiseks kasutatakse e-hääletamiste nummerdamist."
+msgstr "Numbering of e-votes is used for synchronisation."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:33
+msgid "Kaalutlused"
+msgstr "Reflections"
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:35
+msgid ""
+"Teenus on arendatud X-tee REST võimalusi kasutades, vastavalt X-tee REST "
+"sõnumiprotokollile ([X-Road: Message Protocol for REST](https://www.x-tee.ee/"
+"docs/live/xroad/pr-rest_x-road_message_protocol_for_rest.html)). Andmed "
+"väljastatakse JSON-vormingus."
+msgstr ""
+"The service has been developed using the REST capabilities of the X-Road, "
+"according to the X-Road REST message protocol ([X-Road: Message Protocol for "
+"REST](https://www.x-tee.ee/docs/live/xroad/pr-rest_x-"
+"road_message_protocol_for_rest.html)). The data is output in JSON format."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:37
+msgid ""
+"X-teed on otstarbekas kasutada, sest kuigi VIS3 ja EHS võivad olla käitatud "
+"samas taristus, on ikkagi vaja tagada usaldus, logimine ja paindlikkus - "
+"omadused, mille tagamine X-tee kasutamisega kokkuvõttes tõenäoliselt ei saaks "
+"olema ei lihtsam ega odavam."
+msgstr ""
+"The X-road makes sense because, although VIS3 and EHS can be run on the same "
+"infrastructure, there is still a need to ensure trust, logging and "
+"flexibility - features that, in the end, using the X-road is unlikely to be "
+"easier or cheaper to provide."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:39
+msgid ""
+"Protokollis on arvesse võetud Rahvastikuregistri ja VIS3 vaheliste X-tee "
+"teenuste kasutamise kogemust (REST sõnumiprotokoll, JSON, OpenAPI)."
+msgstr ""
+"The protocol takes into account the experience of using X-Road services "
+"between the Population Register and VIS3 (REST message protocol, JSON, "
+"OpenAPI)."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:41
+msgid ""
+"Erilist tähelepanu on pööratud andmete re-sünkroonimise võimalusele tõrgete "
+"korral. Selleks on pakkide pärimine kavandatud idenmpotentsena."
+msgstr ""
+"Particular attention has been paid to the possibility of re-synchronising "
+"data in case of failures. For this purpose, packet inheritance is designed as "
+"an idempotent."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:43
+msgid ""
+"E-hääletanute nimekirja \"peegeldamiseks\" EHS-st VIS3-e võiks "
+"põhimõtteliselt kasutada ka mõnda standardset sünkroonimisprotokolli (nt Git, "
+"Rsync vms, vt \\[1], \\[2], \\[3]). Kuna vajadus on suhteliselt lihtne, siis "
+"seda ei ole tehtud."
+msgstr ""
+"To \"mirror\" the list of e-voters from the EHS to VIS3, in principle a "
+"standard synchronisation protocol could also be used (e.g. Git, Rsync etc., "
+"see \\[1], \\[2], \\[3]). Since the need is relatively simple, this has not "
+"been done."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:45
+msgid ""
+"Jõudluskaalutlused: E-hääletamise jooksvat nimekirja edastatakse e-"
+"hääletamise perioodil (6 päeva). E-hääletamise fakte edastatakse kokku u 300 "
+"000. E-hääletamise perioodi esimesel tunnil võib oodata u 5000 e-hääletamist; "
+"perioodi viimasel tunnil u 10 000 e-hääletamist."
+msgstr ""
+"Performance considerations: the e-voting rolling list will be made available "
+"during the e-voting period (6 days). The total number of e-voting files to be "
+"transmitted will be around 300 000. Approximately 5,000 e-votes can be "
+"expected in the first hour of the e-voting period; approximately 10,000 e-"
+"votes in the last hour of the period."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:47
+msgid "E-hääletamiste järjenumbrid"
+msgstr "E-vote sequential numbers"
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:49
+msgid ""
+"Tagamaks, et e-hääletamiste nimekiri kantakse EHS-st VIS3-e õigeaegselt ja "
+"täielikult, kasutatakse järjenumbreid. EHS omistab igale e-hääletamisele "
+"järjenumbri (ingl Sequence Number)."
+msgstr ""
+"Sequential numbers will be used to ensure that the list of e-votes is "
+"transferred from the EHS to VIS3 in a timely and complete manner. The EHS "
+"assigns a Sequence Number to each e-vote."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:51
+msgid ""
+"Järjenumber on naturaalarv, alates ühest. Väärtus `0` tähistab olukorda, kus "
+"e-hääletamisi veel ei ole toimunud."
+msgstr ""
+"The sequence number is a natural number, starting from one. The value `0` "
+"indicates a situation where no e-voting has yet taken place."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:53
+msgid "Igas valimissündmuses on oma numeratsioon."
+msgstr "Each election event has its own numbering."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:55
+msgid "Teenus"
+msgstr "Service"
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:57
+msgid ""
+"Teenuse vastutav töötleja on Riigi Valimisteenistus (RVT). Teenuse volitatud "
+"töötleja on Riigi Infosüsteemi Amet (RIA). Teenust osutav süsteem on EHS."
+msgstr ""
+"The controller of the service is the State Election Service (RVT). The "
+"authorised processor of the service is the State Information System Authority "
+"(RIA). The system providing the service is EHS."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:59
+msgid ""
+"Teenust kasutav süsteem on VIS3. Teenust kasutava süsteemi vastutav töötleja "
+"on RIA."
+msgstr ""
+"The system using the service is VIS3. The system using the service is the RIA."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:61
+msgid ""
+"Teenuse ärinimi on \"E-hääletamiste nimekiri\". Teenuse tehniline nimi (X-tee "
+"REST teenusekood, Service Code) on `e-votings-running-list`."
+msgstr ""
+"The business name of the service is \"E-voting list\". The technical name of "
+"the service (X-way REST Service Code) is `e-votings-running-list`."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:63
+msgid "Teenus pakub järgmisi otspunkte:"
+msgstr "The service offers the following endpoints:"
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:65
+msgid ""
+"1  `GET /elections`.  \"Valimissündmuste loetelu\" väljastab aktiivsete "
+"valimissündmuste loetelu. Aktiivne valimissündmus teenuse kontekstis on "
+"selline, mille kohta EHS on valmis väljastama e-hääletamiste nimekirja."
+msgstr ""
+"1 `GET /elections`.  \"List of election events\" outputs a list of active "
+"election events. An active election event in the context of the service is "
+"one for which EHS is ready to issue a list of e-votes."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:67
+msgid ""
+"2  `GET /elections/{electionId}/lastseqno`. \"Viimane järjenumber\" väljastab "
+"konkreetse valimissündmuse viimase EHS-s registreeritud e-hääletamise "
+"järjenumbri."
+msgstr ""
+"2 `GET /elections/{electionId}/lastseqno`. \"Last Sequence Number\" gives the "
+"last e-voting sequence number registered in the EHS for a particular election "
+"event."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:69
+msgid ""
+"3  `GET /elections/{electionId}/evotingsbatchfrom/{fromseqno}`. \"e-"
+"hääletamiste pakk\". Selle päringuga pärib VIS3 EHS-lt valimissündmuse "
+"`{electionId}` e-hääletamiste paki, alatest e-hääletamisest järjenumbriga "
+"`{fromseqno}`."
+msgstr ""
+"3 `GET /elections/{electionId}/evotingsbatchfrom/{fromseqno}`. \"e-voting "
+"pack\". With this query, VIS3 shall inherit from EHS the e-voting batch for "
+"the election event `{electionId}`, starting from e-voting with the suffix "
+"`{fromseqno}`."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:71
+msgid ""
+"Päringute ja vastuste andmestruktuuride ja samuti vastuskoodide "
+"spetsifikatsiooni vt OpenAPI spetsifikatsioonis: [ehs-xroad-api.yaml](ehs-"
+"xroad-api.yaml)."
+msgstr ""
+"For the specification of the query and response data structures and also the "
+"response codes, see the OpenAPI specification: [ehs-xroad-api.yaml](ehs-xroad-"
+"api.yaml)."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:73
+msgid ""
+"Teenuse OpenAPI spetsifikatsioon publitseeritakse turvaserveris, vastavalt "
+"spetsifikatsioonile [https://www.x-tee.ee/docs/live/xroad/pr-mrest_x-"
+"road_service_metadata_protocol_for_rest.html#4-retrieving-list-of-services](X-"
+"Road: Service Metadata Protocol for REST), jaotis 5 \"Retrieving the OpenAPI "
+"description of a Service\"."
+msgstr ""
+"The OpenAPI specification of a Service is published in the Security Server, "
+"according to the specification [https://www.x-tee.ee/docs/live/xroad/pr-"
+"mrest_x-road_service_metadata_protocol_for_rest.html#4-retrieving-list-of-"
+"services](X-Road: Service Metadata Protocol for REST), section 5 \"Retrieving "
+"the OpenAPI description of a Service\"."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:75
+msgid "Teenuse OpenAPI spetsifikatsioon näitepäring:"
+msgstr "OpenAPI service specification example request:"
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:77
+msgid ""
+"`curl -H \"accept: application/json\" -H \"X-Road-Client:ee-dev/COM/<MEMBER>/"
+"dev\" \"https://.../r1/ee-dev/COM/<MEMBER>/ehs/getOpenAPI?serviceCode=e-"
+"votings-running-list\"`"
+msgstr ""
+"`curl -H \"accept: application/json\" -H \"X-Road-Client:ee-dev/COM/<MEMBER>/"
+"dev\" \"https://.../r1/ee-dev/COM/<MEMBER>/ehs/getOpenAPI?serviceCode=e-"
+"votings-running-list\"`"
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:79
+msgid "Otspunkt \"Valimissündmuste loetelu\""
+msgstr "Endpoint \"List of electoral events\""
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:81
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:99
+msgid "Näide."
+msgstr "Example."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:83
+msgid "Päring: `GET /elections`"
+msgstr "Query: `GET /elections`"
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:85
+msgid "VIS3 pärib EHS-lt aktiivsete valimissündmuste loetelu."
+msgstr "VIS3 will query the list of active electoral events from EHS."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:87
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:105
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:128
+msgid "Vastus:"
+msgstr "Answer:"
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:93
+msgid "EHS vastab, et aktiivseid valimissündmusi on üks - `RK_2023`."
+msgstr "EHS replies that there is one active election event - `RK_2023`."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:95
+msgid ""
+"Kui aktiivseid valimissündmusi ei ole, siis EHS peab vastuses saatma tühja "
+"massiivi (JSON Array)."
+msgstr ""
+"If there are no active election events, EHS must send an empty array (JSON "
+"Array) in the response."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:97
+msgid "Otspunkt \"Viimane järjenumber\""
+msgstr "Endpoint \"Last serial\""
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:101
+msgid "Päring: `GET /elections/RK_2023/lastseqno`"
+msgstr "Query: `GET /elections/RK_2023/lastseqno`"
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:103
+msgid "VIS3 pärib valimissündmuse `RK_2023` viimase e-hääletamise järjenumbrit."
+msgstr ""
+"VIS3 will query the last e-voting sequence number of the election event "
+"`RK_2023`."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:114
+msgid ""
+"EHS vastab, et valimissündmuse `RK_2023` viimase e-hääletamise järjenumber on "
+"`54002`."
+msgstr ""
+"The EHS replies that the last e-voting sequence number for the election event "
+"`RK_2023` is `54002`."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:116
+msgid ""
+"Kui valimissündmus on EHS-le tundmatu, siis EHS vastab HTTP vastuskoodiga "
+"`404 Not Found`."
+msgstr ""
+"If the election event is unknown to EHS, EHS will respond with the HTTP "
+"response code `404 Not Found`."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:118
+msgid ""
+"Järjenumbrid algavad ühest (`1`). Kui valimisündmuses ei ole veel ükski "
+"valija e-hääletanud, siis vastab EHS `lastseqno` väärtusega `0`."
+msgstr ""
+"Sequential numbers start with one (`1`). If no voter has yet e-voted in the "
+"election event, the EHS will match `lastseqno` with a value of `0`."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:120
+msgid "Otspunkt \"e-hääletanute pakk\""
+msgstr "Endpoint \"e-vote pack\""
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:122
+msgid "Näide 3."
+msgstr "Example 3."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:124
+msgid "Päring: `G /elections/RK_2023/evotingsbatchfrom/54001`"
+msgstr "Query: `G /elections/RK_2023/evotingsbatchfrom/54001`"
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:126
+msgid ""
+"VIS3 pärib valimissündmuse `RK_2023` e-hääletamiste andmeid, alates "
+"järjenumbrist `54001`."
+msgstr ""
+"VIS3 will query the e-voting data for the election event 'RK_2023', starting "
+"with the sequence number '54001'."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:155
+msgid ""
+"EHS vastab, et saadab valimissündmuse `RK_2023` e-hääletamiste andmeid, "
+"alates järjenumbrist `54001`, pakina, milles on kuni `100` kirjet. "
+"Konkreetses pakis on kaks kirjet, kuna paki moodustamise hetkel on viimase "
+"EHS-s registreeritud e-hääletamise järjenumber `54002`. Esimene kirje "
+"tähendab, et valija `LEO KASS`, isikukoodiga `38101010020` on valimistel "
+"`RK_2023` e-hääletanud. Kirjes on ka valija KOV EHAK-kood ja valimisringkonna "
+"number."
+msgstr ""
+"The EHS replies that it will send the e-voting data for the election event "
+"`RK_2023`, starting with the sequence number `54001`, as a packet with up to "
+"`100` records. There will be two records in a particular packet, as the last "
+"e-voting sequence number registered in the EHS at the time the packet is "
+"formed is '54002'. The first record means that the voter `LEO KASS`, with the "
+"personal identification number `38101010020` has e-voted in the election "
+"`RK_2023`. The record also contains the voter's Municipal Electoral "
+"Registration Number and the constituency number."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:157
+msgid ""
+"E-hääletamise fakti kohta EHS e-hääletamise aega ei saada - turvakaalutlustel."
+msgstr ""
+"The fact of e-voting will not be reported to EHS at the time of e-voting - "
+"for security reasons."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:159
+msgid ""
+"Paki maksimaalsuuruse `batchmaxsize` määrab EHS, arvestusega, et andmed "
+"saadetakse X-tee vastussõnumi kehas (mitte manuses). Vastussõnumi töötlemisel "
+"turvaserveris loetakse keha üheaegselt põhimällu. Seetõttu ei tohi "
+"vastusõnumi keha suurus ületada 10 MB (turvaserveri vaikeseadistus)."
+msgstr ""
+"The maximum batch size `batchmaxsize` is determined by the EHS, taking into "
+"account that the data is sent in the body of the X-road response message (not "
+"in the attachment). When processing the response message in the security "
+"server, the body is read simultaneously into the main memory. Therefore, the "
+"body size of the response message shall not exceed 10 MB (default setting of "
+"the security server)."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:161
+msgid ""
+"Vastuses võib olla kuni `batchmaxsize` kirjet. Kui vastuses on kirjeid vähem "
+"kui `batchmaxsize`, siis see tähendab, et EHS-l ei ole vastuse koostamise "
+"hetkel rohkem andmeid e-hääletamiste kohta."
+msgstr ""
+"The response can contain up to `batchmaxsize` records. If there are fewer "
+"than `batchmaxsize` items in the response, this means that the EHS does not "
+"have any more data on e-voting at the time the response is generated."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:163
+msgid "VIS3 peab suutma töödelda erineva `batchmaxsize` väärtusega vastuseid."
+msgstr ""
+"VIS3 must be able to handle responses with different `batchmaxsize` values."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:165
+msgid "Töötluse ülevaade"
+msgstr "Overview of treatment"
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:167
+msgid ""
+"EHS registreerib e-hääletamise fakte. Igale e-hääletamisele omistab EHS "
+"järjenumbri. E-hääletamise fakte võib hoida nt järjenumbri järgi "
+"indekseeritud tabelis - siis on VIS3-i päringutele vastamine kiire ja "
+"efektiivne - kuid see on EHS siseasi. Paki maksimaalsuurus peaks olema EHS "
+"seadistuses määratav."
+msgstr ""
+"EHS records the facts of e-voting. EHS assigns a serial number to each e-"
+"vote. E-voting files could be kept in a table indexed by e.g. sequence number "
+"- then the response to VIS3 queries is fast and efficient - but this is an "
+"internal matter for EHS. The maximum packet size should be configurable in "
+"the EHS configuration."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:169
+msgid ""
+"VIS3 saadab valimiste aktiivsel perioodil regulaarselt päringuid EHS-i X-tee "
+"teenuse otspunkti \"Viimane järjenumber\". EHS saadab vastuses viimase e-"
+"hääletamise järjenumbri."
+msgstr ""
+"During the active period of the elections, VIS3 will regularly send queries "
+"to the EHS X-Road service endpoint \"Last Sequence Number\". EHS will send "
+"the last e-voting sequential number in the response."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:171
+msgid ""
+"Viimase järjenumbri alusel leiab VIS3, kas VIS3-e kantud e-hääletamiste "
+"andmed on EHS-iga sünkroonis. Kui viimane järjenumber osutab, et EHS-s on "
+"lisandunud kirjeid, mis vajavad VIS3-e kandmist, siis saadab VIS3 järjest "
+"päringud EHS X-tee teenuse otspunkti \"e-hääletamiste pakk\", alates "
+"esimesest järjenumbrist, mis on VIS3-s puudu; EHS saadab küsitud paki; VIS3 "
+"salvestab saadud andmed ja saadab järgmise paki päringu."
+msgstr ""
+"Based on the last sequential number, VIS3 will find out whether the e-voting "
+"data entered in VIS3 are in sync with EHS. If the last sequential number "
+"indicates that there are additional records in EHS that need to be entered in "
+"VIS3, VIS3 will send successive queries to the EHS X-Road service endpoint 'e-"
+"voting batch', starting from the first sequential number that is missing in "
+"VIS3; EHS will send the requested batch; VIS3 will store the received data "
+"and send the next batch query."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:173
+msgid ""
+"Päringute \"e-hääletamiste pakk\" töötlusloogika EHS-i poolel peab võimaldama "
+"VIS3-l päringuid esitada mistahes järjekorras ja kuitahes palju kordi."
+msgstr ""
+"The processing logic of the 'e-voting packet' of queries on the EHS side must "
+"allow VIS3 to query in any order and as many times as necessary."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:175
+msgid ""
+"Töötlus peab olema idempotentne (samajõuline) - selles mõttes, et VIS3 võib "
+"päritud andmeid igal ajal uuesti küsida. Uuesti pärimisega ei tohi tekkida "
+"duubelandmeid, tähendusnihkeid ega kinnijooksmisi."
+msgstr ""
+"The processing must be idempotent (concurrent) - in the sense that VIS3 can "
+"retrieve the requested data at any time. The re-query must not result in "
+"duplicates, semantic ambiguities, or stalls."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:177
+msgid ""
+"Tehnilise taustateabena märgime, et EHS hoiab e-hääletamise fakte mitte "
+"relatsioonilises andmebaasis, vaid etcd mäluteenuses."
+msgstr ""
+"As a technical background, EHS stores e-voting facts not in a relational "
+"database but in the etcd storage service."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:179
+msgid "Kohaletoimetamise garantii"
+msgstr "Delivery guarantee"
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:180
+msgid ""
+"Sõltuvalt e-hääletamise sagedusest ja EHS jõudlusest ning seadistusest võib "
+"EHS-s juhtuda, et e-hääletamise väga suure sageduse perioodil e-hääletamise "
+"faktile järjenumbri omistamine ajalõpu (ingl timeout) tõttu ebaõnnestub. "
+"Selline e-hääletamise fakt jääb e-hääletamiste nimekirjas VIS3-e edastamata."
+msgstr ""
+"Depending on the frequency of e-voting and the performance and configuration "
+"of the EHS, it is possible that during a period of very high frequency of e-"
+"voting, the assignment of a sequential number to the e-voting fact may fail "
+"due to a timeout. Such an e-voting fact will not be transmitted to VIS3 in "
+"the list of e-votes."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:182
+msgid ""
+"Seega e-hääletamiste nimekiri ei anna kõigi e-hääletamiste VIS3-e jooksvalt "
+"kohaletoimetamise garantiid. VIS3-e kohaletoimetatud fakte tuleb käsitada "
+"informatiivsetena. E-hääletamise faktid toimetatakse VIS3-e kindlalt "
+"täielikus koosseisus e-hääletanute (lõplikus) nimekirjas, pärast e-"
+"hääletamise perioodi lõppu (eraldi liides EHS ja VIS3 vahel)."
+msgstr ""
+"Therefore, the list of e-votes does not guarantee the delivery of all e-votes "
+"VIS3s on a rolling basis. Facts delivered to the VIS3 must be considered as "
+"informative. The facts of an e-vote will be delivered to the VIS3 in the "
+"(final) list of e-voters in its definitive complete composition, after the "
+"end of the e-voting period (separate interface between EHS and VIS3)."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:184
+msgid "Teenuse pakkumise ajaline ulatus"
+msgstr "Time scale for the provision of the service"
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:186
+msgid ""
+"Konkreetse valimissündmuse kohta pakub EHS e-hääletamiste nimekirja ainult "
+"piiratud perioodil. See periood hõlmab e-hääletamise perioodi (kehtiva õiguse "
+"kohaselt 6 päeva) koos lühikeste siirdeperioodidega enne ja pärast."
+msgstr ""
+"For a specific election event, the EHS only offers a list of e-votes for a "
+"limited period. This period includes the e-voting period (6 days under "
+"current law) with short transition periods before and after."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:188
+msgid ""
+"Kui EHS valimissündmuse kohta e-hääletamiste nimekirja enam ei paku, siis "
+"päringud otspunktidesse \"Viimane järjenumber\" ja \"e-hääletanute pakk\" "
+"saavad HTTP vastuskoodi `410 Gone`."
+msgstr ""
+"If the EHS no longer provides a list of e-votes for an election event, "
+"queries to the endpoints \"Last Sequence Number\" and \"e-vote pack\" will "
+"receive the HTTP response code `410 Gone`."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:190
+msgid ""
+"Valimissündmuste loetelu pakub EHS pidevalt (otspunkt \"Valimissündmuste "
+"loetelu\"). Loetelus on valimissündmused, mille kohta EHS on valmis e-"
+"hääletamiste nimekirja pakkuma."
+msgstr ""
+"A list of electoral events is provided by EHS on an ongoing basis (under "
+"\"List of electoral events\"). The list includes election events for which "
+"EHS is ready to provide a list of e-voting events."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:192
+msgid "Kontroll ja veaolukordade käsitlemine"
+msgstr "Control and error handling"
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:194
+msgid ""
+"Eeldatakse, et EHS-i poolt VIS3-le väljastatav on korrektne ja muutumatu (e-"
+"hääletamiste nimekirja piires). Parandus- ja muutmiskirjeid käesolev "
+"protokoll ei sisalda."
+msgstr ""
+"It is assumed that the EHS output to VIS3 is correct and unchanged (within "
+"the limits of the list of e-votes). Letters of correction and amendment are "
+"not included in these minutes."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:196
+msgid ""
+"Pärast e-hääletamise lõppu, valimispäeval, edastatakse EHS-st VIS3-le e-"
+"hääletanute lõplik nimekiri). See edastus on spetsifitseeritud: [E-"
+"hääletanute nimekiri](https://github.com/e-gov/VIS3-EHS/blob/"
+"main/4_e_haaletanute_nimekiri/SPEC.md)."
+msgstr ""
+"After the end of e-voting, on election day, the final list of e-voters is "
+"transmitted from the EHS to VIS3). This transmission is specific: [e-vote "
+"list](https://github.com/e-gov/VIS3-EHS/blob/main/4_e_haaletanute_nimekiri/"
+"SPEC.md)."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:198
+msgid "VIS3 operaator laeb e-hääletanute lõpliku nimekirja VIS3-e."
+msgstr "The VIS3 operator uploads the final list of e-voters to VIS3."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:200
+msgid ""
+"Jooksva nimekirja ja lõpliku nimekirja erinevuse korral loetakse \"tõe "
+"allikaks\" lõplik nimekiri. Seega: 1) kui lõplikus nimekirjas on isik, kes "
+"hääletamisperioodil edastatud nimekirjas puudub, siis loetakse isik e-"
+"hääletanuks; 2) kui hääletamisaegses nimekirjas on isik, kes lõplikus "
+"nimekirjas puudub, siis märge sellise isiku kohta VIS3-s küll säilitatakse, "
+"kuid töötluses ja toimingutes lähtutakse lõplikust nimekirjast, s.t loetakse, "
+"et isik ei ole e-hääletanud. VIS3 peab omama võimekust hääletamisaegse ja "
+"lõpliku nimekirja erinevust avastada ja operaatorile teada anda."
+msgstr ""
+"In the event of a discrepancy between the current list and the definitive "
+"list, the definitive list is considered to be the \"source of truth\". Thus: "
+"1) if the final list contains a person who is not on the list transmitted "
+"during the voting period, the person is considered to have e-voted; 2) if the "
+"voting period list contains a person who is not on the final list, the record "
+"of such person is kept in VIS3, but processing and operations are based on "
+"the final list, i.e. the person is considered not to have e-voted. The VIS3 "
+"shall have the capability to detect a discrepancy between the voting list and "
+"the final list and to inform the operator."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:203
+msgid ""
+"EHS-st VIS3-e edastatud e-hääletamise faktid on VIS3 kasutajaliideses "
+"nähtavad valimiste korraldajale, vaates \"Valijaga seotud toimingute "
+"ajalugu\". Kui valija e-hääletas mitu korda, siis on valijaga seotud "
+"toimingute ajaloos esitatud kõik valija e-hääletamised. E-hääletamise juures "
+"on näha kuupäev ja kellaaeg, millal e-hääletamise fakt EHS-st VIS3-e edastati."
+msgstr ""
+"The e-voting facts transmitted from the EHS to VIS3 will be visible to the "
+"election organiser in the VIS3 interface, in the 'Voter History' view. If a "
+"voter has e-voted more than once, all e-votes of the voter are shown in the "
+"voter activity history. The date and time at which the fact of the e-vote was "
+"transmitted from the EHS to VIS3 is shown next to the e-vote."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:205
+msgid "Kirjandus"
+msgstr "Literature"
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:207
+msgid "\\[1] Git. https://git-scm.com/."
+msgstr "\\[1] Git. https://git-scm.com/."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:209
+msgid ""
+"\\[2] CouchDB Replication Protocol, https://guide.couchdb.org/draft/"
+"replication.html."
+msgstr ""
+"\\[2] CouchDB Replication Protocol, https://guide.couchdb.org/draft/"
+"replication.html."
+
+#: ../../VIS3-EHS/9_e_haaletamiste_nimekiri/SPEC.md:211
+msgid ""
+"\\[3] Principle and application of Rsync algorithm. https://developpaper.com/"
+"principle-and-application-of-rsync-algorithm/."
+msgstr ""
+"\\[3] Principle and application of Rsync algorithm. https://developpaper.com/"
+"principle-and-application-of-rsync-algorithm/."

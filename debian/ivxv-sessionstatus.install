@@ -1,0 +1,4 @@
+#!/usr/bin/dh-exec
+usr/bin/sessionstatus => usr/bin/ivxv-sessionstatus
+
+usr/lib/systemd/user/ivxv-sessionstatus@.service

@@ -23,6 +23,7 @@ import ee.ivxv.common.service.bbox.Result;
 import ee.ivxv.common.service.container.Container;
 import ee.ivxv.common.service.container.DataFile;
 import ee.ivxv.common.service.i18n.MessageException;
+import ee.ivxv.common.service.report.Reporter;
 import ee.ivxv.common.util.ContainerHelper;
 import ee.ivxv.common.util.I18nConsole;
 import ee.ivxv.common.util.ToolHelper;
@@ -54,6 +55,8 @@ public class CheckTool implements Tool.Runner<CheckArgs> {
     static final ASN1ObjectIdentifier VL_KEY_ALG_ID = X9ObjectIdentifiers.id_ecPublicKey;
 
     private static final String OUT_BB_TMPL = "bb-1.json";
+    private static final String OUT_LOG_DISCRIMINATOR = "check";
+    private static final Long DEFAULT_MAX_VOTE_BDOC_SIZE_IN_BYTES = 32768L;
 
     private final ProcessorContext ctx;
     private final I18nConsole console;
@@ -81,7 +84,9 @@ public class CheckTool implements Tool.Runner<CheckArgs> {
         BallotBox bb = readBallotBox(args, vp, dl.getElection());
         reporter.writeBbErrors(args.out.value());
 
-        reporter.writeLog1(args.out.value(), bb);
+        // There should still be an empty .log1 file even if there are no accepted records
+        reporter.writeEmptyLogFiles(args.out.value(), OUT_LOG_DISCRIMINATOR, Reporter.LogType.LOG1, bb);
+        reporter.writeLog1(args.out.value(), bb, OUT_LOG_DISCRIMINATOR);
 
         if (signed) {
             Path OUT_BB = Util.prefixedPath(bb.getElection(), OUT_BB_TMPL);
@@ -203,7 +208,7 @@ public class CheckTool implements Tool.Runner<CheckArgs> {
                     if (haveRegData || res != Result.BALLOT_WITHOUT_REG_REQ) {
                         reporter.reportBbError(ref, res, va);
                     }
-                });
+                }, args.maxSignedBallotSizeInBytes.value());
 
         if (!haveRegData) {
             console.println();
@@ -238,10 +243,10 @@ public class CheckTool implements Tool.Runner<CheckArgs> {
 
     private <T> BboxHelper.BallotsChecked<T> getCheckedBallots(Path path, VoterProvider vp,
             PublicKeyHolder tsKey, Instant elStart, BboxHelper.Loader<T> l,
-            BboxHelper.Reporter<Ref.BbRef> reporter) {
+            BboxHelper.Reporter<Ref.BbRef> reporter, long maxSignedBallotSizeInBytes) {
         console.println();
         console.println(M.m_bb_loading, path);
-        BboxHelper.BboxLoader<T> loader = exec(() -> l.getBboxLoader(path, reporter));
+        BboxHelper.BboxLoader<T> loader = exec(() -> l.getBboxLoader(path, reporter, maxSignedBallotSizeInBytes));
         console.println(M.m_bb_loaded);
         console.println(M.m_bb_checking_type);
         // If no error has occurred so far, the file structure must be correct and type UNORGANIZED
@@ -325,6 +330,10 @@ public class CheckTool implements Tool.Runner<CheckArgs> {
 
         Arg<Path> bb = Arg.aPath(Msg.arg_ballotbox, true, false);
         Arg<Path> bbChecksum = Arg.aPath(Msg.arg_ballotbox_checksum, true, false).setOptional();
+        Arg<Long> maxSignedBallotSizeInBytes = Arg
+                .aLong(Msg.arg_signed_ballot_max_size_bytes)
+                .setOptional()
+                .setDefault(DEFAULT_MAX_VOTE_BDOC_SIZE_IN_BYTES);
         Arg<Path> districts = Arg.aPath(Msg.arg_districts, true, false);
         Arg<Path> rl = Arg.aPath(Msg.arg_registrationlist, true, false).setOptional();
         Arg<Path> rlChecksum =
@@ -342,6 +351,7 @@ public class CheckTool implements Tool.Runner<CheckArgs> {
         public CheckArgs() {
             args.add(bb);
             args.add(bbChecksum);
+            args.add(maxSignedBallotSizeInBytes);
             args.add(districts);
             args.add(rl);
             args.add(rlChecksum);

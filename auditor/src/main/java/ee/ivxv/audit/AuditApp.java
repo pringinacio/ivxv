@@ -4,6 +4,8 @@ import ee.ivxv.audit.tools.ConvertTool;
 import ee.ivxv.audit.tools.ConvertTool.ConvertArgs;
 import ee.ivxv.audit.tools.DecryptTool;
 import ee.ivxv.audit.tools.DecryptTool.DecryptArgs;
+import ee.ivxv.audit.tools.IntegrityTool;
+import ee.ivxv.audit.tools.IntegrityTool.IntegrityArgs;
 import ee.ivxv.audit.tools.MixerTool;
 import ee.ivxv.audit.tools.MixerTool.MixerArgs;
 import ee.ivxv.common.cli.App;
@@ -24,7 +26,8 @@ class AuditApp extends App<AuditContext> {
         return Arrays.asList( //
                 new Tool<>(Msg.tool_convert, ConvertArgs::new, ConvertTool::new),
                 new Tool<>(Msg.tool_mixer, MixerArgs::new, MixerTool::new),
-                new Tool<>(Msg.tool_decrypt, DecryptArgs::new, DecryptTool::new));
+                new Tool<>(Msg.tool_decrypt, DecryptArgs::new, DecryptTool::new),
+                new Tool<>(Msg.tool_integrity, IntegrityArgs::new, IntegrityTool::new));
     }
 
     @Override
